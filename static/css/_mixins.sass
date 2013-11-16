@@ -1,0 +1,32 @@
+@mixin vendor($property, $value)
+	-webkit-#{$property}: $value
+	-moz-#{$property}: $value
+	-ms-#{$property}: $value
+	-o-#{$property}: $value
+	#{$property}: $value
+
+@mixin placeholder-font($fontFamily, $fontWeight)
+	::-webkit-input-placeholder
+		font-weight: $fontWeight
+		font-family: $fontFamily
+	\:-moz-placeholder
+		font-weight: $fontWeight
+		font-family: $fontFamily
+	::-moz-placeholder
+		font-weight: $fontWeight
+		font-family: $fontFamily
+	\:-ms-input-placeholder
+		font-weight: $fontWeight
+		font-family: $fontFamily
+
+@mixin clearfix
+	*zoom: 1
+	&:before,
+	&:after
+		display: table
+		content: ""
+		// Fixes Opera/contenteditable bug:
+		// http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+		line-height: 0
+	&:after
+		clear: both
