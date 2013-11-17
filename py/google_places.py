@@ -11,6 +11,7 @@ def findPlaces (latitude, longitude, responses):
     RADIUS = '3500' #in meters, approx. 2 miles
     RANKBY = 'prominence'
     KEYWORDS = 'tourism+monument'
+    SENSOR = false
     TYPES = ''
 
     # ADD USER INPUT FOR WHAT TYPE OF LOCATION THEY ARE LOOKING FOR
@@ -22,7 +23,9 @@ def findPlaces (latitude, longitude, responses):
         TYPES = 'amusement_park+aquarium+art_gallery+bowling_alley+cafe+city_hall+establishment+library+museum+night_club+park+restaurant+shopping_mall+store+stadium+store'
             
     url = ('https://maps.googleapis.com/maps/api/place/search/json?location=%s'
-         '&radius=%s&sensor=false&key=%s') % (LOCATION, RADIUS, AUTH_KEY) ? (TYPES,KEYWORDS)
+           '?keyword=%s?types=%s&radius=%s&sensor=false&key=%s') % (LOCATION, KEYWORDS, TYPES, RADIUS, AUTH_KEY)
+    
+    print url
 
     # Send the GET request to the Place details service (using url from above)
     response = urllib2.urlopen(url)
@@ -32,7 +35,7 @@ def findPlaces (latitude, longitude, responses):
     json_data = json.loads(json_raw)
 
     # Iterate through the results and print them to the console
-    if json_data[‘status’] == ‘OK’:
-        for place in json_data['results']:
-            print ‘%s: %s\n’ % (place['name'], place['reference'])'
+   # if json_data[‘status’] == ‘OK’:
+    #    for place in json_data['results']:
+     #       print ‘%s: %s\n’ % (place['name'], place['reference'])'
             
