@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from py import *
+import json
 
 app = Flask(__name__)
 app.config.from_object('py.config')
@@ -7,10 +8,21 @@ app.config.from_object('py.config')
 env = app.jinja_env
 env.line_statement_prefix = '='
 env.globals.update(utils=utils)
+env.globals.update(helpers=helpers)
 
 @app.route("/")
 def index():
 	return render_template("index.html")
+
+@app.route("/maptest")
+def maptest():
+    result = {
+    	'start': 'New York',
+    	'end': 'Chicago',
+    	'waypoints': json.dumps([{"location":"Los Angeles"}])
+    }
+    print result['waypoints']
+    return render_template("test.html", dict = result)
 
 @app.errorhandler(404)
 def error404(error):
