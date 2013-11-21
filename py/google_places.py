@@ -10,7 +10,7 @@ def findPlaces (latitude, longitude, responses):
     LOCATION = str (latitude) + "," + str (longitude)
     RADIUS = 3500 #in meters, approx. 2 miles
     RANKBY = 'prominence'
-    KEYWORDS = 'tourism+monument'
+    #KEYWORDS = 'tourism+monument'
     TYPES = ''
 
     # ADD USER INPUT FOR WHAT TYPE OF LOCATION THEY ARE LOOKING FOR
@@ -22,7 +22,7 @@ def findPlaces (latitude, longitude, responses):
         TYPES = TYPES [:-1]       
             
     url = ('https://maps.googleapis.com/maps/api/place/search/json'
-           '?keyword=%s?types=%s&location=%s&radius=%s&sensor=false&rankby=%s&key=%s') %  (KEYWORDS, TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
+           '?types=%s&location=%s&radius=%s&sensor=false&rankby=%s&key=%s') %  (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
    
     print url
 
