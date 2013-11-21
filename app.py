@@ -10,8 +10,14 @@ env.globals.update(utils=utils)
 
 @app.route("/")
 def index():
-	return render_template("index.html")
+        if request.method=="GET":
+                return render_template("index.html")
+        else: 
+                return redirect ("makeTour")
 
+@app.selectionPage ("makeTour")
+def makeTour ():
+                
 @app.errorhandler(404)
 def error404(error):
 	return render_template("errors/404.html"), 404
