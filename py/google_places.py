@@ -40,7 +40,7 @@ def findPlaces (latitude, longitude, responses):
 
 if __name__ == '__main__':
     findPlaces (40.7472569628042, -73.99085998535156, [])
-=======
+
 import json
 from urllib2 import urlopen
 
@@ -63,15 +63,15 @@ def findPlaces (latitude, longitude, responses):
         for word in responses:
             TYPES = TYPES + str (word) + '|'
         TYPES = TYPES [:-1]       
-            
+    
     url = ('https://maps.googleapis.com/maps/api/place/search/json'
            '?keyword=%s?types=%s&location=%s&radius=%s&sensor=false&rankby=%s&key=%s') %  (KEYWORDS, TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
-   
+    
     print url
 
     # Send the GET request to the Place details service (using url from above)
     response = urlopen(url)
-     
+    
     # Get the response and use the JSON library to decode the JSON
     json_raw = response.read()
     json_data = json.loads(json_raw)
