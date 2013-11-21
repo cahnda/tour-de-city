@@ -1,5 +1,4 @@
 from flask import url_for, Markup
-from os import path
 
 ASSET_TAG_TEMPLATES = {
 	'css': '<link rel="stylesheet" type="text/css" href=%s>',
