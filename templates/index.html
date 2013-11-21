@@ -4,7 +4,19 @@
 	Home
 = endblock
 
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<link rel="stylesheet" type="text/css" href="css/jquery-gmaps-latlon-picker.css"/>
+<script src="js/jquery-gmaps-latlon-picker.js"></script>
+
 = block body
 	<h1>Welcome</h1>
 	<h2>Select your Location</h2>
+    <fieldset class="gllpLatlonPicker">
+    <input type="text" class="gllpSearchField">
+    <input type="button" class="gllpSearchButton" value="search">
+    <br/><br/>
+    <div class="gllpMap">Google Maps</div>
+    <br/>
+</fieldset>
 = endblock

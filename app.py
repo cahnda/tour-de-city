@@ -6,6 +6,7 @@ app = Flask(__name__)
 app.config.from_object('py.config')
 
 env = app.jinja_env
+env.line_statement_prefix = '='
 env.globals.update(utils=utils)
 
 @app.route("/")
