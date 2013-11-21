@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import json
 from urllib2 import urlopen
 
@@ -84,4 +83,3 @@ def findPlaces (latitude, longitude, responses):
 
 if __name__ == '__main__':
     findPlaces (40.7472569628042, -73.99085998535156, [])
->>>>>>> c19a291a4bd726084e5c1de284b12e01175a202b
