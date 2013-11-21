@@ -8,6 +8,7 @@ app.config.from_object('py.config')
 env = app.jinja_env
 env.line_statement_prefix = '='
 env.globals.update(utils=utils)
+env.globals.update(helpers=helpers)
 
 @app.route("/")
 def index():
