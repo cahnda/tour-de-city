@@ -4,19 +4,25 @@
 	Home
 = endblock
 
-<script src="js/jquery-1.7.2.min.js"></script>
+= block head
+{{ helpers.asset_tag('jquery-1.7.2.min.js') }}
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<link rel="stylesheet" type="text/css" href="css/jquery-gmaps-latlon-picker.css"/>
-<script src="js/jquery-gmaps-latlon-picker.js"></script>
+{{ helpers.asset_tag('jquery-gmaps-latlon-picker.css') }}
+{{ helpers.asset_tag('jquery-gmaps-latlon-picker.js') }}
+= endblock
 
 = block body
-	<h1>Welcome</h1>
-	<h2>Select your Location</h2>
-    <fieldset class="gllpLatlonPicker">
-    <input type="text" class="gllpSearchField">
-    <input type="button" class="gllpSearchButton" value="search">
-    <br/><br/>
-    <div class="gllpMap">Google Maps</div>
-    <br/>
-</fieldset>
+<h1>Welcome</h1>
+<h2>Select your Location</h2>
+<form>
+    <fieldset class="gllpLatlonPicker" id="custom_id">
+        <input type="text" class="gllpSearchField">
+        <input type="button" class="gllpSearchButton" value="search">
+        <br/><br/>
+        <div class="gllpMap">Google Maps</div>
+        <input type="hidden" class="gllpLatitude" value="40.7143528"/>
+        <input type="hidden" class="gllpLongitude" value="-74.0059731"/>
+        <input type="hidden" class="gllpZoom" value="12"/>
+    </fieldset>
+</form>
 = endblock
