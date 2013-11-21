@@ -1,97 +1,87 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Displaying text directions with <code>setPanel()</code></title>
-    <style>
-    html, body, #map-canvas {
-        height: 100%;
-        margin: 0px;
-        padding: 0px
-    }
-    #panel {
-        position: absolute;
-        top: 5px;
-        left: 50%;
-        margin-left: -180px;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-    }
-    </style>
-    <style>
-    #directions-panel {
-        height: 100%;
-        float: right;
-        width: 390px;
-        overflow: auto;
-    }
+= extends "layout.html"
+= block title
+	Displaying text directions
+= endblock
+= block head
+	<style>
+		html, body, #map-canvas {
+			height: 100%;
+			margin: 0px;
+			padding: 0px
+		}
+		#panel {
+			position: absolute;
+			top: 5px;
+			left: 50%;
+			margin-left: -180px;
+			z-index: 5;
+			background-color: #fff;
+			padding: 5px;
+			border: 1px solid #999;
+		}
+		</style>
+		<style>
+		#directions-panel {
+			height: 100%;
+			float: right;
+			width: 390px;
+			overflow: auto;
+		}
 
-    #map-canvas {
-        margin-right: 400px;
-    }
+		#map-canvas {
+			margin-right: 400px;
+		}
 
-    #control {
-        background: #fff;
-        padding: 5px;
-        font-size: 14px;
-        font-family: Arial;
-        border: 1px solid #ccc;
-        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
-        display: none;
-    }
+		#control {
+			background: #fff;
+			padding: 5px;
+			font-size: 14px;
+			font-family: Arial;
+			border: 1px solid #ccc;
+			box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+			display: none;
+		}
+	</style>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script>
+		var directionsDisplay;
+		var directionsService = new google.maps.DirectionsService();
 
-    @media print {
-        #map-canvas {
-          height: 500px;
-          margin: 0;
-      }
-  }
-  </style>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-  <script>
-  var directionsDisplay;
-  var directionsService = new google.maps.DirectionsService();
+		function initialize() {
+			directionsDisplay = new google.maps.DirectionsRenderer();
+			var mapOptions = {
+				zoom: 7,
+				center: new google.maps.LatLng(41.850033, -87.6500523)
+			};
+			var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+			directionsDisplay.setMap(map);
+			directionsDisplay.setPanel(document.getElementById('directions-panel'));
+		}
 
-  function initialize() {
-      directionsDisplay = new google.maps.DirectionsRenderer();
-      var mapOptions = {
-        zoom: 7,
-        center: new google.maps.LatLng(41.850033, -87.6500523)
-    };
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-    directionsDisplay.setMap(map);
-    directionsDisplay.setPanel(document.getElementById('directions-panel'));
-}
+		function calcRoute() {
+			var start = "{{dict['start']}}";
+			var end = "{{dict['end']}}";
+			var waypts = JSON.parse({{dict['waypoints']|tojson|safe}});
 
-function calcRoute() {
-  var start = "{{dict['start']}}";
-  var end = "{{dict['end']}}";
-  var waypts = JSON.parse({{dict['waypoints']|tojson|safe}});
+			var request = {
+			origin: start,
+			destination: end,
+			travelMode: google.maps.TravelMode.DRIVING,
+			waypoints: waypts,
+			optimizeWaypoints: true
+		};
+		directionsService.route(request, function(response, status) {
+			if (status == google.maps.DirectionsStatus.OK) {
+				directionsDisplay.setDirections(response);
+			}
+		});
+		}
 
-  var request = {
-    origin: start,
-    destination: end,
-    travelMode: google.maps.TravelMode.DRIVING,
-    waypoints: waypts,
-    optimizeWaypoints: true
-};
-directionsService.route(request, function(response, status) {
-    if (status == google.maps.DirectionsStatus.OK) {
-      directionsDisplay.setDirections(response);
-  }
-});
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-calcRoute()
-</script>
-</head>
-<body>
-<div id="directions-panel"></div>
-<div id="map-canvas"></div>
-</body>
-</html>
+		google.maps.event.addDomListener(window, 'load', initialize);
+		calcRoute()
+	</script>
+= endblock
+= block body
+	<div id="directions-panel"></div>
+	<div id="map-canvas"></div>
+= endblock

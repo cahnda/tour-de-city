@@ -2,11 +2,13 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
 		<title>
-			= block title 
+			= block title
 			= endblock
 		</title>
-		<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/style.css') }}>
+		{{ helpers.asset_tag('style.css') }}
+		{{ helpers.asset_tag('jquery.js') }}
 		= block head
 		= endblock
 	</head>
