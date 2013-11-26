@@ -1,0 +1,20 @@
+body { 
+	background: url(../res/background.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+	margin:0 auto;
+	width:60%;
+	position:relative;
+	text-align:center;
+}
+
+#title {
+	font-family:Helvetica;
+	font-weight:bold;
+	font-size:10em;
+	letter-spacing:0.1em;
+	color:white;
+}
