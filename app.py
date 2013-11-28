@@ -19,16 +19,15 @@ def index():
                 button = request.form['button']
                 if button == "Submit":
                         first = request.form['tour'].encode ('ascii',"ignore")
-                        unicodeObj = (request.form['tour'].count
-                        unicodeObj.encode ('ascii',"ignore")
-                        print z
-                        vals = []
-                      #  for i in range (0,z):
-                               # temp = request.form['tour'][i].encode ('ascii',"ignore"
-                              #  print temp
-                              #  vals.append (temp)
-                        return first
+                        unicodeobj = request.values.getlist("tour")
+                        var = []
+                        for iterating_var in unicodeobj:
+                                print ' hello'
+                                iterating_var = iterating_var.encode ('ascii', 'ignore')
+                                var.append(iterating_var)
+                        print var
 
+                return first
 #@app.selectionPage ("makeTour")
 #def makeTour ():
                 
