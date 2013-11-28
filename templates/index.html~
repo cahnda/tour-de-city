@@ -7,14 +7,13 @@
 = block body
 	<h1>Welcome</h1>
 	<h2>Select your Location</h2>
-= endblock
 
-
+	
 <h2> What type of venue would you like to visit? </h2>
 
-<form>
-<input type="checkbox" name="tour" value="Amusement_park">Amusement Park<br>
-<input type="checkbox" name="tour" value="Aquarium"> Aquarium <br>
+<form method = "POST">
+<input type="checkbox" name="tour" value="amusement_park">Amusement Park<br>
+<input type="checkbox" name="tour" value="aquarium"> Aquarium <br>
 <input type="checkbox" name="tour" value="art_gallery"> Art Gallery <br>
 <input type="checkbox" name="tour" value="bowling_alley"> Bowling Alley <br>
 <input type="checkbox" name="tour" value="cafe"> Cafe <br>
@@ -34,3 +33,7 @@
 </div>
 
 </form>
+
+
+= endblock
+
