@@ -10,7 +10,7 @@ def findPlaces (latitude, longitude, responses):
     LOCATION = str (latitude) + "," + str (longitude)
     RADIUS = 3500 #in meters, approx. 2 miles
     RANKBY = 'prominence'
-    #KEYWORDS = 'tourism+monument'
+    KEYWORDS = 'tourism+monument'
     TYPES = ''
 
     # ADD USER INPUT FOR WHAT TYPE OF LOCATION THEY ARE LOOKING FOR
@@ -21,8 +21,7 @@ def findPlaces (latitude, longitude, responses):
             TYPES = TYPES + str (word) + '|'
         TYPES = TYPES [:-1]       
             
-    url = ('https://maps.googleapis.com/maps/api/place/search/json'
-           '?types=%s&location=%s&radius=%s&sensor=false&rankby=%s&key=%s') %  (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
+    url = ('https://maps.googleapis.com/maps/api/place/search/json?types=%s&location=%s&radius=%s&sensor=false&rankby=%s&key=%s') %  (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
    
     print url
 
@@ -32,6 +31,7 @@ def findPlaces (latitude, longitude, responses):
     # Get the response and use the JSON library to decode the JSON
     json_raw = response.read()
     json_data = json.loads(json_raw)
+    print json_data
 
     # Iterate through the results and print them to the console
     results = []
