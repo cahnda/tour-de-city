@@ -1,0 +1,37 @@
+= extends "layout.html"
+
+= block title
+	Chose Locations
+= endblock
+
+= block body
+
+<h2> Select where you would like to stop during your tour </h2>
+<div id = "checkboxes">
+<form  method = "POST">
+</form>
+</div>
+
+<div>
+<input type="submit" value="Submit" name = "button" /> 
+</div>
+
+<script type="text/javascript">
+alert("I am an alert box!");
+var loc = "{{locs}}";
+
+var myDiv = document.getElementById("checkboxes");
+for (var place in loc) {
+var checkbox = document.createElement("input"); 
+checkbox.setAttribute("type", "checkbox" );
+checkbox.setAttribute("name", "place");
+checkbox.setAttribute("value", place ["vicinity"]);
+myDiv.appendChild(checkbox); 
+var text = document.createTextNode ((place["name"]))
+myDiv.appendChild(text); 
+myDiv.appendChild(document.createElement("br"));
+}
+</script>
+
+= endblock
+
