@@ -20,7 +20,7 @@
 <script>
 var myDiv = document.getElementById("checkboxes");
 
-for (place in {{places}}) {
+for (place in {{locs}}) {
 var checkbox = document.createElement("input"); 
 checkbox.setAttribute("type", "checkbox" );
 checkbox.setAttribute("name", "place");
