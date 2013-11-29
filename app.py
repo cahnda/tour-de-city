@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from py import *
 import json
+
 
 app = Flask(__name__)
 app.config.from_object('py.config')
@@ -10,9 +11,18 @@ env.line_statement_prefix = '='
 env.globals.update(utils=utils)
 env.globals.update(helpers=helpers)
 
-@app.route("/")
+def get_form_value(key):
+    return request.form[key].encode('ascii', 'ignore')
+
+@app.route("/", methods = ['GET','POST'])
 def index():
-	return render_template("index.html")
+    if request.method == 'GET':
+        return render_template("index.html")
+    else:
+        latitude = get_form_value('gllpLatitude')
+        longitude = get_form_value('gllpLongitude')
+        return redirect(url_for('maptest'))
+
 
 @app.route("/maptest")
 def maptest():
