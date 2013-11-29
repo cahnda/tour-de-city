@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
 from py import *
+import json
 
 app = Flask(__name__)
 app.config.from_object('py.config')
@@ -34,21 +35,13 @@ def makeTour ():
         var  = session ['var']
         #Sweyn needs to add the get long + lat capability so that these can be inputed into google places. I'm using placeholders for now
         locs =  google_places.findPlaces (40.7472569628042, -73.99085998535156, var)
-        counter = 0
-        counter2 = 0
-        for x in locs:
-                counter = counter + 1
-                for y in x:
-                        counter2 = counter2 = counter + 1
-                        z = y.encode  ("ascii", "ignore")
-                        locs [counter][counter2] = z
 
-        print locs
         if request.method =="GET":
-                return render_template("makeTour.html", locs = locs)
+                return render_template("makeTour.html", locs = json.dumps(locs))
         else:
                 button = request.form['button']
                 if button == "Submit":
+                        print "hello"
                         first = request.form['place'].encode ('ascii',"ignore")
                         unicodeobj = request.values.getlist("place")
                         var = []

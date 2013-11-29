@@ -1,7 +1,7 @@
 = extends "layout.html"
 
 = block title
-	Home
+	Chose Locations
 = endblock
 
 = block body
@@ -12,25 +12,25 @@
 </form>
 </div>
 
-
 <div>
 <input type="submit" value="Submit" name = "button" /> 
 </div>
 
-<script>
-var myDiv = document.getElementById("checkboxes");
+<script type="text/javascript">
+alert("I am an alert box!");
+var loc = "{{locs}}";
 
-for (place in {{locs}}) {
+var myDiv = document.getElementById("checkboxes");
+for (var place in loc) {
 var checkbox = document.createElement("input"); 
 checkbox.setAttribute("type", "checkbox" );
 checkbox.setAttribute("name", "place");
-checkbox.setAttribute("value", place['vicinity']);
-checkbox.checked = true; 
+checkbox.setAttribute("value", place ["vicinity"]);
 myDiv.appendChild(checkbox); 
-checkbox.checked = true; 
+var text = document.createTextNode ((place["name"]))
+myDiv.appendChild(text); 
+myDiv.appendChild(document.createElement("br"));
 }
-
-
 </script>
 
 = endblock
