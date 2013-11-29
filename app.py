@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from py import *
 
 app = Flask(__name__)
@@ -26,10 +26,26 @@ def index():
                                 iterating_var = iterating_var.encode ('ascii', 'ignore')
                                 var.append(iterating_var)
                         print var
+                return redirect ('/makeTour', var)
 
-                return first
-#@app.selectionPage ("makeTour")
-#def makeTour ():
+@app.route ("/makeTour",  methods = ["GET","POST"])
+def makeTour (places):
+        print 'at page 2'
+        #Sweyn needs to add the get long + lat capability so that these can be inputed into google places. I'm using placeholders for now
+        locs =  google_places.findPlaces (40.7472569628042, -73.99085998535156, places)
+        if request.method =="GET":
+                return render_template("makeTour.html", locs)
+        else:
+                button = request.form['button']
+                if button == "Submit":
+                        first = request.form['place'].encode ('ascii',"ignore")
+                        unicodeobj = request.values.getlist("place")
+                        var = []
+                        for iterating_var in unicodeobj:
+                                iterating_var = iterating_var.encode ('ascii', 'ignore')
+                                var.append(iterating_var)
+                        print var
+               # return showTour (var) this should direct to the last page. Var contains all of the addresses.
                 
 @app.errorhandler(404)
 def error404(error):
