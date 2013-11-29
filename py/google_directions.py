@@ -3,7 +3,7 @@ from json import loads
 
 API_URL = ("http://maps.googleapis.com/maps/api/directions/json?" 
           "origin=%s"
-		  "&waypoints=optimize:true|%s"
+          "&waypoints=optimize:true|%s"
           "&destination=%s"
           "&sensor=false")
 
