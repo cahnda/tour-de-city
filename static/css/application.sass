@@ -1,0 +1,37 @@
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800")
+
+@import mixins
+@import variables
+
+@import vendor/simplegrid
+
+@import header
+
+html, body
+	margin: 0
+	padding: 0
+
+html
+	background: url(../images/background.jpg) no-repeat center center fixed
+	@include vendor(background-size, cover)
+
+body
+	font-family: "Open Sans", sans-serif
+
+h1
+	font-weight: normal
+
+a
+	text-decoration: none
+
+.main-content
+	@include vendor(border-radius, 2px)
+	//width: 900px
+	//margin: 0 auto 30px
+	padding: 50px
+	color: white
+	background-color: rgba(224, 224, 224, 0.18)
+
+.title
+	text-align: center
+	color: white
