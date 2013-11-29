@@ -1,5 +1,5 @@
 import pymongo
-import citi_bike, google_maps, google_places
+import citi_bike, google_maps, google_places, google_directions
 
 client = pymongo.MongoClient()
 db = client.SSSD

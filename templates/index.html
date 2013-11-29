@@ -12,9 +12,10 @@
 = endblock
 
 = block body
-<<<<<<< HEAD
-<h1>Welcome</h1>
-<h2>Select your Location</h2>
+
+	<h1>Welcome</h1>
+	<h2>Select your Location</h2>
+
 <form method="POST">
     <fieldset class="gllpLatlonPicker" id="custom_id">
         <input type="text" class="gllpSearchField">
@@ -22,21 +23,14 @@
         <br/><br/>
         <div class="gllpMap">Google Maps</div>
         
-        <input type="hidden" class="gllpLatitude" value="40.7143528"/>
-        <input type="hidden" class="gllpLongitude" value="-74.0059731"/>
+        <input type="hidden" name = "latitude" class="gllpLatitude" value="40.7143528"/>
+        <input type="hidden" name = "longitude" class="gllpLongitude" value="-74.0059731"/>
         <input type="hidden" class="gllpZoom" value="12"/>
         <br/>
-        <input type="submit" class="button" value = "Submit">
     </fieldset>
-=======
-
-	<h1>Welcome</h1>
-	<h2>Select your Location</h2>
-
 	
 <h2> What type of venue would you like to visit? </h2>
 
-<form  method = "POST">
 <input type="checkbox" name="tour" value="amusement_park">Amusement Park<br>
 <input type="checkbox" name="tour" value="aquarium"> Aquarium <br>
 <input type="checkbox" name="tour" value="art_gallery"> Art Gallery <br>
@@ -57,7 +51,6 @@
 <input type="submit" value="Submit" name = "button" /> 
 </div>
 
->>>>>>> 018a092f702e862e6403f8222a6ab500bb081a73
 </form>
 
 = endblock
