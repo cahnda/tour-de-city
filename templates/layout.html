@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>
 			= block title
 			= endblock
@@ -15,20 +15,16 @@
 	<body>
 		<div class="header">
 			<div class="header-content">
-				<a href={{ url_for('index') }}>
-					<span class="logo">
-						<img src={{ url_for('static', filename='images/map_icon_white.png') }}>
-						<h1>TOURS</h1>
-					</span>
+				<a class="logo" href={{ url_for('index') }}>
+					<img src={{ url_for('static', filename='images/map_icon_white.png') }}>
+					<h1>TOURS</h1>
 				</a>
 			</div>
 		</div>
 		<div class="main-container">
-			<div class="main-content grid grid-pad">
-				<div class="col-1-1">
-					= block body
-					= endblock
-				</div>
+			<div class="main-content">
+				= block body
+				= endblock
 			</div>
 		</div>
 	</body>
