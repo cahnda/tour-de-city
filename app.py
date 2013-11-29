@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from py import *
 import json
 
@@ -10,19 +10,24 @@ env.line_statement_prefix = '='
 env.globals.update(utils=utils)
 env.globals.update(helpers=helpers)
 
-@app.route("/")
+@app.route("/", methods = ["GET","POST"])
 def index():
-	return render_template("index.html")
+        print 'on index page'
+        if request.method =="GET":
+                print 'get'
+                return render_template("index.html")
+        else: 
+                print 'post'
+                button = request.form['button']
+                if button == "Submit":
+                       tmp =  request.form['tour']
+                       print tmp
+                       return tmp
 
-@app.route("/maptest")
-def maptest():
-    result = {
-    	'start': 'New York',
-    	'end': 'Chicago',
-    	'waypoints': json.dumps([{"location":"Los Angeles"}])
-    }
-    print result['waypoints']
-    return render_template("test.html", dict = result)
+
+#@app.selectionPage ("makeTour")
+#def makeTour ():
+                
 
 @app.errorhandler(404)
 def error404(error):
