@@ -11,7 +11,7 @@
 	
 <h2> What type of venue would you like to visit? </h2>
 
-<form method = "POST">
+<form  method = "POST">
 <input type="checkbox" name="tour" value="amusement_park">Amusement Park<br>
 <input type="checkbox" name="tour" value="aquarium"> Aquarium <br>
 <input type="checkbox" name="tour" value="art_gallery"> Art Gallery <br>

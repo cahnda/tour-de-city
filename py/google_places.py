@@ -37,6 +37,7 @@ def findPlaces (latitude, longitude, responses):
     results = []
     if json_data['status'] == 'OK':
         for place in json_data['results']:
+            
            # s= '%s: %s Rating: %s' % (place['name'], place ['vicinity'], place['rating'])
            # s = s.encode ('ascii',"ignore")
            # results.append (s)

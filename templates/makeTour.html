@@ -27,7 +27,7 @@ checkbox.setAttribute("type", "checkbox" );
 checkbox.setAttribute("name", "place");
 checkbox.setAttribute("value", place ["vicinity"]);
 myDiv.appendChild(checkbox); 
-var text = document.createTextNode ("%s: %s Rating: %s" % (place['name'], place ['vicinity'], place['rating']));
+var text = document.createTextNode ((place["name"]))
 myDiv.appendChild(text); 
 myDiv.appendChild(document.createElement("br"));
 }
