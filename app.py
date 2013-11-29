@@ -8,6 +8,7 @@ app.config.from_object('py.config')
 env = app.jinja_env
 env.line_statement_prefix = '='
 env.globals.update(utils=utils)
+env.globals.update(helpers=helpers)
 
 @app.route("/", methods = ["GET","POST"])
 def index():
@@ -51,7 +52,7 @@ def makeTour ():
                         print var
                         return first
                # return showTour (var) this should direct to the last page. Var contains all of the addresses.
-                
+
 @app.errorhandler(404)
 def error404(error):
 	return render_template("errors/404.html"), 404
