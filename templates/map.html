@@ -2,26 +2,21 @@
 <html>
 
 <head>
-	<title>Simple Map</title>
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<title>Google Map</title>
 	<style>
 		html, body, #map-canvas {
 			height: 100%;
-			margin: 0px;
-			padding: 0px;
+			margin: 0;
+			padding: 0;
 		}
 	</style>
-	<script src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script>
 		var map;
 		var mapOptions = {};
 		function initialize() {
-			/*
-			var mapOptions = {
-				zoom: 8,
-				center: new google.maps.LatLng(-34.397, 150.644)
-			};*/
 			mapJson = JSON.parse('{{ map_options|safe }}');
 			for (var key in mapJson) {
 				mapOptions[key] = eval(mapJson[key]);
