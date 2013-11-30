@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, session, url_for
 from py import *
 import json
 
-
 app = Flask(__name__)
 app.config.from_object('py.config')
 
@@ -11,13 +10,20 @@ env.line_statement_prefix = '='
 env.globals.update(utils=utils)
 env.globals.update(helpers=helpers)
 
+@app.route('/map')
+def map():
+	return google_maps.map({
+		'zoom': 8,
+		'center': 'new google.maps.LatLng(-34.397, 150.644)'
+	})
+
 @app.route("/", methods = ["GET","POST"])
 def index():
     print 'on index page'
     if request.method == "GET":
         print 'get'
         return render_template("index.html")
-    else: 
+    else:
         print 'post'
         button = request.form['button']
         print 'after button'
@@ -54,7 +60,7 @@ def makeTour ():
                 var = []
                 for iterating_var in unicodeobj:
                         iterating_var = iterating_var.encode ('ascii', 'ignore')
-                        var.append(iterating_var)         
+                        var.append(iterating_var)
                 var = google_directions.get_waypoint_order(latitude+","+longitude,var,latitude+','+longitude)
                 session['waypoints'] = var
                 return redirect(url_for("showDirections"))
@@ -71,7 +77,7 @@ def showDirections():
     result['end'] = 'Boston'
     result['waypoints'] = json.dumps(waypoints)
     return render_template("showDirections.html", dict = result)
- 
+
 
 @app.errorhandler(404)
 def error404(error):
