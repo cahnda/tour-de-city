@@ -37,3 +37,4 @@ def prepareFormat(waypoints):
             i = i+1
         waypoints[x] = "".join(l)
     return waypoints
+    

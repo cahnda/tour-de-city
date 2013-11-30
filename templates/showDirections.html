@@ -64,15 +64,15 @@
 			var waypts = JSON.parse({{dict['waypoints']|tojson|safe}});
 			console.log(start);
 			console.log(end);
-			console.log(waypts)
+			console.log(waypts);
 			var request = {
 			origin: start,
 			destination: end,
 			travelMode: google.maps.TravelMode.DRIVING,
-			waypoints: waypts,
-			optimizeWaypoints: true
+			waypoints: waypts
 		};
 		directionsService.route(request, function(response, status) {
+			console.log(status)
 			if (status == google.maps.DirectionsStatus.OK) {
 				directionsDisplay.setDirections(response);
 			}

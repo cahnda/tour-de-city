@@ -19,6 +19,7 @@ def map():
 
 @app.route("/", methods = ["GET","POST"])
 def index():
+    utils.update_citi_bike_stations()
     print 'on index page'
     if request.method == "GET":
         print 'get'
@@ -48,7 +49,6 @@ def makeTour ():
         var  = session ['var']
         longitude = session['longitude']
         latitude = session['latitude']
-        #Sweyn needs to add the get long + lat capability so that these can be inputed into google places. I'm using placeholders for now
         locs =  google_places.findPlaces (latitude, longitude, var)
         if request.method =="GET":
             return render_template("makeTour.html", locs = json.dumps(locs))
@@ -68,15 +68,19 @@ def makeTour ():
 @app.route("/showDirections")
 def showDirections():
     waylist = session['waypoints']
+    waylist = citi_bike.make_location_array(session['latitude'],session['longitude'],session['latitude'], session['longitude'], waylist)
     waypoints = []
+    baseLoc = session['latitude'] + "," + session['longitude']
     for waypoint in waylist:
         waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
     print "OUTPUT:" + str(waypoints)
     result = dict()
-    result['start'] = 'New York'
-    result['end'] = 'Boston'
+    result['start'] = baseLoc
+    result['end'] = baseLoc
     result['waypoints'] = json.dumps(waypoints)
     return render_template("showDirections.html", dict = result)
+
+
 
 
 @app.errorhandler(404)
