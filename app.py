@@ -58,8 +58,24 @@ def makeTour ():
                 for iterating_var in unicodeobj:
                         iterating_var = iterating_var.encode ('ascii', 'ignore')
                         var.append(iterating_var)
-                return google_directions.get_waypoint_order(latitude+","+longitude,var,latitude+','+longitude)
+                session['waypoints'] = var
+                return redirect(url_for("maptest"))
+                #return google_directions.get_waypoint_order(latitude+","+longitude,var,latitude+','+longitude)
                # return showTour (var) this should direct to the last page. Var contains all of the addresses.
+
+@app.route("/maptest")
+def maptest():
+    waylist = session['waypoints']
+    waypoints = []
+    for waypoint in waylist:
+        waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
+    print "OUTPUT:" + str(waypoints)
+    result = dict()
+    result['start'] = 'New York'
+    result['end'] = 'Chicago'
+    result['waypoints'] = json.dumps(waypoints)
+    return render_template("test.html", dict = result)
+ 
 
 @app.errorhandler(404)
 def error404(error):

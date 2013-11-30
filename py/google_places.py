@@ -10,7 +10,6 @@ def findPlaces (latitude, longitude, responses):
     LOCATION = str (latitude) + "," + str (longitude)
     RADIUS = 3500 #in meters, approx. 2 miles
     RANKBY = 'prominence'
-    KEYWORDS = 'tourism+monument'
     TYPES = ''
 
     # ADD USER INPUT FOR WHAT TYPE OF LOCATION THEY ARE LOOKING FOR
