@@ -2,19 +2,30 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>
 			= block title
 			= endblock
 		</title>
-		{{ helpers.asset_tag('style.css') }}
+		{{ helpers.asset_tag('application.css') }}
 		{{ helpers.asset_tag('jquery.js') }}
 		= block head
 		= endblock
 	</head>
 	<body>
-	<!-- <img class="background" src={{ url_for("static", filename="res/background.jpg")}}> -->
-		= block body
-		= endblock
+		<div class="header">
+			<div class="header-content">
+				<a class="logo" href={{ url_for('index') }}>
+					<img src={{ url_for('static', filename='images/map_icon_white.png') }}>
+					<h1>TOURS</h1>
+				</a>
+			</div>
+		</div>
+		<div class="main-container">
+			<div class="main-content">
+				= block body
+				= endblock
+			</div>
+		</div>
 	</body>
 </html>
