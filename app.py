@@ -11,9 +11,6 @@ env.line_statement_prefix = '='
 env.globals.update(utils=utils)
 env.globals.update(helpers=helpers)
 
-def get_form_value(key):
-    return request.form[key].encode('ascii', 'ignore')
-
 @app.route("/", methods = ["GET","POST"])
 def index():
     print 'on index page'
