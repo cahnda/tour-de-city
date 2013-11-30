@@ -14,9 +14,8 @@ env.globals.update(helpers=helpers)
 @app.route('/map/<type>')
 def map(type=''):
 	if type == 'select-location':
-		return google_maps.map({ 'streetViewControl': False })
-	else:
-		return google_maps.map()
+		pass
+	return google_maps.map()
 
 @app.route("/", methods = ["GET","POST"])
 def index():
