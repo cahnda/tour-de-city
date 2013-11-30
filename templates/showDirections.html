@@ -62,7 +62,9 @@
 			var start = "{{dict['start']}}";
 			var end = "{{dict['end']}}";
 			var waypts = JSON.parse({{dict['waypoints']|tojson|safe}});
-
+			console.log(start);
+			console.log(end);
+			console.log(waypts)
 			var request = {
 			origin: start,
 			destination: end,

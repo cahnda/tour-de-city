@@ -12,17 +12,46 @@
 = endblock
 
 = block body
-<p id="title">welcome</p>
-<h2>Select your Location</h2>
-<form>
+
+	<h1>Welcome</h1>
+	<h2>Select your Location</h2>
+
+<form method="POST">
     <fieldset class="gllpLatlonPicker" id="custom_id">
         <input type="text" class="gllpSearchField">
-        <input type="button" class="gllpSearchButton" value="search">
+        <input type="button" class="gllpSearchButton" value="Search">
         <br/><br/>
         <div class="gllpMap">Google Maps</div>
-        <input type="hidden" class="gllpLatitude" value="40.7143528"/>
-        <input type="hidden" class="gllpLongitude" value="-74.0059731"/>
+        
+        <input type="hidden" name = "latitude" class="gllpLatitude" value="40.7143528"/>
+        <input type="hidden" name = "longitude" class="gllpLongitude" value="-74.0059731"/>
         <input type="hidden" class="gllpZoom" value="12"/>
+        <br/>
     </fieldset>
+	
+<h2> What type of venue would you like to visit? </h2>
+
+<input type="checkbox" name="tour" value="amusement_park">Amusement Park<br>
+<input type="checkbox" name="tour" value="aquarium"> Aquarium <br>
+<input type="checkbox" name="tour" value="art_gallery"> Art Gallery <br>
+<input type="checkbox" name="tour" value="bowling_alley"> Bowling Alley <br>
+<input type="checkbox" name="tour" value="cafe"> Cafe <br>
+<input type="checkbox" name="tour" value="city_hall"> City Hall <br>
+<input type="checkbox" name="tour" value="establishment"> Establishment <br>
+<input type="checkbox" name="tour" value="library"> Library <br>
+<input type="checkbox" name="tour" value="museum"> Museum <br>
+<input type="checkbox" name="tour" value="night_club"> Night Club <br>
+<input type="checkbox" name="tour" value="park"> Park <br>
+<input type="checkbox" name="tour" value="restaurant"> Restaurant <br>
+<input type="checkbox" name="tour" value="shopping_mall"> Shopping Mall <br>
+<input type="checkbox" name="tour" value="store"> Store  <br>
+<input type="checkbox" name="tour" value="stadium">  Stadium <br>
+
+<div>
+<input type="submit" value="Submit" name = "button" /> 
+</div>
+
 </form>
+
 = endblock
+
