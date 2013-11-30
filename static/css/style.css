@@ -24,6 +24,10 @@ img.background {
 	z-index:-1;
 }
 
+.main-content {
+	text-align:center;
+}
+
 /*
  * ID
 */
