@@ -25,3 +25,7 @@ depots, and plot an optimal route between desired locations.
 Google Maps: Connect a set of given points using the shortest path. Display map.
 Google Places: Find nearest landmarks, using user input for type (museum, nightclub, etc). Order them by distance.
 Citibike: Given a location, find the nearest citibike hub.
+
+# Dependencies
+geopy
+pymongo
