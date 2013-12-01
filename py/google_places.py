@@ -43,14 +43,18 @@ def findPlaces (latitude, longitude, responses):
                 ans.append (str(place['rating']))
             except: 
                 ans.append ('N/A')
-            photo_info =  place ['photos'][0]
-            print photo_info
-            photo_height = photo_info['height']
-            photo_ref = photo_info['photo_reference']
-            photo_width = photo_info['width']
+            try:           
+                photo_info =  place ['photos'][0]
+                print photo_info
+                photo_height = photo_info['height']
+                photo_ref = photo_info['photo_reference']
+                photo_width = photo_info['width']
 
-            photo_url = ('https://maps.googleapis.com/maps/api/place/photo?maxwidth=%s&photoreference=%s&sensor=true&key=%s') %  (photo_width,photo_ref, AUTH_KEY)
-            ans.append (photo_url)
+                photo_url = ('https://maps.googleapis.com/maps/api/place/photo?maxwidth=%s&photoreference=%s&sensor=true&key=%s') %  (photo_width, photo_ref, AUTH_KEY)
+                ans.append (photo_url)
+            except:
+                ans.append ('http://www.profyling.com/wp-content/uploads/2012/08/no-image-available.jpg')
+
             results.append (ans)
             print photo_url
            # s= '%s: %s Rating: %s' % (, place ['vicinity'], place['rating'])
