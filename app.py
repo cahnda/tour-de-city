@@ -82,8 +82,8 @@ def showDirections():
         waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
     print "OUTPUT:" + str(waypoints)
     result = dict()
-    result['start'] = 'New York'
-    result['end'] = 'Boston'
+    result['start'] = session['latitude'] + ',' + session['longitude']
+    result['end'] = session['latitude'] + ',' + session['longitude']
     result['waypoints'] = json.dumps(waypoints)
     return render_template("showDirections.html", dict = result)
 

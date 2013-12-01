@@ -56,7 +56,6 @@ def findPlaces (latitude, longitude, responses):
                 ans.append ('http://www.profyling.com/wp-content/uploads/2012/08/no-image-available.jpg')
 
             results.append (ans)
-            print photo_url
            # s= '%s: %s Rating: %s' % (, place ['vicinity'], place['rating'])
            # s = s.encode ('ascii',"ignore")
            # results.append (s)
