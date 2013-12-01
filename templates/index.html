@@ -1,60 +1,49 @@
-= extends "layout.html"
-
+= extends 'layout.html'
 = block title
 	Home
 = endblock
-
 = block head
-	{{ helpers.asset_tag('jquery-1.7.2.min.js') }}
-	<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-	<script type="text/javascript" src="{{ url_for('static', filename='js/dynamic.js') }}"></script>
-	{{ helpers.asset_tag('jquery-gmaps-latlon-picker.css') }}
-	{{ helpers.asset_tag('jquery-gmaps-latlon-picker.js') }}
+	{{ helpers.asset_tag('maps.locationpicker.js') }}
+	<script>
+		$(window).load(function() {
+			$('.map-container').css('height', $('.venue-container').outerHeight());
+			$('#venue-form input[type=checkbox]').change(function() {
+				$(this).parent().toggleClass('active', this.checked);
+			});
+			locationPicker($('iframe')[0]);
+		})
+	</script>
 = endblock
-
 = block body
-
 	<h1>Welcome</h1>
 	<h2>Select your Location</h2>
-
-	<button id="startButton">
-		Start
-	</button>
-	<form id="startForm" method="POST">
-		<fieldset class="gllpLatlonPicker" id="custom_id">
-			<input type="text" class="gllpSearchField">
-			<input type="button" class="gllpSearchButton" value="Search">
-			<br/><br/>
-			<div class="gllpMap">Google Maps</div>
-
-			<input type="hidden" name = "latitude" class="gllpLatitude" value="40.7143528"/>
-			<input type="hidden" name = "longitude" class="gllpLongitude" value="-74.0059731"/>
-			<input type="hidden" class="gllpZoom" value="12"/>
-			<br/>
-		</fieldset>
-
-		<h2> What type of venue would you like to visit? </h2>
-
-		<input type="checkbox" name="tour" value="amusement_park">Amusement Park<br>
-		<input type="checkbox" name="tour" value="aquarium"> Aquarium <br>
-		<input type="checkbox" name="tour" value="art_gallery"> Art Gallery <br>
-		<input type="checkbox" name="tour" value="bowling_alley"> Bowling Alley <br>
-		<input type="checkbox" name="tour" value="cafe"> Cafe <br>
-		<input type="checkbox" name="tour" value="city_hall"> City Hall <br>
-		<input type="checkbox" name="tour" value="establishment"> Establishment <br>
-		<input type="checkbox" name="tour" value="library"> Library <br>
-		<input type="checkbox" name="tour" value="museum"> Museum <br>
-		<input type="checkbox" name="tour" value="night_club"> Night Club <br>
-		<input type="checkbox" name="tour" value="park"> Park <br>
-		<input type="checkbox" name="tour" value="restaurant"> Restaurant <br>
-		<input type="checkbox" name="tour" value="shopping_mall"> Shopping Mall <br>
-		<input type="checkbox" name="tour" value="store"> Store  <br>
-		<input type="checkbox" name="tour" value="stadium">  Stadium <br>
-
-		<div>
-			<input type="submit" value="Submit" name = "button" />
+	<form action="/" id="venue-form" method="POST">
+		<div class="map-container">
+			<div class="search-form">
+				<input class="search-text" type="text" value=""><a class="search-button">Search</a>
+			</div>
+			<input type="hidden" name="latitude" value="40.7143528"/>
+			<input type="hidden" name="longitude" value="-74.0059731"/>
+			<iframe height="100%" width="100%" frameborder="0" scrolling="no" src="/map"></iframe>
 		</div>
-
+		<div class="venue-container">
+			<h2>What type of venues would you like to visit?</h2>
+			<label><input type="checkbox" name="tour" value="amusement_park">Amusement Park</label>
+			<label><input type="checkbox" name="tour" value="aquarium">Aquarium</label>
+			<label><input type="checkbox" name="tour" value="art_gallery">Art Gallery</label>
+			<label><input type="checkbox" name="tour" value="bowling_alley">Bowling Alley</label>
+			<label><input type="checkbox" name="tour" value="cafe">Cafe</label>
+			<label><input type="checkbox" name="tour" value="city_hall">City Hall</label>
+			<label><input type="checkbox" name="tour" value="establishment">Establishment</label>
+			<label><input type="checkbox" name="tour" value="library">Library</label>
+			<label><input type="checkbox" name="tour" value="museum">Museum</label>
+			<label><input type="checkbox" name="tour" value="night_club">Night Club</label>
+			<label><input type="checkbox" name="tour" value="park">Park</label>
+			<label><input type="checkbox" name="tour" value="restaurant">Restaurant</label>
+			<label><input type="checkbox" name="tour" value="shopping_mall">Shopping Mall</label>
+			<label><input type="checkbox" name="tour" value="store">Store</label>
+			<label><input type="checkbox" name="tour" value="stadium">Stadium</label>
+			<input type="submit" value="Submit" name="button" />
+		</div>
 	</form>
-
 = endblock
