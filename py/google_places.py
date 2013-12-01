@@ -22,15 +22,15 @@ def findPlaces (latitude, longitude, responses):
             
     url = ('https://maps.googleapis.com/maps/api/place/search/json?types=%s&location=%s&radius=%s&sensor=false&rankby=%s&key=%s') %  (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
    
-    print url
+    #print url
 
     # Send the GET request to the Place details service (using url from above)
     response = urlopen(url)
-     
+    
     # Get the response and use the JSON library to decode the JSON
     json_raw = response.read()
     json_data = json.loads(json_raw)
-    print json_data
+   # print json_data
 
     # Iterate through the results and print them to the console
     results = []
@@ -43,11 +43,19 @@ def findPlaces (latitude, longitude, responses):
                 ans.append (str(place['rating']))
             except: 
                 ans.append ('N/A')
+            photo_info =  place ['photos'][0]
+            print photo_info
+            photo_height = photo_info['height']
+            photo_ref = photo_info['photo_reference']
+            photo_width = photo_info['width']
+
+            photo_url = ('https://maps.googleapis.com/maps/api/place/photo?maxwidth=%s&photoreference=%s&sensor=true&key=%s') %  (photo_width,photo_ref, AUTH_KEY)
+            ans.append (photo_url)
             results.append (ans)
+            print photo_url
            # s= '%s: %s Rating: %s' % (, place ['vicinity'], place['rating'])
            # s = s.encode ('ascii',"ignore")
            # results.append (s)
-    print results
     return results
 
 if __name__ == '__main__':
