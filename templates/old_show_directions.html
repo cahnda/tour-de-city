@@ -26,6 +26,7 @@
 			float: right;
 			width: 390px;
 			overflow: auto;
+			background-color: white;
 		}
 
 		#map-canvas {
@@ -67,17 +68,17 @@
 			console.log(end);
 			console.log(waypts);
 			var request = {
-			origin: start,
-			destination: end,
-			travelMode: google.maps.TravelMode.DRIVING,
-			waypoints: waypts
-		};
-		directionsService.route(request, function(response, status) {
-			console.log(status)
-			if (status == google.maps.DirectionsStatus.OK) {
-				directionsDisplay.setDirections(response);
-			}
-		});
+				origin: start,
+				destination: end,
+				travelMode: google.maps.TravelMode.DRIVING,
+				waypoints: waypts
+			};
+			directionsService.route(request, function(response, status) {
+				console.log(status)
+				if (status == google.maps.DirectionsStatus.OK) {
+					directionsDisplay.setDirections(response);
+				}
+			});
 		}
 
 		google.maps.event.addDomListener(window, 'load', initialize);

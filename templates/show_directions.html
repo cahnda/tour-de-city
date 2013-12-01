@@ -1,0 +1,52 @@
+= extends "layout.html"
+= block title
+	Displaying text directions
+= endblock
+= block head
+	<script>
+		var map, directionsDisplay, google, directionsService;
+
+		function calcRoute() {
+			var start = "{{result['start']}}";
+			var end = "{{result['end']}}";
+			var waypts = JSON.parse({{result['waypoints']|tojson|safe}});
+			/*
+			var start = "40.7143528,-74.0059731";
+			var end = "172 Norfolk Street, New York";
+			var waypts = JSON.parse("[{\"location\": \"Reade St \u0026 Broadway\"}, {\"location\": \"Willoughby Ave \u0026 Walworth St\"}, {\"location\": \"158 Bleecker Street, New York\"}, {\"location\": \"Willoughby Ave \u0026 Walworth St\"}, {\"location\": \"Reade St \u0026 Broadway\"}]");*/
+			console.log(start);
+			console.log(end);
+			console.log(waypts);
+			var request = {
+				origin: start,
+				destination: end,
+				travelMode: google.maps.TravelMode.DRIVING,
+				waypoints: waypts
+			};
+			directionsService.route(request, function(response, status) {
+				console.log(status)
+				if (status == google.maps.DirectionsStatus.OK) {
+					directionsDisplay.setDirections(response);
+				}
+			});
+		}
+
+		$(window).load(function() {
+			var fwindow = $('iframe')[0].contentWindow;
+			var fdocument = fwindow.document
+			google = fwindow.google;
+			map = fwindow.map.map;
+
+			directionsService = new google.maps.DirectionsService();
+			directionsDisplay = new google.maps.DirectionsRenderer();
+			directionsDisplay.setMap(map);
+			directionsDisplay.setPanel(fdocument.getElementById('directions-panel'));
+			calcRoute();
+		});
+	</script>
+= endblock
+= block body
+	<div style="height: 600px">
+		<iframe class="direction" height="100%" width="100%" frameborder="0" scrolling="no" src="/map/directions"></iframe>
+	</div>
+= endblock
