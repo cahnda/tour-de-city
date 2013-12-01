@@ -41,14 +41,15 @@ def index():
                 var.append(iterating_var)
             print var
             session ['var'] = var
+            session['page'] = 'makeTour'
             return redirect(url_for('makeTour'))
 
 @app.route ("/makeTour",  methods = ["GET","POST"])
-def makeTour ():
+def makeTour():
+    if 'page' in session.keys() and session['page'] == 'makeTour':
         var  = session ['var']
         longitude = session['longitude']
         latitude = session['latitude']
-        #Sweyn needs to add the get long + lat capability so that these can be inputed into google places. I'm using placeholders for now
         locs =  google_places.findPlaces (latitude, longitude, var)
         if request.method =="GET":
             return render_template("makeTour.html", locs = json.dumps(locs))
@@ -59,28 +60,42 @@ def makeTour ():
                 unicodeobj = request.values.getlist("place")
                 var = []
                 for iterating_var in unicodeobj:
-                        iterating_var = iterating_var.encode ('ascii', 'ignore')
-                        var.append(iterating_var)
+                    iterating_var = iterating_var.encode ('ascii', 'ignore')
+                    var.append(iterating_var)
                 var = google_directions.get_waypoint_order(latitude+","+longitude,var,latitude+','+longitude)
                 session['waypoints'] = var
+                session['page'] = 'showDirections'
                 return redirect(url_for("showDirections"))
+    else:
+        return redirect('/')
+
+
 
 @app.route("/showDirections")
 def showDirections():
-    waylist = session['waypoints']
-    endpoint = waylist.pop()
-    waylist = citi_bike.make_location_array(session['latitude'],session['longitude'],session['latitude'], session['longitude'], waylist)
-    waypoints = []
-    baseLoc = session['latitude'] + "," + session['longitude']
-    for waypoint in waylist:
-        waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
-    print "OUTPUT:" + str(waypoints)
-    result = dict()
-    result['start'] = baseLoc
-    result['end'] = endpoint
-    result['waypoints'] = json.dumps(waypoints)
-    return render_template("showDirections.html", dict = result)
+    if 'page' in session.keys() and session['page'] == 'showDirections':
+        waylist = session['waypoints']
+        endpoint = waylist.pop()
+        waylist = citi_bike.make_location_array(session['latitude'],session['longitude'],session['latitude'], session['longitude'], waylist)
+        waypoints = []
+        baseLoc = session['latitude'] + "," + session['longitude']
+        for waypoint in waylist:
+            waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
+        print "OUTPUT:" + str(waypoints)
+        result = dict()
+        result['start'] = baseLoc
+        result['end'] = endpoint
+        result['waypoints'] = json.dumps(waypoints)
+        session['page'] = ''
+        return render_template("showDirections.html", dict = result)
+    else:
+        return redirect("/")
 
+
+@app.route("/updatedata")
+def updateData():
+    utils.update_citi_bike_stations()
+    redirect("/")
 
 @app.errorhandler(404)
 def error404(error):
