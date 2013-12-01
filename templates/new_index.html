@@ -1,0 +1,67 @@
+= extends 'layout.html'
+= block title
+	Home
+= endblock
+= block head
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.map-wrapper {
+			position: relative;
+			height: 400px;
+		}
+
+		.search-form {
+			box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+			position: absolute;
+			top: 10px;
+			left: 50%;
+			margin-left: -180px;
+			z-index: 5;
+		}
+		.search-text, .search-button {
+			font-size: 16px;
+			display: inline-block;
+			vertical-align: middle;
+			margin: 0;
+			padding: 6px 15px;
+		}
+		.search-text {
+			width: 225px;
+			border: none;
+			border: 1px solid white;
+		}
+		.search-text:focus {
+			border-color: #4D90FE;
+			outline: none;
+		}
+		.search-button {
+			background-color: #4D90FE;
+			border: 1px solid #4D90FE;
+			color: #FFF;
+			font-family: sans-serif;
+			cursor: pointer;
+		}
+		.search-button:focus {
+			outline: none;
+		}
+	</style>
+	{{ helpers.asset_tag('maps.locationpicker.js') }}
+	<script>
+		$(window).load(function() {
+			locationPicker($('iframe')[0]);
+		})
+	</script>
+= endblock
+= block body
+	<h1>Welcome</h1>
+	<h2>Select your Location</h2>
+	<div class="map-wrapper">
+		<form class="search-form">
+			<input class="search-text" type="text" value=""><input type="submit" value="Search" class="search-button">
+		</form>
+		<iframe height="100%" width="100%" frameborder="0" scrolling="no" src="/map"></iframe>
+	</div>
+= endblock

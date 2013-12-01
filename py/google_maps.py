@@ -2,9 +2,10 @@ from flask import render_template
 import json
 
 DEFAULT_OPTIONS = {
-	'zoom': 8,
+	'zoom': 11,
 	'center': 'new google.maps.LatLng(40.7143528, -74.0059731)',
-	'streetViewControl': False
+	'streetViewControl': False,
+	'disableDoubleClickZoom': True,
 }
 
 # options should be a dict

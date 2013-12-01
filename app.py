@@ -10,6 +10,17 @@ env.line_statement_prefix = '='
 env.globals.update(utils=utils)
 env.globals.update(helpers=helpers)
 
+
+@app.route('/new-home')
+def new_home():
+	return render_template('new_index.html')
+
+
+
+@app.route('/test')
+def test():
+	return render_template('test.html')
+
 @app.route('/map')
 @app.route('/map/<type>')
 def map(type=''):
