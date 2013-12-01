@@ -10,6 +10,22 @@
 			margin: 0;
 			padding: 0;
 		}
+
+		#directions-panel {
+			display: none;
+		}
+
+		.directions #map-canvas {
+			margin-right: 400px;
+		}
+
+		.directions #directions-panel {
+			display: block;
+			height: 100%;
+			float: right;
+			width: 390px;
+			overflow: auto;
+		}
 	</style>
 	{{ helpers.asset_tag('jquery.js') }}
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
@@ -22,6 +38,7 @@
 	</script>
 </head>
 <body>
+	<div id="directions-panel"></div>
 	<div id="map-canvas"></div>
 </body>
 </html>

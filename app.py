@@ -11,10 +11,7 @@ env.globals.update(utils=utils)
 env.globals.update(helpers=helpers)
 
 @app.route('/map')
-@app.route('/map/<type>')
-def map(type=''):
-	if type == 'select-location':
-		pass
+def map():
 	return google_maps.map()
 
 @app.route("/", methods = ["GET","POST"])
