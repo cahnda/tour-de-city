@@ -7,6 +7,12 @@ from urllib2 import urlopen
 def findPlaces (latitude, longitude, responses):
     #make request
     AUTH_KEY = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
+    # LIST OF API KEYS:
+    # cahnja@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
+    #
+    #
+    #
+    #
     LOCATION = str (latitude) + "," + str (longitude)
     RADIUS = 3500 #in meters, approx. 2 miles
     RANKBY = 'prominence'
