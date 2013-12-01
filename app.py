@@ -68,6 +68,7 @@ def makeTour ():
 @app.route("/showDirections")
 def showDirections():
     waylist = session['waypoints']
+    endpoint = waylist.pop()
     waylist = citi_bike.make_location_array(session['latitude'],session['longitude'],session['latitude'], session['longitude'], waylist)
     waypoints = []
     baseLoc = session['latitude'] + "," + session['longitude']
@@ -76,7 +77,7 @@ def showDirections():
     print "OUTPUT:" + str(waypoints)
     result = dict()
     result['start'] = baseLoc
-    result['end'] = baseLoc
+    result['end'] = endpoint
     result['waypoints'] = json.dumps(waypoints)
     return render_template("showDirections.html", dict = result)
 
