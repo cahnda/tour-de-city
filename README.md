@@ -26,6 +26,21 @@ Google Maps: Connect a set of given points using the shortest path. Display map.
 Google Places: Find nearest landmarks, using user input for type (museum, nightclub, etc). Order them by distance.
 Citibike: Given a location, find the nearest citibike hub.
 
+#Installing
+
+    pip install virtualenv
+    virtualenv env
+    source env/bin/activate
+    pip install geopy pymongo
+
+#Running
+
+    source env/bin/activate
+    mongod
+    gunicorn -w 4 -b 0.0.0.0:5007 -p pid app:app
+
+On first run go to [http://localhost:5007/updatedata](http://localhost:5007/updatedata) to pull the necessary data.    
+
 # Dependencies
 geopy
 pymongo
