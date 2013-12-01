@@ -2,32 +2,32 @@ var locationPicker;
 (function($) {
 	// frame = dom object
 	locationPicker = function(frame) {
-		var frameWindow = frame.contentWindow;
-		var google, map, geocoder, marker;
-		google = frameWindow.google;
-		map = frameWindow.map;
-		geocoder = new google.maps.Geocoder();
-		marker = new google.maps.Marker({
-			position: new google.maps.LatLng(40.7143528, -74.0059731),
-			map: map,
+		var frameWindow = frame.contentWindow,
+			GMaps = frameWindow.GMaps,
+			map = frameWindow.map;
+		var marker = map.addMarker({
+			title: 'Current Location',
+			lat: 40.7143528,
+			lng: -74.0059731,
 			draggable: true
 		});
 
 		function performSearch(loc) {
-			geocoder.geocode({"address": loc},
-				function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
+			GMaps.geocode({
+				address: loc,
+				callback: function(results, status) {
+					if (status == 'OK') {
 						marker.setPosition(results[0].geometry.location);
 						map.panTo(results[0].geometry.location);
 					}
 				}
-			);
+			});
 		}
 
-		google.maps.event.addListener(map, 'dblclick', function(event) {
+		map.addListener('dblclick', function(event) {
 			marker.setPosition(event.latLng);
 		});
-		google.maps.event.addListener(marker, 'dragend', function(event) {
+		marker.addListener('dragend', function(event) {
 			marker.setPosition(marker.position);
 		});
 
