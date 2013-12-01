@@ -1,82 +1,103 @@
 = extends "layout.html"
 
 = block title
-	Chose Locations
+	Choose Locations
+= endblock
+
+= block head
+	<LINK href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
 = endblock
 
 = block body
 
-<h2> Select where you would like to stop during your tour </h2>
-<form  method = "POST">
-<table>
-   <tr VALIGN=TOP>
-      <td>
-	<div id = "checkboxes1">
+	<h2> Select where you would like to stop during your tour </h2>
+	<form  method = "POST">
+	<table>
+	   <tr VALIGN=TOP>
+		  <td>
+		<div id = "checkboxes1">
+		</div>
+		  </td>
+		  <td>
+		<div id = "checkboxes2">
+		</div>     
+		  </td>
+		  <td>
+		<div id = "checkboxes3">
+		</div>      
+		  </td>
+	   </tr>
+	</table>
+
+	<div>
+		<input type="submit" value="Submit" name = "button" /> 
 	</div>
-      </td>
-      <td>
-	<div id = "checkboxes2">
-	</div>     
-      </td>
-      <td>
-	<div id = "checkboxes3">
-	</div>      
-      </td>
-   </tr>
-</table>
+
+	</form>
+
+	<script type="text/javascript">
+		var loc = JSON.parse({{locs|tojson|safe}});
+
+		for (var i = 0; i < loc.length; i++) {
+
+			if (i%3 == 0) {
+				var myDiv = document.getElementById("checkboxes1");
+			}
+
+			if (i%3 == 1) {
+				var myDiv = document.getElementById("checkboxes2");
+			}
+
+			if (i%3 == 2) {
+				var myDiv = document.getElementById("checkboxes3");
+			}
 
 
-<div>
-<input type="submit" value="Submit" name = "button" /> 
-</div>
+			var itemDiv = document.createElement("div");
+			itemDiv.setAttribute("class", "item");
+			var textDiv = document.createElement("div");
+			textDiv.setAttribute("class", "text");
 
-</form>
+			s = loc [i][0];
+			var nameDiv = document.createElement("div");
+			nameDiv.setAttribute("class", "itemName");
+			var text = document.createTextNode (s)
+			nameDiv.appendChild(text);
+			textDiv.appendChild(nameDiv); 
 
-<script type="text/javascript">
+			s = loc[i][1];
+			var text = document.createTextNode (s)
+			textDiv.appendChild(text); 
+			textDiv.appendChild(document.createElement("br"));
 
-var loc = JSON.parse({{locs|tojson|safe}});
+			s = "     Rating: " + loc[i][2];
+			var text = document.createTextNode (s)
+			textDiv.appendChild(text); 
+			textDiv.appendChild(document.createElement("br"));
 
-for (var i = 0; i < loc.length; i++) {
+			var checkboxDiv = document.createElement("div");
+			checkboxDiv.setAttribute("class", "checkboxDiv");
+			var checkbox = document.createElement("input"); 
+			checkbox.setAttribute("id", "checkboxDivInput");
+			checkbox.setAttribute("type", "checkbox" );
+			checkbox.setAttribute("name", "place");
+			checkbox.setAttribute("value", loc [i][1]);
+			var label = document.createElement("label");
+			label.setAttribute("for", "checkboxDivInput");
 
-if (i%3 == 0) {
-var myDiv = document.getElementById("checkboxes1");}
-if (i%3 == 1) {
-var myDiv = document.getElementById("checkboxes2");}
-if (i%3 == 2) {
-var myDiv = document.getElementById("checkboxes3");}
-		    
-var checkbox = document.createElement("input"); 
-checkbox.setAttribute("type", "checkbox" );
-checkbox.setAttribute("name", "place");
-checkbox.setAttribute("value", loc [i][1]);
-myDiv.appendChild(checkbox); 
+			checkboxDiv.appendChild(checkbox);
+			checkboxDiv.appendChild(label);
+			textDiv.appendChild(checkboxDiv); 
 
-s = loc [i][0];
-var text = document.createTextNode (s)
-myDiv.appendChild(text); 
-myDiv.appendChild(document.createElement("br"));
 
-s = loc[i][1];
-var text = document.createTextNode (s)
-myDiv.appendChild(text); 
-myDiv.appendChild(document.createElement("br"));
+			var img = document.createElement("IMG");
+			img.src = loc[i][3];
+			img.style.height = "250px";
+			img.style.width = "250px";
+			itemDiv.appendChild(img);
 
-s = "     Rating: " + loc[i][2];
-var text = document.createTextNode (s)
-myDiv.appendChild(text); 
-myDiv.appendChild(document.createElement("br"));
-
-myDiv.appendChild(document.createElement("br"));
-var img = document.createElement("IMG");
-img.src = loc[i][3];
-img.style.height = "250px";
-img.style.width = "250px";
-myDiv.appendChild(img);
-myDiv.appendChild(document.createElement("br"));
-myDiv.appendChild(document.createElement("br"));
-
-}
-</script>
-
+			itemDiv.appendChild(textDiv);
+			myDiv.appendChild(itemDiv);
+		}
+	</script>
 = endblock
-

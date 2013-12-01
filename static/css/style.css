@@ -1,51 +1,68 @@
-/*
- * Element
-*/
-
-body { 
-	margin:0 auto;
-	width:60%;
+.item {
+	margin:-1px;
+	margin-bottom:-5px;
 	position:relative;
-	text-align:center;
 }
 
-/*
- * Class
-*/
+.item img {
+	position:relative;
+	z-index:10;
+}
 
-img.background {
-	height: auto;
-	left: 0;
-	min-height: 100%;
-	min-width: 1024px;
-	position: fixed;
-	width: 100%;
-	top: 0;
+.item img:hover {
+	opacity:0.2;
+	z-index:-4;
+}
+
+.text {
+	color:white;
+	font-size:1.1em;
+	left:0px;
+	position:absolute;
+	top:0px;
 	z-index:-1;
 }
 
-.main-content {
-	text-align:center;
+.checkboxDiv {
+	position:relative;
+	width:25px;
 }
 
-/*
- * ID
-*/
-
-#title {
-	font-family:Helvetica;
+.itemName {
+	font-size:1.5em;
 	font-weight:bold;
-	font-size:10em;
-	letter-spacing:0.1em;
-	color:white;
 }
 
-/*
- * Miscellaneous
-*/
+/*.checkboxDiv label {*/
+	/*cursor: pointer;*/
+	/*position: absolute;*/
+	/*width: 25px;*/
+	/*height: 25px;*/
+	/*top: 0;*/
+      /*left: 0;*/
+	/*background: #eee;*/
+	/*border:1px solid #ddd;*/
+/*}*/
 
-@media screen and (max-width: 1024px){
-	img.background {
-		left: 50%;
-		margin-left: -512px; }
-}
+/*.checkboxDiv label:after {*/
+	/*opacity: 0.2;*/
+	/*content: '';*/
+	/*position: absolute;*/
+	/*width: 9px;*/
+	/*height: 5px;*/
+	/*background: transparent;*/
+	/*border: 3px solid #333;*/
+	/*border-top: none;*/
+	/*border-right: none;*/
+
+	/*-webkit-transform: rotate(-45deg);*/
+	/*-moz-transform: rotate(-45deg);*/
+	/*-o-transform: rotate(-45deg);*/
+	/*-ms-transform: rotate(-45deg);*/
+	/*transform: rotate(-45deg);*/
+/*}*/
+
+/*input[type=checkbox] {*/
+	/*visibility: hidden;*/
+	/*z-index:100;*/
+/*}*/
