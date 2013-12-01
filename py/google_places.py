@@ -6,13 +6,11 @@ from urllib2 import urlopen
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyA6YYBVEWXWJHsynCDK78bhlhNCm1iQPDk'
+    AUTH_KEY = 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
     # LIST OF API KEYS:
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
+    # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
     # sweyn3@gmail.com : 'AIzaSyA6YYBVEWXWJHsynCDK78bhlhNCm1iQPDk'
-    #
-    #
-    #
     LOCATION = str (latitude) + "," + str (longitude)
     RADIUS = 3500 #in meters, approx. 2 miles
     RANKBY = 'prominence'
@@ -28,7 +26,7 @@ def findPlaces (latitude, longitude, responses):
             
     url = ('https://maps.googleapis.com/maps/api/place/search/json?types=%s&location=%s&radius=%s&sensor=false&rankby=%s&key=%s') %  (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
    
-    #print url
+    print url
 
     # Send the GET request to the Place details service (using url from above)
     response = urlopen(url)
