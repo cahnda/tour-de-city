@@ -11,6 +11,6 @@ DEFAULT_OPTIONS = {
 
 # type = default or directions
 # options should be a dict
-def map():
+def map(type):
 	map_options = DEFAULT_OPTIONS
-	return render_template('map.html', map_options=map_options)
+	return render_template('map.html', map_options=map_options, map_type=type)

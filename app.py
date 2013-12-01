@@ -11,8 +11,9 @@ env.globals.update(utils=utils)
 env.globals.update(helpers=helpers)
 
 @app.route('/map')
-def map():
-	return google_maps.map()
+@app.route('/map/<type>')
+def map(type=''):
+	return google_maps.map(type)
 
 @app.route("/", methods = ["GET","POST"])
 def index():
@@ -84,7 +85,7 @@ def showDirections():
         result['end'] = endpoint
         result['waypoints'] = json.dumps(waypoints)
         session['page'] = ''
-        return render_template("showDirections.html", dict = result)
+        return render_template("show_directions.html", result = result)
     else:
         return redirect("/")
 
