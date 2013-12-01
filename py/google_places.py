@@ -6,11 +6,22 @@ from urllib2 import urlopen
 
 def findPlaces (latitude, longitude, responses):
     #make request
+<<<<<<< HEAD
     #auth key #1
    # AUTH_KEY = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     #If requests are exceeded, auth key 2
     AUTH_KEY = "AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c"
 LOCATION = str (latitude) + "," + str (longitude)
+=======
+    AUTH_KEY = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
+    # LIST OF API KEYS:
+    # cahnja@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
+    #
+    #
+    #
+    #
+    LOCATION = str (latitude) + "," + str (longitude)
+>>>>>>> 2c6c6553974f325918850fc905ee27a907dc63d8
     RADIUS = 3500 #in meters, approx. 2 miles
     RANKBY = 'prominence'
     TYPES = ''
