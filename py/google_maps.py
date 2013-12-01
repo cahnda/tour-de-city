@@ -14,5 +14,5 @@ DEFAULT_OPTIONS = {
 def map(options={}):
 	map_options = DEFAULT_OPTIONS
 	map_options.update(options)
-	options = json.dumps(map_options)
-	return render_template('map.html', map_options=options)
+	map_options = json.dumps(map_options)
+	return render_template('map.html', map_options=map_options)
