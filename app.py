@@ -15,8 +15,6 @@ env.globals.update(helpers=helpers)
 def new_home():
 	return render_template('new_index.html')
 
-
-
 @app.route('/test')
 def test():
 	return render_template('test.html')
