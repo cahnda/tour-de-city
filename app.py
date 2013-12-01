@@ -95,7 +95,7 @@ def showDirections():
 @app.route("/updatedata")
 def updateData():
     utils.update_citi_bike_stations()
-    redirect("/")
+    return redirect("/")
 
 @app.errorhandler(404)
 def error404(error):
