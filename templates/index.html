@@ -6,18 +6,27 @@
 	{{ helpers.asset_tag('maps.locationpicker.js') }}
 	<script>
 		$(window).load(function() {
+			locationPicker($('iframe')[0]);
 			$('.map-container').css('height', $('.venue-container').outerHeight());
+			$("#venue-form").hide();
+			$("#venue-form").css('position', 'static');
+		})
+		$(document).ready(function(){
 			$('#venue-form input[type=checkbox]').change(function() {
 				$(this).parent().toggleClass('active', this.checked);
 			});
-			locationPicker($('iframe')[0]);
+			$("#start-button").click(function(){
+				$("#start-button").hide();
+				$("#venue-form").fadeIn();
+			});
 		})
 	</script>
 = endblock
 = block body
 	<h1>Welcome</h1>
-	<h2>Select your Location</h2>
+	<a id="start-button">Start</a>
 	<form action="/" id="venue-form" method="POST">
+		<h2>Select your Location</h2>
 		<div class="map-container">
 			<div class="search-form">
 				<input class="search-text" type="text" value=""><a class="search-button">Search</a>
