@@ -15,7 +15,7 @@
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	{{ helpers.asset_tag('gmaps.js') }}
 	<script>
-		var map, mapOptions = JSON.parse('{{ map_options|safe }}');
+		var map, mapOptions = JSON.parse('{{ map_options|tojson|safe }}');
 		$(document).ready(function() {
 			map = new GMaps(mapOptions);
 		});
