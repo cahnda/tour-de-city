@@ -6,10 +6,10 @@ from urllib2 import urlopen
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
+    AUTH_KEY = 'AIzaSyA6YYBVEWXWJHsynCDK78bhlhNCm1iQPDk'
     # LIST OF API KEYS:
-    # cahnja@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
-    #
+    # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
+    # sweyn3@gmail.com : 'AIzaSyA6YYBVEWXWJHsynCDK78bhlhNCm1iQPDk'
     #
     #
     #
