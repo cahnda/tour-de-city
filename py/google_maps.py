@@ -2,8 +2,10 @@ from flask import render_template
 import json
 
 DEFAULT_OPTIONS = {
+	'div': '#map-canvas',
 	'zoom': 11,
-	'center': 'new google.maps.LatLng(40.7143528, -74.0059731)',
+	'lat': 40.7143528,
+	'lng': -74.0059731,
 	'streetViewControl': False,
 	'disableDoubleClickZoom': True,
 }

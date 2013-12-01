@@ -13,18 +13,12 @@
 	</style>
 	{{ helpers.asset_tag('jquery.js') }}
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-	{{ helpers.asset_tag('gmap.js') }}
+	{{ helpers.asset_tag('gmaps.js') }}
 	<script>
-		var map;
-		var mapOptions = {};
-		function initialize() {
-			mapJson = JSON.parse('{{ map_options|safe }}');
-			for (var key in mapJson) {
-				mapOptions[key] = eval(mapJson[key]);
-			}
-			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-		}
-		google.maps.event.addDomListener(window, 'load', initialize);
+		var map, mapOptions = JSON.parse('{{ map_options|safe }}');
+		$(document).ready(function() {
+			map = new GMaps(mapOptions);
+		});
 	</script>
 </head>
 <body>
