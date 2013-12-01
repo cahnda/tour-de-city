@@ -11,8 +11,8 @@ var locationPicker;
 
 		var frameWindow = frame.contentWindow,
 			GMaps = frameWindow.GMaps,
-			map = frameWindow.map;
-		var marker = map.addMarker({
+			map = frameWindow.map,
+			marker = map.addMarker({
 			title: 'Current Location',
 			lat: $latitude.val(),
 			lng: $longitude.val(),

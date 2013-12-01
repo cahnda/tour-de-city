@@ -1,0 +1,83 @@
+#venue-form
+	@include clearfix
+
+.map-container
+	position: relative
+	float: left
+	width: 600px
+	height: 100%
+
+.venue-container
+	overflow: hidden
+	background-color: white
+	color: black
+	text-align: center
+	padding-top: 10px
+
+	h2
+		margin-bottom: 10px
+
+	input[type=checkbox]
+		display: none
+
+	input[type=submit]
+		display: block
+		width: 100%
+		margin-top: 10px
+		padding: 8px
+		background-color: $lightBlue
+		border: none
+		font-size: 18px
+		color: #FFF
+
+	label
+		@include vendor(transition, (color .1s, background-color .1s))
+		@include vendor(user-select, none)
+		display: block
+		width: 90%
+		margin: 0 auto 5px
+		padding: 5px
+		border-top: none
+		background-color: #F1F1F1
+		color: black
+		cursor: pointer
+
+		&:last-of-type
+			margin-bottom: 0
+
+	.active
+		background-color: $lightBlue
+		color: white
+
+.search-form
+	@include vendor(box-shadow, 0 1px 8px rgba(0, 0, 0, 0.3))
+	position: absolute
+	top: 10px
+	left: 50%
+	margin-left: -180px
+	z-index: 5
+
+.search-text, .search-button
+	display: inline-block
+	vertical-align: middle
+	margin: 0
+	padding: 6px 15px
+	font-size: 16px
+
+.search-text
+	width: 225px
+	border: none
+	border: 1px solid white
+	&:focus
+		border-color: #4D90FE
+		outline: none
+
+.search-button
+	background-color: #4D90FE
+	border: 1px solid #4D90FE
+	color: #FFF
+	font-family: sans-serif
+	cursor: pointer
+
+.search-button:focus
+	outline: none
