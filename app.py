@@ -54,20 +54,25 @@ def makeTour():
         else:
             button = request.form['button']
             if button == "Submit":
-                print "hello"
                 unicodeobj = request.values.getlist("place")
+                
+                counter = 0
                 var = []
                 for iterating_var in unicodeobj:
                     iterating_var = iterating_var.encode ('ascii', 'ignore')
                     var.append(iterating_var)
+                    counter = counter + 1
+                #because we don't have full access to google places
+                if counter > 3:
+                        return "Chose a maximum of three stops for your tour"
+                
+                
                 var = google_directions.get_waypoint_order(latitude+","+longitude,var,latitude+','+longitude)
                 session['waypoints'] = var
                 session['page'] = 'showDirections'
                 return redirect(url_for("showDirections"))
     else:
         return redirect('/')
-
-
 
 @app.route("/showDirections")
 def showDirections():
