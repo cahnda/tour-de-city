@@ -44,3 +44,7 @@ On first run go to [http://localhost:5007/updatedata](http://localhost:5007/upda
 # Dependencies
 geopy
 pymongo
+
+#Limitation
+
+Purchasing Google Maps API would allow us to create a tour of unlimited length. With the free version, we can only connect a limited number of waypoints. For this version of the app, users can only select a maximum of three stops for their tour. 
