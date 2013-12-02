@@ -21,7 +21,7 @@
 		.location-container:hover .location, .location.active {
 			opacity: 1;
 			filter:none;
-			background-color: rgba(51, 224, 51, 0.4);
+			background-color: rgba(77, 144, 254, 0.4);
 		}
 
 		.location-container img {
@@ -43,7 +43,34 @@
 			opacity: 0;
 			cursor: pointer;
 		}
+
+        .search-text, .search-button{
+        display: inline-block
+        vertical-align: middle
+    }
+
+        .search-text{
+        width: 225px
+        border: none
+        border: 1px solid white
+        &:focus
+        border-color: #4D90FE
+        outline: none
+    }
+
+        .search-button{
+        background-color: #4D90FE
+        border: 1px solid #4D90FE
+        color: #FFF
+        font-family: sans-serif
+        cursor: pointer
+    }
+
+        .search-button:focus{
+        outline: none
+    }
 	</style>
+
 	<script>
 		$(document).ready(function(){
 			$('.location input[type=checkbox]').change(function() {
@@ -68,7 +95,7 @@
 				</label>
 			</div>
 		= endfor
-		<input type="submit" value="Submit" name="button" />
+		<input type="submit" class="search-button" value="Submit" name="button" />
 	</form>
 = endif
 
