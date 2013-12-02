@@ -18,7 +18,7 @@
 			font-size: 16px;
 			cursor: pointer;
 		}
-		.location-container:hover .location, .location.active {
+		.location-container:hover .location, .location.active{
 			opacity: 1;
 			filter:none;
 			background-color: rgba(77, 144, 254, 0.4);
@@ -77,11 +77,21 @@
 				$(this).parent().toggleClass('active', this.checked);
 			});
 		});
+
+        jQuery(function(){
+            var max = 3;
+            var checkboxes = $('input[id="checkboxDivInput"]');
+
+            checkboxes.change(function(){
+                var current = checkboxes.filter(':checked').length;
+                checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
+            });
+        });
 	</script>
 = endblock
 = block body
 
-<h2>Select where you would like to stop during your tour</h2>
+<h2>Select where you would like to stop during your tour (up to 3)</h2>
 = if locs
 	<form class="locations" method="POST">
 		= for loc in locs
