@@ -52,7 +52,6 @@ def get_json():
 	citi_url = urlopen(CITI_BIKE_JSON_URL)
 	return json.loads(citi_url.read())
 
-
 def make_location_array(startlat, startlon, endlat, endlon, waypoints):
 	startbike = nearest_station_address_lon(startlat, startlon)
 	endbike = nearest_station_address_lon(endlat, endlon)
