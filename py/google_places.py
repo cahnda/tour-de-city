@@ -14,7 +14,7 @@ def findPlaces (latitude, longitude, responses):
     # st.zhu1@gmail.com: 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
     # dcahn@jsa.org: 'AIzaSyAu_MPXCDjBxDSfoqP0HG7W3e33keYx0Ww'
     LOCATION = str (latitude) + "," + str (longitude)
-    RADIUS = 1750 #in meters, approx. 2 miles
+    RADIUS = 1000 #in meters, approx. .5 miles
     RANKBY = 'prominence'
     TYPES = ''
 
