@@ -1,5 +1,4 @@
 from flask import render_template
-import json
 
 DEFAULT_OPTIONS = {
 	'div': '#map-canvas',
@@ -10,9 +9,8 @@ DEFAULT_OPTIONS = {
 	'disableDoubleClickZoom': True,
 }
 
+# type = default or directions
 # options should be a dict
-def map(options={}):
+def map(type):
 	map_options = DEFAULT_OPTIONS
-	map_options.update(options)
-	map_options = json.dumps(map_options)
-	return render_template('map.html', map_options=map_options)
+	return render_template('map.html', map_options=map_options, map_type=type)

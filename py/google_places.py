@@ -1,16 +1,17 @@
 import json
 from urllib2 import urlopen
 
-# PRE: Take a list of "types of places"(i.e. musuem, nightclub) and current location (LONGITUDE and LATITUDE). 
-# POST  Generate an ordered list of places to visit based on their locations. 
+# PRE: Take a list of "types of places"(i.e. musuem, nightclub) and current location (LONGITUDE and LATITUDE).
+# POST  Generate an ordered list of places to visit based on their locations.
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
+    AUTH_KEY = 'AIzaSyDtUXHwxqazYRATJ3Kw1ZyYueEG7yvLmMQ'
     # LIST OF API KEYS:
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
     # sweyn3@gmail.com : 'AIzaSyA6YYBVEWXWJHsynCDK78bhlhNCm1iQPDk'
+    # st.zhu1@gmail.com: 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
     LOCATION = str (latitude) + "," + str (longitude)
     RADIUS = 1750 #in meters, approx. 2 miles
     RANKBY = 'prominence'
@@ -22,15 +23,15 @@ def findPlaces (latitude, longitude, responses):
     else:
         for word in responses:
             TYPES = TYPES + str (word) + '|'
-        TYPES = TYPES [:-1]       
-            
+        TYPES = TYPES [:-1]
+
     url = ('https://maps.googleapis.com/maps/api/place/search/json?types=%s&location=%s&radius=%s&sensor=false&rankby=%s&key=%s') %  (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
-   
+
     print url
 
     # Send the GET request to the Place details service (using url from above)
     response = urlopen(url)
-    
+
     # Get the response and use the JSON library to decode the JSON
     json_raw = response.read()
     json_data = json.loads(json_raw)
@@ -45,9 +46,9 @@ def findPlaces (latitude, longitude, responses):
             ans.append (place['vicinity'].encode ('ascii', 'ignore'))
             try:
                 ans.append (str(place['rating']))
-            except: 
+            except:
                 ans.append ('N/A')
-            try:           
+            try:
                 photo_info =  place ['photos'][0]
                 print photo_info
                 photo_height = photo_info['height']

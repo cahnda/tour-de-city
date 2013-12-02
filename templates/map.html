@@ -4,24 +4,19 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 	<title>Google Map</title>
-	<style>
-		html, body, #map-canvas {
-			height: 100%;
-			margin: 0;
-			padding: 0;
-		}
-	</style>
+	{{ helpers.asset_tag('map.css') }}
 	{{ helpers.asset_tag('jquery.js') }}
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	{{ helpers.asset_tag('gmaps.js') }}
 	<script>
-		var map, mapOptions = JSON.parse('{{ map_options|safe }}');
+		var map, mapOptions = JSON.parse('{{ map_options|tojson|safe }}');
 		$(document).ready(function() {
 			map = new GMaps(mapOptions);
 		});
 	</script>
 </head>
-<body>
+<body class={{ map_type }}>
+	<div id="directions-panel"></div>
 	<div id="map-canvas"></div>
 </body>
 </html>

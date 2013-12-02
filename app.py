@@ -13,9 +13,7 @@ env.globals.update(helpers=helpers)
 @app.route('/map')
 @app.route('/map/<type>')
 def map(type=''):
-	if type == 'select-location':
-		pass
-	return google_maps.map()
+	return google_maps.map(type)
 
 @app.route("/", methods = ["GET","POST"])
 def index():
@@ -47,12 +45,12 @@ def index():
 @app.route ("/makeTour",  methods = ["GET","POST"])
 def makeTour():
     if 'page' in session.keys() and session['page'] == 'makeTour':
-        var  = session ['var']
+        var  = session['var']
         longitude = session['longitude']
         latitude = session['latitude']
-        locs =  google_places.findPlaces (latitude, longitude, var)
+        locs = google_places.findPlaces(latitude, longitude, var)
         if request.method =="GET":
-            return render_template("makeTour.html", locs = json.dumps(locs))
+            return render_template("make_tour.html",locs=locs)
         else:
             button = request.form['button']
             if button == "Submit":
@@ -87,7 +85,7 @@ def showDirections():
         result['end'] = endpoint
         result['waypoints'] = json.dumps(waypoints)
         session['page'] = ''
-        return render_template("showDirections.html", dict = result)
+        return render_template("show_directions.html", result = result)
     else:
         return redirect("/")
 
