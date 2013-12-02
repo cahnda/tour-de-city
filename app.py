@@ -55,7 +55,6 @@ def makeTour():
             button = request.form['button']
             if button == "Submit":
                 unicodeobj = request.values.getlist("place")
-                
                 counter = 0
                 var = []
                 for iterating_var in unicodeobj:
@@ -63,10 +62,9 @@ def makeTour():
                     var.append(iterating_var)
                     counter = counter + 1
                 #because we don't have full access to google places
+                print counter
                 if counter > 3:
-                        return "Chose a maximum of three stops for your tour"
-                
-                
+                        return "You have chosen more than the maximum of three (3) stops for your tour. Please go back and refresh the page before selecting again"
                 var = google_directions.get_waypoint_order(latitude+","+longitude,var,latitude+','+longitude)
                 session['waypoints'] = var
                 session['page'] = 'showDirections'
