@@ -28,7 +28,7 @@ Citibike: Given a location, find the nearest citibike hub.
 
 #Hosted Version
 
-    [http://softdev-server.stuycs.org:6007](http://softdev-server.stuycs.org:6007)
+[http://softdev-server.stuycs.org:6007](http://softdev-server.stuycs.org:6007)
 
 #Installing
 
