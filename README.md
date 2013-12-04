@@ -26,6 +26,10 @@ Google Maps: Connect a set of given points using the shortest path. Display map.
 Google Places: Find nearest landmarks, using user input for type (museum, nightclub, etc). Order them by distance.
 Citibike: Given a location, find the nearest citibike hub.
 
+#Hosted Version
+
+    [http://softdev-server.stuycs.org:6007](http://softdev-server.stuycs.org:6007)
+
 #Installing
 
     pip install virtualenv
