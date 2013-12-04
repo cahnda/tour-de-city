@@ -41,9 +41,9 @@ Citibike: Given a location, find the nearest citibike hub.
 
     source env/bin/activate
     mongod
-    gunicorn -w 4 -b 0.0.0.0:7007 -p pid app:app
+    gunicorn -w 4 -b 0.0.0.0:6007 -p pid app:app
 
-On first run go to [http://localhost:5007/updatedata](http://localhost:5007/updatedata) to pull the necessary data.    
+On first run go to [http://localhost:6007/updatedata](http://localhost:6007/updatedata) to pull the necessary data.    
 
 # Dependencies
 geopy
