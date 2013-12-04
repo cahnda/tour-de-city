@@ -1,23 +1,10 @@
-#start-button
-	display: inline-block
-	padding: 5px 46px
-	background-color: white
-	color: black
-	border: none
-	cursor: pointer
-
 #venue-form
 	@include clearfix
-	position: relative
+	position: absolute
 	left: -5000px
+	//width: $mainContentWidth
 
-.map-container
-	position: relative
-	float: left
-	width: 600px
-	height: 1000px
-
-.venue-container
+#venue-container
 	overflow: hidden
 	background-color: white
 	color: black
@@ -26,6 +13,7 @@
 
 	h2
 		margin-bottom: 10px
+		padding: 0 10px
 
 	input[type=checkbox]
 		display: none
@@ -33,14 +21,6 @@
 	input[type=submit]
 		display: block
 		width: 100%
-		margin-top: 10px
-		padding: 8px
-		background-color: $lightBlue
-		border: none
-		outline: none
-		font-size: 18px
-		color: #FFF
-		cursor: pointer
 
 	label
 		@include vendor(transition, (color .1s, background-color .1s))
@@ -53,13 +33,15 @@
 		background-color: #F1F1F1
 		color: black
 		cursor: pointer
+		&.active
+			background-color: $blue
+			color: white
 
-		&:last-of-type
-			margin-bottom: 0
-
-	.active
-		background-color: $lightBlue
-		color: white
+.map-container
+	position: relative
+	float: left
+	width: 65%
+	height: 1000px
 
 .search-form
 	@include vendor(box-shadow, 0 1px 8px rgba(0, 0, 0, 0.3))
@@ -68,28 +50,3 @@
 	left: 50%
 	margin-left: -180px
 	z-index: 5
-
-.search-text, .search-button
-	display: inline-block
-	vertical-align: middle
-	margin: 0
-	padding: 6px 15px
-	font-size: 16px
-
-.search-text
-	width: 225px
-	border: none
-	border: 1px solid white
-	&:focus
-		border-color: #4D90FE
-		outline: none
-
-.search-button
-	background-color: #4D90FE
-	border: 1px solid #4D90FE
-	color: #FFF
-	font-family: sans-serif
-	cursor: pointer
-
-.search-button:focus
-	outline: none
