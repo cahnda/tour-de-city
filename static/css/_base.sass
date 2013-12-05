@@ -1,4 +1,4 @@
-html, body
+*
 	margin: 0
 	padding: 0
 
@@ -12,5 +12,49 @@ body
 h1
 	font-weight: normal
 
+h1, h2, h3, h4, h5, h6, p
+	text-align: center
+
 a
 	text-decoration: none
+
+input[type=text], input[type=submit], .button
+	display: inline-block
+	vertical-align: middle
+	margin: 0
+	padding: 6px 15px
+	font-size: 18px
+	line-height: 22px
+
+input[type=text]
+	width: 225px
+	border: none
+	border: 1px solid white
+	&:focus
+		border-color: $blue
+		outline: none
+
+input[type=submit], .button
+	@include vendor(transition, (background-color 0.2s, border-color 0.2s))
+	background-color: $blue
+	border: 1px solid $blue
+	color: #FFF
+	cursor: pointer
+	&:hover
+		background-color: $darkBlue
+		border-color: $darkBlue
+	&:focus
+		outline: none
+
+.main-content
+	@include vendor(border-radius, 2px)
+	margin: 0 auto
+	margin-bottom: 50px
+	padding: 1px 0
+	color: white
+	text-align: center
+	background-color: rgba(224, 224, 224, 0.18)
+
+.content
+	width: 90%
+	min-width: 900px
