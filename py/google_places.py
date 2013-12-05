@@ -24,9 +24,7 @@ def findPlaces (latitude, longitude, responses):
         "city_hall|establishment|library|museum|night_club|park|restaurant|"
         "shopping_mall|store|stadium|store"
     else:
-        for word in responses:
-            TYPES = TYPES + str (word) + '|'
-        TYPES = TYPES [:-1]
+    	TYPES = '|'.join(responses)
 
     url = ("https://maps.googleapis.com/maps/api/place/search/json?types=%s"
            "&location=%s&radius=%s&sensor=false&rankby=%s&key=%s") % \
