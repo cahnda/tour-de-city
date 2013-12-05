@@ -13,31 +13,22 @@ env.globals.update(helpers=helpers)
 @app.route('/map')
 @app.route('/map/<type>')
 def map(type=''):
-	return google_maps.map(type)
+    return google_maps.map(type)
 
 @app.route("/", methods = ["GET","POST"])
 def index():
-    print 'on index page'
     if request.method == "GET":
-        print 'get'
         return render_template("index.html")
     else:
-        print 'post'
         button = request.form['button']
-        print 'after button'
         if button == "Submit":
-            print 'right before'
             session['latitude'] = request.form.get('latitude', None)
             session['longitude'] = request.form.get('longitude', None)
-            print session['latitude']
-            print session['longitude']
             unicodeobj = request.values.getlist("tour")
             var = []
             for iterating_var in unicodeobj:
-                print ' hello'
                 iterating_var = iterating_var.encode ('ascii', 'ignore')
                 var.append(iterating_var)
-            print var
             session ['var'] = var
             session['page'] = 'makeTour'
             return redirect(url_for('makeTour'))
@@ -62,10 +53,12 @@ def makeTour():
                     var.append(iterating_var)
                     counter = counter + 1
                 #because we don't have full access to google places
-                print counter
                 if counter > 3:
-                        return "You have chosen more than the maximum of three (3) stops for your tour. Please go back and refresh the page before selecting again"
-                var = google_directions.get_waypoint_order(latitude+","+longitude,var,latitude+','+longitude)
+                        return "You have chosen more than the maximum of three"
+                        " (3) stops for your tour. Please go back and"
+                        " refresh the page before selecting again"
+                var = google_directions.get_waypoint_order(
+                    latitude+","+longitude,var,latitude+','+longitude)
                 session['waypoints'] = var
                 session['page'] = 'showDirections'
                 return redirect(url_for("showDirections"))
@@ -77,12 +70,13 @@ def showDirections():
     if 'page' in session.keys() and session['page'] == 'showDirections':
         waylist = session['waypoints']
         endpoint = waylist.pop()
-        waylist = citi_bike.make_location_array(session['latitude'],session['longitude'],session['latitude'], session['longitude'], waylist)
+        waylist = citi_bike.make_location_array(\
+            session['latitude'], session['longitude'],session['latitude'], \
+            session['longitude'], waylist)
         waypoints = []
         baseLoc = session['latitude'] + "," + session['longitude']
         for waypoint in waylist:
             waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
-        print "OUTPUT:" + str(waypoints)
         result = dict()
         result['start'] = baseLoc
         result['end'] = endpoint
@@ -99,12 +93,12 @@ def updateData():
     return redirect("/")
 
 @app.errorhandler(404)
-def error404(error):
+def error400(error):
 	return render_template("errors/404.html"), 404
 
 @app.errorhandler(500)
 def error500(error):
-	return render_template("errors/500.html"), 500
+    return render_template("errors/500.html"), 500
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=6007)
+    app.run(host='0.0.0.0', port=6007)

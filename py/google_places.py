@@ -20,25 +20,24 @@ def findPlaces (latitude, longitude, responses):
 
     # ADD USER INPUT FOR WHAT TYPE OF LOCATION THEY ARE LOOKING FOR
     if responses == []:
-        TYPES = 'amusement_park|aquarium|art_gallery|bowling_alley|cafe|city_hall|establishment|library|museum|night_club|park|restaurant|shopping_mall|store|stadium|store'
+        TYPES = "amusement_park|aquarium|art_gallery|bowling_alley|cafe|"
+        "city_hall|establishment|library|museum|night_club|park|restaurant|"
+        "shopping_mall|store|stadium|store"
     else:
         for word in responses:
             TYPES = TYPES + str (word) + '|'
         TYPES = TYPES [:-1]
 
-    url = ('https://maps.googleapis.com/maps/api/place/search/json?types=%s&location=%s&radius=%s&sensor=false&rankby=%s&key=%s') %  (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
-
-    print url
+    url = ("https://maps.googleapis.com/maps/api/place/search/json?types=%s"
+           "&location=%s&radius=%s&sensor=false&rankby=%s&key=%s") % \
+           (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
 
     # Send the GET request to the Place details service (using url from above)
     response = urlopen(url)
 
-    # Get the response and use the JSON library to decode the JSON
     json_raw = response.read()
     json_data = json.loads(json_raw)
-   # print json_data
 
-    # Iterate through the results and print them to the console
     results = []
     if json_data['status'] == 'OK':
         for place in json_data['results']:
@@ -51,12 +50,13 @@ def findPlaces (latitude, longitude, responses):
                 ans.append ('N/A')
             try:
                 photo_info =  place ['photos'][0]
-                print photo_info
                 photo_height = photo_info['height']
                 photo_ref = photo_info['photo_reference']
                 photo_width = photo_info['width']
 
-                photo_url = ('https://maps.googleapis.com/maps/api/place/photo?maxwidth=%s&photoreference=%s&sensor=true&key=%s') %  (photo_width, photo_ref, AUTH_KEY)
+                photo_url = ("https://maps.googleapis.com/maps/api/place/photo?"
+                    "maxwidth=%s&photoreference=%s&sensor=true&key=%s") \
+                    % (photo_width, photo_ref, AUTH_KEY)
                 ans.append (photo_url)
             except:
                 ans.append ('http://www.profyling.com/wp-content/uploads/2012/08/no-image-available.jpg')
@@ -66,6 +66,3 @@ def findPlaces (latitude, longitude, responses):
            # s = s.encode ('ascii',"ignore")
            # results.append (s)
     return results
-
-if __name__ == '__main__':
-    findPlaces (40.7472569628042, -73.99085998535156, [])
