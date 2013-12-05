@@ -37,6 +37,8 @@ def prepareFormat(waypoints):
                     l.pop(i)
                 else:
                     l[i] = "+"
+            elif l[i] == "#":
+                l.pop(i)
             i = i+1
         waypoints[x] = "".join(l)
     return waypoints
