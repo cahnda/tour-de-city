@@ -30,6 +30,7 @@ var locationPicker;
 				address: loc,
 				callback: function(results, status) {
 					if (status == 'OK') {
+						console.log("search");
 						updateLocation(results[0].geometry.location);
 						map.panTo(results[0].geometry.location);
 					}
@@ -46,6 +47,7 @@ var locationPicker;
 
 
 		function submitSearch() {
+			console.log("search");
 			var loc = $text.val();
 			performSearch(loc);
 		}
@@ -53,6 +55,7 @@ var locationPicker;
 		$submit.click(submitSearch);
 		$text.keypress(function(e) {
 			if(e.which == 13) {
+				console.log("enter");
 				submitSearch();
 				return false;
 			}
