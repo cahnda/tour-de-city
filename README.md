@@ -1,54 +1,54 @@
-proj2-pd6-07-SSSD
+proj3-6-SSSD
 =================
 
-### PROJECT SUMMARY: BUILD CUSTOM BIKE TOURS IN NYC
+# CUSTOM BIKE TOURS IN NYC
 
-	 ______     ______     ______     _____
-	/\  ___\   /\  ___\   /\  ___\   /\  __-.
-	\ \___  \  \ \___  \  \ \___  \  \ \ \/\ \
-	 \/\_____\  \/\_____\  \/\_____\  \ \____-
-	  \/_____/   \/_____/   \/_____/   \/____/
-
-# Group Members
-  * Steve Zhu
+## Group Members
+  * Victoria Greene
   * David Cahn
   * Severyn Kozak
   * Sweyn Venderbush
 
-# Our Project
+## Our Project
 Our project will generate citi-bike tours to various landmarks and
-points of interest. We'll over overlay the *Google Maps*, *Google Places*, and
-*Citi Bike* APIs to highlight possible destinations, find the nearest bike
-depots, and plot an optimal route between desired locations.
+points of interest in NYC. We'll over overlay the *Google Maps*, *Google
+Places*, and *Citi Bike* APIs to highlight possible destinations, find the
+nearest bike depots, and plot an optimal route between desired locations.
 
-# Backend
+## Backend
 Google Maps: Connect a set of given points using the shortest path. Display map.
-Google Places: Find nearest landmarks, using user input for type (museum, nightclub, etc). Order them by distance.
-Citibike: Given a location, find the nearest citibike hub.
+Google Places: Find nearest landmarks, using user input for type (museum,
+nightclub, etc). Order them by distance. Citibike: Given a location, find the
+nearest citibike hub.
 
-#Hosted Version
+##Hosted Version
 
 [http://softdev-server.stuycs.org:6007](http://softdev-server.stuycs.org:6007)
 
-#Installing
+##Installing
 
-    pip install virtualenv
-    virtualenv env
-    source env/bin/activate
-    pip install geopy pymongo
+	sudo chmod +x install.sh
 
-#Running
+##Running
 
-    source env/bin/activate
-    mongod
-    gunicorn -w 4 -b 0.0.0.0:6007 -p pid app:app
+	./install.sh
 
-On first run go to [http://localhost:6007/updatedata](http://localhost:6007/updatedata) to pull the necessary data.    
+On first run go to
+[http://localhost:6007/updatedata](http://localhost:6007/updatedata) to pull the
+necessary data.
 
-# Dependencies
-geopy
-pymongo
+## Dependencies
 
-#Limitation
+  * mongodb
+  * gunicorn
+  * pip
+  * virtualenv
+  * geopy
+  * pymongo
 
-Purchasing Google Maps API would allow us to create a tour of unlimited length. With the free version, we can only connect a limited number of waypoints. For this version of the app, users can only select a maximum of three stops for their tour. 
+## Limitation
+
+Purchasing Google Maps API would allow us to create a tour of unlimited length.
+With the free version, we can only connect a limited number of waypoints. For
+this version of the app, users can only select a maximum of three stops for
+their tour.
