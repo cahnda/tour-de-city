@@ -1,23 +1,23 @@
 function facebookClick(){
 	var url = "http://www.facebook.com/sharer.php?" +
-		"u=https://cstuy.org&t=trllest";
+		"u=https://softdev-server.stuycs.org:6007&t=Bike%20tours!";
 	popUpUrl(url);
 }
 
 function twitterClick(){
 	var url = "https://twitter.com/intent/tweet?" +
-		"url=http://www.cstuy.org&text=Check%20out%20CSTUY!&" +
-		"hashtags=cstuy,";
+		"url=http://softdev-server.stuycs.org:6007&text=Check%20out%20tours!&" +
+		"hashtags=Tours!,";
 	popUpUrl(url);
 }
 
 function googlePlusClick(){
-	var url = "https://plus.google.com/share?url=http://cstuy.org";
+	var url = "https://plus.google.com/share?url=http://softdev-server.stuycs.org:6007";
 	popUpUrl(url);
 }
 
 function tumblrClick(){
-	var url = "http://www.tumblr.com/share?v=3&u=cstuy.org&t=CSTUY";
+	var url = "http://www.tumblr.com/share?v=3&u=softdev-server.stuycs.org:6007&t=Bike%20tours!";
 	popUpUrl(url);
 }
 
