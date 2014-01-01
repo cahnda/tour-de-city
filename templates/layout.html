@@ -13,6 +13,17 @@
 		= endblock
 	</head>
 	<body>
+		<div id="socialMediaIcons">
+			<script src="/static/js/socialmedia.js"></script>
+			<img onclick="facebookClick()" id="facebook" class="t3"
+				src={{ url_for("static", filename="images/socMedIcos/facebook.png") }}><br>
+			<img onclick="twitterClick()"  id="twitter" class="t3"
+				src={{ url_for("static", filename="images/socMedIcos/twitter.png")}}><br>
+			<img onclick="googlePlusClick()" id="googlePlus" class="t3"
+				src={{ url_for("static", filename="images/socMedIcos/googlePlus.png")}}><br>
+			<img onclick="tumblrClick()" id="tumblr" class="t3"
+				src={{ url_for("static", filename="images/socMedIcos/tumblr.png")}}><br>
+		</div>
 		<div class="header">
 			<div class="header-content content">
 				<a class="logo" href={{ url_for('index') }}>

@@ -1,13 +1,12 @@
 #! /bin/bash
 
-sudo apt-get install pip
+sudo apt-get install python-pip
 sudo apt-get install gunicorn
 sudo apt-get install mongo
 
 pip install geopy pymongo
 pip install virtualenv
 virtualenv env
-source env/bin/activate
 
 source env/bin/activate
 mongod
