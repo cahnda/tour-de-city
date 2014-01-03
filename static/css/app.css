@@ -1,25 +1,36 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800");
+.t1, #venue-container label:hover {
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -ms-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out; }
+
+.t2, #venue-container label.active {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
 .t3, #socialMediaIcons img {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out; }
 
 .t6, footer {
   -webkit-transition: all 0.6s ease-out;
   -moz-transition: all 0.6s ease-out;
+  -ms-transition: all 0.6s ease-out;
   -o-transition: all 0.6s ease-out;
   transition: all 0.6s ease-out; }
-
-.t9 {
-  -webkit-transition: all 0.9s ease-out;
-  -moz-transition: all 0.9s ease-out;
-  -o-transition: all 0.9s ease-out;
-  transition: all 0.9s ease-out; }
 
 .t12 {
   -webkit-transition: all 1.2s ease-out;
   -moz-transition: all 1.2s ease-out;
+  -ms-transition: all 1.2s ease-out;
   -o-transition: all 1.2s ease-out;
   transition: all 1.2s ease-out; }
 
@@ -163,11 +174,6 @@ footer > div {
     display: block;
     width: 100%; }
   #venue-container label {
-    -webkit-transition: color 0.1s, background-color 0.1s;
-    -moz-transition: color 0.1s, background-color 0.1s;
-    -ms-transition: color 0.1s, background-color 0.1s;
-    -o-transition: color 0.1s, background-color 0.1s;
-    transition: color 0.1s, background-color 0.1s;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -181,6 +187,8 @@ footer > div {
     background-color: #f1f1f1;
     color: black;
     cursor: pointer; }
+    #venue-container label:hover {
+      background-color: #e1e1e1; }
     #venue-container label.active {
       background-color: #4d90fe;
       color: white; }

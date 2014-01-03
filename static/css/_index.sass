@@ -23,7 +23,6 @@
 		width: 100%
 
 	label
-		@include vendor(transition, (color .1s, background-color .1s))
 		@include vendor(user-select, none)
 		display: block
 		width: 90%
@@ -33,7 +32,12 @@
 		background-color: #F1F1F1
 		color: black
 		cursor: pointer
+		&:hover
+			@extend .t1
+			background-color: $lightGray
+
 		&.active
+			@extend .t2
 			background-color: $blue
 			color: white
 
