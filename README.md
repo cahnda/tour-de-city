@@ -10,55 +10,18 @@ proj3-6-SSSD
   * Sweyn Venderbush
 
 ## Our Project
-Our project will generate citi-bike tours to various landmarks and
-points of interest in NYC. We'll over overlay the *Google Maps*, *Google
-Places*, and *Citi Bike* APIs to highlight possible destinations, find the
-nearest bike depots, and plot an optimal route between desired locations.
+Our project will generate tours of NYC and Boston. 
 
-## Backend
-Google Maps: Connect a set of given points using the shortest path. Display map.
-Google Places: Find nearest landmarks, using user input for type (museum,
-nightclub, etc). Order them by distance. Citibike: Given a location, find the
-nearest citibike hub.
+Tours will come in three forms:
+1. Walking
+2. Biking
+3. Public transportation
 
-## The Plan
+We'll over overlay the *Google Maps*, *Google Places*, and *Citi Bike* APIs to highlight possible destinations, find the nearest bike depots, and plot an optimal route between desired locations. We will use the *FourSqaure* and *Yelp* APIs to prioritize locations based on user interest.
 
-Deadlines:
-Functioning website: January 17th-19th
-More Styling + Fixing Stuff: 19-24th
-
-Special features:
-Themed/Random tour
-Rate your tours [Victoria]
-Login system (if we have time), Save historic tours [Severyn/Anyone]
-Use javascript to keep everything on the same page (if we have time)
- 
-Page 1: Organization! [Severyn]
-   * Select City → Set internal variable for user session. 
-   * Working to create an organized way of integrating multiple cities.
-   * Discuss with DC and VG about integrating with the rest of the website
-   * "Select Premade Tour → Directs to Page 4
-   * “Make Your Own Tour” → Directs to Page 2
-   * MTA and Walking tours [Integration]
-   * Geolocation (if we learn how to do this)
-
-Page 2: [David] = API work
-     * Theme? Random?
-     * Pop-out box, with full description, check a box to select the location
-     * Yelp + 4Square API to prioritize
-     * Upcoming events/art show. Temporary cool stuff that might be worthwhile.
-     * 20 locations max
-     * Avoid clutter on the pages
- Page 3: [Sweyn] = Google maps
-     * Simple end-page with full description of page
-     * User-friendly organization of the tour data/locations = better way of presenting the final result. Really really important.
-     * Finished with tour → Page 5
-Page 4: [Victoria] = Database work + Javascript [Mongo]
-     * Rate your tours [Victoria], the rated tours can have themes
-     * Themed tour, pre-designed (manually) [Victoria]
-Page 5: Rating Your Tour [Victoria]
-    
-Styling: Wait and see [Severyn]
+In addition to user-generated tours, we will allow users to select from pre-made tours of two-kinds:
+1. Highest-rated by users (stored in mongo database)
+2. Pre-designed by creators based on themes
 
 ##Hosted Version
 
