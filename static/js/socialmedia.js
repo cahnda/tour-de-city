@@ -1,23 +1,25 @@
+var page_url = "http://softdev-server.stuycs.org:6007";
+
 function facebookClick(){
 	var url = "http://www.facebook.com/sharer.php?" +
-		"u=https://softdev-server.stuycs.org:6007&t=Bike%20tours!";
+		"u=" + page_url + "&t=Bike%20tours!";
 	popUpUrl(url);
 }
 
 function twitterClick(){
-	var url = "https://twitter.com/intent/tweet?" +
-		"url=http://softdev-server.stuycs.org:6007&text=Check%20out%20tours!&" +
-		"hashtags=Tours!,";
+	var url = "https://twitter.com/intent/tweet?url=" + page_url +
+		"&text=Check%20out%20tours!&hashtags=Tours!,";
 	popUpUrl(url);
 }
 
 function googlePlusClick(){
-	var url = "https://plus.google.com/share?url=http://softdev-server.stuycs.org:6007";
+	var url = "https://plus.google.com/share?url=" + page_url;
 	popUpUrl(url);
 }
 
 function tumblrClick(){
-	var url = "http://www.tumblr.com/share?v=3&u=softdev-server.stuycs.org:6007&t=Bike%20tours!";
+	var url = "http://www.tumblr.com/share?v=3&u=" + page_url +
+		"&t=Bike%20tours!";
 	popUpUrl(url);
 }
 
