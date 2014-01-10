@@ -43,3 +43,16 @@ def prepareFormat(waypoints):
         waypoints[x] = "".join(l)
     return waypoints
     
+def getDirections(result):
+    url = "http://maps.googleapis.com/maps/api/directions/json?origin=%s,MA&destination=%s&waypoints=%s&sensor=false"
+    start = result['start']
+    end = result['end']
+    waypoints = prepareFormat(result['waypoints'])
+    query_url = url % (start, end, "|".join(waypoints))
+    response = urlopen(query_url)
+    json_raw = response.read()
+    json_data = loads(json_raw)
+    return json_data
+
+
+

@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, session, url_for
-from flask.ext.assets import Environment, Bundle
 from py import *
 import json
 
@@ -81,9 +80,11 @@ def showDirections():
         result = dict()
         result['start'] = baseLoc
         result['end'] = endpoint
-        result['waypoints'] = json.dumps(waypoints)
+        #result['waypoints'] = json.dumps(waypoints)
+        result['waypoints'] = waypoints
         session['page'] = ''
-        return render_template("show_directions.html", result = result)
+        #return render_template("show_directions.html", result = result)
+        return google_directions.getDirections(result);
     else:
         return redirect("/")
 
