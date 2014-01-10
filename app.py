@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, session, url_for
-from flask.ext.assets import Environment, Bundle
 from py import *
 import json
 
