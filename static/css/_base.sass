@@ -40,11 +40,17 @@ input[type=submit], .button
 	border: 1px solid $blue
 	color: #FFF
 	cursor: pointer
+
 	&:hover
 		background-color: $darkBlue
 		border-color: $darkBlue
+
 	&:focus
 		outline: none
+
+.button.clicked
+	background-color: $red
+	border-color: $red
 
 .main-content
 	@include vendor(border-radius, 2px)
@@ -56,5 +62,6 @@ input[type=submit], .button
 	background-color: rgba(224, 224, 224, 0.18)
 
 .content
-	width: 90%
 	min-width: 900px
+	padding-top: 12px
+	width: 90%

@@ -1,8 +1,38 @@
+.row
+
+	display: none
+
+	input[type=radio]
+		display: none
+
+		&:checked + label > img
+			@extend .t3
+			@include opaque(1.0)
+
+
+	label
+		background: black
+		border: none
+		color: black
+		cursor: pointer
+		display: block
+		float: left
+		width: 50%
+
+		img
+			@include opaque(0.7)
+
+			display: block
+			height: 80px
+			width: 100%
+
+			&:hover
+				@include opaque(1.0)
+
 #venue-form
 	@include clearfix
 	position: absolute
 	left: -5000px
-	//width: $mainContentWidth
 
 #venue-container
 	overflow: hidden
@@ -32,6 +62,7 @@
 		background-color: #F1F1F1
 		color: black
 		cursor: pointer
+
 		&:hover
 			@extend .t1
 			background-color: $lightGray
@@ -40,6 +71,9 @@
 			@extend .t2
 			background-color: $blue
 			color: white
+
+			&:hover
+				background-color: $darkBlue
 
 .map-container
 	position: relative

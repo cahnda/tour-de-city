@@ -13,7 +13,7 @@
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.t3, #socialMediaIcons img {
+.t3, .row input[type=radio]:checked + label > img, #socialMediaIcons img {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -90,6 +90,10 @@ input[type=submit], .button {
   input[type=submit]:focus, .button:focus {
     outline: none; }
 
+.button.clicked {
+  background-color: #e73b3b;
+  border-color: #e73b3b; }
+
 .main-content {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -104,8 +108,9 @@ input[type=submit], .button {
   background-color: rgba(224, 224, 224, 0.18); }
 
 .content {
-  width: 90%;
-  min-width: 900px; }
+  min-width: 900px;
+  padding-top: 12px;
+  width: 90%; }
 
 .header-content {
   margin: 40px auto; }
@@ -147,6 +152,31 @@ footer > div {
   display: inline-block;
   height: 100%;
   width: 900px; }
+
+.row {
+  display: none; }
+  .row input[type=radio] {
+    display: none; }
+    .row input[type=radio]:checked + label > img {
+      opacity: 1;
+      filter: alpha(opacity=1); }
+  .row label {
+    background: black;
+    border: none;
+    color: black;
+    cursor: pointer;
+    display: block;
+    float: left;
+    width: 50%; }
+    .row label img {
+      opacity: 0.7;
+      filter: alpha(opacity=0.7);
+      display: block;
+      height: 80px;
+      width: 100%; }
+      .row label img:hover {
+        opacity: 1;
+        filter: alpha(opacity=1); }
 
 #venue-form {
   *zoom: 1;
@@ -192,6 +222,8 @@ footer > div {
     #venue-container label.active {
       background-color: #4d90fe;
       color: white; }
+      #venue-container label.active:hover {
+        background-color: #3177eb; }
 
 .map-container {
   position: relative;
@@ -272,7 +304,7 @@ footer > div {
 #socialMediaIcons {
   left: 0%;
   position: fixed;
-  top: 23%;
+  top: 177px;
   z-index: 10; }
   #socialMediaIcons img {
     float: left;
