@@ -17,7 +17,7 @@ $(document).ready(function(){
 	});
 
 	$("#row1 input[type=radio]").click(function(){
-		$(this).parent().next().fadeIn();
+		$(this).parent().parent().next(".row").fadeIn();
 	})
 
 	$("#row2 input[type=radio]").click(function(){

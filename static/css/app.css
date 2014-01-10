@@ -13,7 +13,7 @@
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.t3, .row input[type=radio]:checked + label, #socialMediaIcons img {
+.t3, .row input[type=radio]:checked + label > img, #socialMediaIcons img {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -157,17 +157,26 @@ footer > div {
   display: none; }
   .row input[type=radio] {
     display: none; }
-    .row input[type=radio]:checked + label {
-      background-color: #e73b3b;
-      color: white; }
+    .row input[type=radio]:checked + label > img {
+      opacity: 1;
+      filter: alpha(opacity=1); }
   .row label {
+    background-color: #f1f1f1;
+    border: none;
+    color: black;
+    cursor: pointer;
     display: block;
     float: left;
-    width: 50%;
-    border-top: none;
-    background-color: #f1f1f1;
-    color: black;
-    cursor: pointer; }
+    width: 50%; }
+    .row label img {
+      opacity: 0.7;
+      filter: alpha(opacity=0.7);
+      display: block;
+      height: 80px;
+      width: 100%; }
+      .row label img:hover {
+        opacity: 1;
+        filter: alpha(opacity=1); }
 
 #venue-form {
   *zoom: 1;
