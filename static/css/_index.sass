@@ -1,3 +1,25 @@
+.row
+
+	display: none
+
+	input[type=radio]
+		display: none
+
+		&:checked + label
+			@extend .t3
+			background-color: $red
+			color: white
+
+	label
+		display: block
+		float: left
+		width: 50%
+		//margin: 0 auto 5px
+		border-top: none
+		background-color: #F1F1F1
+		color: black
+		cursor: pointer
+
 #venue-form
 	@include clearfix
 	position: absolute
@@ -32,6 +54,7 @@
 		background-color: #F1F1F1
 		color: black
 		cursor: pointer
+
 		&:hover
 			@extend .t1
 			background-color: $lightGray
@@ -40,6 +63,9 @@
 			@extend .t2
 			background-color: $blue
 			color: white
+
+			&:hover
+				background-color: $darkBlue
 
 .map-container
 	position: relative
