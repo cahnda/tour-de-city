@@ -1,10 +1,10 @@
 window.onload = function () {
     alert ("loaded");
-    imgList = document.getElementsByClassName ("location-content");
-    console.log (imgList.length);
-for (var img in imgList)
-	console.log (imgList);
-	imgList.onclick = function () {
+    for (var i=1;i<={{locLen}};i++) {
+	strIt = i.toString();
+	divName = "myDiv" + strIt
+	img = document.getElementById(divName);
+	img.onclick = function () {
 	    $.modal("this is a modal");
 	};
     };
