@@ -6,7 +6,7 @@ from urllib2 import urlopen
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
+    AUTH_KEY = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # LIST OF API KEYS:
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
@@ -37,8 +37,10 @@ def findPlaces (latitude, longitude, responses):
     json_data = json.loads(json_raw)
 
     results = []
+    placeNum = 0
     if json_data['status'] == 'OK':
         for place in json_data['results']:
+            placeNum = placeNum + 1
             ans = []
             ans.append (place['name'].encode ('ascii', 'ignore'))
             ans.append (place['vicinity'].encode ('ascii', 'ignore'))
@@ -58,7 +60,8 @@ def findPlaces (latitude, longitude, responses):
                 ans.append (photo_url)
             except:
                 ans.append ('http://www.profyling.com/wp-content/uploads/2012/08/no-image-available.jpg')
-
+            divStr = "myDiv" + str (placeNum)
+            ans.append (divStr)
             results.append (ans)
            # s= '%s: %s Rating: %s' % (, place ['vicinity'], place['rating'])
            # s = s.encode ('ascii',"ignore")

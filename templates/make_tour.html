@@ -4,15 +4,14 @@
 = endblock
 = block head
 <head>
-
 <script>
 window.onload = function () {
     alert ("loaded");
-    imgList = document.getElementsByClassName  ("location-content");
-    console.log (imgList.length);
-    for img in imgList {
-	console.log (imgList);
-	imgList.onclick = function () {
+    for (var i=1;i<={{locLen}};i++) {
+	strIt = i.toString();
+	divName = "myDiv" + strIt
+	img = document.getElementById(divName);
+	img.onclick = function () {
 	    $.modal("this is a modal");
 	};
     };
@@ -26,7 +25,7 @@ window.onload = function () {
 			= for loc in locs
 				<div class="location-container">
 					<div class="force-height"></div>
-					<div class="location-content", id = "locationNum">
+					<div class="location-content", id ={{loc[4]}} >
 						<img src="{{ loc[3] }}">
 						<label class="location">
 							<h2>{{ loc[0] }}</h2>

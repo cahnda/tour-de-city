@@ -40,8 +40,9 @@ def makeTour():
         longitude = session['longitude']
         latitude = session['latitude']
         locs = google_places.findPlaces(latitude, longitude, var)
+        locLen = len (locs)
         if request.method =="GET":
-            return render_template("make_tour.html",locs=locs)
+            return render_template("make_tour.html",locs=locs, locLen=locLen)
         else:
             button = request.form['button']
             if button == "Submit":

@@ -1,0 +1,11 @@
+window.onload = function () {
+    picNum = {{locLen}};
+    alert ("loaded");
+    for (var i=1;i<=locLen;i++) {
+	divName = "myDiv" + str (placeNum)
+	img = document.getElementById(divName);
+	img.onclick = function () {
+	    $.modal("this is a modal");
+	};
+    };
+};
