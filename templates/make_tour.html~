@@ -1,0 +1,35 @@
+= extends "layout.html"
+= block title
+	Choose Locations
+= endblock
+= block head
+<script>
+  $("locationNum").click(function() {
+  alert( "Handler for .click() called." );
+  });
+</script>
+= endblock
+= block body
+	<h2 style="padding-top: 10px;">Select where you would like to stop during your tour (up to 3)</h2>
+	= if locs
+		<form class="locations-form" method="POST">
+			= for loc in locs
+				<div class="location-container">
+					<div class="force-height"></div>
+					<div class="location-content", id = "locationNum">
+						<img src="{{ loc[3] }}">
+						<label class="location">
+							<h2>{{ loc[0] }}</h2>
+							<p>{{ loc[1] }}</p>
+							<p>Rating: {{ loc[2] }}</p>
+							<input type="checkbox" name="place" value="{{ loc[1] }}">
+						</label>
+					</div>
+				</div>
+			= endfor
+			<input type="submit" class="button" value="Submit" name="button" />
+		</form>
+	= else
+		<p style="padding: 5px 0 10px;">No locations found.</p>
+	= endif
+= endblock
