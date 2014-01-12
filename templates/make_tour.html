@@ -4,14 +4,17 @@
 = endblock
 = block head
 <head>
+
 <script>
 window.onload = function () {
     alert ("loaded");
-    imgList = document.getElementById ("locationNum");
+    imgList = document.getElementsByClassName  ("location-content");
     console.log (imgList.length);
-    console.log (imgList);
-    imgList.onclick = function () {
-	$.modal("this is a modal");
+    for img in imgList {
+	console.log (imgList);
+	imgList.onclick = function () {
+	    $.modal("this is a modal");
+	};
     };
 };
 </script>
