@@ -4,9 +4,10 @@
 = endblock
 = block head
 <script>
-  $("locationNum").click(function() {
-  alert( "Handler for .click() called." );
-  });
+alert ("loaded");
+imgList = document.getElementById ("locationNum");
+console.log (imgList);
+};
 </script>
 = endblock
 = block body
@@ -30,6 +31,6 @@
 			<input type="submit" class="button" value="Submit" name="button" />
 		</form>
 	= else
-		<p style="padding: 5px 0 10px;">No locations found.</p>
+		<p style="padding: 5px 0 10px;"> No locations found.</p>
 	= endif
 = endblock
