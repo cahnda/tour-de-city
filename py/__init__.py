@@ -1,1 +1,1 @@
-__all__ = ['citi_bike', 'google_maps', 'google_places', 'utils', 'config', 'helpers', 'google_directions']
+__all__ = ["city_bikes", "google_maps", "google_places", "utils", "config", "helpers", "google_directions"]

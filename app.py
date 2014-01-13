@@ -71,7 +71,8 @@ def showDirections():
     if 'page' in session.keys() and session['page'] == 'showDirections':
         waylist = session['waypoints']
         endpoint = waylist.pop()
-        waylist = citi_bike.make_location_array(\
+		utils.setBikeDatabase(session["latitude"], session["longitude"])
+        waylist = utils.make_location_array(\
             session['latitude'], session['longitude'],session['latitude'], \
             session['longitude'], waylist)
         waypoints = []
@@ -90,7 +91,7 @@ def showDirections():
 
 @app.route("/updatedata")
 def updateData():
-    utils.update_citi_bike_stations()
+	utils.update_bike_stations()
     return redirect("/")
 
 @app.errorhandler(404)
