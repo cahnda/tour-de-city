@@ -3,11 +3,18 @@
 	Choose Locations
 = endblock
 = block head
+<head>
 <script>
-alert ("loaded");
-imgList = document.getElementById ("locationNum");
-imgList.onclick = function () {
-$.modal("this is a modal");
+window.onload = function () {
+    alert ("loaded");
+    for (var i=1;i<={{locLen}};i++) {
+	strIt = i.toString();
+	divName = "myDiv" + strIt
+	img = document.getElementById(divName);
+	img.onclick = function () {
+	    $.modal("this is a modal");
+	};
+    };
 };
 </script>
 = endblock
@@ -18,7 +25,7 @@ $.modal("this is a modal");
 			= for loc in locs
 				<div class="location-container">
 					<div class="force-height"></div>
-					<div class="location-content", id = "locationNum">
+					<div class="location-content", id ={{loc[4]}} >
 						<img src="{{ loc[3] }}">
 						<label class="location">
 							<h2>{{ loc[0] }}</h2>
