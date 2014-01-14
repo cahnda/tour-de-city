@@ -1,9 +1,19 @@
 $(window).load(function() {
+	locationPicker($('iframe')[0]);
+
 	$("#venue-form").hide();
 	$("#venue-form").css('position', 'static');
+
 })
 
 $(document).ready(function(){
+	if (navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(function(position){
+			$("input[name='latitude']").val(position.coords.latitude);
+			$("input[name='longitude']").val(position.coords.longitude);
+		});
+	}
+
 	$("#start-button").click(function(){
 		if($(this).hasClass("clicked")){
 			$(this).removeClass("clicked").text("Start");

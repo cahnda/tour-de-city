@@ -61,7 +61,6 @@ a {
 input[type=text], input[type=submit], .button {
   display: inline-block;
   vertical-align: middle;
-  margin: 0;
   padding: 6px 15px;
   font-size: 18px;
   line-height: 22px; }
@@ -109,7 +108,6 @@ input[type=submit], .button {
 
 .content {
   min-width: 900px;
-  padding-top: 12px;
   width: 90%; }
 
 .header-content {
@@ -193,8 +191,7 @@ footer > div {
   overflow: hidden;
   background-color: white;
   color: black;
-  text-align: center;
-  padding-top: 10px; }
+  text-align: center; }
   #venue-container h2 {
     margin-bottom: 10px;
     padding: 0 10px; }
@@ -224,6 +221,9 @@ footer > div {
       color: white; }
       #venue-container label.active:hover {
         background-color: #3177eb; }
+
+#start-button {
+  margin: 12px; }
 
 .map-container {
   position: relative;
