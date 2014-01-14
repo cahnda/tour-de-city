@@ -24,6 +24,11 @@ def index():
         if button == "Submit":
             session['latitude'] = request.form.get('latitude', None)
             session['longitude'] = request.form.get('longitude', None)
+            #Just while we might not have it in the form
+            try:
+                session['transport'] = request.form.get('transport', None)
+            except:
+                pass
             unicodeobj = request.values.getlist("tour")
             var = []
             for iterating_var in unicodeobj:

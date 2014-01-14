@@ -49,6 +49,7 @@ def getDirections(result):
     end = result['end']
     waypoints = prepareFormat(result['waypoints'])
     query_url = url % (start, end, "|".join(waypoints))
+    print query_url
     response = urlopen(query_url)
     json_raw = response.read()
     json_data = loads(json_raw)
