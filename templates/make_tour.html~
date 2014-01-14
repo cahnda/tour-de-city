@@ -12,10 +12,11 @@ window.onload = function () {
 	divName = "myDiv" + strIt
 	img = document.getElementById(divName);
 	img.onclick = function () {
-	    $.modal("this is a modal");
+	  $( "#dialog" ).dialog({modal:true});
 	};
     };
 };
+
 </script>
 = endblock
 = block body
@@ -36,6 +37,10 @@ window.onload = function () {
 					</div>
 				</div>
 			= endfor
+<div id="dialog" title="Basic dialog">
+  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
+
 			<input type="submit" class="button" value="Submit" name="button" />
 		</form>
 	= else
