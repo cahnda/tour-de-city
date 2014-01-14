@@ -19,20 +19,25 @@ window.onload = function () {
 
 	var imgSc = document.getElementById(divName);
 	imgSc.onclick = function () {
-	    
+	    var source = this.getElementsByTagName('img')[0];
+	    var phyImg = source.src;
+
 	    document.getElementById("dialog").innerHTML = "";
 	    var iDiv = document.getElementById("dialog");
 	    var txtNd=document.createTextNode(imgTxt);
 	    iDiv.appendChild(txtNd);
 
 	    var imgpop = document.createElement("img");
-	    imgpop.setAttribute("src", phyImg);
+	    imgpop.setAttribute("src", phyImg );
+	    imgpop.setAttribute("height", "500");
+	    imgpop.setAttribute("width", "500");
+
 	    iDiv.appendChild(imgpop);
 
 	    $("#dialog").dialog({
 		modal:true, 
-		height: 1000,
-		width: 1000,
+		height: "auto",
+		width: "auto",
 		buttons: {
 		    Ok: function() {
 			$( this ).dialog( "close" );
@@ -40,7 +45,6 @@ window.onload = function () {
 	};
     };
 };
-
 </script>
 
 = endblock
