@@ -21,7 +21,12 @@ window.onload = function () {
 	imgSc.onclick = function () {
 	    var source = this.getElementsByTagName('img')[0];
 	    var phyImg = source.src;
+	   
+	    var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
+	    var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
+	    var ratingImg  = this.getElementsByTagName('p')[0].innerHTML;
 
+	    console.log (titleImg);
 	    document.getElementById("dialog").innerHTML = "";
 	    var iDiv = document.getElementById("dialog");
 	    var txtNd=document.createTextNode(imgTxt);
@@ -36,6 +41,7 @@ window.onload = function () {
 
 	    $("#dialog").dialog({
 		modal:true, 
+		title: titleImg,
 		height: "auto",
 		width: "auto",
 		buttons: {
