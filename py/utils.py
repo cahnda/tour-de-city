@@ -2,8 +2,7 @@ import city_bikes, google_maps, google_places, google_directions
 
 from geopy.distance import vincenty    # geodesic distance
 from geopy.geocoders import GoogleV3
-from urllib2 import urlopen
-import pymongo, json
+import pymongo
 
 client = pymongo.MongoClient()
 db = client.SSSD
@@ -13,7 +12,7 @@ bike_stations = db.newyork_bikes
 def update_bike_stations(city_name):
 	city_bike_stations = getBikeDatabase(city_name)
 	city_bike_stations.remove()
-	city_bike_stations.insert(city_bikes.city_bike_functions[city_name])
+	city_bike_stations.insert(city_bikes.city_bike_functions[city_name]())
 
 def setBikeDatabase(lat_str, lon_str):
 	global bike_stations
@@ -25,6 +24,10 @@ def setBikeDatabase(lat_str, lon_str):
 def getBikeDatabase(city_name):
 	if city_name == "newyork":
 		return db.newyork_bikes
+
+	elif city_name == "boston":
+		return db.boston_bikes
+
 
 def get_bike_stations():
 	return bike_stations.find()
@@ -76,6 +79,3 @@ def make_location_array(startlat, startlon, endlat, endlon, waypoints):
 
 def distance(coor1, coor2):
     return vincenty(coor1, coor2).miles
-
-def get_json(url):
-    return json.loads(urlopen(url).read())

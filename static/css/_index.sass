@@ -19,6 +19,7 @@
 		width: 50%
 
 		img
+			@extend .t1
 			@include opaque(0.7)
 
 			display: block
@@ -76,6 +77,10 @@
 
 #start-button
 	margin: 12px
+
+#start-button.clicked
+	&:hover
+		background-color: #E42424
 
 .map-container
 	position: relative
