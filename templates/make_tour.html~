@@ -5,14 +5,22 @@
 = block head
 <head>
 <script>
+
+var d;
 window.onload = function () {
     alert ("loaded");
     for (var i=1;i<={{locLen}};i++) {
 	strIt = i.toString();
 	divName = "myDiv" + strIt
 	img = document.getElementById(divName);
+	var iDiv = document.createElement('div');
 	img.onclick = function () {
-	  $( "#dialog" ).dialog({modal:true});
+	 $("#dialog").dialog({
+				    modal:true, 
+				    buttons: {
+				       Ok: function() {
+				         $(  this ).dialog( "close" );
+				        }}});
 	};
     };
 };

@@ -62,8 +62,6 @@ def findPlaces (latitude, longitude, responses):
                 ans.append ('http://www.profyling.com/wp-content/uploads/2012/08/no-image-available.jpg')
             divStr = "myDiv" + str (placeNum)
             ans.append (divStr)
-            descriptionText = "placeholder"
-            ans.append (descriptionText)
             results.append (ans)
            # s= '%s: %s Rating: %s' % (, place ['vicinity'], place['rating'])
            # s = s.encode ('ascii',"ignore")
