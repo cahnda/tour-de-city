@@ -18,13 +18,13 @@ def update_bike_stations(city_name):
 def setBikeDatabase(lat_str, lon_str):
 	global bike_stations
 
-	address = GoogleV3().reverse("%s, %s", (lat_str, lon_str))[0][0]
+	address = GoogleV3().reverse("%s, %s" % (lat_str, lon_str))[0][0].split(",")
 	city_name = address[len(address) - 3].lower().replace(" ", "")
 	bike_stations = getBikeDatabase(city_name)
 
-def getBikeDatabase(city_name)
+def getBikeDatabase(city_name):
 	if city_name == "newyork":
-		return db.newyorkcity_bikes
+		return db.newyork_bikes
 
 def get_bike_stations():
 	return bike_stations.find()
