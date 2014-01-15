@@ -64,6 +64,9 @@ def findPlaces (latitude, longitude, responses):
             ans.append (divStr)
             descriptionText = "placeholder"
             ans.append (descriptionText)
+            chkStr = "myChk" + str (placeNum)
+            ans.append (chkStr)
+
             results.append (ans)
            # s= '%s: %s Rating: %s' % (, place ['vicinity'], place['rating'])
            # s = s.encode ('ascii',"ignore")
