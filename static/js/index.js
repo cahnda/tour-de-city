@@ -3,7 +3,6 @@ $(window).load(function() {
 
 	$("#venue-form").hide();
 	$("#venue-form").css('position', 'static');
-
 })
 
 $(document).ready(function(){

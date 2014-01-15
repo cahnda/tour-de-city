@@ -13,6 +13,7 @@
 		= endblock
 	</head>
 	<body>
+
 		<div id="socialMediaIcons">
 			<script src="/static/js/socialmedia.js"></script>
 			<img onclick="facebookClick()" id="facebook" class="t3"
@@ -24,6 +25,7 @@
 			<img onclick="tumblrClick()" id="tumblr" class="t3"
 				src={{ url_for("static", filename="images/socMedIcos/tumblr.png")}}><br>
 		</div>
+
 		<div class="header">
 			<div class="header-content content">
 				<a class="logo" href={{ url_for('index') }}>
@@ -32,6 +34,7 @@
 				</a>
 			</div>
 		</div>
+
 		<div class="main-container">
 			<div class="main-content content">
 				= block body
@@ -39,10 +42,22 @@
 				= endblock
 			</div>
 		</div>
+
 		<footer>
 			<div>
-				Content to be added!
+				<a href="/">
+					<img src="/static/images/footerIcos/home.png">
+				</a>
+
+				<a href="/contact">
+					<img src="/static/images/footerIcos/contact.png">
+				</a>
+
+				<a href="/about">
+					<img src="/static/images/footerIcos/about.png">
+				</a><br>
 			</div>
 		</footer>
+
 	</body>
 </html>

@@ -14,4 +14,21 @@ footer > div
 	color: white
 	display: inline-block
 	height: 100%
+	padding-top: 10px
+	position: relative
 	width: 900px
+
+	a
+		margin-left: 20px
+		margin-right: 20px
+
+		img
+			@extend .t3
+			@include opaque(0.7)
+			height: 68%
+
+			&:hover
+				@include opaque(1.0)
+
+	#unstaggered1
+		margin-top: 10px
