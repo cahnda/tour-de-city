@@ -90,8 +90,13 @@ def showDirections():
     else:
         return redirect("/")
 
-@app.route("/contact")
+@app.route("/contact", methods = ["GET", "POST"])
 def contact():
+	if request.method == "POST":
+		utils.send_email(
+			request.form["email_address"],
+			request.form["subject"],
+			request.form["body"])
 	return render_template("contact.html")
 
 @app.route("/about")
