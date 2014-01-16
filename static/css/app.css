@@ -1,5 +1,5 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800");
-.t1, .row label img, #venue-container label:hover {
+.t1, #button-font1 label img, #button-font2 label img, #venue-container label:hover {
   -webkit-transition: all 0.1s ease-out;
   -moz-transition: all 0.1s ease-out;
   -ms-transition: all 0.1s ease-out;
@@ -172,20 +172,43 @@ footer > div {
     .row input[type=radio]:checked + label {
       opacity: 1;
       filter: alpha(opacity=1); }
-  .row label {
+
+#button-font1 {
+  font-size: 59px; }
+  #button-font1 label {
     background: #3cb4f8;
-    border: none;
-    color: #3cb4f8;
+    border: solid;
     cursor: pointer;
     display: block;
     float: left;
-    width: 50%;
+    width: 49.5%;
     opacity: 0.7;
     filter: alpha(opacity=0.7); }
-    .row label:hover {
+    #button-font1 label:hover {
       opacity: 1;
       filter: alpha(opacity=1); }
-    .row label img {
+    #button-font1 label img {
+      display: block;
+      height: 80px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto; }
+
+#button-font2 {
+  font-size: 59px; }
+  #button-font2 label {
+    background: #e73b3b;
+    border: solid;
+    cursor: pointer;
+    display: block;
+    float: left;
+    width: 49.5%;
+    opacity: 0.7;
+    filter: alpha(opacity=0.7); }
+    #button-font2 label:hover {
+      opacity: 1;
+      filter: alpha(opacity=1); }
+    #button-font2 label img {
       display: block;
       height: 80px;
       display: block;

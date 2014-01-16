@@ -9,14 +9,44 @@
 			@extend .t3
 			@include opaque(1.0)
 
+
+
+#button-font1
+	font-size: 59px
+
 	label
 		background: $lightBlue
-		border: none
-		color: $lightBlue
+		border: solid
+		//color: $lightBlue
 		cursor: pointer
 		display: block
 		float: left
-		width: 50%
+		width: 49.5%
+		@include opaque(0.7)
+
+		&:hover
+			@include opaque(1.0)
+
+		img
+			@extend .t1
+
+			display: block
+			height: 80px
+			display: block
+			margin-left: auto
+			margin-right: auto 
+
+#button-font2
+	font-size: 59px
+
+	label
+		background: $red
+		border: solid
+		//color: $lightBlue
+		cursor: pointer
+		display: block
+		float: left
+		width: 49.5%
 		@include opaque(0.7)
 
 		&:hover
