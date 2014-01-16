@@ -16,7 +16,7 @@
 			var request = {
 				origin: start,
 				destination: end,
-				travelMode: google.maps.TravelMode.BICYCLING,
+				travelMode: google.maps.TravelMode.{{result['transportation']}},
 				waypoints: waypts
 			};
 			directionsService.route(request, function(response, status) {

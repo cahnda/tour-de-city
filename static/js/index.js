@@ -1,7 +1,7 @@
 $(window).load(function() {
 	locationPicker($('iframe')[0]);
 
-	$("#venue-form").hide();
+	$("#venue-info").hide();
 	$("#venue-form").css('position', 'static');
 
 })
@@ -17,7 +17,7 @@ $(document).ready(function(){
 	$("#start-button").click(function(){
 		if($(this).hasClass("clicked")){
 			$(this).removeClass("clicked").text("Start");
-			$(".row, #venue-form").fadeOut();
+			$(".row, #venue-info").fadeOut();
 			$("input[type=radio], input[type=checkbox]").prop("checked", false);
 		}
 		else {
@@ -31,7 +31,7 @@ $(document).ready(function(){
 	})
 
 	$("#row2 input[type=radio]").click(function(){
-		$("#venue-form").fadeIn();
+		$("#venue-info").fadeIn();
 		var $mapContainer = $('.map-container'),
 			$venueContainer = $('#venue-container');
 
@@ -47,7 +47,7 @@ $(document).ready(function(){
 		resizeMap();
 	})
 
-	$('#venue-form input[type=checkbox]').change(function() {
+	$('#venue-info input[type=checkbox]').change(function() {
 		$(this).parent().toggleClass('active', this.checked);
 	});
 

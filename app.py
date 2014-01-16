@@ -24,6 +24,7 @@ def index():
         if button == "Submit":
             session['latitude'] = request.form.get('latitude', None)
             session['longitude'] = request.form.get('longitude', None)
+            session['transportation'] = request.form.get('tour-transportation', None)
             unicodeobj = request.values.getlist("tour")
             var = []
             for iterating_var in unicodeobj:
@@ -82,6 +83,7 @@ def showDirections():
         result['start'] = baseLoc
         result['end'] = endpoint
         result['waypoints'] = json.dumps(waypoints)
+        result['transportation'] = session['transportation']
         session['page'] = ''
         return render_template("show_directions.html", result = result)
     else:

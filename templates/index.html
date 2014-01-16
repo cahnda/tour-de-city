@@ -10,7 +10,7 @@
 	<a id="start-button" class="button" style="width: 120px;margin-bottom: 10px;">
 		Start
 	</a>
-
+	<form action="/" id="venue-form" method="POST">
 	<div id="row1" class="row">
 		<div>
 			<input id="radio-custom" type="radio" name="tour-type" value="custom">
@@ -19,27 +19,26 @@
 			</label>
 		</div>
 
-		<div>
+		<div id="radio-button-home">
 			<input id="radio-premade" type="radio" name="tour-type" value="premade">
 			<label for="radio-premade">
-				<img src="/static/images/socMedIcos/twitter.png">
+				<img src="/static/images/socMedIcos/twitter.png">			
 			</label>
 		</div>
 	</div>
 
 	<div id="row2" class="row">
-		<input id="radio-bike" type="radio" name="tour-transportation" value="bike">
-		<label for="radio-bike">
-			<img src="/static/images/socMedIcos/googlePlus.png">
+		<input id="radio-bike" type="radio" name="tour-transportation" value="BICYCLING">
+		<label for="radio-bike" >
+			<img src="/static/images/bicon.png">
 		</label>
 
-		<input id="radio-foot" type="radio" name="tour-transportation" value="foot">
+		<input id="radio-foot" type="radio" name="tour-transportation" value="WALKING">
 		<label for="radio-foot">
-			<img src="/static/images/socMedIcos/tumblr.png">
+			<img src="/static/images/wicon.png">
 		</label>
 	</div>
-
-	<form action="/" id="venue-form" method="POST">
+	<div id="venue-info">
 		<h2 style="margin-bottom: 10px;">Select your Location</h2>
 
 		<div class="map-container">
@@ -70,6 +69,7 @@
 			<label><input type="checkbox" name="tour" value="stadium">Stadium</label>
 			<input type="submit" value="Submit" name="button" />
 		</div>
+	</div>
 	</form>
 </div>
 = endblock
