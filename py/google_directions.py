@@ -1,6 +1,5 @@
 from urllib2 import urlopen
 from json import loads
-import copy
 
 API_URL = "http://maps.googleapis.com/maps/api/directions/json?origin=%s&waypoints=optimize:true|%s&destination=%s&sensor=false"
 

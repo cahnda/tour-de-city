@@ -21,7 +21,6 @@ a
 input[type=text], input[type=submit], .button
 	display: inline-block
 	vertical-align: middle
-	margin: 0
 	padding: 6px 15px
 	font-size: 18px
 	line-height: 22px
@@ -40,11 +39,17 @@ input[type=submit], .button
 	border: 1px solid $blue
 	color: #FFF
 	cursor: pointer
+
 	&:hover
 		background-color: $darkBlue
 		border-color: $darkBlue
+
 	&:focus
 		outline: none
+
+.button.clicked
+	background-color: $red
+	border-color: $red
 
 .main-content
 	@include vendor(border-radius, 2px)
@@ -56,5 +61,5 @@ input[type=submit], .button
 	background-color: rgba(224, 224, 224, 0.18)
 
 .content
-	width: 90%
 	min-width: 900px
+	width: 90%

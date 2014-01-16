@@ -24,11 +24,7 @@ def index():
         if button == "Submit":
             session['latitude'] = request.form.get('latitude', None)
             session['longitude'] = request.form.get('longitude', None)
-            #Just while we might not have it in the form
-            try:
-                session['transport'] = request.form.get('transport', None)
-            except:
-                pass
+            session['transportation'] = request.form.get('tour-transportation', None)
             unicodeobj = request.values.getlist("tour")
             var = []
             for iterating_var in unicodeobj:
@@ -75,7 +71,8 @@ def showDirections():
     if 'page' in session.keys() and session['page'] == 'showDirections':
         waylist = session['waypoints']
         endpoint = waylist.pop()
-        waylist = citi_bike.make_location_array(\
+        utils.setBikeDatabase(session["latitude"], session["longitude"])
+        waylist = utils.make_location_array(\
             session['latitude'], session['longitude'],session['latitude'], \
             session['longitude'], waylist)
         waypoints = []
@@ -85,8 +82,8 @@ def showDirections():
         result = dict()
         result['start'] = baseLoc
         result['end'] = endpoint
-        #result['waypoints'] = json.dumps(waypoints)
-        result['waypoints'] = waypoints
+        result['waypoints'] = json.dumps(waypoints)
+        result['transportation'] = session['transportation']
         session['page'] = ''
         #return render_template("show_directions.html", result = result)
         return google_directions.getDirections(result);
@@ -96,7 +93,7 @@ def showDirections():
 
 @app.route("/updatedata")
 def updateData():
-    utils.update_citi_bike_stations()
+    utils.update_bike_stations("newyork") # placeholder argument
     return redirect("/")
 
 @app.errorhandler(404)

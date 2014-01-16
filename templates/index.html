@@ -4,42 +4,43 @@
 = endblock
 = block head
 	{{ helpers.asset_tag('maps.locationpicker.js') }}
-	<script>
-		$(window).load(function() {
-			locationPicker($('iframe')[0]);
-			var $mapContainer = $('.map-container'),
-				$venueContainer = $('#venue-container');
-
-			function resizeMap() {
-				var mapHeight = $mapContainer.outerHeight()
-					venueHeight = $venueContainer.outerHeight();
-				if (mapHeight != venueHeight) {
-					$mapContainer.css('height', venueHeight);
-				}
-			}
-
-			$(window).resize(resizeMap);
-			resizeMap();
-			$("#venue-form").hide();
-			$("#venue-form").css('position', 'static');
-		})
-		$(document).ready(function(){
-			$('#venue-form input[type=checkbox]').change(function() {
-				$(this).parent().toggleClass('active', this.checked);
-			});
-			$("#start-button").click(function(){
-				$("#start-button").hide();
-				$("#venue-form").fadeIn();
-				$(window).resize();
-			});
-		})
-	</script>
+	{{ helpers.asset_tag("index.js")}}
 = endblock
 = block body
-	<h1 style="margin-top: 10px;">Welcome</h1>
-	<a id="start-button" class="button" style="width: 120px;margin-bottom: 10px;">Start</a>
+	<a id="start-button" class="button" style="width: 120px;margin-bottom: 10px;">
+		Start
+	</a>
 	<form action="/" id="venue-form" method="POST">
+	<div id="row1" class="row">
+		<div>
+			<input id="radio-custom" type="radio" name="tour-type" value="custom">
+			<label for="radio-custom">
+				<img src="/static/images/socMedIcos/facebook.png">
+			</label>
+		</div>
+
+		<div id="radio-button-home">
+			<input id="radio-premade" type="radio" name="tour-type" value="premade">
+			<label for="radio-premade">
+				<img src="/static/images/socMedIcos/twitter.png">			
+			</label>
+		</div>
+	</div>
+
+	<div id="row2" class="row">
+		<input id="radio-bike" type="radio" name="tour-transportation" value="BICYCLING">
+		<label for="radio-bike" >
+			<img src="/static/images/bicon.png">
+		</label>
+
+		<input id="radio-foot" type="radio" name="tour-transportation" value="WALKING">
+		<label for="radio-foot">
+			<img src="/static/images/wicon.png">
+		</label>
+	</div>
+	<div id="venue-info">
 		<h2 style="margin-bottom: 10px;">Select your Location</h2>
+
 		<div class="map-container">
 			<div class="search-form">
 				<input class="search-text" type="text" value=""><a class="search-button button">Search</a>
@@ -48,6 +49,7 @@
 			<input type="hidden" name="longitude" value="-74.0059731"/>
 			<iframe height="100%" width="100%" frameborder="0" scrolling="no" src="/map"></iframe>
 		</div>
+
 		<div id="venue-container">
 			<h2>What type of venues would you like to visit?</h2>
 			<label><input type="checkbox" name="tour" value="amusement_park">Amusement Park</label>
@@ -67,5 +69,7 @@
 			<label><input type="checkbox" name="tour" value="stadium">Stadium</label>
 			<input type="submit" value="Submit" name="button" />
 		</div>
+	</div>
 	</form>
+</div>
 = endblock
