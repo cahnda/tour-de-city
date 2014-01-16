@@ -5,6 +5,7 @@
 = block head
 <head>
 <script>
+totalChecked = 0;
 
 window.onload = function () {
     alert ("loaded");
@@ -24,13 +25,12 @@ window.onload = function () {
 	    var phyImg = source.src;
 	    num = this.id.substring (5);
 	    chkId = "myChk" + num;
-	   
+	    
 	    var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
 	    var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
 	    var ratingImg  = this.getElementsByTagName('p')[0].innerHTML;
 	    var chk = document.getElementById (chkId);
-				
-
+	    
 	    document.getElementById("dialog").innerHTML = "";
 	    var iDiv = document.getElementById("dialog");
 	    var txtNd=document.createTextNode(imgTxt);
@@ -50,7 +50,14 @@ window.onload = function () {
 		width: "auto",
 		buttons: {
 		    Select: function () {
-		         chk.checked() = true};
+			if (totalChecked < 3) {
+			    chk.checked = true;
+			    totalChecked = totalChecked + 1;
+			    $(this).dialog('close');}
+			else {
+			    alert ("You Cannot Select this Location. You have already exceeded the maximum of three stops");}
+		    },
+
 		    Cancel: function() {
 			$( this ).dialog( "close" );
 		    }}});
