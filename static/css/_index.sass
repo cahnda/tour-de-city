@@ -5,10 +5,9 @@
 	input[type=radio]
 		display: none
 
-		&:checked + label > img
+		&:checked + label
 			@extend .t3
 			@include opaque(1.0)
-			background: black
 
 	label
 		background: $lightBlue
@@ -18,19 +17,19 @@
 		display: block
 		float: left
 		width: 50%
+		@include opaque(0.7)
+
+		&:hover
+			@include opaque(1.0)
 
 		img
 			@extend .t1
-			@include opaque(0.7)
 
 			display: block
 			height: 80px
 			display: block
 			margin-left: auto
 			margin-right: auto 
-
-			&:hover
-				@include opaque(1.0)
 
 #venue-form
 	@include clearfix

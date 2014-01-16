@@ -1,5 +1,5 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800");
-.t1, .row label img, .radio-button-home label img, #venue-container label:hover {
+.t1, .row label img, #venue-container label:hover {
   -webkit-transition: all 0.1s ease-out;
   -moz-transition: all 0.1s ease-out;
   -ms-transition: all 0.1s ease-out;
@@ -13,7 +13,7 @@
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.t3, .row input[type=radio]:checked + label > img, #socialMediaIcons img {
+.t3, .row input[type=radio]:checked + label, #socialMediaIcons img {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -155,10 +155,9 @@ footer > div {
   display: none; }
   .row input[type=radio] {
     display: none; }
-    .row input[type=radio]:checked + label > img {
+    .row input[type=radio]:checked + label {
       opacity: 1;
-      filter: alpha(opacity=1);
-      background: black; }
+      filter: alpha(opacity=1); }
   .row label {
     background: #3cb4f8;
     border: none;
@@ -166,35 +165,18 @@ footer > div {
     cursor: pointer;
     display: block;
     float: left;
-    width: 50%; }
+    width: 50%;
+    opacity: 0.7;
+    filter: alpha(opacity=0.7); }
+    .row label:hover {
+      opacity: 1;
+      filter: alpha(opacity=1); }
     .row label img {
-      opacity: 0.7;
-      filter: alpha(opacity=0.7);
       display: block;
       height: 80px;
       display: block;
       margin-left: auto;
       margin-right: auto; }
-      .row label img:hover {
-        opacity: 1;
-        filter: alpha(opacity=1); }
-
-.radio-button-home label {
-  background: #3cb4f8;
-  border: none;
-  color: #3cb4f8;
-  cursor: pointer;
-  display: block;
-  float: left;
-  width: 50%; }
-  .radio-button-home label img {
-    opacity: 0.7;
-    filter: alpha(opacity=0.7);
-    display: block;
-    height: 80px; }
-    .radio-button-home label img:hover {
-      opacity: 1;
-      filter: alpha(opacity=1); }
 
 #venue-form {
   *zoom: 1;
