@@ -1,19 +1,19 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800");
-.t1, .row label img, #venue-container label:hover {
+.t1 {
   -webkit-transition: all 0.1s ease-out;
   -moz-transition: all 0.1s ease-out;
   -ms-transition: all 0.1s ease-out;
   -o-transition: all 0.1s ease-out;
   transition: all 0.1s ease-out; }
 
-.t2, #venue-container label.active {
+.t2 {
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
   -ms-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.t3, footer > div a img, .row input[type=radio]:checked + label > img, #socialMediaIcons img {
+.t3, footer > div a img, #socialMediaIcons img {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -164,101 +164,6 @@ footer > div {
         filter: alpha(opacity=1); }
   footer > div #unstaggered1 {
     margin-top: 10px; }
-
-.row {
-  display: none; }
-  .row input[type=radio] {
-    display: none; }
-    .row input[type=radio]:checked + label > img {
-      opacity: 1;
-      filter: alpha(opacity=1); }
-  .row label {
-    background: black;
-    border: none;
-    color: black;
-    cursor: pointer;
-    display: block;
-    float: left;
-    width: 50%; }
-    .row label img {
-      opacity: 0.7;
-      filter: alpha(opacity=0.7);
-      display: block;
-      height: 80px;
-      width: 100%; }
-      .row label img:hover {
-        opacity: 1;
-        filter: alpha(opacity=1); }
-
-#venue-form {
-  *zoom: 1;
-  position: absolute;
-  left: -5000px; }
-  #venue-form:before, #venue-form:after {
-    display: table;
-    content: "";
-    line-height: 0; }
-  #venue-form:after {
-    clear: both; }
-
-#venue-container {
-  overflow: hidden;
-  background-color: white;
-  color: black;
-  text-align: center; }
-  #venue-container h2 {
-    margin-bottom: 10px;
-    padding: 0 10px; }
-  #venue-container input[type=checkbox] {
-    display: none; }
-  #venue-container input[type=submit] {
-    display: block;
-    width: 100%; }
-  #venue-container label {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-    display: block;
-    width: 90%;
-    margin: 0 auto 5px;
-    padding: 5px;
-    border-top: none;
-    background-color: #f1f1f1;
-    color: black;
-    cursor: pointer; }
-    #venue-container label:hover {
-      background-color: #e1e1e1; }
-    #venue-container label.active {
-      background-color: #4d90fe;
-      color: white; }
-      #venue-container label.active:hover {
-        background-color: #3177eb; }
-
-#start-button {
-  margin: 12px; }
-
-#start-button.clicked:hover {
-  background-color: #e42424; }
-
-.map-container {
-  position: relative;
-  float: left;
-  width: 65%;
-  height: 1000px; }
-
-.search-form {
-  -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  -ms-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  -o-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  margin-left: -180px;
-  z-index: 5; }
 
 .locations-form {
   display: block;
