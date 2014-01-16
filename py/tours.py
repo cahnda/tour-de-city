@@ -11,7 +11,7 @@ class Tour():
 def form(t):
     return "%s, %s, %s: %.1f"%(t.address1, t.address2, t.address3, t.rate)
 
-def average(tours): 
+def average(tours):   #averages the rates of the tours with the same addresses (regardless of the order) and pops the duplicates 
     temp = list(tours)
     for x in range(0,len(temp)):
         if x < len(temp):
@@ -31,11 +31,14 @@ def average(tours):
     return temp
 
 
-def organize(tours):
+
+def organize(tours):  #sorts tours in descending order by rating
     tours = sorted(tours, key=lambda t: t.rate, reverse=True)
     return tours
 
-t = Tour("address 1", "address 2", "address 3", 4.5)
+#-----------------------------Tests-----------------------------------
+
+"""t = Tour("address 1", "address 2", "address 3", 4.5)
 
 t1 = Tour("this", "that", "the other", 3.0)
 
@@ -52,4 +55,4 @@ tours = average(tours)
 tours = organize(tours)
 
 for one in tours:
-    print form(one)
+    print form(one)"""
