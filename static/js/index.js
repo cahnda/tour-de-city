@@ -23,15 +23,24 @@ $(document).ready(function(){
 		else {
 			$(this).addClass("clicked").text("Cancel");
 			$("#row1").fadeIn();
+			$('html, body').animate({
+        		scrollTop: $("#row1").offset().top
+    		}, 500);
 		}
 	});
 
 	$("#row1 input[type=radio]").click(function(){
 		$(this).parent().parent().next(".row").fadeIn();
+		$('html, body').animate({
+        	scrollTop: $("#row2").offset().top
+    	}, 500);
 	})
 
 	$("#row2 input[type=radio]").click(function(){
 		$("#venue-info").fadeIn();
+		$('html, body').animate({
+        		scrollTop: $("#venue-container").offset().top
+    		}, 500);
 		var $mapContainer = $('.map-container'),
 			$venueContainer = $('#venue-container');
 
