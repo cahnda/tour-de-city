@@ -1,3 +1,5 @@
+    <script>
+    totalChecked = 0;
 
 window.onload = function () {
     alert ("loaded");
@@ -11,11 +13,18 @@ window.onload = function () {
 	phyImg = loc[i-1][3];
 
 	var imgSc = document.getElementById(divName);
+	
 	imgSc.onclick = function () {
 	    var source = this.getElementsByTagName('img')[0];
 	    var phyImg = source.src;
-
-	    console.log (source);
+	    num = this.id.substring (5);
+	    chkId = "myChk" + num;
+	    
+	    var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
+	    var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
+	    var ratingImg  = this.getElementsByTagName('p')[0].innerHTML;
+	    var chk = document.getElementById (chkId);
+	    
 	    document.getElementById("dialog").innerHTML = "";
 	    var iDiv = document.getElementById("dialog");
 	    var txtNd=document.createTextNode(imgTxt);
@@ -30,13 +39,23 @@ window.onload = function () {
 
 	    $("#dialog").dialog({
 		modal:true, 
-		title: 
+		title: titleImg,
 		height: "auto",
 		width: "auto",
 		buttons: {
-		    Ok: function() {
+		    Select: function () {
+			if (totalChecked < 3) {
+			    chk.checked = true;
+			    totalChecked = totalChecked + 1;
+			    $(this).dialog('close');}
+			else {
+			    alert ("You Cannot Select this Location. You have already exceeded the maximum of three stops");}
+		    },
+
+		    Cancel: function() {
 			$( this ).dialog( "close" );
 		    }}});
 	};
     };
 };
+</script>
