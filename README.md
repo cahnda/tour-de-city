@@ -1,4 +1,4 @@
-proj3-6-SSSD
+proj3-6-VSSD
 =================
 
 # CUSTOM BIKE TOURS IN NYC

@@ -2,7 +2,7 @@
 @import mixins
 
 #contact
-	height: 400px
+	height: 300px
 	margin: 20px auto 0 auto
 	width: 520px
 
@@ -37,18 +37,14 @@
 			width: 468px
 
 		textarea
-			@include vendor(transition, height 0.4s ease-out)
 
 			border: none
 			font-family: "Open Sans", sans-serif
 			height: 50px
 			line-height: 22px
 			padding: 8px 15px
+			resize: none
 			width: 470px
-
-			&:focus
-				transition-property: height
-				height: 200px
 
 	#phone-info
 		display: none

@@ -12,9 +12,13 @@ $(document).ready(function(){
 		$("#email-info").fadeIn(fadeTime);
 	})
 
-	//$("textarea").focus(function(){
-		//$(this)
-	//})
+	$("textarea").focus(function(){
+		$(this).animate({height : "200px"});
+		$("#contact").animate({height : "450px"})
+	}).focusout(function(){
+		$(this).animate({height : "50"});
+		$("#contact").animate({height : "300px"});
+	})
 
 	$("button").click(function(){
 		$("button").toggleClass("clicked");
