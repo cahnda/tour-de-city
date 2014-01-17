@@ -1,0 +1,56 @@
+@import variables
+@import mixins
+
+#contact
+	height: 400px
+	margin: 20px auto 0 auto
+	width: 520px
+
+	button
+		@extend .t3
+		background-color: $darkBlue
+		border: 0px solid $darkBlue
+		margin-right: auto
+		margin-left: auto
+		width: 160px
+
+		&:hover
+			background-color: $blue
+
+	.clicked
+		background-color: $blue
+		width: 340px
+
+	div
+		left: 0
+		position: relative
+		top: 0
+
+	form
+		text-align: left
+
+		*
+			margin: 10px
+
+		input[type="text"]
+			font-size: 14px
+			width: 468px
+
+		textarea
+			@include vendor(transition, height 0.4s ease-out)
+
+			border: none
+			font-family: "Open Sans", sans-serif
+			height: 50px
+			line-height: 22px
+			padding: 8px 15px
+			width: 470px
+
+			&:focus
+				transition-property: height
+				height: 200px
+
+	#phone-info
+		display: none
+		font-size: 2em
+		margin: 5px
