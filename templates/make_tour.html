@@ -40,7 +40,7 @@ window.onload = function () {
 	    
 	    var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
 	    var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
-	    var ratingImg  = this.getElementsByTagName('p')[0].innerHTML;
+	    var ratingImg  = this.getElementsByTagName('p')[1].innerHTML;
 	    chk = document.getElementById (chkId);
 	    loc = document.getElementById (locId);
 
@@ -49,6 +49,24 @@ window.onload = function () {
 
 	    document.getElementById("dialog").innerHTML = "";
 	    var iDiv = document.getElementById("dialog");
+
+            var titleName = "Name: ";
+	    var addressName = "Address: ";
+	    var ratingName = "Google Places ";
+	   
+	    var titleNd=document.createTextNode(titleName + titleImg);
+	    var addressNd=document.createTextNode(addressName + addressImg);
+	    var ratingNd=document.createTextNode(ratingName + ratingImg);
+
+	    iDiv.appendChild (titleNd);
+	    iDiv.appendChild(document.createElement("br"));
+            iDiv.appendChild (addressNd);
+	    iDiv.appendChild(document.createElement("br"));
+            iDiv.appendChild (ratingNd);
+	    iDiv.appendChild(document.createElement("br"));
+	    iDiv.appendChild(document.createElement("br"));
+
+
 	    var txtNd=document.createTextNode(imgTxt);
 	    iDiv.appendChild(txtNd);
 

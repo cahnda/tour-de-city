@@ -6,7 +6,7 @@ from urllib2 import urlopen
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
+    AUTH_KEY = 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
     # LIST OF API KEYS:
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
@@ -73,4 +73,13 @@ def findPlaces (latitude, longitude, responses):
            # s= '%s: %s Rating: %s' % (, place ['vicinity'], place['rating'])
            # s = s.encode ('ascii',"ignore")
            # results.append (s)
-    return results
+
+            #topic_id = place ['id']
+            topic_id = "/m/0d6lp"
+            url = "https://www.googleapis.com/freebase/v1/topic" + topic_id + '?' + 'filter=suggest&key=%s' %(AUTH_KEY)
+            print url
+           # topic = json.loads(urlopen(url).read())
+        return results
+
+if __name__ == '__main__':
+    findPlaces (40.7472569628042, -73.99085998535156, [])
