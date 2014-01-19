@@ -29,7 +29,7 @@ def findPlaces (latitude, longitude, responses):
     url = ("https://maps.googleapis.com/maps/api/place/search/json?types=%s"
            "&location=%s&radius=%s&sensor=false&rankby=%s&key=%s") % \
            (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
-
+    print url
     # Send the GET request to the Place details service (using url from above)
     response = urlopen(url)
 
@@ -42,7 +42,9 @@ def findPlaces (latitude, longitude, responses):
         for place in json_data['results']:
             placeNum = placeNum + 1
             ans = []
-            ans.append (place['name'].encode ('ascii', 'ignore'))
+            placeName = place['name'].encode ('ascii', 'ignore')
+            placeName2 = place['name']
+            ans.append (placeName)
             ans.append (place['vicinity'].encode ('ascii', 'ignore'))
             try:
                 ans.append (str(place['rating']))
@@ -75,8 +77,10 @@ def findPlaces (latitude, longitude, responses):
            # results.append (s)
 
             #topic_id = place ['id']
-            topic_id = "/m/0d6lp"
+            topic_id = "/location/" + placeName
+            #url = "https://www.googleapis.com/freebase/v1/search" + '?' + 'query=&s&filter=(any type:/location)&key=%s' %(placeName2, AUTH_KEY)
             url = "https://www.googleapis.com/freebase/v1/topic" + topic_id + '?' + 'filter=suggest&key=%s' %(AUTH_KEY)
+
             print url
            # topic = json.loads(urlopen(url).read())
         return results
