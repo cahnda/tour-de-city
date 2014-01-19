@@ -1,5 +1,6 @@
 import json
 from urllib2 import urlopen
+from urllib import urlencode
 
 # PRE: Take a list of "types of places"(i.e. musuem, nightclub) and current location (LONGITUDE and LATITUDE).
 # POST  Generate an ordered list of places to visit based on their locations.
@@ -44,6 +45,8 @@ def findPlaces (latitude, longitude, responses):
             ans = []
             placeName = place['name'].encode ('ascii', 'ignore')
             placeName2 = place['name']
+            lat = place ["geometry"]["location"]["lat"]
+            latStr = str (lat)
             ans.append (placeName)
             ans.append (place['vicinity'].encode ('ascii', 'ignore'))
             try:
@@ -75,12 +78,17 @@ def findPlaces (latitude, longitude, responses):
            # s= '%s: %s Rating: %s' % (, place ['vicinity'], place['rating'])
            # s = s.encode ('ascii',"ignore")
            # results.append (s)
-
-            #topic_id = place ['id']
-            topic_id = "/location/" + placeName
-            #url = "https://www.googleapis.com/freebase/v1/search" + '?' + 'query=&s&filter=(any type:/location)&key=%s' %(placeName2, AUTH_KEY)
-            url = "https://www.googleapis.com/freebase/v1/topic" + topic_id + '?' + 'filter=suggest&key=%s' %(AUTH_KEY)
-
+           # topic_id = "/location/" + placeName
+           # url = "https://www.googleapis.com/freebase/v1/topic" + topic_id + '?' + 'filter=suggest&key=%s' %(AUTH_KEY)
+            query = placeName
+            service_url = 'https://www.googleapis.com/freebase/v1/search'
+            params = {
+               #'query': query,
+               'key': AUTH_KEY,
+               'indent':'true',
+               'type': 'location/geocode/' + latStr,
+           }
+            url = service_url + '?' + urlencode(params)
             print url
            # topic = json.loads(urlopen(url).read())
         return results
