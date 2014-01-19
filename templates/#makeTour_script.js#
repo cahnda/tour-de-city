@@ -1,13 +1,6 @@
 totalChecked = 0;
 
-$(document).ready(function(){
-
-    console.log ("TURNING STUFF BLUE");
-    highlighter =  $('.location input[type=checkbox]');
-    console.log (highlighter);
-    highlighter.change (function () {
-	$(this).parent().toggleClass('active', this.checked);
-    });
+window.onload = function () {
 
     allCBox = document.getElementsByClassName ("chkbox");
     for (i=0; i < allCBox.length; i++) {
@@ -89,3 +82,13 @@ $(document).ready(function(){
 	};
     };
 };
+
+$(document).ready(function(){
+
+    console.log ("TURNING STUFF BLUE");
+    highlighter =  $('.location input[type=checkbox]');
+    console.log (highlighter);
+    highlighter.change (function () {
+	$(this).parent().toggleClass('active', this.checked);
+    });
+});
