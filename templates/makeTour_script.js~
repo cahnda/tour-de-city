@@ -1,5 +1,5 @@
-    <script>
-    totalChecked = 0;
+ <script>
+totalChecked = 0;
 
 window.onload = function () {
     alert ("loaded");

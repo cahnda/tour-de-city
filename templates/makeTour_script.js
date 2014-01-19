@@ -1,7 +1,10 @@
- <script>
 totalChecked = 0;
 
 window.onload = function () {
+    $('.location input[type=checkbox]').change(function() {
+	$(this).parent().toggleClass('active', this.checked);
+    });
+
     alert ("loaded");
     document.getElementById("dialog").innerHTML = "";
 
@@ -32,8 +35,8 @@ window.onload = function () {
 
 	    var imgpop = document.createElement("img");
 	    imgpop.setAttribute("src", phyImg );
-	    imgpop.setAttribute("height", "500");
-	    imgpop.setAttribute("width", "500");
+	    imgpop.setAttribute("height", "350");
+	    imgpop.setAttribute("width", "350");
 
 	    iDiv.appendChild(imgpop);
 
@@ -47,12 +50,18 @@ window.onload = function () {
 			if (totalChecked < 3) {
 			    chk.checked = true;
 			    totalChecked = totalChecked + 1;
-			    $(this).dialog('close');}
+			    $(this).dialog('close');
+			    $(this).parent().toggleClass('active');}
 			else {
-			    alert ("You Cannot Select this Location. You have already exceeded the maximum of three stops");}
+			    alert ("You Cannot Select this Location. You have already met the maximum of three stops.");}
 		    },
+			
+		    Unselect: function () {
+			chk.checked = false;
+			totalChecked = totalChecked - 1;
+			$(this).dialog('close');},
 
-		    Cancel: function() {
+		    Close: function() {
 			$( this ).dialog( "close" );
 		    }}});
 	};
