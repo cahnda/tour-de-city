@@ -18,8 +18,20 @@ window.onload = function () {
 	strIt = i.toString();
 	divName = "myDiv" + strIt
         var loc = JSON.parse('{{locs | tojson | safe}}');
-	imgTxt = loc[i-1][5];
+	openingHours = loc[i-1][5];
 	phyImg = loc[i-1][3];
+	telephoneNum = loc[i-1][8];   
+	website = loc[i-1][9];   
+        reviews = loc [i-1][10];
+	if (reviews === "N/A") {
+	    myReview = reviews; }
+        else {
+	    myReview = [];
+	    for (var i = 0; i < 3; i++) {
+	        if (typeof reviews[i] != "undefined"){
+		    myReview.push(reviews[i]["text"]);}}
+	}
+	
 
 	var imgSc = document.getElementById(divName);
 	
@@ -29,26 +41,69 @@ window.onload = function () {
 	    var phyImg = source.src;
 	    num = this.id.substring (5);
 	    chkId = "myChk" + num;
+	    locId = "myLoc" + num;
 	    
 	    var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
 	    var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
-	    var ratingImg  = this.getElementsByTagName('p')[0].innerHTML;
+	    var ratingImg  = this.getElementsByTagName('p')[1].innerHTML;
 	    chk = document.getElementById (chkId);
+	    loc = document.getElementById (locId);
 
 	    console.log ("AM I CHECKED?");
 	    console.log (chk.checked);
 
 	    document.getElementById("dialog").innerHTML = "";
 	    var iDiv = document.getElementById("dialog");
-	    var txtNd=document.createTextNode(imgTxt);
-	    iDiv.appendChild(txtNd);
+	    column1 = document.createElement("td")
+	    column2 = document.createElement("td")
+
+	    var titleName = "Name: ";
+	    var addressName = "Address: ";
+	    var ratingName = "Google Places";
+	    
+	    var titleNd=document.createTextNode(titleImg);
+	    var addressNd=document.createTextNode(addressImg);
+	    var ratingNd=document.createTextNode(ratingImg);
+
+	    column1.appendChild (titleNd);
+	    column1.appendChild(document.createElement("br"));
+	    column1.appendChild (addressNd);
+	    column1.appendChild(document.createElement("br"));
+	    column1.appendChild (ratingNd);
+	    column1.appendChild(document.createElement("br"));
+	    var txtNd=document.createTextNode(telephoneNum);
+	    column1.appendChild(txtNd);
+	    column1.appendChild(document.createElement("br"));
+	    var txtNd=document.createTextNode(openingHours);
+	    column1.appendChild(txtNd);
+	    column1.appendChild(document.createElement("br"));
+	    var txtNd=document.createTextNode(website);
+	    column1.appendChild(txtNd);
+	    column1.appendChild(document.createElement("br"));
+	    column1.appendChild(document.createElement("br"));
+	    column1.appendChild(document.createElement("br"));
+	    var txtNd=document.createTextNode("REVIEWS:");
+	    column1.appendChild(txtNd);
+	    if (myReview === "N/A"){
+		var txtNd=document.createTextNode(myReview);
+		column1.appendChild(txtNd);}
+	    else {
+		for (var i = 0; i < myReview.length - 1; i++) {
+		    column1.appendChild(document.createElement("br"));
+		    var txtNd=document.createTextNode(str(i+2));
+		    var reviewNd=document.createTextNode(myReview[i+1]);
+		    column1.appendChild(txtNd);
+		    column1.appendChild(reviewNd);
+		}}
 
 	    var imgpop = document.createElement("img");
 	    imgpop.setAttribute("src", phyImg );
 	    imgpop.setAttribute("height", "350");
 	    imgpop.setAttribute("width", "350");
 
-	    iDiv.appendChild(imgpop);
+	    column2.appendChild(imgpop);
+	    iDiv.appendChild (column1);
+	    iDiv.appendChild (column2);
 
 	    $("#dialog").dialog({
 		modal:true, 
@@ -65,30 +120,27 @@ window.onload = function () {
 				chk.checked = true;
 			        console.log (chk.checked);
 				totalChecked = totalChecked + 1;
-				$(this).dialog('close');}
+				$(this).dialog('close');
+			        console.log ("COLORING");
+			        console.log (loc.style.opacity);
+			        loc.style.opacity = 1;
+			        loc.style.backgroundColor = "green";
+			    }
 			    else {
 				alert ("You Cannot Select this Location. You have already met the maximum of three stops.");}
 			}},
 		    
-		    Unselect: function () {
+ 		    Unselect: function () {
 			chk.checked = false;
 			totalChecked = totalChecked - 1;
+			loc.style.opacity = "";
+			loc.style.backgroundColor = "";
 			$(this).dialog('close');},
 
 		    Close: function() {
 			$( this ).dialog( "close" );
-		    }}});
-
+		    }}});				  
 	};
+	
     };
 };
-
-$(document).ready(function(){
-
-    console.log ("TURNING STUFF BLUE");
-    highlighter =  $('.location input[type=checkbox]');
-    console.log (highlighter);
-    highlighter.change (function () {
-	$(this).parent().toggleClass('active', this.checked);
-    });
-});

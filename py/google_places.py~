@@ -7,7 +7,7 @@ from urllib import urlencode
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
+    AUTH_KEY = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # LIST OF API KEYS:
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
@@ -68,11 +68,14 @@ def findPlaces (latitude, longitude, responses):
                 ans.append ('http://www.profyling.com/wp-content/uploads/2012/08/no-image-available.jpg')
             divStr = "myDiv" + str (placeNum)
             ans.append (divStr)
-            openNow = place ["opening_hours"]["open_now"];
-            if openNow:
-                ans.append ("This venue is currently open")
-            else:
-                ans.append ("This venue is currently closed")
+            try: 
+                openNow = place ["opening_hours"]["open_now"];
+                if openNow:
+                    ans.append ("This venue is currently open")
+                else:
+                    ans.append ("This venue is currently closed")
+            except: 
+                    ans.append ("No data available on opening hours")
 
             chkStr = "myChk" + str (placeNum)
             ans.append (chkStr)
@@ -102,12 +105,16 @@ def findPlaces (latitude, longitude, responses):
             json_data = json.loads(json_raw)
             if json_data['status'] == 'OK':
                 result = json_data ['result']
-                phoneNum = result['formatted_phone_number']
-                ans.append (phoneNum)
+                try:
+                    phoneNum = result['formatted_phone_number']
+                    ans.append (phoneNum)
+                except:
+                    ans.append ("No phone number listed")
+
                 try:
                     ans.append (result["website"])
                 except:
-                    ans.append ('N/A')
+                    ans.append ('No website listed')
                 try:
                      ans.append (result ['reviews'])
                 except:

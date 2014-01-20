@@ -14,34 +14,33 @@ window.onload = function () {
     alert ("loaded");
     document.getElementById("dialog").innerHTML = "";
 
-    for (var i=1;i<={{locLen}};i++) {
-	strIt = i.toString();
+    for (var n=1;n<={{locLen}};n++) {
+	strIt = n.toString();
 	divName = "myDiv" + strIt
-        var loc = JSON.parse('{{locs | tojson | safe}}');
-	openingHours = loc[i-1][5];
-	phyImg = loc[i-1][3];
-	telephoneNum = loc[i-1][8];   
-	website = loc[i-1][9];   
-        reviews = loc [i-1][10];
-	if (reviews === "N/A") {
-	    myReview = reviews; }
-        else {
-	    myReview = [];
-	    for (var i = 0; i < 3; i++) {
-	        if (typeof reviews[i] != "undefined"){
-		    myReview.push(reviews[i]["text"]);}}
-	}
-	
-
+	var loc = JSON.parse('{{locs | tojson | safe}}');
 	var imgSc = document.getElementById(divName);
 	
 	imgSc.onclick = function () {
-
+	    
 	    var source = this.getElementsByTagName('img')[0];
 	    var phyImg = source.src;
 	    num = this.id.substring (5);
 	    chkId = "myChk" + num;
 	    locId = "myLoc" + num;
+
+	    openingHours = loc[n-1][5];
+	    phyImg = loc[n-1][3];
+	    telephoneNum = loc[n-1][8];   
+	    website = loc[n-1][9];   
+            reviews = loc [n-1][10];
+	    if (reviews === "N/A") {
+		myReview = reviews; }
+            else {
+		myReview = [];
+		for (var i = 0; i < 3; i++) {
+	            if (typeof reviews[i] != "undefined"){
+			myReview.push(reviews[i]["text"]);}}
+	    }
 	    
 	    var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
 	    var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
@@ -112,19 +111,19 @@ window.onload = function () {
 		width: "auto",
 		buttons: {
 		    Select: function () {
-		        if (chk.checked === true) {
+			if (chk.checked === true) {
 			    alert ("You have already selected this location.");}
 			else {
 			    if (totalChecked < 3) {
-			        console.log ("SELECTING YOUR CHECKBOX");
+				console.log ("SELECTING YOUR CHECKBOX");
 				chk.checked = true;
-			        console.log (chk.checked);
+				console.log (chk.checked);
 				totalChecked = totalChecked + 1;
 				$(this).dialog('close');
-			        console.log ("COLORING");
-			        console.log (loc.style.opacity);
-			        loc.style.opacity = 1;
-			        loc.style.backgroundColor = "green";
+				console.log ("COLORING");
+				console.log (loc.style.opacity);
+				loc.style.opacity = 1;
+				loc.style.backgroundColor = "green";
 			    }
 			    else {
 				alert ("You Cannot Select this Location. You have already met the maximum of three stops.");}
