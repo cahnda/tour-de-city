@@ -24,12 +24,14 @@ window.onload = function () {
 	website = loc[i-1][9];   
         reviews = loc [i-1][10];
 	if (reviews === "N/A") {
-	    myReview = reviews }
+	    myReview = reviews; }
         else {
 	    myReview = [];
 	    for (var i = 0; i < 3; i++) {
-	        myReview.append( reviews[i]["text"])};
-	};
+	        if (typeof reviews[i] != "undefined"){
+		    myReview.push(reviews[i]["text"]);}}
+	}
+	
 
 	var imgSc = document.getElementById(divName);
 	
@@ -82,18 +84,17 @@ window.onload = function () {
 	    column1.appendChild(document.createElement("br"));
 	    var txtNd=document.createTextNode("REVIEWS:");
 	    column1.appendChild(txtNd);
-	    if (myReviews === "N/A"){
-		var txtNd=document.createTextNode(myReviews);
+	    if (myReview === "N/A"){
+		var txtNd=document.createTextNode(myReview);
 		column1.appendChild(txtNd);}
 	    else {
-		for review in myReviews {
+		for (var i = 0; i < myReview.length - 1; i++) {
 		    column1.appendChild(document.createElement("br"));
-		    var txtNd=document.createTextNode("1.");
-		    var reviewNd=document.createTextNode(review);
+		    var txtNd=document.createTextNode(str(i+2));
+		    var reviewNd=document.createTextNode(myReview[i+1]);
 		    column1.appendChild(txtNd);
 		    column1.appendChild(reviewNd);
-		}
-	    }
+		}}
 
 	    var imgpop = document.createElement("img");
 	    imgpop.setAttribute("src", phyImg );
@@ -103,8 +104,6 @@ window.onload = function () {
 	    column2.appendChild(imgpop);
 	    iDiv.appendChild (column1);
 	    iDiv.appendChild (column2);
-
-
 
 	    $("#dialog").dialog({
 		modal:true, 
@@ -143,7 +142,5 @@ window.onload = function () {
 		    }}});				  
 	};
 	
-
     };
 };
-
