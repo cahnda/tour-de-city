@@ -7,7 +7,7 @@ from urllib import urlencode
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
+    AUTH_KEY = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # LIST OF API KEYS:
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
@@ -44,9 +44,10 @@ def findPlaces (latitude, longitude, responses):
             placeNum = placeNum + 1
             ans = []
             placeName = place['name'].encode ('ascii', 'ignore')
-            placeName2 = place['name']
-            lat = place ["geometry"]["location"]["lat"]
-            latStr = str (lat)
+            ref =  place['reference']
+#            placeName2 = place['name']
+#            lat = place ["geometry"]["location"]["lat"]
+#            latStr = str (lat)
             ans.append (placeName)
             ans.append (place['vicinity'].encode ('ascii', 'ignore'))
             try:
@@ -67,30 +68,60 @@ def findPlaces (latitude, longitude, responses):
                 ans.append ('http://www.profyling.com/wp-content/uploads/2012/08/no-image-available.jpg')
             divStr = "myDiv" + str (placeNum)
             ans.append (divStr)
-            descriptionText = "placeholder"
-            ans.append (descriptionText)
+            try: 
+                openNow = place ["opening_hours"]["open_now"];
+                if openNow:
+                    ans.append ("This venue is currently open")
+                else:
+                    ans.append ("This venue is currently closed")
+            except: 
+                    ans.append ("No data available on opening hours")
+
             chkStr = "myChk" + str (placeNum)
             ans.append (chkStr)
             locStr = "myLoc" + str (placeNum)
             ans.append (locStr)
-
-            results.append (ans)
+           
            # s= '%s: %s Rating: %s' % (, place ['vicinity'], place['rating'])
            # s = s.encode ('ascii',"ignore")
            # results.append (s)
-           # topic_id = "/location/" + placeName
-           # url = "https://www.googleapis.com/freebase/v1/topic" + topic_id + '?' + 'filter=suggest&key=%s' %(AUTH_KEY)
-            query = placeName
-            service_url = 'https://www.googleapis.com/freebase/v1/search'
-            params = {
+           # topic_id = "/en/" + placeName
+            #url = "https://www.googleapis.com/freebase/v1/topic" + topic_id + '?' + 'filter=suggest&key=%s' %(AUTH_KEY)
+            #query = placeName
+            #service_url = 'https://www.googleapis.com/freebase/v1/search'
+            #params = {
                #'query': query,
-               'key': AUTH_KEY,
-               'indent':'true',
-               'type': 'location/geocode/' + latStr,
-           }
-            url = service_url + '?' + urlencode(params)
-            print url
+             #  'key': AUTH_KEY,
+             #  'indent':'true',
+              # 'type': 'location/geocode/' + latStr,
+           #}
+            #url = service_url + '?' + urlencode(params)
            # topic = json.loads(urlopen(url).read())
+        
+            url = "https://maps.googleapis.com/maps/api/place/details/json?reference=%s&sensor=true&extensions=review_summary&key=%s" %(ref, AUTH_KEY)
+            response = urlopen(url)
+    
+            json_raw = response.read()
+            json_data = json.loads(json_raw)
+            if json_data['status'] == 'OK':
+                result = json_data ['result']
+                try:
+                    phoneNum = result['formatted_phone_number']
+                    ans.append (phoneNum)
+                except:
+                    ans.append ("No phone number listed")
+
+                try:
+                    ans.append (result["website"])
+                except:
+                    ans.append ('No website listed')
+                try:
+                     ans.append (result ['reviews'])
+                except:
+                    ans.append ("No reviews available")
+            print url
+            results.append (ans)
+
         return results
 
 if __name__ == '__main__':

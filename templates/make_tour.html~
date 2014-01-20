@@ -8,9 +8,15 @@
 totalChecked = 0;
 
 window.onload = function () {
-$('.location input[type=checkbox]').change(function() {
-$(this).parent().toggleClass('active', this.checked);
-});
+
+    allCBox = document.getElementsByClassName ("chkbox");
+    for (i=0; i < allCBox.length; i++) {
+	console.log ("CHECKING YOUR CHECKBOX")
+	console.log (allCBox[i]);
+	allCBox[i].disabled = true;
+	console.log (allCBox[i].disabled);
+	console.log (allCBox[i].checked);
+    };
 
     alert ("loaded");
     document.getElementById("dialog").innerHTML = "";
@@ -19,33 +25,78 @@ $(this).parent().toggleClass('active', this.checked);
 	strIt = i.toString();
 	divName = "myDiv" + strIt
         var loc = JSON.parse('{{locs | tojson | safe}}');
-	imgTxt = loc[i-1][5];
+	openingHours = loc[i-1][5];
 	phyImg = loc[i-1][3];
+	telephoneNum = loc[i-1][8];   
+	website = loc[i-1][9];   
+        reviews = loc [i-1][10];
+	if (reviews === "N/A") {
+	    myReview = reviews;};
+        totalReviews = 0;
+	   for (var i = 0; i < 3; i++) {
+	        console.log ( reviews[i]["text"]);}
+
+
 
 	var imgSc = document.getElementById(divName);
 	
 	imgSc.onclick = function () {
+
 	    var source = this.getElementsByTagName('img')[0];
 	    var phyImg = source.src;
 	    num = this.id.substring (5);
 	    chkId = "myChk" + num;
+	    locId = "myLoc" + num;
 	    
 	    var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
 	    var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
-	    var ratingImg  = this.getElementsByTagName('p')[0].innerHTML;
-	    var chk = document.getElementById (chkId);
-	    
+	    var ratingImg  = this.getElementsByTagName('p')[1].innerHTML;
+	    chk = document.getElementById (chkId);
+	    loc = document.getElementById (locId);
+
+	    console.log ("AM I CHECKED?");
+	    console.log (chk.checked);
+
 	    document.getElementById("dialog").innerHTML = "";
 	    var iDiv = document.getElementById("dialog");
-	    var txtNd=document.createTextNode(imgTxt);
-	    iDiv.appendChild(txtNd);
+	    column1 = document.createElement("td")
+	    column2 = document.createElement("td")
+
+
+
+            var titleName = "Name: ";
+	    var addressName = "Address: ";
+	    var ratingName = "Google Places";
+	   
+	    var titleNd=document.createTextNode(titleImg);
+	    var addressNd=document.createTextNode(addressImg);
+	    var ratingNd=document.createTextNode(ratingImg);
+
+	    column1.appendChild (titleNd);
+	    column1.appendChild(document.createElement("br"));
+            column1.appendChild (addressNd);
+	    column1.appendChild(document.createElement("br"));
+            column1.appendChild (ratingNd);
+	    column1.appendChild(document.createElement("br"));
+	    var txtNd=document.createTextNode(telephoneNum);
+	    column1.appendChild(txtNd);
+	    column1.appendChild(document.createElement("br"));
+            var txtNd=document.createTextNode(openingHours);
+	    column1.appendChild(txtNd);
+	    column1.appendChild(document.createElement("br"));
+	    var txtNd=document.createTextNode(website);
+	    column1.appendChild(txtNd);
 
 	    var imgpop = document.createElement("img");
 	    imgpop.setAttribute("src", phyImg );
 	    imgpop.setAttribute("height", "350");
 	    imgpop.setAttribute("width", "350");
 
-	    iDiv.appendChild(imgpop);
+	    column2.appendChild(imgpop);
+	    iDiv.appendChild (column1);
+	    iDiv.appendChild (column2);
+
+
 
 	    $("#dialog").dialog({
 		modal:true, 
@@ -54,24 +105,41 @@ $(this).parent().toggleClass('active', this.checked);
 		width: "auto",
 		buttons: {
 		    Select: function () {
-			if (totalChecked < 3) {
-			    chk.checked = true;
-			    totalChecked = totalChecked + 1;
-			    $(this).dialog('close');}
+		        if (chk.checked === true) {
+			    alert ("You have already selected this location.");}
 			else {
-			    alert ("You Cannot Select this Location. You have already met the maximum of three stops.");}
-		    }.
-		  Unselect: function () {
-			    chk.checked = false;
-			    totalChecked = totalChecked - 1;
-			    $(this).dialog('close');},
+			    if (totalChecked < 3) {
+			        console.log ("SELECTING YOUR CHECKBOX");
+				chk.checked = true;
+			        console.log (chk.checked);
+				totalChecked = totalChecked + 1;
+				$(this).dialog('close');
+			        console.log ("COLORING");
+			        console.log (loc.style.opacity);
+			        loc.style.opacity = 1;
+			        loc.style.backgroundColor = "green";
+					       }
+			    else {
+				alert ("You Cannot Select this Location. You have already met the maximum of three stops.");}
+			}},
+		    
+ 		    Unselect: function () {
+			chk.checked = false;
+			totalChecked = totalChecked - 1;
+				loc.style.opacity = "";
+			        loc.style.backgroundColor = "";
+			$(this).dialog('close');},
 
-		    Cancel: function() {
+		    Close: function() {
 			$( this ).dialog( "close" );
-		    }}});
+		    }}});				  
 	};
+					    
+
     };
 };
+
+
 </script>
 
 = endblock
@@ -84,11 +152,11 @@ $(this).parent().toggleClass('active', this.checked);
 					<div class="force-height"></div>
 					<div class="location-content", id ={{loc[4]}} >
 						<img src="{{ loc[3] }}">
-						<label class="location">
+						<label class="location", id = {{loc[7]}}>
 							<h2>{{ loc[0] }}</h2>
 							<p>{{ loc[1] }}</p>
 							<p>Rating: {{ loc[2] }}</p>
-							<input type="checkbox" name="place" value="{{ loc[1] }}" id = "{{loc[6]}}">
+							<input type="checkbox" name="place" value="{{ loc[1] }}" id = "{{loc[6]}}" class = "chkbox">
 						</label>
 					</div>
 				</div>
