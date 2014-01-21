@@ -52,6 +52,7 @@ def nearest_station_address(street):
 def nearest_station_address_lon(lat, lon):
     stations = get_bike_stations()
 
+    #issue here: (stations is empty sometimes)
     nearest_station = stations[0]
     shortest_dist = distance((nearest_station["latitude"], \
             nearest_station["longitude"]), (lat, lon))
@@ -79,3 +80,22 @@ def make_location_array(startlat, startlon, endlat, endlon, waypoints):
 
 def distance(coor1, coor2):
     return vincenty(coor1, coor2).miles
+
+#------------------------------------------------------------------------
+
+from tours import Tour
+from tours import average
+from tours import organize 
+
+def addTour(tour):
+    db=open()    
+    db.insert({'tour': tour})
+
+def _tours(res):
+    return [t['tour'] for t in res]
+    
+def getSorted():
+    res = _tour(db.find({'tour': tour}))
+    res = average(res)
+    return organize(res)
+

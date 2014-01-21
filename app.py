@@ -36,10 +36,11 @@ def index():
 @app.route ("/makeTour",  methods = ["GET","POST"])
 def makeTour():
     if 'page' in session.keys() and session['page'] == 'makeTour':
-        var  = session['var']
+        # result types -- just call them what they are
+        res_types  = session['var']
         longitude = session['longitude']
         latitude = session['latitude']
-        locs = google_places.findPlaces(latitude, longitude, var)
+        locs = google_places.findPlaces(latitude, longitude, res_types)
         if request.method =="GET":
             return render_template("make_tour.html",locs=locs)
         else:
@@ -47,19 +48,19 @@ def makeTour():
             if button == "Submit":
                 unicodeobj = request.values.getlist("place")
                 counter = 0
-                var = []
+                waypoints = []
                 for iterating_var in unicodeobj:
                     iterating_var = iterating_var.encode ('ascii', 'ignore')
-                    var.append(iterating_var)
+                    waypoints.append(iterating_var)
                     counter = counter + 1
                 #because we don't have full access to google places
                 if counter > 3:
                         return "You have chosen more than the maximum of three"
                         " (3) stops for your tour. Please go back and"
                         " refresh the page before selecting again"
-                var = google_directions.get_waypoint_order(
-                    latitude+","+longitude,var,latitude+','+longitude)
-                session['waypoints'] = var
+                waypoints = google_directions.get_waypoint_order(
+                    latitude+","+longitude,waypoints,latitude+','+longitude)
+                session['waypoints'] = waypoints
                 session['page'] = 'showDirections'
                 return redirect(url_for("showDirections"))
     else:

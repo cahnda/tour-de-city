@@ -1,0 +1,26 @@
+= extends 'layout.html'
+= block title
+	Home
+= endblock
+= block head
+	{{ helpers.asset_tag('maps.locationpicker.js') }}
+	{{ helpers.asset_tag("index.js")}}
+= endblock
+= block body
+
+<body>
+<h1>Thank you for taking our tour!</h1>
+<br>
+<div> <!-- make this a translucent box or something -->
+  <a>First site</a> * <a>Second site</a> * <a>Third site</a> 
+</div>
+<br>
+<h2>Did you enjoy enjoy your tour? Rate it here:</h2>
+
+ * * * * *
+
+<hr>
+<address></address>
+<!-- hhmts start -->Last modified: Tue Jan 14 23:33:28 EST 2014 <!-- hhmts end -->
+</body>
+`
