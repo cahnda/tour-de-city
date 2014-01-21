@@ -1,0 +1,73 @@
+.t1 {
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -ms-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out; }
+
+.t2 {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.t3, #contact button {
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.t6 {
+  -webkit-transition: all 0.6s ease-out;
+  -moz-transition: all 0.6s ease-out;
+  -ms-transition: all 0.6s ease-out;
+  -o-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out; }
+
+.t12 {
+  -webkit-transition: all 1.2s ease-out;
+  -moz-transition: all 1.2s ease-out;
+  -ms-transition: all 1.2s ease-out;
+  -o-transition: all 1.2s ease-out;
+  transition: all 1.2s ease-out; }
+
+#contact {
+  height: 300px;
+  margin: 20px auto 0 auto;
+  width: 520px; }
+  #contact button {
+    background-color: #3177eb;
+    border: 0px solid #3177eb;
+    margin-right: auto;
+    margin-left: auto;
+    width: 160px; }
+    #contact button:hover {
+      background-color: #4d90fe; }
+  #contact .clicked {
+    background-color: #4d90fe;
+    width: 340px; }
+  #contact div {
+    left: 0;
+    position: relative;
+    top: 0; }
+  #contact form {
+    text-align: left; }
+    #contact form * {
+      margin: 10px; }
+    #contact form input[type="text"] {
+      font-size: 14px;
+      width: 468px; }
+    #contact form textarea {
+      border: none;
+      font-family: "Open Sans", sans-serif;
+      height: 50px;
+      line-height: 22px;
+      padding: 8px 15px;
+      resize: none;
+      width: 470px; }
+  #contact #phone-info {
+    display: none;
+    font-size: 2em;
+    margin: 5px; }

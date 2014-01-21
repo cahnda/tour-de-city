@@ -4,42 +4,45 @@
 = endblock
 = block head
 	{{ helpers.asset_tag('maps.locationpicker.js') }}
+	{{ helpers.asset_tag("index.css")}}
 	{{ helpers.asset_tag("index.js")}}
 = endblock
 = block body
 	<a id="start-button" class="button" style="width: 120px;margin-bottom: 10px;">
 		Start
 	</a>
-
+	<form action="/" id="venue-form" method="POST">
 	<div id="row1" class="row">
-		<div>
+		<div id="button-font1">
 			<input id="radio-custom" type="radio" name="tour-type" value="custom">
 			<label for="radio-custom">
-				<img src="/static/images/socMedIcos/facebook.png">
+				Custom Tour
 			</label>
 		</div>
 
-		<div>
+		<div id="button-font1">
 			<input id="radio-premade" type="radio" name="tour-type" value="premade">
 			<label for="radio-premade">
-				<img src="/static/images/socMedIcos/twitter.png">
+				Pre-Made Tour	
 			</label>
 		</div>
 	</div>
 
 	<div id="row2" class="row">
-		<input id="radio-bike" type="radio" name="tour-transportation" value="bike">
-		<label for="radio-bike">
-			<img src="/static/images/socMedIcos/googlePlus.png">
-		</label>
-
-		<input id="radio-foot" type="radio" name="tour-transportation" value="foot">
-		<label for="radio-foot">
-			<img src="/static/images/socMedIcos/tumblr.png">
-		</label>
+		<div id="button-font2">
+			<input id="radio-bike" type="radio" name="tour-transportation" value="BICYCLING">
+			<label for="radio-bike">
+				<img src="/static/images/bicon.png">
+			</label>
+		</div>
+		<div id="button-font2">
+			<input id="radio-foot" type="radio" name="tour-transportation" value="WALKING">
+			<label for="radio-foot">
+				<img src="/static/images/wicon.png">
+			</label>
+		</div>
 	</div>
-
-	<form action="/" id="venue-form" method="POST">
+	<div id="venue-info">
 		<h2 style="margin-bottom: 10px;">Select your Location</h2>
 
 		<div class="map-container">
@@ -70,6 +73,7 @@
 			<label><input type="checkbox" name="tour" value="stadium">Stadium</label>
 			<input type="submit" value="Submit" name="button" />
 		</div>
+	</div>
 	</form>
 </div>
 = endblock

@@ -24,6 +24,7 @@ def index():
         if button == "Submit":
             session['latitude'] = request.form.get('latitude', None)
             session['longitude'] = request.form.get('longitude', None)
+            session['transportation'] = request.form.get('tour-transportation', None)
             unicodeobj = request.values.getlist("tour")
             var = []
             for iterating_var in unicodeobj:
@@ -83,13 +84,20 @@ def showDirections():
         result['start'] = baseLoc
         result['end'] = endpoint
         result['waypoints'] = json.dumps(waypoints)
+        result['transportation'] = session['transportation']
         session['page'] = ''
-        return render_template("show_directions.html", result = result)
+        #return render_template("show_directions.html", result = result)
+        return google_directions.getDirections(result);
     else:
         return redirect("/")
 
-@app.route("/contact")
+@app.route("/contact", methods = ["GET", "POST"])
 def contact():
+	if request.method == "POST":
+		utils.send_email(
+			request.form["email_address"],
+			request.form["subject"],
+			request.form["body"])
 	return render_template("contact.html")
 
 @app.route("/about")

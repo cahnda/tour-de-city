@@ -1,3 +1,6 @@
+@import mixins
+@import variables
+
 .row
 
 	display: none
@@ -5,29 +8,61 @@
 	input[type=radio]
 		display: none
 
-		&:checked + label > img
+		&:checked + label
 			@extend .t3
 			@include opaque(1.0)
 
+
+
+#button-font1
+	font-size: 59px
+
 	label
-		background: black
+		background: $lightBlue
 		border: none
-		color: black
+		//color: $lightBlue
 		cursor: pointer
 		display: block
 		float: left
 		width: 50%
+		@include opaque(0.7)
+
+		&:hover
+			@include opaque(1.0)
 
 		img
 			@extend .t1
-			@include opaque(0.7)
 
 			display: block
 			height: 80px
-			width: 100%
+			display: block
+			margin-left: auto
+			margin-right: auto 
 
-			&:hover
-				@include opaque(1.0)
+#button-font2
+	font-size: 59px
+
+	label
+		background: $red
+		border: none
+		//color: $lightBlue
+		cursor: pointer
+		display: block
+		float: left
+		width: 50%
+		@include opaque(0.7)
+
+		&:hover
+			@include opaque(1.0)
+
+		img
+			@extend .t1
+
+			display: block
+			height: 80px
+			display: block
+			margin-left: auto
+			margin-right: auto 
 
 #venue-form
 	@include clearfix

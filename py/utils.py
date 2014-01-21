@@ -2,7 +2,8 @@ import city_bikes, google_maps, google_places, google_directions
 
 from geopy.distance import vincenty    # geodesic distance
 from geopy.geocoders import GoogleV3
-import pymongo
+import pymongo, smtplib
+from email.mime.text import MIMEText
 
 client = pymongo.MongoClient()
 db = client.SSSD
@@ -98,4 +99,8 @@ def getSorted():
     res = _tour(db.find({'tour': tour}))
     res = average(res)
     return organize(res)
+
+def send_email(email_address, subject, body):
+	db.contact.insert({"email_address" : email_address, "subject" : subject,
+		"body" : body})
 
