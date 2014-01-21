@@ -30,7 +30,9 @@
 							<h2>{{ loc[0] }}</h2>
 							<p>{{ loc[1] }}</p>
 							<p>Rating: {{ loc[2] }}</p>
-							<input type="checkbox" name="place" value="{{ loc[1] }}">
+							<input
+					  type="checkbox" name="place"
+					  value="{{ loc[0] }}|{{ loc[1] }}">
 						</label>
 					</div>
 				</div>

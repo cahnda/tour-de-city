@@ -51,7 +51,7 @@ def nearest_station_address(street):
     return nearest_station["address"]
 
 def nearest_station_address_lon(lat, lon):
-    stations = get_bike_stations()
+    stations = list(get_bike_stations())
 
     #issue here: (stations is empty sometimes)
     nearest_station = stations[0]
