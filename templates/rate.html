@@ -9,8 +9,15 @@
 <br>
 <div> <!-- make this a translucent box or something -->
   = for wayp in waypoints
-  <a>wayp</a> *
-  = endfor
+<div class="force-height"></div>
+
+<div class="location-content">
+  <img src="{{wayp[1]}}" width="100" height="100"/>
+  <label class="location">
+  <h2>{{wayp[0]}}</h2>
+  </label>
+</div>
+= endfor
 </div>
 <br>
 <h2>Did you enjoy enjoy your tour? Rate it here:</h2>
@@ -19,6 +26,6 @@
 
 <hr>
 <address></address>
-<!-- hhmts start -->Last modified: Mon Jan 20 21:00:30 EST 2014 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Mon Jan 20 22:04:18 EST 2014 <!-- hhmts end -->
 </body>
-`
+= endblock

@@ -51,11 +51,9 @@ def makeTour():
                 counter = 0
                 waypoints = []
                 place_names = []
-                for iterating_var in [x.split('|') for x in unicodeobj]:
-                    iterating_var[0] = iterating_var[0].encode ('ascii', 'ignore')
-                    iterating_var[1] = iterating_var[1].encode ('ascii', 'ignore')
-                    waypoints.append(iterating_var[1])
-                    place_names.append(iterating_var[0])
+                for iterating_var in unicodeobj:
+                    iterating_var = iterating_var.encode ('ascii', 'ignore')
+                    waypoints.append(iterating_var)
                     counter = counter + 1
                 #because we don't have full access to google places
                 if counter > 3:
@@ -66,7 +64,8 @@ def makeTour():
                     latitude+","+longitude,waypoints,latitude+','+longitude)
                 session['waypoints'] = waypoints
                 session['page'] = 'showDirections'
-                session['place_names'] = place_names
+                session['place_names'] = [l[0] for l in locs if l[1] in waypoints]
+                session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]
                 return redirect(url_for("showDirections"))
     else:
         return redirect('/')
@@ -97,7 +96,12 @@ def showDirections():
 
 @app.route("/rate", methods = ["GET", "POST"])
 def rate():
-    render_template('rate.html', waypoints=session['place_names'])
+    names = session['place_names']
+    pics = session['place_pics']
+    waypoints = []
+    for i in range(len(names)):
+        waypoints.append((names[i], pics[i]))
+    return render_template('rate.html', waypoints=waypoints)
 
 @app.route("/contact", methods = ["GET", "POST"])
 def contact():
