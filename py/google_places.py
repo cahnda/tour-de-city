@@ -119,7 +119,6 @@ def findPlaces (latitude, longitude, responses):
                      ans.append (result ['reviews'])
                 except:
                     ans.append ("No reviews available")
-            print url
             results.append (ans)
 
         return results

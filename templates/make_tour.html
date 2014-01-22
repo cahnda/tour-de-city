@@ -1,21 +1,17 @@
 = extends "layout.html"
 = block title
-	Choose Locations
+Choose Locations
 = endblock
 = block head
 <head>
-<script>
+ <script>
 totalChecked = 0;
 
 window.onload = function () {
 
     allCBox = document.getElementsByClassName ("chkbox");
     for (i=0; i < allCBox.length; i++) {
-	console.log ("CHECKING YOUR CHECKBOX")
-	console.log (allCBox[i]);
 	allCBox[i].disabled = true;
-	console.log (allCBox[i].disabled);
-	console.log (allCBox[i].checked);
     };
 
     alert ("loaded");
@@ -24,31 +20,36 @@ window.onload = function () {
     for (var n=1;n<={{locLen}};n++) {
 	strIt = n.toString();
 	divName = "myDiv" + strIt
-	loc = JSON.parse('{{locs | tojson | safe}}');
 	var imgSc = document.getElementById(divName);
 	
-	var openingHours = loc[n-1][5];
-	    var phyImg = loc[n-1][3];
-	   var telephoneNum = loc[n-1][8];   
-	    var website = loc[n-1][9];   
-            var reviews = loc[n-1][10];
-	    if (reviews === "No reviews available") {
-		myReview = reviews; }
-            else {
-		myReview = [];
-		for (var i = 0; i < 3; i++) {
-	            if (typeof reviews[i] != "undefined"){
-			myReview.push(reviews[i]["text"]);}}
-	    }
-
 	imgSc.onclick = function () {
-	    
+
+
 	    var source = this.getElementsByTagName('img')[0];
 	    var phyImg = source.src;
 	    num = this.id.substring (5);
 	    chkId = "myChk" + num;
 	    locId = "myLoc" + num;
 	    
+
+	    loc = JSON.parse('{{locs | tojson | safe}}');
+	    var openingHours = loc[num-1][5];
+	    var telephoneNum = loc[num-1][8];   
+	    var website = loc[num-1][9];
+	    var reviews = loc[num-1][10];
+	    if (reviews === "No reviews available") {
+		myReview = reviews; }
+	    else {
+		myReview = [];
+		for (var i = 0; i < 3; i++) {
+		    if (typeof reviews[i] != "undefined"){
+			var txt = reviews[i]["text"];
+                        var txt2 = txt.replace("&#39;","'");
+			myReview.push(txt2);
+		        console.log (txt);
+		        console.log (txt2);
+
+}}}
 	    var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
 	    var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
 	    var ratingImg  = this.getElementsByTagName('p')[1].innerHTML;
@@ -60,8 +61,8 @@ window.onload = function () {
 
 	    document.getElementById("dialog").innerHTML = "";
 	    var iDiv = document.getElementById("dialog");
-	    column1 = document.createElement("td")
-	    column2 = document.createElement("td")
+	    column1 = document.createElement("tr")
+	    column2 = document.createElement("tr")
 
 	    var titleName = "Name: ";
 	    var addressName = "Address: ";
@@ -84,25 +85,28 @@ window.onload = function () {
 	    column1.appendChild(txtNd);
 	    column1.appendChild(document.createElement("br"));
 	    var txtNd=document.createTextNode(website);
+	    console.log (website);
 	    column1.appendChild(txtNd);
 	    column1.appendChild(document.createElement("br"));
 	    column1.appendChild(document.createElement("br"));
 	    column1.appendChild(document.createElement("br"));
 	    var txtNd=document.createTextNode("REVIEWS:");
 	    column1.appendChild(txtNd);
+
 	    if (myReview === "No reviews available"){
 		var txtNd=document.createTextNode(myReview);
-		column1.appendChild(txtNd);}
-		console.log ("no review")
+		column1.appendChild(txtNd);
+		console.log ("no review");
+	    }
+
 	    else {
-		for (var i = 1; i < myReview.length - 1; i++) {
+		for (var i = 1; i <= myReview.length; i++) {
+		    column1.appendChild(document.createElement("br"));
 		    column1.appendChild(document.createElement("br"));
 		    var txtNd=document.createTextNode(i.toString () + ". ");
 		    var reviewNd=document.createTextNode(myReview[i-1]);
-
 		    column1.appendChild(txtNd);
 		    column1.appendChild(reviewNd);
-		    console.log (myReview[i-1]);
 		}}
 
 	    var imgpop = document.createElement("img");
@@ -150,37 +154,36 @@ window.onload = function () {
 			$( this ).dialog( "close" );
 		    }}});				  
 	};
-	
     };
 };
-
+									     
 </script>
 
-= endblock
-= block body
-	<h2 style="padding-top: 10px;">Select where you would like to stop during your tour (up to 3)</h2>
-	= if locs
-		<form class="locations-form" method="POST">
-			= for loc in locs
-				<div class="location-container">
-					<div class="force-height"></div>
-					<div class="location-content", id ={{loc[4]}} >
-						<img src="{{ loc[3] }}">
-						<label class="location", id = {{loc[7]}}>
-							<h2>{{ loc[0] }}</h2>
-							<p>{{ loc[1] }}</p>
-							<p>Rating: {{ loc[2] }}</p>
-							<input type="checkbox" name="place" value="{{ loc[1] }}" id = "{{loc[6]}}" class = "chkbox">
-						</label>
-					</div>
-				</div>
-			= endfor
-<div id="dialog" title="Basic dialog">
-</div>
+  = endblock
+  = block body
+  <h2 style="padding-top: 10px;">Select where you would like to stop during your tour (up to 3)</h2>
+  = if locs
+  <form class="locations-form" method="POST">
+    = for loc in locs
+    <div class="location-container">
+      <div class="force-height"></div>
+      <div class="location-content", id ={{loc[4]}} >
+	<img src="{{ loc[3] }}">
+	<label class="location", id = {{loc[7]}}>
+	  <h2>{{ loc[0] }}</h2>
+	  <p>{{ loc[1] }}</p>
+	  <p>Rating: {{ loc[2] }}</p>
+	  <input type="checkbox" name="place" value="{{ loc[1] }}" id = "{{loc[6]}}" class = "chkbox">
+	</label>
+      </div>
+    </div>
+    = endfor
+    <div id="dialog" title="Basic dialog">
+    </div>
 
-			<input type="submit" class="button" value="Submit" name="button" />
-		</form>
-	= else
-		<p style="padding: 5px 0 10px;"> No locations found.</p>
-	= endif
-= endblock
+    <input type="submit" class="button" value="Submit" name="button" />
+  </form>
+  = else
+  <p style="padding: 5px 0 10px;"> No locations found.</p>
+  = endif
+  = endblock
