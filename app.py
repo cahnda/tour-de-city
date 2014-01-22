@@ -55,6 +55,8 @@ def makeTour():
                     iterating_var = iterating_var.encode ('ascii', 'ignore')
                     waypoints.append(iterating_var)
                     counter = counter + 1
+                session['place_names'] = [l[0] for l in locs if l[1] in unicodeobj]
+                session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]
                 #because we don't have full access to google places
                 if counter > 3:
                         return "You have chosen more than the maximum of three"
@@ -64,8 +66,6 @@ def makeTour():
                     latitude+","+longitude,waypoints,latitude+','+longitude)
                 session['waypoints'] = waypoints
                 session['page'] = 'showDirections'
-                session['place_names'] = [l[0] for l in locs if l[1] in waypoints]
-                session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]
                 return redirect(url_for("showDirections"))
     else:
         return redirect('/')
