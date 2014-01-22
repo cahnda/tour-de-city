@@ -1,5 +1,5 @@
 import json
-from urllib2 import urlopen
+from urllib2 import urlopen, quote, Request
 from urllib import urlencode
 
 # PRE: Take a list of "types of places"(i.e. musuem, nightclub) and current location (LONGITUDE and LATITUDE).
@@ -7,7 +7,7 @@ from urllib import urlencode
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = "AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE"
+    AUTH_KEY = "AIzaSyAu_MPXCDjBxDSfoqP0HG7W3e33keYx0Ww"
     # LIST OF API KEYS:
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
@@ -30,10 +30,8 @@ def findPlaces (latitude, longitude, responses):
     url = ("https://maps.googleapis.com/maps/api/place/search/json?types=%s"
            "&location=%s&radius=%s&sensor=false&rankby=%s&key=%s") % \
            (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
-    print url
     # Send the GET request to the Place details service (using url from above)
     response = urlopen(url)
-
     json_raw = response.read()
     json_data = json.loads(json_raw)
 
@@ -45,9 +43,9 @@ def findPlaces (latitude, longitude, responses):
             ans = []
             placeName = place['name'].encode ('ascii', 'ignore')
             ref =  place['reference']
-#            placeName2 = place['name']
-#            lat = place ["geometry"]["location"]["lat"]
-#            latStr = str (lat)
+            lat = place ["geometry"]["location"]["lat"]
+            lng  = place ["geometry"]["location"]["lng"]
+
             ans.append (placeName)
             ans.append (place['vicinity'].encode ('ascii', 'ignore'))
             try:
@@ -99,8 +97,8 @@ def findPlaces (latitude, longitude, responses):
            # topic = json.loads(urlopen(url).read())
         
             url = "https://maps.googleapis.com/maps/api/place/details/json?reference=%s&sensor=true&extensions=review_summary&key=%s" %(ref, AUTH_KEY)
+
             response = urlopen(url)
-    
             json_raw = response.read()
             json_data = json.loads(json_raw)
             if json_data['status'] == 'OK':
@@ -119,6 +117,20 @@ def findPlaces (latitude, longitude, responses):
                      ans.append (result ['reviews'])
                 except:
                     ans.append ("No reviews available")
+
+            #YELP API INTEGRATION
+            url = "http://api.yelp.com/business_review_search?term=%s&lat=%s&long=%s&radius=10&limit=1&ywsid=QpOpEuta4Y2gBa4QcDhx3w" % (placeName,lat, lng)
+            #headers = { 'User-Agent' : 'custom user agent' }
+            #req = Request(url, None, headers)
+            #html = urlopen(req).read()
+            respose = urlopen (url)
+           # json_raw = response.read()
+           # json_data = json.loads(json_raw)
+            #if json_data['status'] == 'OK':
+             #   rating = json_data ['avg_rating']
+              #  ratingImg = json_data ['rating_img_url_small']
+               # print rating
+
             results.append (ans)
 
         return results
