@@ -89,8 +89,7 @@ def showDirections():
         result['waypoints'] = json.dumps(waypoints)
         result['transportation'] = session['transportation']
         session['page'] = ''
-        #return render_template("show_directions.html", result = result)
-        return google_directions.getDirections(result);
+        return render_template("show_directions.html", result = result)
     else:
         return redirect("/")
 
