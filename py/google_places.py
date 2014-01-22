@@ -1,3 +1,4 @@
+import requests
 import json
 from urllib2 import urlopen, quote, Request
 from urllib import urlencode
@@ -120,17 +121,13 @@ def findPlaces (latitude, longitude, responses):
 
             #YELP API INTEGRATION
             url = "http://api.yelp.com/business_review_search?term=%s&lat=%s&long=%s&radius=10&limit=1&ywsid=QpOpEuta4Y2gBa4QcDhx3w" % (placeName,lat, lng)
-            #headers = { 'User-Agent' : 'custom user agent' }
-            #req = Request(url, None, headers)
-            #html = urlopen(req).read()
-            respose = urlopen (url)
-           # json_raw = response.read()
-           # json_data = json.loads(json_raw)
-            #if json_data['status'] == 'OK':
-             #   rating = json_data ['avg_rating']
-              #  ratingImg = json_data ['rating_img_url_small']
-               # print rating
-
+            response = requests.get(url)
+            json_data = response.json()["businesses"][0]
+            rating = json_data ['avg_rating']
+            ratingImg = json_data ['rating_img_url_small']
+            reviews = json_data ['reviews']
+            print rating
+            
             results.append (ans)
 
         return results
