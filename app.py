@@ -66,32 +66,33 @@ def makeTour():
                     latitude+","+longitude,waypoints,latitude+','+longitude)
                 session['waypoints'] = waypoints
                 session['page'] = 'showDirections'
-                return redirect(url_for("showDirections"))
+
+
+                waylist = session['waypoints']
+                endpoint = waylist.pop()
+
+                waylist = utils.make_location_array(\
+                    session['latitude'], session['longitude'],session['latitude'], \
+                    session['longitude'], waylist)
+                waypoints = []
+                baseLoc = session['latitude'] + "," + session['longitude']
+                for waypoint in waylist:
+                    waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
+                result = dict()
+                result['start'] = baseLoc
+                result['end'] = endpoint
+                result['waypoints'] = json.dumps(waypoints)
+                result['transportation'] = session['transportation']
+
+                return redirect("/tour=%s" % utils.add_mongo_tour(result))
+
     else:
         return redirect('/')
 
-@app.route("/showDirections")
-def showDirections():
-    if 'page' in session.keys() and session['page'] == 'showDirections':
-        waylist = session['waypoints']
-        endpoint = waylist.pop()
-        utils.setBikeDatabase(session["latitude"], session["longitude"])
-        waylist = utils.make_location_array(\
-            session['latitude'], session['longitude'],session['latitude'], \
-            session['longitude'], waylist)
-        waypoints = []
-        baseLoc = session['latitude'] + "," + session['longitude']
-        for waypoint in waylist:
-            waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
-        result = dict()
-        result['start'] = baseLoc
-        result['end'] = endpoint
-        result['waypoints'] = json.dumps(waypoints)
-        result['transportation'] = session['transportation']
-        session['page'] = ''
-        return render_template("show_directions.html", result = result)
-    else:
-        return redirect("/")
+@app.route("/tour=<tour_obj_id>")
+def showDirections(tour_obj_id):
+    return render_template("show_directions.html",
+        result = utils.get_mongo_tour(tour_obj_id))
 
 @app.route("/rate", methods = ["GET", "POST"])
 def rate():
