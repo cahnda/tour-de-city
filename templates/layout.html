@@ -14,6 +14,16 @@
 	</head>
 	<body>
 
+		<span id="signinButton">
+			<span
+				class="g-signin"
+				data-callback="signinCallback"
+				data-clientid="611512958800-p6uidtj1frllpcvv8jo6gnc9f2lmn431.apps.googleusercontent.com"
+				data-cookiepolicy="single_host_origin"
+				data-scope="profile">
+			</span>
+		</span>
+
 		<div id="socialMediaIcons">
 			<script src="/static/js/socialmedia.js"></script>
 			<img onclick="facebookClick()" id="facebook" class="t3"
@@ -59,5 +69,8 @@
 			</div>
 		</footer>
 
+		<script src="/static/js/google_oauth.js">
+		</script>
+		<!--{{ helpers.asset_tag("google_oauth.js")}}-->
 	</body>
 </html>
