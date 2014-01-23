@@ -83,6 +83,7 @@ def makeTour():
                 result['end'] = endpoint
                 result['waypoints'] = json.dumps(waypoints)
                 result['transportation'] = session['transportation']
+                session["tour_dictionary"] = result
 
                 return redirect("/tour=%s" % utils.add_mongo_tour(result))
 
@@ -91,8 +92,12 @@ def makeTour():
 
 @app.route("/tour=<tour_obj_id>")
 def showDirections(tour_obj_id):
-    return render_template("show_directions.html",
-        result = utils.get_mongo_tour(tour_obj_id))
+    if "tour_dictionary" in session.keys():
+        tour = session["tour_dictionary"]
+    else:
+        tour = utils.get_mongo_tour(tour_obj_id)
+
+    return render_template("show_directions.html", result = tour)
 
 @app.route("/rate", methods = ["GET", "POST"])
 def rate():
