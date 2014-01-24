@@ -2,8 +2,10 @@
 @import variables
 
 .row
-
 	display: none
+
+#button-font1, #button-font2
+	font-size: 59px
 
 	input[type=radio]
 		display: none
@@ -12,15 +14,9 @@
 			@extend .t3
 			@include opaque(1.0)
 
-
-
-#button-font1
-	font-size: 59px
-
 	label
 		background: $lightBlue
 		border: none
-		//color: $lightBlue
 		cursor: pointer
 		display: block
 		float: left
@@ -28,41 +24,23 @@
 		@include opaque(0.7)
 
 		&:hover
+			@extend .t3
 			@include opaque(1.0)
 
 		img
-			@extend .t1
-
 			display: block
 			height: 80px
 			display: block
 			margin-left: auto
-			margin-right: auto 
+			margin-right: auto
+
+#button-font1
+	label
+		background: $lightBlue
 
 #button-font2
-	font-size: 59px
-
 	label
 		background: $red
-		border: none
-		//color: $lightBlue
-		cursor: pointer
-		display: block
-		float: left
-		width: 50%
-		@include opaque(0.7)
-
-		&:hover
-			@include opaque(1.0)
-
-		img
-			@extend .t1
-
-			display: block
-			height: 80px
-			display: block
-			margin-left: auto
-			margin-right: auto 
 
 #venue-form
 	@include clearfix
@@ -74,7 +52,6 @@
 	background-color: white
 	color: black
 	text-align: center
-	//padding-top: 10px
 
 	h2
 		margin-bottom: 10px
@@ -111,7 +88,8 @@
 				background-color: $darkBlue
 
 #start-button
-	margin: 12px
+	margin: 12px 12px 10px 12px
+	width: 120px
 
 #start-button.clicked
 	&:hover

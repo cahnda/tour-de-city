@@ -1,4 +1,4 @@
-.t1, #button-font1 label img, #button-font2 label img, #venue-container label:hover {
+.t1, #venue-container label:hover {
   -webkit-transition: all 0.1s ease-out;
   -moz-transition: all 0.1s ease-out;
   -ms-transition: all 0.1s ease-out;
@@ -12,7 +12,7 @@
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.t3, .row input[type=radio]:checked + label {
+.t3, #button-font1 input[type=radio]:checked + label, #button-font2 input[type=radio]:checked + label, #button-font1 label:hover, #button-font2 label:hover {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -35,15 +35,15 @@
 
 .row {
   display: none; }
-  .row input[type=radio] {
+
+#button-font1, #button-font2 {
+  font-size: 59px; }
+  #button-font1 input[type=radio], #button-font2 input[type=radio] {
     display: none; }
-    .row input[type=radio]:checked + label {
+    #button-font1 input[type=radio]:checked + label, #button-font2 input[type=radio]:checked + label {
       opacity: 1;
       filter: alpha(opacity=1); }
-
-#button-font1 {
-  font-size: 59px; }
-  #button-font1 label {
+  #button-font1 label, #button-font2 label {
     background: #3cb4f8;
     border: none;
     cursor: pointer;
@@ -52,36 +52,21 @@
     width: 50%;
     opacity: 0.7;
     filter: alpha(opacity=0.7); }
-    #button-font1 label:hover {
+    #button-font1 label:hover, #button-font2 label:hover {
       opacity: 1;
       filter: alpha(opacity=1); }
-    #button-font1 label img {
+    #button-font1 label img, #button-font2 label img {
       display: block;
       height: 80px;
       display: block;
       margin-left: auto;
       margin-right: auto; }
 
-#button-font2 {
-  font-size: 59px; }
-  #button-font2 label {
-    background: #e73b3b;
-    border: none;
-    cursor: pointer;
-    display: block;
-    float: left;
-    width: 50%;
-    opacity: 0.7;
-    filter: alpha(opacity=0.7); }
-    #button-font2 label:hover {
-      opacity: 1;
-      filter: alpha(opacity=1); }
-    #button-font2 label img {
-      display: block;
-      height: 80px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto; }
+#button-font1 label {
+  background: #3cb4f8; }
+
+#button-font2 label {
+  background: #e73b3b; }
 
 #venue-form {
   *zoom: 1;
@@ -130,7 +115,8 @@
         background-color: #3177eb; }
 
 #start-button {
-  margin: 12px; }
+  margin: 12px 12px 10px 12px;
+  width: 120px; }
 
 #start-button.clicked:hover {
   background-color: #e42424; }
