@@ -8,7 +8,7 @@ from urllib import urlencode
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = "AIzaSyAu_MPXCDjBxDSfoqP0HG7W3e33keYx0Ww"
+    AUTH_KEY = "AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w"
     # LIST OF API KEYS:
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
@@ -127,17 +127,21 @@ def findPlaces (latitude, longitude, responses):
                 ratingYELP = json_data ['avg_rating']
                 ratingImg = json_data ['rating_img_url_small']
                 reviews = json_data ['reviews']
-                if (len (reviews) > 1): 
-                    ArrayReviews = []
-                    for review in reviews:
-                        ArrayReviews.append( review['text_excerpt'])
-                    ans[10] = ArrayReviews
                 ans.append (ratingYELP)
                 ans.append (ratingImg)
-                results.append (ans)
+               # if (len (reviews) > 1): 
+                #    ArrayReviews = []
+                 #   for review in reviews:
+                  #      ArrayReviews.append(review['text_excerpt'])
+                   # ans[10] = ArrayReviews
             except: 
-                results.append (ans)
-
+                ans.append ("No yelp information")
+                ans.append ("No yelp information")
+            results.append (ans)
+        
+        results = sorted(results, key=lambda ans: ans[11], reverse = True)
+        for ans in results:
+            print ans[11]
         return results
 
 if __name__ == '__main__':

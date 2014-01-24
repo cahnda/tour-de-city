@@ -31,12 +31,14 @@ window.onload = function () {
 	    chkId = "myChk" + num;
 	    locId = "myLoc" + num;
 	    
-
-	    loc = JSON.parse('{{locs | tojson | safe}}');
+	    loc = JSON.parse ('{{locs | tojson | safe}}');
 	    var openingHours = loc[num-1][5];
 	    var telephoneNum = loc[num-1][8];   
 	    var website = loc[num-1][9];
 	    var reviews = loc[num-1][10];
+	    var YelpRating = loc[num-1][11];
+	    var YelpRatingImg = loc[num-1][12];
+
 	    if (reviews === "No reviews available") {
 		myReview = reviews; }
 	    else {
@@ -49,7 +51,7 @@ window.onload = function () {
 		        console.log (txt);
 		        console.log (txt2);
 
-}}}
+		    }}}
 	    var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
 	    var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
 	    var ratingImg  = this.getElementsByTagName('p')[1].innerHTML;
@@ -67,16 +69,16 @@ window.onload = function () {
 	    var titleName = "Name: ";
 	    var addressName = "Address: ";
 	    var ratingName = "Google Places";
+            var ratingNameYELP = "Average Yelp Rating: ";
 	    
 	    var titleNd=document.createTextNode(titleImg);
 	    var addressNd=document.createTextNode(addressImg);
 	    var ratingNd=document.createTextNode(ratingImg);
+	    var ratingNdYelp = document.createTextNode(YelpRating);
 
 	    column1.appendChild (titleNd);
 	    column1.appendChild(document.createElement("br"));
 	    column1.appendChild (addressNd);
-	    column1.appendChild(document.createElement("br"));
-	    column1.appendChild (ratingName + ratingNd);
 	    column1.appendChild(document.createElement("br"));
 	    var txtNd=document.createTextNode(telephoneNum);
 	    column1.appendChild(txtNd);
@@ -87,6 +89,27 @@ window.onload = function () {
 	    var txtNd=document.createTextNode(website);
 	    console.log (website);
 	    column1.appendChild(txtNd);
+
+
+	    column1.appendChild(document.createElement("br"));
+	    var txtNd=document.createTextNode(ratingName);
+	    column1.appendChild (txtNd);
+	    column1.appendChild (ratingNd);
+
+	    column1.appendChild(document.createElement("br"));
+	    var txtNd=document.createTextNode(ratingNameYELP);
+	    column1.appendChild (txtNd);
+	    column1.appendChild (ratingNdYelp);
+            
+            column1.appendChild(document.createElement("br"));
+	    var imgpop = document.createElement("img");
+	    imgpop.setAttribute("src", YelpRatingImg );
+            imgpop.setAttribute("height", "50");
+	    imgpop.setAttribute("width", "200");
+
+	    column1.appendChild(imgpop);
+				    
+
 	    column1.appendChild(document.createElement("br"));
 	    column1.appendChild(document.createElement("br"));
 	    column1.appendChild(document.createElement("br"));
@@ -109,11 +132,10 @@ window.onload = function () {
 		    column1.appendChild(reviewNd);
 		}}
 
+
 	    var imgpop = document.createElement("img");
 	    imgpop.setAttribute("src", phyImg );
-	    imgpop.setAttribute("height", "350");
-	    imgpop.setAttribute("width", "350");
-
+	 
 	    column2.appendChild(imgpop);
 	    iDiv.appendChild (column1);
 	    iDiv.appendChild (column2);

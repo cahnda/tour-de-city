@@ -30,8 +30,7 @@ window.onload = function () {
 	    var website = loc[num-1][9];
 	    var reviews = loc[num-1][10];
 	    var YelpRating = loc[num-1][11];
-	    YelpRatingImg = loc[num-1][12];
-
+	    var YelpRatingImg = loc[num-1][12];
 
 	    if (reviews === "No reviews available") {
 		myReview = reviews; }

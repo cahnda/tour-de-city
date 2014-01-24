@@ -17,31 +17,34 @@ window.onload = function () {
     for (var n=1;n<={{locLen}};n++) {
 	strIt = n.toString();
 	divName = "myDiv" + strIt
-	var loc = JSON.parse('{{locs | tojson | safe}}');
 	var imgSc = document.getElementById(divName);
 	
 	imgSc.onclick = function () {
-	    
+
+
 	    var source = this.getElementsByTagName('img')[0];
 	    var phyImg = source.src;
 	    num = this.id.substring (5);
 	    chkId = "myChk" + num;
 	    locId = "myLoc" + num;
+	    
 
-	    openingHours = loc[n-1][5];
-	    phyImg = loc[n-1][3];
-	    telephoneNum = loc[n-1][8];   
-	    website = loc[n-1][9];   
-            reviews = loc [n-1][10];
-	    if (reviews === "N/A") {
+	    loc = JSON.parse('{{locs | tojson | safe}}');
+	    var openingHours = loc[num-1][5];
+	    var telephoneNum = loc[num-1][8];   
+	    var website = loc[num-1][9];
+	    var reviews = loc[num-1][10];
+	    if (reviews === "No reviews available") {
 		myReview = reviews; }
-            else {
+	    else {
 		myReview = [];
 		for (var i = 0; i < 3; i++) {
-	            if (typeof reviews[i] != "undefined"){
-			myReview.push(reviews[i]["text"]);}}
+		    if (typeof reviews[i] != "undefined"){
+			var txt = reviews[i]["text"];
+                        var txt2 = txt.replace("&#39;","'");
+
+			myReview.push(txt);}}
 	    }
-	    
 	    var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
 	    var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
 	    var ratingImg  = this.getElementsByTagName('p')[1].innerHTML;
@@ -53,8 +56,8 @@ window.onload = function () {
 
 	    document.getElementById("dialog").innerHTML = "";
 	    var iDiv = document.getElementById("dialog");
-	    column1 = document.createElement("td")
-	    column2 = document.createElement("td")
+	    column1 = document.createElement("tr")
+	    column2 = document.createElement("tr")
 
 	    var titleName = "Name: ";
 	    var addressName = "Address: ";
@@ -77,22 +80,28 @@ window.onload = function () {
 	    column1.appendChild(txtNd);
 	    column1.appendChild(document.createElement("br"));
 	    var txtNd=document.createTextNode(website);
+	    console.log (website);
 	    column1.appendChild(txtNd);
 	    column1.appendChild(document.createElement("br"));
 	    column1.appendChild(document.createElement("br"));
 	    column1.appendChild(document.createElement("br"));
 	    var txtNd=document.createTextNode("REVIEWS:");
 	    column1.appendChild(txtNd);
-	    if (myReview === "N/A"){
+
+	    if (myReview === "No reviews available"){
 		var txtNd=document.createTextNode(myReview);
-		column1.appendChild(txtNd);}
+		column1.appendChild(txtNd);
+		console.log ("no review");
+	    }
+
 	    else {
-		for (var i = 0; i < myReview.length - 1; i++) {
+		for (var i = 1; i < myReview.length; i++) {
 		    column1.appendChild(document.createElement("br"));
-		    var txtNd=document.createTextNode(str(i+2));
-		    var reviewNd=document.createTextNode(myReview[i+1]);
+		    var txtNd=document.createTextNode(i.toString () + ". ");
+		    var reviewNd=document.createTextNode(myReview[i-1]);
 		    column1.appendChild(txtNd);
 		    column1.appendChild(reviewNd);
+		    console.log (myReview[i-1]);
 		}}
 
 	    var imgpop = document.createElement("img");
@@ -140,6 +149,5 @@ window.onload = function () {
 			$( this ).dialog( "close" );
 		    }}});				  
 	};
-	
     };
 };
