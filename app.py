@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from py import *
+from tours import Tour
+import tours
 import json
 
 app = Flask(__name__)
@@ -112,6 +114,14 @@ def rate():
     for i in range(len(names)):
         waypoints.append((names[i], pics[i]))
     return render_template('rate.html', waypoints=waypoints)
+
+@app.route("/rate/<int:rating>", methods = ["GET", "POST"])
+def rating():
+    names = session['place_names']
+    newTour = Tour(names,rating)
+    tours.addTour(newTour)
+    return redirect('/')
+    
 
 @app.route("/contact", methods = ["GET", "POST"])
 def contact():
