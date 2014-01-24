@@ -37,6 +37,8 @@ window.onload = function () {
 	    var telephoneNum = loc[num-1][8];   
 	    var website = loc[num-1][9];
 	    var reviews = loc[num-1][10];
+	    var YelpRating = loc[num-1][11];
+
 	    if (reviews === "No reviews available") {
 		myReview = reviews; }
 	    else {
@@ -67,6 +69,9 @@ window.onload = function () {
 	    var titleName = "Name: ";
 	    var addressName = "Address: ";
 	    var ratingName = "Google Places";
+            var ratingNameYELP = "Average Yelp Rating: ";
+
+				    
 	    
 	    var titleNd=document.createTextNode(titleImg);
 	    var addressNd=document.createTextNode(addressImg);
@@ -77,6 +82,10 @@ window.onload = function () {
 	    column1.appendChild (addressNd);
 	    column1.appendChild(document.createElement("br"));
 	    column1.appendChild (ratingName + ratingNd);
+
+   column1.appendChild(document.createElement("br"));
+	    column1.appendChild (ratingNameYELP + YelpRating);
+
 	    column1.appendChild(document.createElement("br"));
 	    var txtNd=document.createTextNode(telephoneNum);
 	    column1.appendChild(txtNd);

@@ -130,7 +130,7 @@ def findPlaces (latitude, longitude, responses):
                 if (len (reviews) > 1): 
                     ArrayReviews = []
                     for review in reviews:
-                        ArrayReviews.append( review['text_excerpt'])
+                        ArrayReviews.append(review['text_excerpt'])
                     ans[10] = ArrayReviews
                 ans.append (ratingYELP)
                 ans.append (ratingImg)
