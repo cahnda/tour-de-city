@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from py import *
+from py import tours
 from py.tours import Tour
 import json
 
@@ -118,9 +119,18 @@ def rate():
 def rating(rating):
     names = session['place_names']
     newTour = Tour(names,rating)
+    #  for a in newTour.addresses:
+    #  a = a.encode('ascii')
     tours.addTour(newTour)
-    return redirect('/')
-    
+    return redirect('/thankyou')
+
+@app.route("/thankyou")
+def end():
+    tourList = tours.getSorted()
+    final = []
+    for t in tourList:
+        final.append(tours.form(t)) 
+    return render_template("end.html", l = final)
 
 @app.route("/contact", methods = ["GET", "POST"])
 def contact():

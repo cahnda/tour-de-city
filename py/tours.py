@@ -14,6 +14,7 @@ class Tour():
 def form(t):
     return "%s: %.1f"%(t.addresses, t.rate)
 
+
 def average(tours):   #averages the rates of the tours with the same addresses (regardless of the order) and pops the duplicates 
     temp = list(tours)
     for x in range(0,len(temp)):
@@ -37,15 +38,14 @@ def organize(tours):  #sorts tours in descending order by rating
     tours = sorted(tours, key=lambda t: t.rate, reverse=True)
     return tours
 
-def addTour(tour):
-    db=open()    
-    db.insert({'tour': tour})
+def addTour(tour): 
+    db.tours.insert({'addresses':tour.addresses, 'rate':tour.rate})
 
 def _tours(res):
-    return [t['tour'] for t in res]
+    return [Tour(t['addresses'], t['rate']) for t in res]
     
 def getSorted():
-    res = _tour(db.find({'tour': tour}))
+    res = _tours(db.tours.find())
     res = average(res)
     return organize(res)
 

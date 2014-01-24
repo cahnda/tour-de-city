@@ -1,0 +1,24 @@
+= extends 'layout.html'
+= block title
+	Rate Your Tour
+= endblock
+= block body
+
+<script type="text/javascript">
+function display() {
+        var i;
+        var ret = "";
+        var list = {{l}};
+        for (i in list[i]) {
+          ret += "<li>"+list[i]+"</li>"
+        document.getElementById("div").innerHTML = ret;
+      }
+</script>
+
+<body onload="display()">
+<h1>This is the end page!</h1>
+
+<ul id="div"> something </ul>
+
+</body>
+= endblock
