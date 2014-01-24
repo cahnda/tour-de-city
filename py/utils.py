@@ -3,12 +3,14 @@ import city_bikes, google_maps, google_places, google_directions
 from geopy.distance import vincenty    # geodesic distance
 from geopy.geocoders import GoogleV3
 import pymongo, smtplib
+from bson.objectid import ObjectId
 from email.mime.text import MIMEText
 
 client = pymongo.MongoClient()
 db = client.SSSD
 
 bike_stations = db.newyork_bikes
+tours = db.tours
 
 def update_bike_stations(city_name):
 	city_bike_stations = getBikeDatabase(city_name)
@@ -28,7 +30,6 @@ def getBikeDatabase(city_name):
 
 	elif city_name == "boston":
 		return db.boston_bikes
-
 
 def get_bike_stations():
 	return bike_stations.find()
@@ -82,19 +83,25 @@ def make_location_array(startlat, startlon, endlat, endlon, waypoints):
 def distance(coor1, coor2):
     return vincenty(coor1, coor2).miles
 
+def get_mongo_tour(obj_id_string):
+	return tours.find_one({"_id" : ObjectId(obj_id_string)})["tour_dict"]
+
+def add_mongo_tour(tour_dict):
+	return str(tours.insert({"tour_dict" : tour_dict}))
+
 #------------------------------------------------------------------------
 
 from tours import Tour
 from tours import average
-from tours import organize 
+from tours import organize
 
 def addTour(tour):
-    db=open()    
+    db=open()
     db.insert({'tour': tour})
 
 def _tours(res):
     return [t['tour'] for t in res]
-    
+
 def getSorted():
     res = _tour(db.find({'tour': tour}))
     res = average(res)

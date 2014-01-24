@@ -14,6 +14,25 @@
 	</head>
 	<body>
 
+			= if session["google_user_dict"]
+
+				<div id="gUserPanel">
+					<img src={{ session["google_user_dict"]["image"]["url"] }}>
+				</div>
+
+			= else
+
+				<div id="gSignInWrapper">
+					<div id="customBtn" class="customGPlusSignIn">
+						<span class="icon">
+							<img src="static/images/socMedIcos/googlePlusTransparent.png">
+						</span>
+						<span class="buttonText">Sign in with Google</span>
+					</div>
+				</div>
+
+			= endif
+
 		<div id="socialMediaIcons">
 			<script src="/static/js/socialmedia.js"></script>
 			<img onclick="facebookClick()" id="facebook" class="t3"
@@ -58,6 +77,8 @@
 				</a><br>
 			</div>
 		</footer>
+
+		{{ helpers.asset_tag("google_oauth.js")}}
 
 	</body>
 </html>
