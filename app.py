@@ -49,12 +49,15 @@ def makeTour():
         longitude = session['longitude']
         latitude = session['latitude']
         locs = google_places.findPlaces(latitude, longitude, res_types)
+        locLen = len (locs)
         if request.method =="GET":
-            return render_template("make_tour.html",locs=locs)
+            return render_template("make_tour.html",locs=locs, locLen=locLen)
         else:
             button = request.form['button']
             if button == "Submit":
                 unicodeobj = request.values.getlist("place")
+                print "THIS IS MY LENGTH"
+                print len (unicodeobj)
                 counter = 0
                 waypoints = []
                 place_names = []
@@ -63,17 +66,11 @@ def makeTour():
                     waypoints.append(iterating_var)
                     counter = counter + 1
                 session['place_names'] = [l[0] for l in locs if l[1] in unicodeobj]
-                session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]
-                #because we don't have full access to google places
-                if counter > 3:
-                        return "You have chosen more than the maximum of three"
-                        " (3) stops for your tour. Please go back and"
-                        " refresh the page before selecting again"
+                session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]              
                 waypoints = google_directions.get_waypoint_order(
                     latitude+","+longitude,waypoints,latitude+','+longitude)
                 session['waypoints'] = waypoints
                 session['page'] = 'showDirections'
-
 
                 waylist = session['waypoints']
                 endpoint = waylist.pop()
