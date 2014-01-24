@@ -121,8 +121,8 @@ def findPlaces (latitude, longitude, responses):
 
             #YELP API INTEGRATION
             url = "http://api.yelp.com/business_review_search?term=%s&lat=%s&long=%s&radius=10&limit=1&ywsid=QpOpEuta4Y2gBa4QcDhx3w" % (placeName,lat, lng)
-            response = requests.get(url)
             try:
+                response = requests.get(url)
                 json_data = response.json()["businesses"][0]
                 ratingYELP = json_data ['avg_rating']
                 ratingImg = json_data ['rating_img_url_small']
