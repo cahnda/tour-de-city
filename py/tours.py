@@ -1,3 +1,8 @@
+import pymongo
+
+client = pymongo.MongoClient()
+db = client.SSSD
+
 class Tour():
     def __init__(self, a1, a2, a3, rate):
         self.address1 = a1
@@ -30,11 +35,21 @@ def average(tours):   #averages the rates of the tours with the same addresses (
             break
     return temp
 
-
-
 def organize(tours):  #sorts tours in descending order by rating
     tours = sorted(tours, key=lambda t: t.rate, reverse=True)
     return tours
+
+def addTour(tour):
+    db=open()    
+    db.insert({'tour': tour})
+
+def _tours(res):
+    return [t['tour'] for t in res]
+    
+def getSorted():
+    res = _tour(db.find({'tour': tour}))
+    res = average(res)
+    return organize(res)
 
 #-----------------------------Tests-----------------------------------
 
