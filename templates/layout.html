@@ -14,15 +14,24 @@
 	</head>
 	<body>
 
-		<span id="signinButton">
-			<span
-				class="g-signin"
-				data-callback="signinCallback"
-				data-clientid="611512958800-p6uidtj1frllpcvv8jo6gnc9f2lmn431.apps.googleusercontent.com"
-				data-cookiepolicy="single_host_origin"
-				data-scope="profile">
-			</span>
-		</span>
+			= if session["google_user_dict"]
+
+				<div id="gUserPanel">
+					<img src={{ session["google_user_dict"]["image"]["url"] }}>
+				</div>
+
+			= else
+
+				<div id="gSignInWrapper">
+					<div id="customBtn" class="customGPlusSignIn">
+						<span class="icon">
+							<img src="static/images/socMedIcos/googlePlusTransparent.png">
+						</span>
+						<span class="buttonText">Sign in with Google</span>
+					</div>
+				</div>
+
+			= endif
 
 		<div id="socialMediaIcons">
 			<script src="/static/js/socialmedia.js"></script>
@@ -69,8 +78,7 @@
 			</div>
 		</footer>
 
-		<script src="/static/js/google_oauth.js">
-		</script>
-		<!--{{ helpers.asset_tag("google_oauth.js")}}-->
+		{{ helpers.asset_tag("google_oauth.js")}}
+
 	</body>
 </html>

@@ -15,6 +15,11 @@ env.globals.update(helpers=helpers)
 def map(type=''):
     return google_maps.map(type)
 
+@app.route("/clear")
+def clear():
+	session.clear()
+	return redirect(url_for("index"))
+
 @app.route("/", methods = ["GET","POST"])
 def index():
     if request.method == "GET":
@@ -125,6 +130,11 @@ def about():
 def updateData():
     utils.update_bike_stations("newyork") # placeholder argument
     return redirect("/")
+
+@app.route("/googleoauth", methods = ["POST"])
+def googleoauth():
+	session["google_user_dict"] = request.json
+	return ""
 
 @app.errorhandler(404)
 def error400(error):

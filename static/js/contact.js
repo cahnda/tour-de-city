@@ -11,9 +11,8 @@ $(document).ready(function(){
 	})
 
 	$("button").click(function(){
-		//if(!$(this).hasClass("clicked"))
-			//$("button").toggleClass("clicked");
 		var emailConButton = $("#email-contact")
+
 		if(emailConButton.hasClass("clicked")){
 			$("#email-info").hide();
 			$("#phone-info").fadeIn(fadeTime);
@@ -22,6 +21,7 @@ $(document).ready(function(){
 			$("#phone-info").hide();
 			$("#email-info").fadeIn(fadeTime);
 		}
+
 		$("button").toggleClass("clicked")
 	})
 })

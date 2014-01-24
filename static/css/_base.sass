@@ -9,6 +9,31 @@ html
 body
 	font-family: "Open Sans", sans-serif
 
+	#gUserPanel, #gSignInWrapper
+		position: absolute
+		right: 0px
+		top: 0px
+
+	#gSignInWrapper
+		@extend .t3
+
+		background-color: #dd4b39
+		width: 190px
+
+		img
+			float: left
+			width: 50px
+
+		.buttonText
+			color: white
+			font-size: 0.87em
+			float: right
+			padding: 13px 10px 5px 0px
+
+		&:hover
+			background-color: #E42810
+			cursor: pointer
+
 h1
 	font-weight: normal
 

@@ -13,7 +13,7 @@
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.t3, footer > div a img, #socialMediaIcons img {
+.t3, body #gSignInWrapper, footer > div a img, #socialMediaIcons img {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -48,6 +48,24 @@ html {
 
 body {
   font-family: "Open Sans", sans-serif; }
+  body #gUserPanel, body #gSignInWrapper {
+    position: absolute;
+    right: 0px;
+    top: 0px; }
+  body #gSignInWrapper {
+    background-color: #dd4b39;
+    width: 190px; }
+    body #gSignInWrapper img {
+      float: left;
+      width: 50px; }
+    body #gSignInWrapper .buttonText {
+      color: white;
+      font-size: 0.87em;
+      float: right;
+      padding: 13px 10px 5px 0px; }
+    body #gSignInWrapper:hover {
+      background-color: #e42810;
+      cursor: pointer; }
 
 h1 {
   font-weight: normal; }
