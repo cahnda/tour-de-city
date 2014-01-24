@@ -139,7 +139,7 @@ def findPlaces (latitude, longitude, responses):
                 ans.append ("No yelp information")
             results.append (ans)
         
-        results = sorted(results, key=lambda ans: ans[11], reverse = True)
+        results = sorted(results, key=lambda ans: ans[12], reverse = True)
         for ans in results:
             print ans[11]
         return results
