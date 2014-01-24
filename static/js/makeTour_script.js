@@ -4,11 +4,7 @@ window.onload = function () {
 
     allCBox = document.getElementsByClassName ("chkbox");
     for (i=0; i < allCBox.length; i++) {
-	console.log ("CHECKING YOUR CHECKBOX")
-	console.log (allCBox[i]);
 	allCBox[i].disabled = true;
-	console.log (allCBox[i].disabled);
-	console.log (allCBox[i].checked);
     };
 
     alert ("loaded");
@@ -28,12 +24,14 @@ window.onload = function () {
 	    chkId = "myChk" + num;
 	    locId = "myLoc" + num;
 	    
-
-	    loc = JSON.parse('{{locs | tojson | safe}}');
+	    loc = JSON.parse ('{{locs | tojson | safe}}');
 	    var openingHours = loc[num-1][5];
 	    var telephoneNum = loc[num-1][8];   
 	    var website = loc[num-1][9];
 	    var reviews = loc[num-1][10];
+	    var YelpRating = loc[num-1][11];
+	    var YelpRatingImg = loc[num-1][12];
+
 	    if (reviews === "No reviews available") {
 		myReview = reviews; }
 	    else {
@@ -41,10 +39,10 @@ window.onload = function () {
 		for (var i = 0; i < 3; i++) {
 		    if (typeof reviews[i] != "undefined"){
 			var txt = reviews[i]["text"];
-                        var txt2 = txt.replace("&#39;","'");
+                        var txt = txt.replace("&#39;","'");
+			myReview.push(txt);
+		    }}}
 
-			myReview.push(txt);}}
-	    }
 	    var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
 	    var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
 	    var ratingImg  = this.getElementsByTagName('p')[1].innerHTML;
@@ -59,33 +57,55 @@ window.onload = function () {
 	    column1 = document.createElement("tr")
 	    column2 = document.createElement("tr")
 
+
 	    var titleName = "Name: ";
 	    var addressName = "Address: ";
-	    var ratingName = "Google Places";
+	    var ratingName = "Google Places ";
+            var ratingNameYELP = "Average Yelp Rating: ";
 	    
 	    var titleNd=document.createTextNode(titleImg);
 	    var addressNd=document.createTextNode(addressImg);
 	    var ratingNd=document.createTextNode(ratingImg);
+	    var ratingNdYelp = document.createTextNode(YelpRating);
 
 	    column1.appendChild (titleNd);
 	    column1.appendChild(document.createElement("br"));
 	    column1.appendChild (addressNd);
 	    column1.appendChild(document.createElement("br"));
-	    column1.appendChild (ratingNd);
-	    column1.appendChild(document.createElement("br"));
 	    var txtNd=document.createTextNode(telephoneNum);
 	    column1.appendChild(txtNd);
-	    column1.appendChild(document.createElement("br"));
-	    var txtNd=document.createTextNode(openingHours);
-	    column1.appendChild(txtNd);
+	    
 	    column1.appendChild(document.createElement("br"));
 	    var txtNd=document.createTextNode(website);
 	    console.log (website);
 	    column1.appendChild(txtNd);
+
 	    column1.appendChild(document.createElement("br"));
+	    var txtNd=document.createTextNode(openingHours);
+	    column1.appendChild(txtNd);
+
 	    column1.appendChild(document.createElement("br"));
+	    var txtNd=document.createTextNode(ratingName);
+	    column1.appendChild (txtNd);
+	    column1.appendChild (ratingNd);
+
 	    column1.appendChild(document.createElement("br"));
-	    var txtNd=document.createTextNode("REVIEWS:");
+	    var txtNd=document.createTextNode(ratingNameYELP);
+	    column1.appendChild (txtNd);
+	    column1.appendChild (ratingNdYelp);
+            
+            column1.appendChild(document.createElement("br"));
+	    var imgpop = document.createElement("img");
+	    imgpop.setAttribute("src", YelpRatingImg );
+            imgpop.setAttribute("height", "40");
+	    imgpop.setAttribute("width", "150");
+
+	    column1.appendChild(imgpop);			    
+	    column1.appendChild(document.createElement("br"));
+            column1.appendChild(document.createElement("br"));
+            column1.appendChild(document.createElement("br"));
+
+            var txtNd=document.createTextNode("REVIEWS:");
 	    column1.appendChild(txtNd);
 
 	    if (myReview === "No reviews available"){
@@ -95,23 +115,26 @@ window.onload = function () {
 	    }
 
 	    else {
-		for (var i = 1; i < myReview.length; i++) {
+		for (var i = 1; i <= myReview.length; i++) {
+		    column1.appendChild(document.createElement("br"));
 		    column1.appendChild(document.createElement("br"));
 		    var txtNd=document.createTextNode(i.toString () + ". ");
 		    var reviewNd=document.createTextNode(myReview[i-1]);
 		    column1.appendChild(txtNd);
 		    column1.appendChild(reviewNd);
-		    console.log (myReview[i-1]);
 		}}
+
 
 	    var imgpop = document.createElement("img");
 	    imgpop.setAttribute("src", phyImg );
-	    imgpop.setAttribute("height", "350");
+            imgpop.setAttribute("height", "350");
 	    imgpop.setAttribute("width", "350");
-
+	    
+            column2.appendChild(document.createElement("br"));
 	    column2.appendChild(imgpop);
 	    iDiv.appendChild (column1);
 	    iDiv.appendChild (column2);
+
 
 	    $("#dialog").dialog({
 		modal:true, 

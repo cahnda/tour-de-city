@@ -46,12 +46,10 @@ window.onload = function () {
 		for (var i = 0; i < 3; i++) {
 		    if (typeof reviews[i] != "undefined"){
 			var txt = reviews[i]["text"];
-                        var txt2 = txt.replace("&#39;","'");
-			myReview.push(txt2);
-		        console.log (txt);
-		        console.log (txt2);
-
+                        var txt = txt.replace("&#39;","'");
+			myReview.push(txt);
 		    }}}
+
 	    var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
 	    var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
 	    var ratingImg  = this.getElementsByTagName('p')[1].innerHTML;
@@ -66,9 +64,10 @@ window.onload = function () {
 	    column1 = document.createElement("tr")
 	    column2 = document.createElement("tr")
 
+
 	    var titleName = "Name: ";
 	    var addressName = "Address: ";
-	    var ratingName = "Google Places";
+	    var ratingName = "Google Places ";
             var ratingNameYELP = "Average Yelp Rating: ";
 	    
 	    var titleNd=document.createTextNode(titleImg);
@@ -82,14 +81,15 @@ window.onload = function () {
 	    column1.appendChild(document.createElement("br"));
 	    var txtNd=document.createTextNode(telephoneNum);
 	    column1.appendChild(txtNd);
-	    column1.appendChild(document.createElement("br"));
-	    var txtNd=document.createTextNode(openingHours);
-	    column1.appendChild(txtNd);
+	
 	    column1.appendChild(document.createElement("br"));
 	    var txtNd=document.createTextNode(website);
 	    console.log (website);
 	    column1.appendChild(txtNd);
 
+    column1.appendChild(document.createElement("br"));
+	    var txtNd=document.createTextNode(openingHours);
+	    column1.appendChild(txtNd);
 
 	    column1.appendChild(document.createElement("br"));
 	    var txtNd=document.createTextNode(ratingName);
@@ -101,19 +101,18 @@ window.onload = function () {
 	    column1.appendChild (txtNd);
 	    column1.appendChild (ratingNdYelp);
             
-            column1.appendChild(document.createElement("br"));
+           column1.appendChild(document.createElement("br"));
 	    var imgpop = document.createElement("img");
 	    imgpop.setAttribute("src", YelpRatingImg );
-            imgpop.setAttribute("height", "50");
-	    imgpop.setAttribute("width", "200");
+            imgpop.setAttribute("height", "40");
+	    imgpop.setAttribute("width", "150");
 
-	    column1.appendChild(imgpop);
-				    
+	    column1.appendChild(imgpop);			    
+	    column1.appendChild(document.createElement("br"));
+           column1.appendChild(document.createElement("br"));
+           column1.appendChild(document.createElement("br"));
 
-	    column1.appendChild(document.createElement("br"));
-	    column1.appendChild(document.createElement("br"));
-	    column1.appendChild(document.createElement("br"));
-	    var txtNd=document.createTextNode("REVIEWS:");
+            var txtNd=document.createTextNode("REVIEWS:");
 	    column1.appendChild(txtNd);
 
 	    if (myReview === "No reviews available"){
@@ -135,10 +134,14 @@ window.onload = function () {
 
 	    var imgpop = document.createElement("img");
 	    imgpop.setAttribute("src", phyImg );
-	 
+            imgpop.setAttribute("height", "350");
+	    imgpop.setAttribute("width", "350");
+	    
+            column2.appendChild(document.createElement("br"));
 	    column2.appendChild(imgpop);
 	    iDiv.appendChild (column1);
 	    iDiv.appendChild (column2);
+
 
 	    $("#dialog").dialog({
 		modal:true, 
@@ -194,7 +197,7 @@ window.onload = function () {
 	<label class="location", id = {{loc[7]}}>
 	  <h2>{{ loc[0] }}</h2>
 	  <p>{{ loc[1] }}</p>
-	  <p>Rating: {{ loc[2] }}</p>
+	  <p>Rating: {{ loc[12] }}</p>
 	  <input type="checkbox" name="place" value="{{ loc[1] }}" id = "{{loc[6]}}" class = "chkbox">
 	</label>
       </div>
