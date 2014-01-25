@@ -31,7 +31,8 @@ window.onload = function () {
             chkId = "myChk" + num;
             locId = "myLoc" + num;
             
-            loc = JSON.parse ('{{locs | tojson | safe}}');
+            loc = {{ locs | tojson | safe }};
+            //loc = JSON.parse({{locs | tojson | safe}});
             var openingHours = loc[num-1][5];
             var telephoneNum = loc[num-1][8];   
             var website = loc[num-1][9];
