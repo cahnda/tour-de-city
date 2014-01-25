@@ -11,14 +11,14 @@ function display() {
         var list = {{l}};
         for (i in list[i]) {
           ret += "<li>"+list[i]+"</li>"
+	  }
         document.getElementById("div").innerHTML = ret;
       }
+window.onload=display;
 </script>
 
-<body onload="display()">
 <h1>This is the end page!</h1>
 
 <ul id="div"> something </ul>
 
-</body>
 = endblock
