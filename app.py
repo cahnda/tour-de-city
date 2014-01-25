@@ -66,7 +66,7 @@ def makeTour():
                     waypoints.append(iterating_var)
                     counter = counter + 1
                 session['place_names'] = [l[0] for l in locs if l[1] in unicodeobj]
-                session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]              
+                session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]
                 waypoints = google_directions.get_waypoint_order(
                     latitude+","+longitude,waypoints,latitude+','+longitude)
                 session['waypoints'] = waypoints
@@ -103,6 +103,20 @@ def showDirections(tour_obj_id):
 
     return render_template("show_directions.html", result = tour)
 
+@app.route("/profile")
+def profile():
+	if "google_user_dict" in session:
+		return render_template("profile.html",
+			user_tours = utils.get_user_tour(session["google_user_dict"]["id"]))
+	else:
+		return redirect(url_for("index"))
+
+@app.route("/logout")
+def logout():
+	if "google_user_dict" in session.keys():
+		session.pop("google_user_dict")
+	return redirect(url_for("index"))
+
 @app.route("/rate", methods = ["GET", "POST"])
 def rate():
     names = session['place_names']
@@ -126,7 +140,7 @@ def end():
     tourList = tours.getSorted()
     final = []
     for t in tourList:
-        final.append(tours.form(t)) 
+        final.append(tours.form(t))
     return render_template("end.html", l = final)
 
 @app.route("/contact", methods = ["GET", "POST"])

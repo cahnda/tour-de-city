@@ -86,8 +86,11 @@ def distance(coor1, coor2):
 def get_mongo_tour(obj_id_string):
 	return tours.find_one({"_id" : ObjectId(obj_id_string)})["tour_dict"]
 
-def add_mongo_tour(tour_dict):
-	return str(tours.insert({"tour_dict" : tour_dict}))
+def get_user_tour(user_id):
+	return tours.find({"user_id" : user_id})
+
+def add_mongo_tour(tour_dict, user_id = None):
+	return str(tours.insert({"tour_dict" : tour_dict, "user_id" : user_id}))
 
 #------------------------------------------------------------------------
 

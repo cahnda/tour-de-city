@@ -13,7 +13,7 @@
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.t3, body #gSignInWrapper, footer > div a img, #socialMediaIcons img {
+.t3, body #gSignInContainer, body #gUserPanel, body #gUserPanel *, footer > div a img, #socialMediaIcons img {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -47,25 +47,58 @@ html {
   background-size: cover; }
 
 body {
-  font-family: "Open Sans", sans-serif; }
-  body #gUserPanel, body #gSignInWrapper {
+  font-family: "Open Sans", sans-serif;
+  overflow: hidden; }
+  body #gSignInContainer, body #gUserPanel {
     position: absolute;
     right: 0px;
     top: 0px; }
-  body #gSignInWrapper {
+  body #gSignInContainer {
     background-color: #dd4b39;
+    height: 50px;
     width: 190px; }
-    body #gSignInWrapper img {
+    body #gSignInContainer .spinner {
+      left: 50%;
+      top: 50%; }
+    body #gSignInContainer img {
       float: left;
       width: 50px; }
-    body #gSignInWrapper .buttonText {
+    body #gSignInContainer .buttonText {
       color: white;
       font-size: 0.87em;
       float: right;
       padding: 13px 10px 5px 0px; }
-    body #gSignInWrapper:hover {
+    body #gSignInContainer:hover {
       background-color: #e42810;
       cursor: pointer; }
+  body #gUserPanel {
+    right: -150px; }
+    body #gUserPanel * {
+      display: inline-block;
+      height: 50px;
+      font-size: 1.2em;
+      color: white;
+      float: left; }
+    body #gUserPanel #profile {
+      background-color: #3cb4f8;
+      overflow: hidden;
+      width: 100px; }
+      body #gUserPanel #profile a {
+        margin-top: 5px;
+        margin-left: 15px; }
+      body #gUserPanel #profile:hover {
+        background-color: #3177eb; }
+    body #gUserPanel #logout {
+      background-color: #dd4b39;
+      width: 50px; }
+      body #gUserPanel #logout a img {
+        margin: 7px;
+        width: 36px;
+        height: 36px; }
+      body #gUserPanel #logout:hover {
+        background-color: #e42810; }
+    body #gUserPanel:hover {
+      right: 0px; }
 
 h1 {
   font-weight: normal; }
@@ -183,65 +216,8 @@ footer > div {
   footer > div #unstaggered1 {
     margin-top: 10px; }
 
-.locations-form {
-  display: block;
-  padding-top: 10px;
-  font-size: 0;
-  text-align: left; }
-  .locations-form input[type=submit] {
-    width: 100%; }
-
-.location-container {
-  position: relative;
-  display: inline-block; }
-  @media (min-width: 1300px) {
-    .location-container {
-      width: 20%; } }
-  @media (max-width: 1300px) {
-    .location-container {
-      width: 25%; } }
-
-.location-content {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  vertical-align: top;
-  width: 100%;
-  font-size: 16px;
-  cursor: pointer; }
-  .location-content:hover .location {
-    opacity: 1;
-    filter: none;
-    background-color: rgba(77, 144, 254, 0.4); }
-  .location-content img {
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 100%; }
-  .location-content input[type=checkbox] {
-    display: none; }
-
-.location {
-  transition: opacity 0.2s;
-  box-sizing: border-box;
-  display: block;
-  height: 100%;
-  padding: 15px;
-  opacity: 0;
-  cursor: pointer; }
-  .location.active {
-    opacity: 1;
-    filter: none;
-    background-color: rgba(77, 144, 254, 0.4); }
-  .location h2 {
-    font-size: 20px; }
-
-.force-height {
-  padding-top: 100%; }
-
 #socialMediaIcons {
+  cursor: pointer;
   left: 0%;
   position: fixed;
   top: 165px;
