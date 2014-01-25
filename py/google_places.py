@@ -8,7 +8,7 @@ from urllib import urlencode
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
+    AUTH_KEY = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
     # LIST OF API KEYS:
 
     # this is pretty funny, just saying; nonchalantly abusing google - sevko

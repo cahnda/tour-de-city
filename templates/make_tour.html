@@ -5,14 +5,17 @@ Choose Locations
 = endblock
 
 = block head
-	{{ helpers.asset_tag('jquery.simplemodal-1.4.4.js') }}
-	{{ helpers.asset_tag('jquery-ui-1.10.3.custom.css') }}
-	{{ helpers.asset_tag('jquery-ui-1.10.3.custom.min.js') }}
 = endblock
 
-<script src="static/js/make_tour.js"></script>
-
 = block body
+
+	<script>
+		var numLocs = {{ locLen }};
+		var locs = {{ locs | tojson | safe }}
+	</script>
+
+	{{ helpers.asset_tag("make_tour.js") }}
+
 	<h2 style="padding-top: 10px;">Select where you would like to stop during your tour (up to 3)</h2>
 
 	= if locs
@@ -34,7 +37,6 @@ Choose Locations
 				</div>
 			= endfor
 
-			<div id="dialog" title="Basic dialog"></div>
 			<input type="submit" class="button" value="Submit" name="button" />
 		</form>
 

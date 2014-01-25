@@ -1,16 +1,24 @@
 totalChecked = 0;
 
+$(document).ready(function(){
+	$('.location input[type=checkbox]').change(function() {
+		$(this).parent().toggleClass('active', this.checked);
+	});
+	var max = 3;
+	var $checkboxes = $('.locations-form input[type=checkbox]');
+	$checkboxes.change(function(){
+	    var current = $checkboxes.filter(':checked').length;
+	    $checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
+	});
+});
+
 window.onload = function () {
+	//allCBox = document.getElementsByClassName ("chkbox");
+	//for (i=0; i < allCBox.length; i++) {
+		//allCBox[i].disabled = true;
+	//};
 
-	allCBox = document.getElementsByClassName ("chkbox");
-	for (i=0; i < allCBox.length; i++) {
-		allCBox[i].disabled = true;
-	};
-
-	alert ("loaded");
-	document.getElementById("dialog").innerHTML = "";
-
-	for (var n=1;n<={{locLen}};n++) {
+	for (var n=1;n<=numLocs;n++) {
 		strIt = n.toString();
 		divName = "myDiv" + strIt
 		var imgSc = document.getElementById(divName);
@@ -23,8 +31,7 @@ window.onload = function () {
 			chkId = "myChk" + num;
 			locId = "myLoc" + num;
 
-			loc = {{ locs | tojson | safe }};
-			//loc = JSON.parse({{locs | tojson | safe}});
+			loc = locs
 			var openingHours = loc[num-1][5];
 			var telephoneNum = loc[num-1][8];
 			var website = loc[num-1][9];
@@ -136,41 +143,6 @@ window.onload = function () {
             iDiv.appendChild (column1);
             iDiv.appendChild (column2);
 
-            $("#dialog").dialog({
-                modal:true,
-                title: titleImg,
-                height: "auto",
-                width: "auto",
-                buttons: {
-                    Select: function () {
-                        if (chk.checked === true) {
-                            alert ("You have already selected this location.");}
-                        else {
-                            if (totalChecked < 3) {
-                                console.log ("SELECTING YOUR CHECKBOX");
-                                chk.checked = true;
-                                console.log (chk.checked);
-                                totalChecked = totalChecked + 1;
-                                $(this).dialog('close');
-                                console.log ("COLORING");
-                                console.log (loc.style.opacity);
-                                loc.style.opacity = 1;
-                                loc.style.backgroundColor = "green";
-                            }
-                            else {
-                                alert ("You Cannot Select this Location. You have already met the maximum of three stops.");}
-                        }},
-
-                    Unselect: function () {
-                        chk.checked = false;
-                        totalChecked = totalChecked - 1;
-                        loc.style.opacity = "";
-                        loc.style.backgroundColor = "";
-                        $(this).dialog('close');},
-
-                    Close: function() {
-                        $( this ).dialog( "close" );
-                    }}});
         };
     };
 };
