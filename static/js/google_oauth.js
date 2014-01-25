@@ -25,12 +25,6 @@ function signinCallback(authResult) {
 					url : "/googleoauth",
 					data : JSON.stringify(resp, null, '\t'),
 					contentType : "application/json;charset=UTF-8",
-					success : function(result) {
-						console.log(result);
-					},
-					error : function(){
-						console.log("Failure");
-					}
 				})
 
 				var googleUserPanel = document.createElement("div");

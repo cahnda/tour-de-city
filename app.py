@@ -25,6 +25,7 @@ def clear():
 @app.route("/", methods = ["GET","POST"])
 def index():
     if request.method == "GET":
+        print session
         return render_template("index.html")
     else:
         button = request.form['button']

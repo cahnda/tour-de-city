@@ -8,13 +8,16 @@ from urllib import urlencode
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = "AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w"
+    AUTH_KEY = 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
     # LIST OF API KEYS:
+
+    # this is pretty funny, just saying; nonchalantly abusing google - sevko
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
     # sweyn3@gmail.com : 'AIzaSyA6YYBVEWXWJHsynCDK78bhlhNCm1iQPDk'
     # st.zhu1@gmail.com: 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
     # dcahn@jsa.org: 'AIzaSyAu_MPXCDjBxDSfoqP0HG7W3e33keYx0Ww'
+
     LOCATION = str (latitude) + "," + str (longitude)
     RADIUS = 1000 #in meters, approx. .5 miles
     RANKBY = 'prominence'

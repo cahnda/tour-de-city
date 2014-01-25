@@ -2,51 +2,53 @@ totalChecked = 0;
 
 window.onload = function () {
 
-    allCBox = document.getElementsByClassName ("chkbox");
-    for (i=0; i < allCBox.length; i++) {
-        allCBox[i].disabled = true;
-    };
-    
-    alert ("loaded");
-    document.getElementById("dialog").innerHTML = "";
-    
-    for (var n=1;n<={{locLen}};n++) {
-        strIt = n.toString();
-        divName = "myDiv" + strIt
-        var imgSc = document.getElementById(divName);
-        
-        imgSc.onclick = function () {
-	    
-            var source = this.getElementsByTagName('img')[0];
-            var phyImg = source.src;
-            num = this.id.substring (5);
-            chkId = "myChk" + num;
-            locId = "myLoc" + num;
-            
-            loc = JSON.parse ('{{locs | tojson | safe}}');
-            var openingHours = loc[num-1][5];
-            var telephoneNum = loc[num-1][8];   
-            var website = loc[num-1][9];
-            var reviews = loc[num-1][10];
-            var YelpRating = loc[num-1][11];
-            var YelpRatingImg = loc[num-1][12];
+	allCBox = document.getElementsByClassName ("chkbox");
+	for (i=0; i < allCBox.length; i++) {
+		allCBox[i].disabled = true;
+	};
 
-            if (reviews === "No reviews available") {
-                myReview = reviews; }
-            else {
-                myReview = [];
-                for (var i = 0; i < 3; i++) {
-                    if (typeof reviews[i] != "undefined"){
-                        var txt = reviews[i]["text"];
-                        var txt = txt.replace("&#39;","'");
-                        myReview.push(txt);
-                    }}}
+	alert ("loaded");
+	document.getElementById("dialog").innerHTML = "";
 
-            var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
-            var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
-            var ratingImg  = this.getElementsByTagName('p')[1].innerHTML;
-            chk = document.getElementById (chkId);
-            loc = document.getElementById (locId);
+	for (var n=1;n<={{locLen}};n++) {
+		strIt = n.toString();
+		divName = "myDiv" + strIt
+		var imgSc = document.getElementById(divName);
+
+		imgSc.onclick = function () {
+
+			var source = this.getElementsByTagName('img')[0];
+			var phyImg = source.src;
+			num = this.id.substring (5);
+			chkId = "myChk" + num;
+			locId = "myLoc" + num;
+
+			loc = {{ locs | tojson | safe }};
+			//loc = JSON.parse({{locs | tojson | safe}});
+			var openingHours = loc[num-1][5];
+			var telephoneNum = loc[num-1][8];
+			var website = loc[num-1][9];
+			var reviews = loc[num-1][10];
+			var YelpRating = loc[num-1][11];
+			var YelpRatingImg = loc[num-1][12];
+
+			if (reviews === "No reviews available") {
+				myReview = reviews; }
+			else {
+				myReview = [];
+				for (var i = 0; i < 3; i++) {
+					if (typeof reviews[i] != "undefined"){
+						var txt = reviews[i]["text"];
+						var txt = txt.replace("&#39;","'");
+						myReview.push(txt);
+					}}}
+
+			var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
+			var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
+			var ratingImg  = this.getElementsByTagName('p')[1].innerHTML;
+			chk = document.getElementById (chkId);
+			loc = document.getElementById (locId);
+
 
             console.log ("AM I CHECKED?");
             console.log (chk.checked);
@@ -61,7 +63,7 @@ window.onload = function () {
             var addressName = "Address: ";
             var ratingName = "Google Places ";
             var ratingNameYELP = "Average Yelp Rating: ";
-            
+
             var titleNd=document.createTextNode(titleImg);
             var addressNd=document.createTextNode(addressImg);
             var ratingNd=document.createTextNode(ratingImg);
@@ -73,7 +75,7 @@ window.onload = function () {
             column1.appendChild(document.createElement("br"));
             var txtNd=document.createTextNode(telephoneNum);
             column1.appendChild(txtNd);
-            
+
             column1.appendChild(document.createElement("br"));
             var txtNd=document.createTextNode(website);
             console.log (website);
@@ -92,14 +94,14 @@ window.onload = function () {
             var txtNd=document.createTextNode(ratingNameYELP);
             column1.appendChild (txtNd);
             column1.appendChild (ratingNdYelp);
-            
+
             column1.appendChild(document.createElement("br"));
             var imgpop = document.createElement("img");
             imgpop.setAttribute("src", YelpRatingImg );
             imgpop.setAttribute("height", "40");
             imgpop.setAttribute("width", "150");
 
-            column1.appendChild(imgpop);                            
+            column1.appendChild(imgpop);
             column1.appendChild(document.createElement("br"));
             column1.appendChild(document.createElement("br"));
             column1.appendChild(document.createElement("br"));
@@ -108,6 +110,7 @@ window.onload = function () {
             column1.appendChild(txtNd);
 
             if (myReview === "No reviews available"){
+
                 var txtNd=document.createTextNode(myReview);
                 column1.appendChild(txtNd);
                 console.log ("no review");
@@ -127,14 +130,14 @@ window.onload = function () {
             imgpop.setAttribute("src", phyImg );
             imgpop.setAttribute("height", "350");
             imgpop.setAttribute("width", "350");
-            
+
             column2.appendChild(document.createElement("br"));
             column2.appendChild(imgpop);
             iDiv.appendChild (column1);
             iDiv.appendChild (column2);
 
             $("#dialog").dialog({
-                modal:true, 
+                modal:true,
                 title: titleImg,
                 height: "auto",
                 width: "auto",
@@ -157,7 +160,7 @@ window.onload = function () {
                             else {
                                 alert ("You Cannot Select this Location. You have already met the maximum of three stops.");}
                         }},
-                    
+
                     Unselect: function () {
                         chk.checked = false;
                         totalChecked = totalChecked - 1;
@@ -167,7 +170,7 @@ window.onload = function () {
 
                     Close: function() {
                         $( this ).dialog( "close" );
-                    }}});                                  
+                    }}});
         };
     };
 };
