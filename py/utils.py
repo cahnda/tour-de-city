@@ -89,24 +89,6 @@ def get_mongo_tour(obj_id_string):
 def add_mongo_tour(tour_dict):
 	return str(tours.insert({"tour_dict" : tour_dict}))
 
-#------------------------------------------------------------------------
-
-from tours import Tour
-from tours import average
-from tours import organize
-
-def addTour(tour):
-    db=open()
-    db.insert({'tour': tour})
-
-def _tours(res):
-    return [t['tour'] for t in res]
-
-def getSorted():
-    res = _tour(db.find({'tour': tour}))
-    res = average(res)
-    return organize(res)
-
 def send_email(email_address, subject, body):
 	db.contact.insert({"email_address" : email_address, "subject" : subject,
 		"body" : body})
