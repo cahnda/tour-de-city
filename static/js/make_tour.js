@@ -1,15 +1,19 @@
 totalChecked = 0;
 
 $(document).ready(function(){
-	$('.location input[type=checkbox]').change(function() {
-		$(this).parent().toggleClass('active', this.checked);
-	});
-	var max = 3;
-	var $checkboxes = $('.locations-form input[type=checkbox]');
-	$checkboxes.change(function(){
-	    var current = $checkboxes.filter(':checked').length;
-	    $checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
-	});
+	//$('.location input[type=checkbox]').change(function() {
+		//$(this).parent().toggleClass('active', this.checked);
+	//});
+	//var max = 3;
+	//var $checkboxes = $('.locations-form input[type=checkbox]');
+	//$checkboxes.change(function(){
+		//var current = $checkboxes.filter(':checked').length;
+		//$checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
+	//});
+	$(".location-container").click(function(){
+		var widthInfoDiv = document.querySelector("div.main-content.content").offsetWidth;
+		$(this).css({"width" : widthInfoDiv + "px"});
+	})
 });
 
 window.onload = function () {
@@ -25,8 +29,8 @@ window.onload = function () {
 
 		imgSc.onclick = function () {
 
-			var source = this.getElementsByTagName('img')[0];
-			var phyImg = source.src;
+			//var source = this.getElementsByTagName('img')[0];
+			//var phyImg = source.src;
 			num = this.id.substring (5);
 			chkId = "myChk" + num;
 			locId = "myLoc" + num;
@@ -39,8 +43,8 @@ window.onload = function () {
 			var YelpRating = loc[num-1][11];
 			var YelpRatingImg = loc[num-1][12];
 
-			if (reviews === "No reviews available") {
-				myReview = reviews; }
+			if (reviews === "No reviews available")
+				myReview = reviews;
 			else {
 				myReview = [];
 				for (var i = 0; i < 3; i++) {
@@ -48,7 +52,9 @@ window.onload = function () {
 						var txt = reviews[i]["text"];
 						var txt = txt.replace("&#39;","'");
 						myReview.push(txt);
-					}}}
+					}
+				}
+			}
 
 			var titleImg  = this.getElementsByTagName('h2')[0].innerHTML;
 			var addressImg  = this.getElementsByTagName('p')[0].innerHTML;
@@ -88,7 +94,7 @@ window.onload = function () {
             console.log (website);
             column1.appendChild(txtNd);
 
-	    column1.appendChild(document.createElement("br"));
+            column1.appendChild(document.createElement("br"));
             var txtNd=document.createTextNode(openingHours);
             column1.appendChild(txtNd);
 
@@ -133,13 +139,13 @@ window.onload = function () {
                     column1.appendChild(reviewNd);
                 }}
 
-            var imgpop = document.createElement("img");
-            imgpop.setAttribute("src", phyImg );
-            imgpop.setAttribute("height", "350");
-            imgpop.setAttribute("width", "350");
+            //var imgpop = document.createElement("img");
+            //imgpop.setAttribute("src", phyImg );
+            //imgpop.setAttribute("height", "350");
+            //imgpop.setAttribute("width", "350");
 
             column2.appendChild(document.createElement("br"));
-            column2.appendChild(imgpop);
+            //column2.appendChild(imgpop);
             iDiv.appendChild (column1);
             iDiv.appendChild (column2);
 

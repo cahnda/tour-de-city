@@ -5,6 +5,7 @@ Choose Locations
 = endblock
 
 = block head
+	{{ helpers.asset_tag("make_tour.css") }}
 = endblock
 
 = block body
@@ -26,12 +27,16 @@ Choose Locations
 				<div class="location-container">
 					<div class="force-height"></div>
 					<div class="location-content", id ={{loc[4]}} >
-						<img src="{{ loc[3] }}">
+						<div class="circular"
+							style="background: url({{ loc[3]}}) no-repeat; background-size: 200px 200px;">
+							<!--<img src="{{ loc[3] }}">-->
+						</div>
 						<label class="location", id = {{loc[7]}}>
 							<h2>{{ loc[0] }}</h2>
 							<p>{{ loc[1] }}</p>
 							<p>Rating: {{ loc[11] }}</p>
-							<input type="checkbox" name="place" value="{{ loc[1] }}" id = "{{loc[6]}}" class = "chkbox">
+							<input type="checkbox" name="place" value="{{ loc[1] }}"
+								id = "{{loc[6]}}" class = "chkbox">
 						</label>
 					</div>
 				</div>
