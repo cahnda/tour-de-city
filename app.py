@@ -25,6 +25,7 @@ def clear():
 @app.route("/", methods = ["GET","POST"])
 def index():
     if request.method == "GET":
+        print session
         return render_template("index.html")
     else:
         button = request.form['button']
@@ -44,10 +45,10 @@ def index():
 @app.route ("/makeTour",  methods = ["GET","POST"])
 def makeTour():
     if 'page' in session.keys() and session['page'] == 'makeTour':
-        # result types -- just call them what they are
         res_types  = session['var']
         longitude = session['longitude']
         latitude = session['latitude']
+        print latitude, longitude
         locs = google_places.findPlaces(latitude, longitude, res_types)
         locLen = len (locs)
         if request.method =="GET":
@@ -130,9 +131,8 @@ def rate():
 def rating(rating):
     names = session['place_names']
     newTour = Tour(names,rating)
-    #  for a in newTour.addresses:
-    #  a = a.encode('ascii')
     tours.addTour(newTour)
+    print(newTour.addresses)
     return redirect('/thankyou')
 
 @app.route("/thankyou")
@@ -140,7 +140,12 @@ def end():
     tourList = tours.getSorted()
     final = []
     for t in tourList:
-        final.append(tours.form(t))
+        i = ""
+        for a in t.addresses:
+            i += a + ", "
+        i += "Rating: " + str(t.rate)
+        i.encode('ascii')
+        final.append(i)
     return render_template("end.html", l = final)
 
 @app.route("/contact", methods = ["GET", "POST"])

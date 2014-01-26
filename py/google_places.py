@@ -3,18 +3,22 @@ import json
 from urllib2 import urlopen, quote, Request
 from urllib import urlencode
 
+import datetime
+
 # PRE: Take a list of "types of places"(i.e. musuem, nightclub) and current location (LONGITUDE and LATITUDE).
 # POST  Generate an ordered list of places to visit based on their locations.
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = "AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w"
+    AUTH_KEY = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
     # LIST OF API KEYS:
+
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
     # sweyn3@gmail.com : 'AIzaSyA6YYBVEWXWJHsynCDK78bhlhNCm1iQPDk'
     # st.zhu1@gmail.com: 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
     # dcahn@jsa.org: 'AIzaSyAu_MPXCDjBxDSfoqP0HG7W3e33keYx0Ww'
+
     LOCATION = str (latitude) + "," + str (longitude)
     RADIUS = 1000 #in meters, approx. .5 miles
     RANKBY = 'prominence'
@@ -32,13 +36,19 @@ def findPlaces (latitude, longitude, responses):
            "&location=%s&radius=%s&sensor=false&rankby=%s&key=%s") % \
            (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
     # Send the GET request to the Place details service (using url from above)
+
     response = urlopen(url)
     json_raw = response.read()
     json_data = json.loads(json_raw)
 
     results = []
     placeNum = 0
+
+    photoTime = 0
+    yelpTime = 0
+
     if json_data['status'] == 'OK':
+        print "a"
         for place in json_data['results']:
             placeNum = placeNum + 1
             ans = []
@@ -64,23 +74,24 @@ def findPlaces (latitude, longitude, responses):
                     % (photo_width, photo_ref, AUTH_KEY)
                 ans.append (photo_url)
             except:
-                ans.append ('http://www.profyling.com/wp-content/uploads/2012/08/no-image-available.jpg')
+                ans.append ("/static/images/no_photo_available.jpg")
+
             divStr = "myDiv" + str (placeNum)
             ans.append (divStr)
-            try: 
+            try:
                 openNow = place ["opening_hours"]["open_now"];
                 if openNow:
                     ans.append ("This venue is currently open")
                 else:
                     ans.append ("This venue is currently closed")
-            except: 
+            except:
                     ans.append ("No data available on opening hours")
 
             chkStr = "myChk" + str (placeNum)
             ans.append (chkStr)
             locStr = "myLoc" + str (placeNum)
             ans.append (locStr)
-           
+
            # s= '%s: %s Rating: %s' % (, place ['vicinity'], place['rating'])
            # s = s.encode ('ascii',"ignore")
            # results.append (s)
@@ -96,12 +107,14 @@ def findPlaces (latitude, longitude, responses):
            #}
             #url = service_url + '?' + urlencode(params)
            # topic = json.loads(urlopen(url).read())
-        
+
+            start = datetime.datetime.now()
             url = "https://maps.googleapis.com/maps/api/place/details/json?reference=%s&sensor=true&extensions=review_summary&key=%s" %(ref, AUTH_KEY)
 
             response = urlopen(url)
             json_raw = response.read()
             json_data = json.loads(json_raw)
+
             if json_data['status'] == 'OK':
                 result = json_data ['result']
                 try:
@@ -119,6 +132,10 @@ def findPlaces (latitude, longitude, responses):
                 except:
                     ans.append ("No reviews available")
 
+            end = datetime.datetime.now()
+            photoTime += (end - start).microseconds
+
+            start = datetime.datetime.now()
             #YELP API INTEGRATION
             url = "http://api.yelp.com/business_review_search?term=%s&lat=%s&long=%s&radius=10&limit=1&ywsid=QpOpEuta4Y2gBa4QcDhx3w" % (placeName,lat, lng)
             try:
@@ -129,20 +146,25 @@ def findPlaces (latitude, longitude, responses):
                 reviews = json_data ['reviews']
                 ans.append (ratingYELP)
                 ans.append (ratingImg)
-               # if (len (reviews) > 1): 
+               # if (len (reviews) > 1):
                 #    ArrayReviews = []
                  #   for review in reviews:
                   #      ArrayReviews.append(review['text_excerpt'])
                    # ans[10] = ArrayReviews
-            except: 
+            except:
                 ans.append ("No yelp information")
                 ans.append ("No yelp information")
             results.append (ans)
-        
+
+            end = datetime.datetime.now()
+            yelpTime += (end - start).microseconds
+
         results = sorted(results, key=lambda ans: ans[12], reverse = True)
         for ans in results:
             print ans[11]
+        print "yelptime: %d" % yelpTime
+        print "phototime: %d" % photoTime
         return results
 
 if __name__ == '__main__':
-    findPlaces (40.7472569628042, -73.99085998535156, [])
+    findPlaces (40.720842536130434, -73.99730066093753, [])

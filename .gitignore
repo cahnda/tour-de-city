@@ -1,5 +1,7 @@
 *.json
 .sass-cache/
+*~
+\#*\#
 
 #
 # Git presets
