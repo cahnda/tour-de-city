@@ -25,6 +25,7 @@ def clear():
 @app.route("/", methods = ["GET","POST"])
 def index():
     if request.method == "GET":
+        print session
         return render_template("index.html")
     else:
         button = request.form['button']
@@ -44,10 +45,10 @@ def index():
 @app.route ("/makeTour",  methods = ["GET","POST"])
 def makeTour():
     if 'page' in session.keys() and session['page'] == 'makeTour':
-        # result types -- just call them what they are
         res_types  = session['var']
         longitude = session['longitude']
         latitude = session['latitude']
+        print latitude, longitude
         locs = google_places.findPlaces(latitude, longitude, res_types)
         locLen = len (locs)
         if request.method =="GET":
@@ -66,7 +67,7 @@ def makeTour():
                     waypoints.append(iterating_var)
                     counter = counter + 1
                 session['place_names'] = [l[0] for l in locs if l[1] in unicodeobj]
-                session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]              
+                session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]
                 waypoints = google_directions.get_waypoint_order(
                     latitude+","+longitude,waypoints,latitude+','+longitude)
                 session['waypoints'] = waypoints
