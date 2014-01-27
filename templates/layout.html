@@ -18,13 +18,14 @@
 
 			= if session["google_user_dict"]
 
-				<div id="gUserPanel">
-					<img src={{ session["google_user_dict"]["image"]["url"] }}>
-					<div id="profile">
-						<a href="/profile">profile</a>
-					</div>
-					<div id="logout">
-						<a href="/logout"><img src="static/images/logout.png"></a>
+					<div id="gUserPanel">
+						<img src={{ session["google_user_dict"]["image"]["url"] }}>
+						<div id="profile">
+							<a href="/profile">profile</a>
+						</div>
+						<div id="logout">
+							<a href="/logout"><img src="static/images/logout.png"></a>
+						</div>
 					</div>
 				</div>
 
@@ -59,7 +60,7 @@
 			<div class="header-content content">
 				<a class="logo" href={{ url_for('index') }}>
 					<img src={{ url_for('static', filename='images/map_icon_white.png') }}>
-					<h1>TOURS</h1>
+					<h1>tour de city</h1>
 				</a>
 			</div>
 		</div>
