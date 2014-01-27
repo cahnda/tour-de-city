@@ -222,10 +222,26 @@ footer > div {
     height: 100%; }
   .location-content input[type=checkbox] {
     display: none; }
+  .location-content .circular {
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+    border-radius: 100px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px; }
+    .location-content .circular img {
+      opacity: 0;
+      filter: alpha(opacity=0); }
+  .location-content label {
+    left: 0px;
+    position: absolute;
+    top: 0px; }
 
 .location {
   transition: opacity 0.2s;
-  box-sizing: border-box;
   display: block;
   height: 100%;
   padding: 15px;
