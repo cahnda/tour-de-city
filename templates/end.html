@@ -11,7 +11,7 @@ function display() {
         var ret = "";
         var list = {{l|safe}};
         for (i in list) {
-          ret += "<p>"+a+".&nbsp;&nbsp;"+list[i][0]+"<br>"+'<a class="button" href="/tour=' + list[i][1] + '">Select</a>'+"</p>"
+          ret += "<p>"+a+".&nbsp;&nbsp;"+list[i][0]+"<br>"+'<a style="font-size:medium;" class="button" href="/tour=' + list[i][1] + '">Select</a>'+"</p><br>"
 	  a++;
 	  }
         document.getElementById("div").innerHTML = ret;
@@ -19,8 +19,8 @@ function display() {
 window.onload=display;
 </script>
 
-<h1>Top-Rated Tours</h1>
-
+<h1><b>Top-Rated Tours</b></h1>
+<br>
 <ol id="div"> something </ol>
 
 = endblock
