@@ -116,7 +116,9 @@ def rate():
 @app.route("/rate/<int:rating>", methods = ["GET", "POST"])
 def rating(rating):
     names = session['place_names']
-    newTour = Tour(names,rating)
+    addresses = session['waypoints']
+    pics = session['place_pics']
+    newTour = Tour(names,addresses,pics,rating)
     tours.addTour(newTour)
     print(newTour.addresses)
     return redirect('/thankyou')
@@ -127,11 +129,12 @@ def end():
     final = []
     for t in tourList:
         i = ""
-        for a in t.addresses:
-            i += a + ", "
-        i += "Rating: " + str(t.rate)
+        for a in t.names:
+            i += a + " * "
+        i += "<b>Rating: " + str(t.rate) + "</b>"
         i.encode('ascii')
         final.append(i)
+    
     return render_template("end.html", l = json.dumps(final))
 
 @app.route("/contact", methods = ["GET", "POST"])
