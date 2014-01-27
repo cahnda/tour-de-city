@@ -11,7 +11,7 @@ function display() {
         var ret = "";
         var list = {{l|safe}};
         for (i in list) {
-          ret += "<p>"+a+".&nbsp;&nbsp;"+list[i]+"</p>"
+          ret += "<p>"+a+".&nbsp;&nbsp;"+list[i][0]+"<br>"+'<a class="button" href="/tour=' + list[i][1] + '">Select</a>'+"</p>"
 	  a++;
 	  }
         document.getElementById("div").innerHTML = ret;

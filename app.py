@@ -152,7 +152,7 @@ def toptours():
         for pic in t.pictures:
             i += '<img src="' + str(pic) + '" width="100" height="100"/>' + "&nbsp; &nbsp; &nbsp; &nbsp;"
         i.encode('ascii')
-        final.append(i)
+        final.append((i, t._id))
     return render_template("end.html", l = json.dumps(final))
 
 @app.route("/contact", methods = ["GET", "POST"])
