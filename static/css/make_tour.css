@@ -12,7 +12,7 @@
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.t3 {
+.t3, .dialog .top-left .contact-info p {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -33,50 +33,72 @@
   -o-transition: all 1.2s ease-out;
   transition: all 1.2s ease-out; }
 
-#dialog {
+.dialog {
   background-color: rgba(48, 45, 45, 0.68);
-  height: 400px;
+  border: 1px solid black;
   left: 50%;
   margin-left: -250px;
   padding: 25px;
   position: fixed;
   width: 500px;
   z-index: 200; }
-  #dialog * {
+  .dialog * {
     text-align: left; }
-  #dialog #top-left h1 {
-    font-size: 2.6em; }
-  #dialog #top-left #rating {
-    font-size: 1.2em; }
-    #dialog #top-left #rating span {
-      font-size: 2em;
-      color: #3cb4f8; }
-  #dialog #top-left #contact-info {
-    width: 110px; }
-    #dialog #top-left #contact-info p {
-      background-color: #3cb4f8;
-      padding: 4px; }
-      #dialog #top-left #contact-info p:hover {
-        background-color: #3177eb; }
-      #dialog #top-left #contact-info p a {
-        color: white; }
-  #dialog #top-right {
+  .dialog .top-left {
+    width: 320px; }
+    .dialog .top-left h1 {
+      color: #3cb4f8;
+      font-size: 2em; }
+    .dialog .top-left .rating {
+      font-size: 1.2em; }
+      .dialog .top-left .rating span {
+        font-size: 2em;
+        color: #3cb4f8; }
+    .dialog .top-left .contact-info {
+      width: 500px; }
+      .dialog .top-left .contact-info p {
+        background-color: #3cb4f8;
+        font-weight: bold;
+        padding: 4px; }
+        .dialog .top-left .contact-info p:hover {
+          background-color: #3177eb; }
+        .dialog .top-left .contact-info p a {
+          color: white; }
+  .dialog .top-right {
     float: right;
     position: absolute;
     right: 0;
     top: 0; }
-    #dialog #top-right img {
-      width: 200px; }
-  #dialog #reviews {
-    bottom: 0;
-    margin-top: 30px;
-    position: absolute; }
-    #dialog #reviews .review {
-      display: inline-block; }
-      #dialog #reviews .review .review-text {
+    .dialog .top-right img {
+      height: 207px;
+      width: 207px; }
+  .dialog .reviews {
+    margin-top: 30px; }
+    .dialog .reviews .review {
+      display: inline-block;
+      width: 500px; }
+      .dialog .reviews .review .review-text {
         font-style: oblique; }
-      #dialog #reviews .review .author {
+        .dialog .reviews .review .review-text span {
+          color: green;
+          font-weight: bold;
+          font-size: 1.3em; }
+      .dialog .reviews .review .author {
+        color: #3cb4f8;
         float: right; }
+  .dialog .footer {
+    margin-top: 30px; }
+    .dialog .footer button {
+      background-color: #3177eb;
+      border: none;
+      color: white;
+      font-size: 1.3em;
+      text-align: center;
+      width: 250px; }
+    .dialog .footer #select {
+      background-color: green; }
+    .dialog .footer #cancel {
+      background-color: #e73b3b; }
 
 .locations-form {
   display: block;

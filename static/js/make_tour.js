@@ -1,33 +1,39 @@
-totalChecked = 0;
-
 $(document).ready(function(){
-	$('.location input[type=checkbox]').change(function() {
-		$(this).parent().toggleClass('active', this.checked);
-	});
-	var max = 3;
-	var $checkboxes = $('.locations-form input[type=checkbox]');
-
-	$checkboxes.change(function(){
-		var current = $checkboxes.filter(':checked').length;
-		$checkboxes.filter(':not(:checked)').prop('disabled', current >= max);
-	});
-
 	$(".dialog").hide();
-});
 
-window.onload = function () {
+	// click events for .location-container and .dialog buttons
+	$(".location-container").each(function(){
 
-	var locContainers = $(".location-container");
-	for(var locNum = 0; locNum < numLocs; locNum++){
-		currLoc = locContainers[locNum];
-		currLoc.onclick = function(){
-			dialogContent = [];
-			dialogAppear();
-		}
+		var locationSelector = ".location-container#" + this.id + " label";
+		var dialogSelector = ".dialog#" + this.id;
+
+		$(this).click(function(){
+			$(".location-container").animate({"opacity" : "0.3"}, 300);
+			$(this).addClass("active");
+			dialogAppear(dialogSelector);
+		});
+
+		$(dialogSelector + " .footer #cancel").click(function(){
+			dialogDisappear(dialogSelector)
+			$(locationSelector).removeClass("active");
+			$(locationSelector + " input[type='checkbox']").prop("checked", false);
+		})
+
+		$(dialogSelector + " .footer #select").click(function(){
+			dialogDisappear(dialogSelector)
+			$(locationSelector).addClass("active");
+		})
+
+	})
+
+	var dialogDisappear = function(dialogSelector){
+		$(dialogSelector).fadeOut(260);
+		$(".location-container").animate({"opacity" : "1.0"}, 300);
 	}
 
-	var dialogAppear = function(){
-		$("#dialog").fadeIn(260);
-		$(".location-container").animate({"opacity" : "0.3"}, 260);
+	var dialogAppear = function(dialogSelector){
+		$(dialogSelector).fadeIn(260);
+		$(".location-container").animate({"opacity" : "0.3"}, 300);
 	}
-};
+
+})

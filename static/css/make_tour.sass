@@ -1,8 +1,8 @@
 @import variables, mixins
 
-#dialog
+.dialog
 	background-color: rgba(48, 45, 45, 0.68)
-	height: 400px
+	border: 1px solid black
 	left: 50%
 	margin-left: -250px
 	padding: 25px
@@ -13,22 +13,27 @@
 	*
 		text-align: left
 
-	#top-left
-		h1
-			font-size: 2.6em
+	.top-left
+		width: 320px
 
-		#rating
+		h1
+			color: $lightBlue
+			font-size: 2.0em
+
+		.rating
 			font-size: 1.2em
 
 			span
 				font-size: 2em
 				color: $lightBlue
 
-		#contact-info
-			width: 110px
-
+		.contact-info
+			width: 500px
 			p
+				@extend .t3
+
 				background-color: $lightBlue
+				font-weight: bold
 				padding: 4px
 
 				&:hover
@@ -38,29 +43,51 @@
 					color: white
 
 
-	#top-right
+	.top-right
 		float: right
 		position: absolute
 		right: 0
 		top: 0
 
 		img
-			width: 200px
+			height: 207px
+			width: 207px
 
-	#reviews
-		bottom: 0
+	.reviews
 		margin-top: 30px
-		position: absolute
 
 		.review
-
 			display: inline-block
+			width: 500px
 
 			.review-text
 				font-style: oblique
 
+				span
+					color: green
+					font-weight: bold
+					font-size: 1.3em
+
 			.author
+				color: $lightBlue
 				float: right
+
+	.footer
+		margin-top: 30px
+
+		button
+			background-color: $darkBlue
+			border: none
+			color: white
+			font-size: 1.3em
+			text-align: center
+			width: 250px
+
+		#select
+			background-color: green
+
+		#cancel
+			background-color: $red
 
 
 .locations-form
