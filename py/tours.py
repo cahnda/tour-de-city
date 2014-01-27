@@ -54,7 +54,7 @@ def _tours(res):
 def getSorted():
     res = _tours(db.tours.find())
     res = average(res)
-    return organize(res)
+    return organize(res)[:10] if len(res) > 10 else organize(res)
 
 #-----------------------------Tests-----------------------------------
 
