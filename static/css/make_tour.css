@@ -12,7 +12,7 @@
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.t3, .dialog .top-left .contact-info p {
+.t3, .dialog .top-left .contact-info p, .dialog .footer button {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -73,6 +73,11 @@
     .dialog .top-right img {
       height: 207px;
       width: 207px; }
+  .dialog .foursquare-info {
+    font-size: 1.2em; }
+    .dialog .foursquare-info span {
+      color: #3cb4f8;
+      font-size: 1.5em; }
   .dialog .reviews {
     margin-top: 30px; }
     .dialog .reviews .review {
@@ -81,7 +86,7 @@
       .dialog .reviews .review .review-text {
         font-style: oblique; }
         .dialog .reviews .review .review-text span {
-          color: green;
+          color: #33d633;
           font-weight: bold;
           font-size: 1.3em; }
       .dialog .reviews .review .author {
@@ -90,16 +95,19 @@
   .dialog .footer {
     margin-top: 30px; }
     .dialog .footer button {
-      background-color: #3177eb;
       border: none;
       color: white;
       font-size: 1.3em;
       text-align: center;
       width: 250px; }
     .dialog .footer #select {
-      background-color: green; }
+      background-color: #33d633; }
+      .dialog .footer #select:hover {
+        background-color: #00a000; }
     .dialog .footer #cancel {
-      background-color: #e73b3b; }
+      background-color: #dd4b39; }
+      .dialog .footer #cancel:hover {
+        background-color: #e42810; }
 
 .locations-form {
   display: block;
