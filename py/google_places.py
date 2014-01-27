@@ -170,7 +170,7 @@ def findPlaces (latitude, longitude, responses):
             CLIENT_SECRET = "B1GJXBPPLOGTT53OK4RNC3UZ3XK0A11GUPA3EECEUVSFDJRJ"
             DATEVERIFIED = "20140127"
             url = "https://api.foursquare.com/v2/venues/search?query=%s&ll=%s,%s&intent=match&client_id=%s&client_secret=%s&v=%s" % (placeName, lat, lng, CLIENT_ID, CLIENT_SECRET,DATEVERIFIED)
-            print url
+
             response = requests.get(url)
             json_data = response.json()["response"]["venues"]
             myCheckIns = myHere = 0
