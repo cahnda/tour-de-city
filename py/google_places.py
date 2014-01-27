@@ -10,7 +10,7 @@ import datetime
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
+    AUTH_KEY = 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
     # LIST OF API KEYS:
 
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
@@ -62,7 +62,7 @@ def findPlaces (latitude, longitude, responses):
             try:
                 ans.append (str(place['rating']))
             except:
-                ans.append ('N/A')
+                ans.append (0)
             try:
                 photo_info =  place ['photos'][0]
                 photo_height = photo_info['height']
@@ -162,9 +162,11 @@ def findPlaces (latitude, longitude, responses):
             #end = datetime.datetime.now()
             #yelpTime += (end - start).microseconds
 
-        #results = sorted(results, key=lambda ans: ans[12], reverse = True)
-        #for ans in results:
-            #print ans[11]
+        results = sorted(results, key=lambda ans: ans[2], reverse = True)
+        for ans in results:
+            if ans[2] == 0:
+                ans[2] = "N/A"
+
         #print "yelptime: %d" % yelpTime
         #print "phototime: %d" % photoTime
         return results
