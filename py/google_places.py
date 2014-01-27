@@ -10,7 +10,7 @@ import datetime
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
+    AUTH_KEY = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # LIST OF API KEYS:
 
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
@@ -108,8 +108,9 @@ def findPlaces (latitude, longitude, responses):
             #url = service_url + '?' + urlencode(params)
            # topic = json.loads(urlopen(url).read())
 
-            start = datetime.datetime.now()
+            #start = datetime.datetime.now()
             url = "https://maps.googleapis.com/maps/api/place/details/json?reference=%s&sensor=true&extensions=review_summary&key=%s" %(ref, AUTH_KEY)
+            #print "Google API call: %s" % url
 
             response = urlopen(url)
             json_raw = response.read()
@@ -132,39 +133,41 @@ def findPlaces (latitude, longitude, responses):
                 except:
                     ans.append ("No reviews available")
 
-            end = datetime.datetime.now()
-            photoTime += (end - start).microseconds
+            #end = datetime.datetime.now()
+            #photoTime += (end - start).microseconds
 
-            start = datetime.datetime.now()
+            #start = datetime.datetime.now()
             #YELP API INTEGRATION
-            url = "http://api.yelp.com/business_review_search?term=%s&lat=%s&long=%s&radius=10&limit=1&ywsid=QpOpEuta4Y2gBa4QcDhx3w" % (placeName,lat, lng)
-            try:
-                response = requests.get(url)
-                json_data = response.json()["businesses"][0]
-                ratingYELP = json_data ['avg_rating']
-                ratingImg = json_data ['rating_img_url_small']
-                reviews = json_data ['reviews']
-                ans.append (ratingYELP)
-                ans.append (ratingImg)
-               # if (len (reviews) > 1):
-                #    ArrayReviews = []
-                 #   for review in reviews:
-                  #      ArrayReviews.append(review['text_excerpt'])
-                   # ans[10] = ArrayReviews
-            except:
-                ans.append ("No yelp information")
-                ans.append ("No yelp information")
+            #url = "http://api.yelp.com/business_review_search?term=%s&lat=%s&long=%s&radius=10&limit=1&ywsid=QpOpEuta4Y2gBa4QcDhx3w" % (placeName,lat, lng)
+            #print "Yelp API call: %s" % url
+
+            #try:
+                #response = requests.get(url)
+                #json_data = response.json()["businesses"][0]
+                #ratingYELP = json_data ['avg_rating']
+                #ratingImg = json_data ['rating_img_url_small']
+                #reviews = json_data ['reviews']
+                #ans.append (ratingYELP)
+                #ans.append (ratingImg)
+               ## if (len (reviews) > 1):
+                ##    ArrayReviews = []
+                 ##   for review in reviews:
+                  ##      ArrayReviews.append(review['text_excerpt'])
+                   ## ans[10] = ArrayReviews
+            #except:
+                #ans.append ("No yelp information")
+                #ans.append ("No yelp information")
             results.append (ans)
 
-            end = datetime.datetime.now()
-            yelpTime += (end - start).microseconds
+            #end = datetime.datetime.now()
+            #yelpTime += (end - start).microseconds
 
-        results = sorted(results, key=lambda ans: ans[12], reverse = True)
-        for ans in results:
-            print ans[11]
-        print "yelptime: %d" % yelpTime
-        print "phototime: %d" % photoTime
+        #results = sorted(results, key=lambda ans: ans[12], reverse = True)
+        #for ans in results:
+            #print ans[11]
+        #print "yelptime: %d" % yelpTime
+        #print "phototime: %d" % photoTime
         return results
 
 if __name__ == '__main__':
-    findPlaces (40.720842536130434, -73.99730066093753, [])
+    print findPlaces (40.720842536130434, -73.99730066093753, [])

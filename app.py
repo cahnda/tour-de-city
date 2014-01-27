@@ -106,6 +106,20 @@ def showDirections(tour_obj_id):
 
     return render_template("show_directions.html", result = tour)
 
+@app.route("/profile")
+def profile():
+	if "google_user_dict" in session:
+		return render_template("profile.html",
+			user_tours = utils.get_user_tour(session["google_user_dict"]["id"]))
+	else:
+		return redirect(url_for("index"))
+
+@app.route("/logout")
+def logout():
+	if "google_user_dict" in session.keys():
+		session.pop("google_user_dict")
+	return redirect(url_for("index"))
+
 @app.route("/rate", methods = ["GET", "POST"])
 def rate():
     names = session['place_names']
