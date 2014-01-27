@@ -1,23 +1,25 @@
 = extends 'layout.html'
 = block title
-	Rate Your Tour
+	Most Popular Tours
 = endblock
 = block body
 
 <script type="text/javascript">
 function display() {
         var i;
+        var a = 1
         var ret = "";
         var list = {{l|safe}};
         for (i in list) {
-          ret += "<li>"+list[i]+"</li>"
+          ret += "<p>"+a+".&nbsp;&nbsp;"+list[i][0]+"<br>"+'<a class="button" href="/tour=' + list[i][1] + '">Select</a>'+"</p>"
+	  a++;
 	  }
         document.getElementById("div").innerHTML = ret;
       }
 window.onload=display;
 </script>
 
-<h1>This is the end page!</h1>
+<h1>Top-Rated Tours</h1>
 
 <ol id="div"> something </ol>
 
