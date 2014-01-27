@@ -8,8 +8,8 @@
 function display() {
         var i;
         var ret = "";
-        var list = {{l}};
-        for (i in list[i]) {
+        var list = {{l|safe}};
+        for (i in list) {
           ret += "<li>"+list[i]+"</li>"
 	  }
         document.getElementById("div").innerHTML = ret;
@@ -19,6 +19,6 @@ window.onload=display;
 
 <h1>This is the end page!</h1>
 
-<ul id="div"> something </ul>
+<ol id="div"> something </ol>
 
 = endblock

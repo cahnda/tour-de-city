@@ -4,15 +4,17 @@ client = pymongo.MongoClient()
 db = client.SSSD
 
 class Tour():
-    def __init__(self, addresses, rate):
+    def __init__(self, names, addresses, pictures, rate):
+        self.names = names
         self.addresses = addresses
+        self.pictures = pictures
         self.rate = rate
         
     def __str__(self):
-        return "%s: %.1f"%(t.addresses, t.rate)
+        return "%s: %.1f"%(t.names, t.rate)
 
 def form(t):
-    return "%s: %.1f"%(t.addresses, t.rate)
+    return "%s: %.1f"%(t.names, t.rate)
 
 
 def average(tours):   #averages the rates of the tours with the same addresses (regardless of the order) and pops the duplicates 
@@ -23,7 +25,7 @@ def average(tours):   #averages the rates of the tours with the same addresses (
             counter = 1
             for t in range(x+1,len(temp)):
                 if t < len(temp):
-                    if set(temp[x].addresses) == set(temp[t].addresses):
+                    if set(temp[x].names) == set(temp[t].names):
                         ratesum += temp[t].rate
                         counter += 1
                         temp.pop(t)
@@ -39,10 +41,10 @@ def organize(tours):  #sorts tours in descending order by rating
     return tours
 
 def addTour(tour): 
-    db.tours.insert({'addresses':tour.addresses, 'rate':tour.rate})
+    db.tours.insert({'names':tour.names, 'addresses':tour.addresses, 'pictures':tour.pictures, 'rate':tour.rate})
 
 def _tours(res):
-    return [Tour(t['addresses'], t['rate']) for t in res]
+    return [Tour(t['names'], t['addresses'], t['pictures'], t['rate']) for t in res]
     
 def getSorted():
     res = _tours(db.tours.find())

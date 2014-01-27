@@ -10,7 +10,7 @@ client = pymongo.MongoClient()
 db = client.SSSD
 
 bike_stations = db.newyork_bikes
-tours = db.tours
+tourList = db.tourList
 
 def update_bike_stations(city_name):
 	city_bike_stations = getBikeDatabase(city_name)
@@ -84,10 +84,10 @@ def distance(coor1, coor2):
     return vincenty(coor1, coor2).miles
 
 def get_mongo_tour(obj_id_string):
-	return tours.find_one({"_id" : ObjectId(obj_id_string)})["tour_dict"]
+	return tourList.find_one({"_id" : ObjectId(obj_id_string)})["tour_dict"]
 
 def add_mongo_tour(tour_dict):
-	return str(tours.insert({"tour_dict" : tour_dict}))
+	return str(tourList.insert({"tour_dict" : tour_dict}))
 
 def send_email(email_address, subject, body):
 	db.contact.insert({"email_address" : email_address, "subject" : subject,

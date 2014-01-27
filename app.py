@@ -132,7 +132,7 @@ def end():
         i += "Rating: " + str(t.rate)
         i.encode('ascii')
         final.append(i)
-    return render_template("end.html", l = final)
+    return render_template("end.html", l = json.dumps(final))
 
 @app.route("/contact", methods = ["GET", "POST"])
 def contact():
