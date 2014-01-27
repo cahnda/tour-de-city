@@ -1,7 +1,6 @@
 import requests
 import json
-from urllib2 import urlopen, quote, Request
-from urllib import urlencode
+from urllib2 import urlopen
 
 import datetime
 
@@ -161,6 +160,25 @@ def findPlaces (latitude, longitude, responses):
 
             #end = datetime.datetime.now()
             #yelpTime += (end - start).microseconds
+            lat = str (lat)
+            lng = str (lng)
+            CLIENT_ID = "PROKVIKPGQ3VZ1S2LMVI0QIKPEUXYRT14XLHTOHF2XS4RQYK"
+            CLIENT_SECRET = "B1GJXBPPLOGTT53OK4RNC3UZ3XK0A11GUPA3EECEUVSFDJRJ"
+            DATEVERIFIED = "20140127"
+            url = "https://api.foursquare.com/v2/venues/search?query=%s&ll=%s,%s&intent=match&client_id=%s&client_secret=%s&v=%s" % (placeName, lat, lng, CLIENT_ID, CLIENT_SECRET,DATEVERIFIED)
+            print url
+            response = requests.get(url)
+            json_data = response.json()["response"]["venues"]
+            myVenue =  json_data [0]
+            print "UNIQUE"
+            for venue in json_data:
+                if venue["name"] == placeName:
+                    myVenue = venue
+            myHere = myVenue ["hereNow"]["count"]
+            myStats =  myVenue ['stats']
+            myCheckIns =  myStats ["checkinsCount"]
+            ans.append (myCheckIns)
+            ans.append (myHere)
 
         results = sorted(results, key=lambda ans: ans[2], reverse = True)
         for ans in results:
