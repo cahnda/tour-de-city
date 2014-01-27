@@ -54,6 +54,13 @@
 			height: 207px
 			width: 207px
 
+	.foursquare-info
+		font-size: 1.2em
+
+		span
+			color: $lightBlue
+			font-size: 1.5em
+
 	.reviews
 		margin-top: 30px
 
@@ -65,7 +72,7 @@
 				font-style: oblique
 
 				span
-					color: green
+					color: #33D633
 					font-weight: bold
 					font-size: 1.3em
 
@@ -77,7 +84,8 @@
 		margin-top: 30px
 
 		button
-			background-color: $darkBlue
+			@extend .t3
+
 			border: none
 			color: white
 			font-size: 1.3em
@@ -85,10 +93,16 @@
 			width: 250px
 
 		#select
-			background-color: green
+			background-color: #33D633
+
+			&:hover
+				background-color: #00A000
 
 		#cancel
-			background-color: $red
+			background-color: $googleRed
+
+			&:hover
+				background-color: $darkRed
 
 
 .locations-form

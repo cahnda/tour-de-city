@@ -9,7 +9,7 @@ import datetime
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
+    AUTH_KEY = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
     # LIST OF API KEYS:
 
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
@@ -128,7 +128,11 @@ def findPlaces (latitude, longitude, responses):
                 except:
                     ans.append ('No website listed')
                 try:
-                     ans.append (result ['reviews'])
+                    #reviews = result["reviews"]
+                    #for review in reviews:
+                        #if len(review["text"]) > 100:
+                             #review["text"] = (review["text"][:100], review["text"][100:])
+					 ans.append (result ['reviews'])
                 except:
                     ans.append ("No reviews available")
 
@@ -169,14 +173,18 @@ def findPlaces (latitude, longitude, responses):
 
             response = requests.get(url)
             json_data = response.json()["response"]["venues"]
-            myVenue =  json_data [0]
+            myCheckIns = myHere = 0
 
-            for venue in json_data:
-                if venue["name"] == placeName:
-                    myVenue = venue
-            myHere = myVenue ["hereNow"]["count"]
-            myStats =  myVenue ['stats']
-            myCheckIns =  myStats ["checkinsCount"]
+            if len(json_data) > 0:
+                myVenue =  json_data [0]
+                print "UNIQUE"
+                for venue in json_data:
+                    if venue["name"] == placeName:
+                        myVenue = venue
+                myHere = myVenue ["hereNow"]["count"]
+                myStats =  myVenue ['stats']
+                myCheckIns =  myStats ["checkinsCount"]
+
             ans.append (myCheckIns)
             ans.append (myHere)
 
