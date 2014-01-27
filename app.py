@@ -139,6 +139,7 @@ def rating(rating):
     print(newTour.addresses)
     return redirect('/toptours')
 
+
 @app.route("/toptours")
 def toptours():
     tourList = tours.getSorted()
@@ -146,11 +147,12 @@ def toptours():
     for t in tourList:
         i = ""
         for a in t.names:
-            i += a + " * "
-        i += "<b>Rating: " + str(t.rate) + "</b>"
+            i += a + "&nbsp; &nbsp;*&nbsp; &nbsp;"
+        i += "<b>Rating: " + str(t.rate) + "</b> <br> "
+        for pic in t.pictures:
+            i += '<img src="' + str(pic) + '" width="100" height="100"/>' + "&nbsp; &nbsp; &nbsp; &nbsp;"
         i.encode('ascii')
-        final.append(i)
-    
+        final.append((i, t._id))
     return render_template("end.html", l = json.dumps(final))
 
 @app.route("/contact", methods = ["GET", "POST"])

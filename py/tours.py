@@ -44,7 +44,12 @@ def addTour(tour):
     db.tours.insert({'names':tour.names, 'addresses':tour.addresses, 'pictures':tour.pictures, 'rate':tour.rate})
 
 def _tours(res):
-    return [Tour(t['names'], t['addresses'], t['pictures'], t['rate']) for t in res]
+    res = list(res)
+    ret = [Tour(t['names'], t['addresses'], t['pictures'], t['rate']) for t in res]
+    # preserve ids
+    for i in range(len(res)):
+        ret[i]._id = str(res[i]['_id'])
+    return ret
     
 def getSorted():
     res = _tours(db.tours.find())
