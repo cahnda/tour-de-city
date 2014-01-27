@@ -28,7 +28,7 @@ def index():
         print session
         return render_template("index.html")
     else:
-        button = request.form['button']
+        button = request.form['button'] if 'button' in request.form else None
         if button == "Submit":
             session['latitude'] = request.form.get('latitude', None)
             session['longitude'] = request.form.get('longitude', None)
@@ -41,6 +41,8 @@ def index():
             session ['var'] = var
             session['page'] = 'makeTour'
             return redirect(url_for('makeTour'))
+        return redirect('/toptours')
+
 
 @app.route ("/makeTour",  methods = ["GET","POST"])
 def makeTour():
@@ -121,10 +123,10 @@ def rating(rating):
     newTour = Tour(names,addresses,pics,rating)
     tours.addTour(newTour)
     print(newTour.addresses)
-    return redirect('/thankyou')
+    return redirect('/toptours')
 
-@app.route("/thankyou")
-def end():
+@app.route("/toptours")
+def toptours():
     tourList = tours.getSorted()
     final = []
     for t in tourList:

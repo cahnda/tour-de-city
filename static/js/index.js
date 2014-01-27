@@ -36,6 +36,10 @@ $(document).ready(function(){
 	})
 
 	$("#row2 input[type=radio]").click(function(){
+	    if ($("#row1 input:radio:checked").val() == "premade") {
+		document.getElementById("venue-form").submit()
+		return
+	    }
 		$("#venue-info").fadeIn();
 		$('html, body').animate({
         		scrollTop: $("#venue-container").offset().top
