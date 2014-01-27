@@ -22,8 +22,51 @@ Choose Locations
 	= if locs
 
 		<form class="locations-form" method="POST">
-
 			= for loc in locs
+
+				<div class="dialog">
+					<div class="top-left">
+						<h1>City Hall</h1>
+						<h3>New York City</h3>
+
+						<span id="rating">
+							<span>3.5</span> / 5
+						</span>
+
+						<div id="contact-info">
+							<p>000.111.2222</p>
+							<p><a href="/trillest.com">trillest.com</a></p>
+						</div>
+					</div>
+
+					<div id="top-right">
+						<img src="/static/images/no_photo_available.jpg">
+					</div>
+
+					<div id="reviews">
+						<h1> Reviews </h1>
+						<div class="review">
+
+							<p class="review-text">
+								"review 1 be here dfdfdfdfreview 1 be here dfdfdfdfreview 1 be here dfdfdfdf"
+							</p>
+							<p class="author">
+								-- a1
+							</p>
+						</div>
+
+						<div class="review">
+							<p class="review-text">
+								"review 2 be hered dddddreview 1 be here dfdfdfdfreview 1 be here dfdfdfdf"
+							</p>
+							<p class="author">
+								-- a2
+							</p>
+						</div>
+
+					</div>
+				</div>
+
 				<div class="location-container">
 					<div class="force-height"></div>
 					<div class="location-content", id ={{loc[4]}} >

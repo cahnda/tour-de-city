@@ -1,5 +1,68 @@
 @import variables, mixins
 
+#dialog
+	background-color: rgba(48, 45, 45, 0.68)
+	height: 400px
+	left: 50%
+	margin-left: -250px
+	padding: 25px
+	position: fixed
+	width: 500px
+	z-index: 200
+
+	*
+		text-align: left
+
+	#top-left
+		h1
+			font-size: 2.6em
+
+		#rating
+			font-size: 1.2em
+
+			span
+				font-size: 2em
+				color: $lightBlue
+
+		#contact-info
+			width: 110px
+
+			p
+				background-color: $lightBlue
+				padding: 4px
+
+				&:hover
+					background-color: $darkBlue
+
+				a
+					color: white
+
+
+	#top-right
+		float: right
+		position: absolute
+		right: 0
+		top: 0
+
+		img
+			width: 200px
+
+	#reviews
+		bottom: 0
+		margin-top: 30px
+		position: absolute
+
+		.review
+
+			display: inline-block
+
+			.review-text
+				font-style: oblique
+
+			.author
+				float: right
+
+
 .locations-form
 	display: block
 	padding-top: 10px

@@ -33,6 +33,51 @@
   -o-transition: all 1.2s ease-out;
   transition: all 1.2s ease-out; }
 
+#dialog {
+  background-color: rgba(48, 45, 45, 0.68);
+  height: 400px;
+  left: 50%;
+  margin-left: -250px;
+  padding: 25px;
+  position: fixed;
+  width: 500px;
+  z-index: 200; }
+  #dialog * {
+    text-align: left; }
+  #dialog #top-left h1 {
+    font-size: 2.6em; }
+  #dialog #top-left #rating {
+    font-size: 1.2em; }
+    #dialog #top-left #rating span {
+      font-size: 2em;
+      color: #3cb4f8; }
+  #dialog #top-left #contact-info {
+    width: 110px; }
+    #dialog #top-left #contact-info p {
+      background-color: #3cb4f8;
+      padding: 4px; }
+      #dialog #top-left #contact-info p:hover {
+        background-color: #3177eb; }
+      #dialog #top-left #contact-info p a {
+        color: white; }
+  #dialog #top-right {
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0; }
+    #dialog #top-right img {
+      width: 200px; }
+  #dialog #reviews {
+    bottom: 0;
+    margin-top: 30px;
+    position: absolute; }
+    #dialog #reviews .review {
+      display: inline-block; }
+      #dialog #reviews .review .review-text {
+        font-style: oblique; }
+      #dialog #reviews .review .author {
+        float: right; }
+
 .locations-form {
   display: block;
   padding-top: 10px;
