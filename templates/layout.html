@@ -9,6 +9,7 @@
 		</title>
 		{{ helpers.asset_tag('app.css') }}
 		{{ helpers.asset_tag('jquery.js') }}
+		{{ helpers.asset_tag('spin.min.js') }}
 
 		= block head
 		= endblock
@@ -19,16 +20,24 @@
 
 				<div id="gUserPanel">
 					<img src={{ session["google_user_dict"]["image"]["url"] }}>
+					<div id="profile">
+						<a href="/profile">profile</a>
+					</div>
+					<div id="logout">
+						<a href="/logout"><img src="static/images/logout.png"></a>
+					</div>
 				</div>
 
 			= else
 
-				<div id="gSignInWrapper">
-					<div id="customBtn" class="customGPlusSignIn">
-						<span class="icon">
-							<img src="static/images/socMedIcos/googlePlusTransparent.png">
-						</span>
-						<span class="buttonText">Sign in with Google</span>
+				<div id="gSignInContainer">
+					<div id="gSignInWrapper">
+						<div id="customBtn" class="customGPlusSignIn">
+							<span class="icon">
+								<img src="static/images/socMedIcos/googlePlusTransparent.png">
+							</span>
+							<span class="buttonText">Sign in with Google</span>
+						</div>
 					</div>
 				</div>
 

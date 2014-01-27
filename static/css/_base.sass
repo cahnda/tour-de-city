@@ -8,17 +8,23 @@ html
 
 body
 	font-family: "Open Sans", sans-serif
+	overflow: hidden
 
-	#gUserPanel, #gSignInWrapper
+	#gSignInContainer, #gUserPanel
+		@extend .t3
+
 		position: absolute
 		right: 0px
 		top: 0px
 
-	#gSignInWrapper
-		@extend .t3
-
-		background-color: #dd4b39
+	#gSignInContainer
+		background-color: $googleRed
+		height: 50px
 		width: 190px
+
+		.spinner
+			left: 50%
+			top: 50%
 
 		img
 			float: left
@@ -31,8 +37,48 @@ body
 			padding: 13px 10px 5px 0px
 
 		&:hover
-			background-color: #E42810
+			background-color: $darkRed
 			cursor: pointer
+
+	#gUserPanel
+		right: -150px
+
+		*
+			@extend .t3
+			display: inline-block
+			height: 50px
+			font-size: 1.2em
+			color: white
+			float: left
+
+		#profile
+			background-color: $lightBlue
+			overflow: hidden
+			width: 100px
+
+			a
+				margin-top: 5px
+				margin-left: 15px
+
+			&:hover
+				background-color: $darkBlue
+
+		#logout
+			background-color: $googleRed
+			width: 50px
+
+			a
+
+				img
+					margin: 7px
+					width: 36px
+					height: 36px
+
+			&:hover
+				background-color: $darkRed
+
+		&:hover
+			right: 0px
 
 h1
 	font-weight: normal

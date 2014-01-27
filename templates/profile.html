@@ -1,0 +1,11 @@
+= extends 'layout.html'
+
+= block title
+	Profile : {{ session["google_user_dict"]["displayName"] }}
+= endblock
+
+= block body
+	= for tour in user_tours
+		<p>tour</p>
+	= endfor
+= endblock
