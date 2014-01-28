@@ -51,11 +51,13 @@ body {
   body #gSignInContainer, body #gUserPanel {
     position: fixed;
     right: 0px;
-    top: 0px; }
+    top: 0px;
+    z-index: 300; }
   body #gSignInContainer {
     background-color: #dd4b39;
     height: 50px;
-    width: 190px; }
+    width: 190px;
+    z-index: 300; }
     body #gSignInContainer .spinner {
       left: 50%;
       top: 50%; }
