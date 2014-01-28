@@ -1,0 +1,38 @@
+@import variables, mixins
+
+div
+	button, #finish
+		@extend .t3
+
+		border-style: none
+		color: white
+		cursor: pointer
+		font-size: 2.0em
+		height: 48px
+
+	button
+		width: 50%
+
+	#rate-up
+		background-color: $green
+
+		&:hover
+			background-color: $darkGreen
+
+	#rate-down
+		background-color: $googleRed
+
+		&:hover
+			background-color: $darkRed
+
+	#finish
+		background-color: $lightBlue
+
+		&:hover
+			background-color: $darkBlue
+
+		a
+			color: white
+			display: inline-block
+			width: 100%
+			text-decoration: none
