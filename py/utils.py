@@ -83,13 +83,24 @@ def make_location_array(startlat, startlon, endlat, endlon, waypoints):
 def distance(coor1, coor2):
     return vincenty(coor1, coor2).miles
 
-def get_mongo_tour(obj_id_string):
-	return tourList.find_one({"_id" : ObjectId(obj_id_string)})["tour_dict"]
+def get_mongo_tours():
+	return tourList.find()
 
-def add_mongo_tour(tour_dict):
-	return str(tourList.insert({"tour_dict" : tour_dict}))
+def get_mongo_tour(obj_id_string):
+	return tourList.find_one({"_id" : ObjectId(obj_id_string)})
+
+def add_mongo_tour(tour_dict, loc_images, user_id=None):
+	return str(tourList.insert({"tour_dict" : tour_dict,
+		"loc_images" : loc_images, "user_id" : user_id, "rating" : 0}))
+
+def rate_tour(obj_id_string, rate_value):
+	curr_tour_rating = get_mongo_tour(obj_id_string)["rating"]
+	tourList.update({"_id" : ObjectId(obj_id_string)},
+		{"$set" : {"rating" : curr_tour_rating + rate_value}})
+
+def get_user_tours(user_id):
+	return tourList.find({"user_id" : user_id})
 
 def send_email(email_address, subject, body):
 	db.contact.insert({"email_address" : email_address, "subject" : subject,
 		"body" : body})
-

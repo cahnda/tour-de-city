@@ -11,6 +11,7 @@ def findPlaces (latitude, longitude, responses):
     #make request
     AUTH_KEY = 'AIzaSyBJ2GpKgNV-tufVV__SC5x6vV3L74ZCTCg'
     # LIST OF API KEYS:
+    print AUTH_KEY
 
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
@@ -42,6 +43,7 @@ def findPlaces (latitude, longitude, responses):
     response = urlopen(url)
     json_raw = response.read()
     json_data = json.loads(json_raw)
+    print json_data
 
     results = []
     placeNum = 0
@@ -117,6 +119,7 @@ def findPlaces (latitude, longitude, responses):
             response = urlopen(url)
             json_raw = response.read()
             json_data = json.loads(json_raw)
+            print json_data
 
             if json_data['status'] == 'OK':
                 result = json_data ['result']
@@ -176,6 +179,7 @@ def findPlaces (latitude, longitude, responses):
 
             response = requests.get(url)
             json_data = response.json()["response"]["venues"]
+            print json_data
             myCheckIns = myHere = 0
 
             if len(json_data) > 0:

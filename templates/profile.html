@@ -4,8 +4,30 @@
 	Profile : {{ session["google_user_dict"]["displayName"] }}
 = endblock
 
+= block head
+	{{helpers.asset_tag("profile.css")}}
+= endblock
+
 = block body
+	<div id="header-content">
+		<img src="{{ session['google_user_dict']['image']['url'] }}">
+		<h1>{{ session["google_user_dict"]["displayName"] }}</h1>
+		<div>
+			//recent tours
+		</div>
+	</div>
 	= for tour in user_tours
-		<p>tour</p>
+		<div class="tour">
+			<div id="link">
+				<button>
+					<a href="/tour={{ tour['_id'] }}">View Tour</a>
+				</button>
+			</div><br>
+				= for img_src in tour["loc_images"]
+					<div>
+						<img src="{{ img_src }}">
+					</div>
+				= endfor
+		</div>
 	= endfor
 = endblock

@@ -66,7 +66,8 @@
   background: #3cb4f8; }
 
 #button-font2 label {
-  background: #e73b3b; }
+  background: #e73b3b;
+  width: 25%; }
 
 #venue-form {
   *zoom: 1;

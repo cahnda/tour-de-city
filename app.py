@@ -26,6 +26,13 @@ def clear():
 def index():
     if request.method == "GET":
         print session
+        if "google_user_dict" in session.keys():
+            google_user_dict = session['google_user_dict']
+        session.clear();
+        try:
+            session['google_user_dict'] = google_user_dict
+        except:
+            pass
         return render_template("index.html")
     else:
         button = request.form['button'] if 'button' in request.form else None
@@ -41,18 +48,24 @@ def index():
             session ['var'] = var
             session['page'] = 'makeTour'
             return redirect(url_for('makeTour'))
-        return redirect('/toptours')
+        return redirect('/premadetours')
 
 
 @app.route ("/makeTour",  methods = ["GET","POST"])
 def makeTour():
     if 'page' in session.keys() and session['page'] == 'makeTour':
+        if "tour_dictionary" in session.keys():
+            session.pop("tour_dictionary")
         res_types  = session['var']
         longitude = session['longitude']
         latitude = session['latitude']
+        transportation = session['transportation']
         print latitude, longitude
         locs = google_places.findPlaces(latitude, longitude, res_types)
-        locLen = len (locs)
+        try:
+            locLen = len (locs)
+        except:
+            pass
         if request.method =="GET":
             return render_template("make_tour.html",locs=locs, locLen=locLen)
         else:
@@ -77,10 +90,12 @@ def makeTour():
 
                 waylist = session['waypoints']
                 endpoint = waylist.pop()
-
-                waylist = utils.make_location_array(\
-                    session['latitude'], session['longitude'],session['latitude'], \
-                    session['longitude'], waylist)
+                if transportation == "BIKING":
+                    waylist = utils.make_location_array(\
+                        session['latitude'], session['longitude'],session['latitude'], \
+                        session['longitude'], waylist)
+                else:
+                    waylist = session['waypoints']
                 waypoints = []
                 baseLoc = session['latitude'] + "," + session['longitude']
                 for waypoint in waylist:
@@ -91,26 +106,36 @@ def makeTour():
                 result['waypoints'] = json.dumps(waypoints)
                 result['transportation'] = session['transportation']
                 session["tour_dictionary"] = result
+                print result
 
-                return redirect("/tour=%s" % utils.add_mongo_tour(result))
+                user_id = None
+                if "google_user_dict" in session.keys():
+                    user_id = session["google_user_dict"]["id"]
+                return redirect("/tour=%s" % utils.add_mongo_tour(result,
+                    session["place_pics"], user_id))
 
     else:
         return redirect('/')
 
-@app.route("/tour=<tour_obj_id>")
+@app.route("/tour=<tour_obj_id>", methods=["GET", "POST"])
 def showDirections(tour_obj_id):
-    if "tour_dictionary" in session.keys():
-        tour = session["tour_dictionary"]
-    else:
-        tour = utils.get_mongo_tour(tour_obj_id)
+    if request.method == "GET":
+        if "tour_dictionary" in session.keys():
+            tour = session["tour_dictionary"]
+        else:
+            tour = utils.get_mongo_tour(tour_obj_id)["tour_dict"]
 
-    return render_template("show_directions.html", result = tour)
+        return render_template("show_directions.html", result = tour)
+
+    else:
+        utils.rate_tour(tour_obj_id, int(request.json["rate_value"]))
+        return ""
 
 @app.route("/profile")
 def profile():
 	if "google_user_dict" in session:
 		return render_template("profile.html",
-			user_tours = utils.get_user_tour(session["google_user_dict"]["id"]))
+			user_tours = utils.get_user_tours(session["google_user_dict"]["id"]))
 	else:
 		return redirect(url_for("index"))
 
@@ -140,20 +165,11 @@ def rating(rating):
     return redirect('/toptours')
 
 
-@app.route("/toptours")
-def toptours():
-    tourList = tours.getSorted()
-    final = []
-    for t in tourList:
-        i = ""
-        for a in t.names:
-            i += a + "&nbsp; &nbsp;*&nbsp; &nbsp;"
-        i += "<b>Rating: " + str(t.rate) + "</b> <br> "
-        for pic in t.pictures:
-            i += '<img src="' + str(pic) + '" width="100" height="100"/>' + "&nbsp; &nbsp; &nbsp; &nbsp;"
-        i.encode('ascii')
-        final.append((i, t._id))
-    return render_template("end.html", l = json.dumps(final))
+@app.route("/premadetours")
+def premadetours():
+	tours = sorted(utils.get_mongo_tours(), key=lambda tour: tour["rating"])[:5]
+	return render_template("premade_tours.html", highest_ranked_tours = tours)
+
 
 @app.route("/contact", methods = ["GET", "POST"])
 def contact():
