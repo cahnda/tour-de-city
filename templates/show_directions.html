@@ -3,6 +3,8 @@
 	Displaying text directions
 = endblock
 = block head
+
+	{{ helpers.asset_tag("show_directions.css")}}
 	{{ helpers.asset_tag("show_directions.js")}}
 	<script>
 		var map, directionsDisplay, google, directionsService;
@@ -38,5 +40,17 @@
 	<input type="button" class="button" value="Show Map" id="map-button" />
 	<div id="final_map" style="height: 600px">
 		<iframe class="direction" height="100%" width="100%" frameborder="0" scrolling="no" src="/map/directions"></iframe>
+	</div>
+	<div>
+		<button id="rate-up" value="1">
+				rate +1
+		</button><button id="rate-down" value="-1">
+				rate -1
+		</button>
+		<div id="finish">
+			<a href="/">
+				finish
+			</a>
+		</div>
 	</div>
 = endblock

@@ -48,6 +48,8 @@ def index():
 @app.route ("/makeTour",  methods = ["GET","POST"])
 def makeTour():
     if 'page' in session.keys() and session['page'] == 'makeTour':
+        if "tour_dictionary" in session.keys():
+            session.pop("tour_dictionary")
         res_types  = session['var']
         longitude = session['longitude']
         latitude = session['latitude']
@@ -92,26 +94,36 @@ def makeTour():
                 result['waypoints'] = json.dumps(waypoints)
                 result['transportation'] = session['transportation']
                 session["tour_dictionary"] = result
+                print result
 
-                return redirect("/tour=%s" % utils.add_mongo_tour(result))
+                user_id = None
+                if "google_user_dict" in session.keys():
+                    user_id = session["google_user_dict"]["id"]
+                return redirect("/tour=%s" % utils.add_mongo_tour(result,
+                    session["place_pics"], user_id))
 
     else:
         return redirect('/')
 
-@app.route("/tour=<tour_obj_id>")
+@app.route("/tour=<tour_obj_id>", methods=["GET", "POST"])
 def showDirections(tour_obj_id):
-    if "tour_dictionary" in session.keys():
-        tour = session["tour_dictionary"]
-    else:
-        tour = utils.get_mongo_tour(tour_obj_id)
+    if request.method == "GET":
+        if "tour_dictionary" in session.keys():
+            tour = session["tour_dictionary"]
+        else:
+            tour = utils.get_mongo_tour(tour_obj_id)["tour_dict"]
 
-    return render_template("show_directions.html", result = tour)
+        return render_template("show_directions.html", result = tour)
+
+    else:
+        utils.rate_tour(tour_obj_id, int(request.json["rate_value"]))
+        return ""
 
 @app.route("/profile")
 def profile():
 	if "google_user_dict" in session:
 		return render_template("profile.html",
-			user_tours = utils.get_user_tour(session["google_user_dict"]["id"]))
+			user_tours = utils.get_user_tours(session["google_user_dict"]["id"]))
 	else:
 		return redirect(url_for("index"))
 
