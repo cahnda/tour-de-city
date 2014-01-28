@@ -59,9 +59,13 @@ def makeTour():
         res_types  = session['var']
         longitude = session['longitude']
         latitude = session['latitude']
+        transportation = session['transportation']
         print latitude, longitude
         locs = google_places.findPlaces(latitude, longitude, res_types)
-        locLen = len (locs)
+        try:
+            locLen = len (locs)
+        except:
+            pass
         if request.method =="GET":
             return render_template("make_tour.html",locs=locs, locLen=locLen)
         else:
@@ -86,10 +90,12 @@ def makeTour():
 
                 waylist = session['waypoints']
                 endpoint = waylist.pop()
-
-                waylist = utils.make_location_array(\
-                    session['latitude'], session['longitude'],session['latitude'], \
-                    session['longitude'], waylist)
+                if transportation == "BIKING":
+                    waylist = utils.make_location_array(\
+                        session['latitude'], session['longitude'],session['latitude'], \
+                        session['longitude'], waylist)
+                else:
+                    waylist = session['waypoints']
                 waypoints = []
                 baseLoc = session['latitude'] + "," + session['longitude']
                 for waypoint in waylist:
