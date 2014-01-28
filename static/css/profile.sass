@@ -1,5 +1,22 @@
 @import variables, mixins
 
+#header-content
+	padding: 20px
+
+	*
+		text-align: left
+
+	h1
+		color: $lightBlue
+
+	div
+		font-size: 1.4em
+
+	img
+		float: left
+		margin-right: 10px
+		width: 80px
+
 .tour
 	text-align: left
 	float: left
@@ -20,6 +37,15 @@
 			background-color: $lightBlue
 			border: none
 			color: white
+			height: 20px
 			margin-bottom: -2px
 			position: relative
 			width: 100%
+
+			&:hover
+				@extend .t3
+
+				background-color: $darkBlue
+
+			a
+				color: white
