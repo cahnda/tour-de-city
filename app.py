@@ -42,7 +42,7 @@ def index():
             session ['var'] = var
             session['page'] = 'makeTour'
             return redirect(url_for('makeTour'))
-        return redirect('/toptours')
+        return redirect('/premadetours')
 
 
 @app.route ("/makeTour",  methods = ["GET","POST"])
@@ -153,20 +153,11 @@ def rating(rating):
     return redirect('/toptours')
 
 
-@app.route("/toptours")
-def toptours():
-    tourList = tours.getSorted()
-    final = []
-    for t in tourList:
-        i = ""
-        for a in t.names:
-            i += a + "&nbsp; &nbsp;*&nbsp; &nbsp;"
-        i += "<b>Rating: " + str(t.rate) + "</b> <br> "
-        for pic in t.pictures:
-            i += '<img src="' + str(pic) + '" width="100" height="100"/>' + "&nbsp; &nbsp; &nbsp; &nbsp;"
-        i.encode('ascii')
-        final.append((i, t._id))
-    return render_template("end.html", l = json.dumps(final))
+@app.route("/premadetours")
+def premadetours():
+	tours = sorted(utils.get_mongo_tours(), key=lambda tour: tour["rating"])[:5]
+	return render_template("premade_tours.html", highest_ranked_tours = tours)
+
 
 @app.route("/contact", methods = ["GET", "POST"])
 def contact():
