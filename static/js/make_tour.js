@@ -39,7 +39,7 @@ $(document).ready(function(){
 	}
 
 	var dialogAppear = function(dialogSelector){
-		$(".dialog").hide(
+		$(".dialog").hide();
 		$(dialogSelector).fadeIn(260);
 		$(".location-container").animate({"opacity" : "0.3"}, 300);
 	}
