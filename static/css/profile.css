@@ -12,7 +12,7 @@
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.t3 {
+.t3, .tour #link button:hover {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -33,8 +33,23 @@
   -o-transition: all 1.2s ease-out;
   transition: all 1.2s ease-out; }
 
+#header-content {
+  padding: 20px; }
+  #header-content * {
+    text-align: left; }
+  #header-content h1 {
+    color: #3cb4f8; }
+  #header-content div {
+    font-size: 1.4em; }
+  #header-content img {
+    float: left;
+    margin-right: 10px;
+    width: 80px; }
+
 .tour {
-  text-align: left; }
+  text-align: left;
+  float: left;
+  width: 50%; }
   .tour img {
     height: 100px;
     margin-right: -4px;
@@ -42,11 +57,16 @@
   .tour div {
     display: inline-block; }
   .tour #link {
-    width: 50%; }
+    width: 99%; }
     .tour #link button {
       background-color: #3cb4f8;
       border: none;
       color: white;
+      height: 20px;
       margin-bottom: -2px;
       position: relative;
       width: 100%; }
+      .tour #link button:hover {
+        background-color: #3177eb; }
+      .tour #link button a {
+        color: white; }
