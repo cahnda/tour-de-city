@@ -50,12 +50,17 @@ def makeTour():
         res_types  = session['var']
         longitude = session['longitude']
         latitude = session['latitude']
+        transportation = session['transportation']
+        locs = session['locs'] = google_places.findPlaces(latitude, longitude, res_types)
+        try:
+            locLen = len (locs)
+        except:
+            locLen = 0;
         print latitude, longitude
-        locs = google_places.findPlaces(latitude, longitude, res_types)
-        locLen = len (locs)
         if request.method =="GET":
             return render_template("make_tour.html",locs=locs, locLen=locLen)
         else:
+            #locs = session['locs']
             button = request.form['button']
             if button == "Submit":
                 unicodeobj = request.values.getlist("place")
@@ -74,17 +79,18 @@ def makeTour():
                     latitude+","+longitude,waypoints,latitude+','+longitude)
                 session['waypoints'] = waypoints
                 session['page'] = 'showDirections'
-
-                waylist = session['waypoints']
-                endpoint = waylist.pop()
-
-                waylist = utils.make_location_array(\
-                    session['latitude'], session['longitude'],session['latitude'], \
-                    session['longitude'], waylist)
-                waypoints = []
                 baseLoc = session['latitude'] + "," + session['longitude']
-                for waypoint in waylist:
-                    waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
+                endpoint = waypoints[-1:]
+                print endpoint
+                print transportation
+                if transportation == "BIKING":
+                    waylist = session['waypoints']
+                    waylist = utils.make_location_array(\
+                        session['latitude'], session['longitude'],session['latitude'], \
+                        session['longitude'], waylist)
+                    waypoints = []
+                    for waypoint in waylist:
+                        waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
                 result = dict()
                 result['start'] = baseLoc
                 result['end'] = endpoint

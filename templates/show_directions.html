@@ -4,11 +4,38 @@
 = endblock
 = block head
 	{{ helpers.asset_tag("show_directions.js")}}
+	<script>
+		var map, directionsDisplay, google, directionsService;
+
+		function calcRoute() {
+			var start = "{{result['start']}}";
+			var end = "{{result['end']}}";
+			var waypts = JSON.parse({{result['waypoints']|tojson|safe}});
+			console.log(start);
+			console.log(end);
+			console.log(waypts);
+			var request = {
+				origin: start,
+				destination: end,
+				travelMode: google.maps.TravelMode.{{result['transportation']}},
+				waypoints: waypts
+			};
+			directionsService.route(request, function(response, status) {
+				console.log(status)
+				if (status == google.maps.DirectionsStatus.OK) {
+					directionsDisplay.setDirections(response);
+				}
+			});
+		}
+	</script>
 = endblock
 = block body
 	<div id="final_summary">
+
 		Lorem Ipsum
+		<br>
 	</div>
+	<input type="button" class="button" value="Show Map" id="map-button" />
 	<div id="final_map" style="height: 600px">
 		<iframe class="direction" height="100%" width="100%" frameborder="0" scrolling="no" src="/map/directions"></iframe>
 	</div>
