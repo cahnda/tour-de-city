@@ -9,6 +9,13 @@
 = endblock
 
 = block body
+	<div id="header-content">
+		<img src="{{ session['google_user_dict']['image']['url'] }}">
+		<h1>{{ session["google_user_dict"]["displayName"] }}</h1>
+		<div>
+			//recent tours
+		</div>
+	</div>
 	= for tour in user_tours
 		<div class="tour">
 			<div id="link">
