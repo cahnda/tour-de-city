@@ -83,6 +83,9 @@ def make_location_array(startlat, startlon, endlat, endlon, waypoints):
 def distance(coor1, coor2):
     return vincenty(coor1, coor2).miles
 
+def get_mongo_tours():
+	return tourList.find()
+
 def get_mongo_tour(obj_id_string):
 	return tourList.find_one({"_id" : ObjectId(obj_id_string)})
 

@@ -1,0 +1,27 @@
+= extends 'layout.html'
+
+= block title
+	premade tours
+= endblock
+
+= block head
+	{{ helpers.asset_tag("premade_tours.css") }}
+= endblock
+
+= block body
+	<h1>//highest rated tours</h1>
+	= for tour in highest_ranked_tours
+		<div class="tour">
+			<div id="link">
+				<button>
+					<a href="/tour={{ tour['_id'] }}">link</a>
+				</button>
+			</div><br>
+				= for img_src in tour["loc_images"]
+					<div>
+						<img src="{{ img_src }}">
+					</div>
+				= endfor
+		</div>
+	= endfor
+= endblock
