@@ -9,7 +9,7 @@ import datetime
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
+    AUTH_KEY = 'AIzaSyBtT5oFCm_LRdN1IvkROlLeoFRGdyNcfpU'
     # LIST OF API KEYS:
 
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
@@ -17,6 +17,7 @@ def findPlaces (latitude, longitude, responses):
     # sweyn3@gmail.com : 'AIzaSyA6YYBVEWXWJHsynCDK78bhlhNCm1iQPDk'
     # st.zhu1@gmail.com: 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
     # dcahn@jsa.org: 'AIzaSyAu_MPXCDjBxDSfoqP0HG7W3e33keYx0Ww'
+    # stuyvesantspectator@gmail.com: 'AIzaSyBtT5oFCm_LRdN1IvkROlLeoFRGdyNcfpU'
 
     LOCATION = str (latitude) + "," + str (longitude)
     RADIUS = 1000 #in meters, approx. .5 miles
