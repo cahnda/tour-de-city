@@ -26,7 +26,13 @@ def clear():
 def index():
     if request.method == "GET":
         print session
+        if "google_user_dict" in session.keys():
+            google_user_dict = session['google_user_dict']
         session.clear();
+        try:
+            session['google_user_dict'] = google_user_dict
+        except:
+            pass
         return render_template("index.html")
     else:
         button = request.form['button'] if 'button' in request.form else None

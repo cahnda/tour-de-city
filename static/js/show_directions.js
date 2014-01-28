@@ -2,13 +2,11 @@ $(window).load(function() {
 
       $("#map-button").click(function(){
             if($(this).hasClass("click")){
-                  $(this).removeClass("click").text("Show Map");
+                  $(this).removeClass("click").text("View Tour");
                   $("#final_map").fadeOut();
-                  $("#final_summary").fadeIn();
             }
             else {
-                  $(this).addClass("click").text("Show Summary");
-                  $("#final_summary").fadeOut();
+                  $(this).addClass("click").text("Hide Tour");
                   $("#final_map").fadeIn();       
             }
       });

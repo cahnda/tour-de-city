@@ -1,7 +1,7 @@
 @import variables, mixins
 
 div
-	button, #finish
+	button, #finish, #map-button
 		@extend .t3
 
 		border-style: none
@@ -12,6 +12,13 @@ div
 
 	button
 		width: 50%
+
+	#map-button
+		background-color: $lightBlue
+		&:hover
+			background-color: $darkBlue
+		button
+			width: 100%
 
 	#rate-up
 		background-color: $green
