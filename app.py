@@ -26,6 +26,7 @@ def clear():
 def index():
     if request.method == "GET":
         print session
+        session.clear();
         return render_template("index.html")
     else:
         button = request.form['button'] if 'button' in request.form else None
@@ -51,19 +52,19 @@ def makeTour():
         longitude = session['longitude']
         latitude = session['latitude']
         transportation = session['transportation']
+        print latitude, longitude
         locs = session['locs'] = google_places.findPlaces(latitude, longitude, res_types)
         try:
             locLen = len (locs)
         except:
             locLen = 0;
-        print latitude, longitude
         if request.method =="GET":
             return render_template("make_tour.html",locs=locs, locLen=locLen)
         else:
             #locs = session['locs']
             button = request.form['button']
             if button == "Submit":
-                unicodeobj = request.values.getlist("place")
+                unicodeobj = request.form.getlist("place")
                 print "THIS IS MY LENGTH"
                 print len (unicodeobj)
                 counter = 0
@@ -91,6 +92,9 @@ def makeTour():
                     waypoints = []
                     for waypoint in waylist:
                         waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
+                else:
+                    for i in range(len(waypoints)):
+                        waypoints[i] = {"location":waypoints[i].encode('ascii', 'ignore')}
                 result = dict()
                 result['start'] = baseLoc
                 result['end'] = endpoint
