@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 $(window).load(function() {
 
       $("#map-button").click(function(){
@@ -28,6 +27,7 @@ $(window).load(function() {
       directionsDisplay.setMap(map);
       directionsDisplay.setPanel(fdocument.getElementById('directions-panel'));
       calcRoute();
+});
 
 $(document).ready(function(){
 	$("#rate-up, #rate-down").click(function(){
