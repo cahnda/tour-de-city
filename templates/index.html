@@ -1,0 +1,91 @@
+= extends 'layout.html'
+= block title
+	Home
+= endblock
+= block head
+	{{ helpers.asset_tag('maps.locationpicker.js') }}
+	{{ helpers.asset_tag("index.css")}}
+	{{ helpers.asset_tag("index.js")}}
+= endblock
+= block body
+	<a id="start-button" class="button">
+		Start
+	</a>
+	<form action="/" id="venue-form" method="POST">
+	<div id="row1" class="row">
+		<div id="button-font1">
+			<input id="radio-custom" type="radio" name="tour-type" value="custom">
+			<label for="radio-custom">
+				Custom Tour
+			</label>
+		</div>
+
+		<div id="button-font1">
+			<input id="radio-premade" type="radio" name="tour-type" value="premade">
+			<label for="radio-premade">
+				Pre-Made Tour
+			</label>
+		</div>
+	</div>
+
+	<div id="row2" class="row">
+		<div id="button-font2">
+			<input id="radio-bike" type="radio" name="tour-transportation" value="BICYCLING">
+			<label for="radio-bike">
+				<img src="/static/images/bicon.png">
+			</label>
+		</div>
+		<div id="button-font2">
+			<input id="radio-foot" type="radio" name="tour-transportation" value="WALKING">
+			<label for="radio-foot">
+				<img src="/static/images/wicon.png">
+			</label>
+		</div>
+		<div id="button-font2">
+			<input id="radio-foot" type="radio" name="tour-transportation" value="DRIVING">
+			<label for="radio-foot">
+				<img src="/static/images/carcon.png">
+			</label>
+		</div>
+		<div id="button-font2">
+			<input id="radio-foot" type="radio" name="tour-transportation" value="TRANSIT">
+			<label for="radio-foot">
+				<img src="/static/images/buscon.png">
+			</label>
+		</div>
+	</div>
+	<div id="venue-info">
+		<h2 style="margin-bottom: 10px;">Select your Location</h2>
+
+		<div class="map-container">
+			<div class="search-form">
+				<input class="search-text" type="text" value=""><a class="search-button button">Search</a>
+			</div>
+			<input type="hidden" name="latitude" value="40.7143528"/>
+			<input type="hidden" name="longitude" value="-74.0059731"/>
+			<iframe height="100%" width="100%" frameborder="0" scrolling="no" src="/map"></iframe>
+		</div>
+
+		<div id="venue-container">
+			<h2>What type of venues would you like to visit?</h2>
+			<label><input type="checkbox" name="tour" value="amusement_park">Amusement Park</label>
+			<label><input type="checkbox" name="tour" value="aquarium">Aquarium</label>
+			<label><input type="checkbox" name="tour" value="art_gallery">Art Gallery</label>
+			<label><input type="checkbox" name="tour" value="bowling_alley">Bowling Alley</label>
+			<label><input type="checkbox" name="tour" value="cafe">Cafe</label>
+			<label><input type="checkbox" name="tour" value="city_hall">City Hall</label>
+			<label><input type="checkbox" name="tour" value="establishment">Establishment</label>
+			<label><input type="checkbox" name="tour" value="library">Library</label>
+			<label><input type="checkbox" name="tour" value="museum">Museum</label>
+			<label><input type="checkbox" name="tour" value="night_club">Night Club</label>
+			<label><input type="checkbox" name="tour" value="park">Park</label>
+			<label><input type="checkbox" name="tour" value="restaurant">Restaurant</label>
+			<label><input type="checkbox" name="tour" value="shopping_mall">Shopping Mall</label>
+			<label><input type="checkbox" name="tour" value="store">Store</label>
+			<label><input type="checkbox" name="tour" value="stadium">Stadium</label>
+			<input type="submit" value="Submit" name="button" />
+		</div>
+	</div>
+	</form>
+</div>
+= endblock

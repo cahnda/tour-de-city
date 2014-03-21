@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			= block title
+			= endblock
+		</title>
+		{{ helpers.asset_tag('app.css') }}
+		{{ helpers.asset_tag('jquery.js') }}
+		{{ helpers.asset_tag('spin.min.js') }}
+
+		= block head
+		= endblock
+	</head>
+	<body>
+
+			= if session["google_user_dict"]
+
+					<div id="gUserPanel">
+						<img src={{ session["google_user_dict"]["image"]["url"] }}>
+						<div id="profile">
+							<a href="/profile">profile</a>
+						</div>
+						<div id="logout">
+							<a href="/logout"><img src="static/images/logout.png"></a>
+						</div>
+					</div>
+				</div>
+
+			= else
+
+				<div id="gSignInContainer">
+					<div id="gSignInWrapper">
+						<div id="customBtn" class="customGPlusSignIn">
+							<span class="icon">
+								<img src="static/images/socMedIcos/googlePlusTransparent.png">
+							</span>
+							<span class="buttonText">Sign in with Google</span>
+						</div>
+					</div>
+				</div>
+
+			= endif
+
+		<div id="socialMediaIcons">
+			<script src="/static/js/socialmedia.js"></script>
+			<img onclick="facebookClick()" id="facebook" class="t3"
+				src={{ url_for("static", filename="images/socMedIcos/facebook.png") }}><br>
+			<img onclick="twitterClick()"  id="twitter" class="t3"
+				src={{ url_for("static", filename="images/socMedIcos/twitter.png")}}><br>
+			<img onclick="googlePlusClick()" id="googlePlus" class="t3"
+				src={{ url_for("static", filename="images/socMedIcos/googlePlus.png")}}><br>
+			<img onclick="tumblrClick()" id="tumblr" class="t3"
+				src={{ url_for("static", filename="images/socMedIcos/tumblr.png")}}><br>
+		</div>
+
+		<div class="header">
+			<div class="header-content content">
+				<a class="logo" href={{ url_for('index') }}>
+					<img src={{ url_for('static', filename='images/map_icon_white.png') }}>
+					<h1>tour de city</h1>
+				</a>
+			</div>
+		</div>
+
+		<div class="main-container">
+			<div class="main-content content">
+				= block body
+					<h1>Page not found.</h1>
+				= endblock
+			</div>
+		</div>
+
+		<footer>
+			<div>
+				<a href="/">
+					<img src="/static/images/footerIcos/home.png">
+				</a>
+
+				<a href="/contact">
+					<img src="/static/images/footerIcos/contact.png">
+				</a>
+
+				<a href="/about">
+					<img src="/static/images/footerIcos/about.png">
+				</a><br>
+			</div>
+		</footer>
+
+		{{ helpers.asset_tag("google_oauth.js")}}
+
+	</body>
+</html>

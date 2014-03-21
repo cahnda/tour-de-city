@@ -1,0 +1,51 @@
+@mixin vendor($property, $value)
+	-webkit-#{$property}: $value
+	-moz-#{$property}: $value
+	-ms-#{$property}: $value
+	-o-#{$property}: $value
+	#{$property}: $value
+
+@mixin placeholder-font($fontFamily, $fontWeight)
+	::-webkit-input-placeholder
+		font-weight: $fontWeight
+		font-family: $fontFamily
+	\:-moz-placeholder
+		font-weight: $fontWeight
+		font-family: $fontFamily
+	::-moz-placeholder
+		font-weight: $fontWeight
+		font-family: $fontFamily
+	\:-ms-input-placeholder
+		font-weight: $fontWeight
+		font-family: $fontFamily
+
+@mixin clearfix
+	*zoom: 1
+	&:before,
+	&:after
+		display: table
+		content: ""
+		// Fixes Opera/contenteditable bug:
+		// http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+		line-height: 0
+	&:after
+		clear: both
+
+@mixin opaque($opacity)
+	opacity: $opacity
+	filter: alpha(opacity=$opacity)
+
+.t1
+	@include vendor(transition, all 0.1s ease-out)
+
+.t2
+	@include vendor(transition, all 0.2s ease-out)
+
+.t3
+	@include vendor(transition, all 0.3s ease-out)
+
+.t6
+	@include vendor(transition, all 0.6s ease-out)
+
+.t12
+	@include vendor(transition, all 1.2s ease-out)

@@ -1,0 +1,10 @@
+window.onload (function () {
+alert ("loaded");
+imgList = document.getElementById ("locationNum");
+imgList.onclick = function () {
+$.modal("this is a modal");
+};
+};document.onload =  function () {
+    imgList = document.getElementById ("locationNum");
+    console.log (imgList.length);
+};

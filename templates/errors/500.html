@@ -1,0 +1,10 @@
+= extends "layout.html"
+
+= block head
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+= endblock
+
+= block body
+	<p id="error">500</p>
+	<a href="/" class="button" style="margin-bottom: 10px">Go home.</a>
+= endblock

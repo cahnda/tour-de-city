@@ -1,0 +1,34 @@
+= extends "layout.html"
+
+= block title
+	Contact
+= endblock
+
+= block head
+	{{ helpers.asset_tag("contact.css") }}
+	{{ helpers.asset_tag("contact.js")}}
+= endblock
+
+= block body
+	<div id="contact">
+		<button id="email-contact" class="clicked button">
+			Email
+		</button><button id="phone-contact" class="button">
+			Phone
+		</button>
+
+		<div id="email-info">
+			<form id="email-contact" method="post">
+				<input type="text" name="email_address" placeholder="email address"><br>
+				<input type="text" name="subject" placeholder="subject"><br>
+				<textarea name="body" placeholder="body"></textarea><br>
+				<input type="submit" name="submit">
+			</form>
+		</div>
+
+		<div id="phone-info">
+			<p>123.456.7890</p>
+		</div>
+
+	</div>
+= endblock

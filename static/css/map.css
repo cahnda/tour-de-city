@@ -1,0 +1,1 @@
+html,body,#map-canvas{height:100%;margin:0;padding:0}#directions-panel{box-sizing:border-box;display:none;height:100%;float:right;width:400px;padding:10px;overflow:auto;background-color:#fff}.directions #map-canvas{margin-right:400px}.directions #directions-panel{display:block}
