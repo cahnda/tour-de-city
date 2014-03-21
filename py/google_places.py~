@@ -9,14 +9,18 @@ import datetime
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
+    AUTH_KEY = 'AIzaSyBJ2GpKgNV-tufVV__SC5x6vV3L74ZCTCg'
     # LIST OF API KEYS:
+    print AUTH_KEY
 
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
     # sweyn3@gmail.com : 'AIzaSyA6YYBVEWXWJHsynCDK78bhlhNCm1iQPDk'
     # st.zhu1@gmail.com: 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE'
     # dcahn@jsa.org: 'AIzaSyAu_MPXCDjBxDSfoqP0HG7W3e33keYx0Ww'
+    # stuyvesantspectator@gmail.com: 'AIzaSyBtT5oFCm_LRdN1IvkROlLeoFRGdyNcfpU'
+    # dcahn@northeastjsa.org: 'AIzaSyAOz86LAqTs5HwgH6Ib2e3AIkNLaoVelSo'
+    # spectatoredits@gmail.com: 'AIzaSyBJ2GpKgNV-tufVV__SC5x6vV3L74ZCTCg'
 
     LOCATION = str (latitude) + "," + str (longitude)
     RADIUS = 1000 #in meters, approx. .5 miles
@@ -39,6 +43,7 @@ def findPlaces (latitude, longitude, responses):
     response = urlopen(url)
     json_raw = response.read()
     json_data = json.loads(json_raw)
+    print json_data
 
     results = []
     placeNum = 0
@@ -114,6 +119,7 @@ def findPlaces (latitude, longitude, responses):
             response = urlopen(url)
             json_raw = response.read()
             json_data = json.loads(json_raw)
+            print json_data
 
             if json_data['status'] == 'OK':
                 result = json_data ['result']
@@ -173,6 +179,7 @@ def findPlaces (latitude, longitude, responses):
 
             response = requests.get(url)
             json_data = response.json()["response"]["venues"]
+            print json_data
             myCheckIns = myHere = 0
 
             if len(json_data) > 0:
