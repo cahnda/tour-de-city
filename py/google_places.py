@@ -9,7 +9,7 @@ import datetime
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
+    AUTH_KEY = 'AIzaSyBJ2GpKgNV-tufVV__SC5x6vV3L74ZCTCg'
     # LIST OF API KEYS:
     print AUTH_KEY
 
@@ -33,11 +33,11 @@ def findPlaces (latitude, longitude, responses):
         "city_hall|establishment|library|museum|night_club|park|restaurant|"
         "shopping_mall|store|stadium|store"
     else:
-        TYPES = '|'.join(responses)
+    	TYPES = '|'.join(responses)
 
     url = ("https://maps.googleapis.com/maps/api/place/search/json?types=%s"
            "&location=%s&radius=%s&sensor=false&rankby=%s&key=%s") % \
-        (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
+           (TYPES, LOCATION, RADIUS, RANKBY, AUTH_KEY)
     # Send the GET request to the Place details service (using url from above)
 
     response = urlopen(url)
@@ -67,14 +67,14 @@ def findPlaces (latitude, longitude, responses):
                 ans.append (str(place['rating']))
             except:
                 ans.append (0)
-                try:
-                    photo_info =  place ['photos'][0]
-                    photo_height = photo_info['height']
-                    photo_ref = photo_info['photo_reference']
-                    photo_width = photo_info['width']
+            try:
+                photo_info =  place ['photos'][0]
+                photo_height = photo_info['height']
+                photo_ref = photo_info['photo_reference']
+                photo_width = photo_info['width']
 
                 photo_url = ("https://maps.googleapis.com/maps/api/place/photo?"
-                             "maxwidth=%s&photoreference=%s&sensor=true&key=%s") \
+                    "maxwidth=%s&photoreference=%s&sensor=true&key=%s") \
                     % (photo_width, photo_ref, AUTH_KEY)
                 ans.append (photo_url)
             except:
@@ -88,7 +88,7 @@ def findPlaces (latitude, longitude, responses):
                     ans.append ("This venue is currently open")
                 else:
                     ans.append ("This venue is currently closed")
-                except:
+            except:
                     ans.append ("No data available on opening hours")
 
             chkStr = "myChk" + str (placeNum)
@@ -100,17 +100,17 @@ def findPlaces (latitude, longitude, responses):
            # s = s.encode ('ascii',"ignore")
            # results.append (s)
            # topic_id = "/en/" + placeName
-           #url = "https://www.googleapis.com/freebase/v1/topic" + topic_id + '?' + 'filter=suggest&key=%s' %(AUTH_KEY)
-           #query = placeName
-           #service_url = 'https://www.googleapis.com/freebase/v1/search'
-           #params = {
-           #'query': query,
-           #  'key': AUTH_KEY,
-           #  'indent':'true',
-           # 'type': 'location/geocode/' + latStr,
+            #url = "https://www.googleapis.com/freebase/v1/topic" + topic_id + '?' + 'filter=suggest&key=%s' %(AUTH_KEY)
+            #query = placeName
+            #service_url = 'https://www.googleapis.com/freebase/v1/search'
+            #params = {
+               #'query': query,
+             #  'key': AUTH_KEY,
+             #  'indent':'true',
+              # 'type': 'location/geocode/' + latStr,
            #}
             #url = service_url + '?' + urlencode(params)
-            # topic = json.loads(urlopen(url).read())
+           # topic = json.loads(urlopen(url).read())
 
             #start = datetime.datetime.now()
             url = "https://maps.googleapis.com/maps/api/place/details/json?reference=%s&sensor=true&extensions=review_summary&key=%s" %(ref, AUTH_KEY)
@@ -133,14 +133,14 @@ def findPlaces (latitude, longitude, responses):
                     ans.append (result["website"])
                 except:
                     ans.append ('No website listed')
-                    try:
-                        #reviews = result["reviews"]
-                        #for review in reviews:
+                try:
+                    #reviews = result["reviews"]
+                    #for review in reviews:
                         #if len(review["text"]) > 100:
-                        #review["text"] = (review["text"][:100], review["text"][100:])
-                        ans.append (result ['reviews'])
-                    except:
-                        ans.append ("No reviews available")
+                             #review["text"] = (review["text"][:100], review["text"][100:])
+					 ans.append (result ['reviews'])
+                except:
+                    ans.append ("No reviews available")
 
             #end = datetime.datetime.now()
             #photoTime += (end - start).microseconds
@@ -151,21 +151,21 @@ def findPlaces (latitude, longitude, responses):
             #print "Yelp API call: %s" % url
 
             #try:
-            #response = requests.get(url)
-            #json_data = response.json()["businesses"][0]
-            #ratingYELP = json_data ['avg_rating']
-            #ratingImg = json_data ['rating_img_url_small']
-            #reviews = json_data ['reviews']
-            #ans.append (ratingYELP)
-            #ans.append (ratingImg)
-            ## if (len (reviews) > 1):
-            ##    ArrayReviews = []
-            ##   for review in reviews:
-            ##      ArrayReviews.append(review['text_excerpt'])
-            ## ans[10] = ArrayReviews
+                #response = requests.get(url)
+                #json_data = response.json()["businesses"][0]
+                #ratingYELP = json_data ['avg_rating']
+                #ratingImg = json_data ['rating_img_url_small']
+                #reviews = json_data ['reviews']
+                #ans.append (ratingYELP)
+                #ans.append (ratingImg)
+               ## if (len (reviews) > 1):
+                ##    ArrayReviews = []
+                 ##   for review in reviews:
+                  ##      ArrayReviews.append(review['text_excerpt'])
+                   ## ans[10] = ArrayReviews
             #except:
-            #ans.append ("No yelp information")
-            #ans.append ("No yelp information")
+                #ans.append ("No yelp information")
+                #ans.append ("No yelp information")
             results.append (ans)
 
             #end = datetime.datetime.now()
@@ -188,9 +188,9 @@ def findPlaces (latitude, longitude, responses):
                 for venue in json_data:
                     if venue["name"] == placeName:
                         myVenue = venue
-                        myHere = myVenue ["hereNow"]["count"]
-                        myStats =  myVenue ['stats']
-                        myCheckIns =  myStats ["checkinsCount"]
+                myHere = myVenue ["hereNow"]["count"]
+                myStats =  myVenue ['stats']
+                myCheckIns =  myStats ["checkinsCount"]
 
             ans.append (myCheckIns)
             ans.append (myHere)
