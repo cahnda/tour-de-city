@@ -6,8 +6,9 @@ import pymongo, smtplib
 from bson.objectid import ObjectId
 from email.mime.text import MIMEText
 
-client = pymongo.MongoClient('mongodb://softdev:softdev@oceanic.mongohq.com:10015/app23219080')
+#client = pymongo.MongoClient('mongodb://softdev:softdev@oceanic.mongohq.com:10015/app23219080')
 #client = client.admin.authenticate('softdev','softdev')
+client = pymongo.connection.Connection('mongodb://<user>:<password>@oceanic.mongohq.com:10015/app23219080')
 db = client.SSSD
 
 bike_stations = db.newyork_bikes
