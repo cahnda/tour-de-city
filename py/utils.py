@@ -8,8 +8,8 @@ from email.mime.text import MIMEText
 
 #client = pymongo.MongoClient('mongodb://softdev:softdev@oceanic.mongohq.com:10015/app23219080')
 #client = client.admin.authenticate('softdev','softdev')
-connection = pymongo.MongoClient ("ds033307.mongolab.com", 33307)
-db = connection ["heroku_app23219080"]
+connection = pymongo.MongoClient ("dbh74.mongolab.com", 27747)
+db = connection ["heroku_app23236736"]
 db.authenticate("softdev", "softdev")
 #db = client.SSSD
 

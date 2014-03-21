@@ -1,7 +1,11 @@
 import pymongo
 
-client = pymongo.MongoClient()
-db = client.SSSD
+#client = pymongo.MongoClient()
+#db = client.SSSD
+connection = pymongo.MongoClient ("ds033307.mongolab.com", 33307)
+db = connection ["heroku_app23219080"]
+db.authenticate("softdev", "softdev")
+
 
 class Tour():
     def __init__(self, names, addresses, pictures, rate):

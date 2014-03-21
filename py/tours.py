@@ -2,8 +2,8 @@ import pymongo
 
 #client = pymongo.MongoClient()
 #db = client.SSSD
-connection = pymongo.MongoClient ("ds033307.mongolab.com", 33307)
-db = connection ["heroku_app23219080"]
+connection = pymongo.MongoClient ("dbh74.mongolab.com", 27747)
+db = connection ["heroku_app23236736"]
 db.authenticate("softdev", "softdev")
 
 
