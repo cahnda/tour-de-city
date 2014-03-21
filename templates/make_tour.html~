@@ -1,0 +1,107 @@
+= extends "layout.html"
+
+= block title
+	Choose Locations
+= endblock
+
+= block head
+	{{ helpers.asset_tag("make_tour.css") }}
+= endblock
+
+= block body
+
+	<script>
+		var numLocs = {{ locLen }};
+		var locs = {{ locs | tojson | safe }}
+	</script>
+
+	{{ helpers.asset_tag("make_tour.js") }}
+
+	<h2 style="padding-top: 10px;">Select where you would like to stop during your tour (up to 3)</h2>
+
+	= if locs
+
+			= for loc in locs
+
+				<div id="{{ loc[4] }}" class="dialog">
+					<div class="top-left">
+						<h1>{{ loc[0] }}</h1>
+						<h3>{{ loc[1] }}</h3>
+
+						<span class="rating">
+							<span>{{ loc[2] }}</span> / 5
+						</span>
+
+						<div class="contact-info">
+							<p>{{ loc[8] }}</p>
+							<p><a href="{{ loc[9] }}">{{ loc[9] }}</a></p>
+						</div>
+					</div>
+
+					<div class="top-right">
+						<img src="{{ loc[3] }}">
+					</div>
+
+					<div class="reviews">
+						<h1> Reviews </h1>
+
+						= for review in loc[10][:3]
+							<div class="review">
+
+								<p class="review-text">
+									<span>{{ review["rating"] }}</span> / 5
+									{{ review["text"] | truncate (50) }}
+
+								</p>
+								<p class="author">
+									{{ review["author_name"] }}
+								</p>
+							</div><br>
+						= endfor
+
+					</div>
+					
+
+					<div class="footer">
+					  
+						<button id="select">
+							select
+						</button><button id="cancel">
+							cancel
+						</button>
+					</div>
+				</div>
+
+			= endfor
+
+		<form class="locations-form" method="POST">
+			= for loc in locs
+
+			<div id="{{ loc[4] }}" class="location-container">
+					<div class="force-height"></div>
+					<div class="location-content">
+						<div class="circular"
+							style="background: url({{ loc[3]}}) no-repeat; background-size: 200px 200px;">
+							<!--<img src="{{ loc[3] }}">-->
+						</div>
+						<label class="location", id = {{loc[7]}}>
+							<h2>{{ loc[0] }}</h2>
+							<p>{{ loc[1] }}</p>
+							<p>Rating: {{ loc[2] }}</p>
+							<input type="checkbox" name="place" value="{{ loc[1] }}"
+								id = "{{loc[6]}}" class = "chkbox">
+						</label>
+					</div>
+				</div>
+			= endfor
+
+			<input type="submit" class="button" value="Submit" name="button" />
+		</form>
+
+	= else
+
+		<p style="padding: 5px 0 10px;"> No locations found.</p>
+
+	= endif
+
+= endblock
