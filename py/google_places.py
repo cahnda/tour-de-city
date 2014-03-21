@@ -11,7 +11,6 @@ def findPlaces (latitude, longitude, responses):
     #make request
     AUTH_KEY = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # LIST OF API KEYS:
-    print AUTH_KEY
 
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
@@ -43,7 +42,6 @@ def findPlaces (latitude, longitude, responses):
     response = urlopen(url)
     json_raw = response.read()
     json_data = json.loads(json_raw)
-    print json_data
 
     results = []
     placeNum = 0
@@ -52,7 +50,6 @@ def findPlaces (latitude, longitude, responses):
     yelpTime = 0
 
     if json_data['status'] == 'OK':
-        print "a"
         for place in json_data['results']:
             placeNum = placeNum + 1
             ans = []
@@ -119,7 +116,6 @@ def findPlaces (latitude, longitude, responses):
             response = urlopen(url)
             json_raw = response.read()
             json_data = json.loads(json_raw)
-            print json_data
 
             if json_data['status'] == 'OK':
                 result = json_data ['result']
@@ -179,12 +175,11 @@ def findPlaces (latitude, longitude, responses):
 
             response = requests.get(url)
             json_data = response.json()["response"]["venues"]
-            print json_data
+
             myCheckIns = myHere = 0
 
             if len(json_data) > 0:
                 myVenue =  json_data [0]
-                print "UNIQUE"
                 for venue in json_data:
                     if venue["name"] == placeName:
                         myVenue = venue
@@ -200,9 +195,7 @@ def findPlaces (latitude, longitude, responses):
             if ans[2] == 0:
                 ans[2] = "N/A"
 
-        #print "yelptime: %d" % yelpTime
-        #print "phototime: %d" % photoTime
         return results
 
 if __name__ == '__main__':
-    print findPlaces (40.720842536130434, -73.99730066093753, [])
+    print findPlaces (40.720842536130434, -73.99730066093753, [])[10]
