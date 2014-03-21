@@ -10,7 +10,7 @@ from email.mime.text import MIMEText
 #client = client.admin.authenticate('softdev','softdev')
 connection = pymongo.MongoClient ("ds033307.mongolab.com", 33307)
 db = connection ["heroku_app23219080"]
-#db.authenticate("softdev", "softdev")
+db.authenticate("softdev", "softdev")
 #db = client.SSSD
 
 bike_stations = db.newyork_bikes
