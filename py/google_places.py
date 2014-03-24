@@ -119,7 +119,9 @@ def findPlaces (latitude, longitude, responses):
             response = urlopen(url)
             json_raw = response.read()
             json_data = json.loads(json_raw)
-            print json_data
+                        
+           # print json_data
+          #  print "hello"
 
             if json_data['status'] == 'OK':
                 result = json_data ['result']
@@ -166,7 +168,6 @@ def findPlaces (latitude, longitude, responses):
             #except:
                 #ans.append ("No yelp information")
                 #ans.append ("No yelp information")
-            results.append (ans)
 
             #end = datetime.datetime.now()
             #yelpTime += (end - start).microseconds
@@ -174,7 +175,8 @@ def findPlaces (latitude, longitude, responses):
             lng = str (lng)
             CLIENT_ID = "PROKVIKPGQ3VZ1S2LMVI0QIKPEUXYRT14XLHTOHF2XS4RQYK"
             CLIENT_SECRET = "B1GJXBPPLOGTT53OK4RNC3UZ3XK0A11GUPA3EECEUVSFDJRJ"
-            DATEVERIFIED = "20140127"
+            DATEVERIFIED = "20140301"
+
             url = "https://api.foursquare.com/v2/venues/search?query=%s&ll=%s,%s&intent=match&client_id=%s&client_secret=%s&v=%s" % (placeName, lat, lng, CLIENT_ID, CLIENT_SECRET,DATEVERIFIED)
 
             response = requests.get(url)
@@ -195,6 +197,7 @@ def findPlaces (latitude, longitude, responses):
             ans.append (myCheckIns)
             ans.append (myHere)
 
+        results.append (ans)
         results = sorted(results, key=lambda ans: ans[2], reverse = True)
         for ans in results:
             if ans[2] == 0:
