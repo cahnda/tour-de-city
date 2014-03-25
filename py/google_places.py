@@ -9,8 +9,9 @@ import datetime
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
+    AUTH_KEY = 'AIzaSyChW4Dkv_Ua8CXq6zy1sRRha2tRW7FYzlM'
     # LIST OF API KEYS:
+    print AUTH_KEY
 
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
@@ -20,6 +21,7 @@ def findPlaces (latitude, longitude, responses):
     # stuyvesantspectator@gmail.com: 'AIzaSyBtT5oFCm_LRdN1IvkROlLeoFRGdyNcfpU'
     # dcahn@northeastjsa.org: 'AIzaSyAOz86LAqTs5HwgH6Ib2e3AIkNLaoVelSo'
     # spectatoredits@gmail.com: 'AIzaSyBJ2GpKgNV-tufVV__SC5x6vV3L74ZCTCg'
+    # futureofisraelconference@gmail.com:'AIzaSyChW4Dkv_Ua8CXq6zy1sRRha2tRW7FYzlM'
 
     LOCATION = str (latitude) + "," + str (longitude)
     RADIUS = 1000 #in meters, approx. .5 miles
@@ -42,6 +44,7 @@ def findPlaces (latitude, longitude, responses):
     response = urlopen(url)
     json_raw = response.read()
     json_data = json.loads(json_raw)
+    print json_data
 
     results = []
     placeNum = 0
@@ -50,6 +53,7 @@ def findPlaces (latitude, longitude, responses):
     yelpTime = 0
 
     if json_data['status'] == 'OK':
+        print "a"
         for place in json_data['results']:
             placeNum = placeNum + 1
             ans = []
@@ -110,12 +114,16 @@ def findPlaces (latitude, longitude, responses):
            # topic = json.loads(urlopen(url).read())
 
             #start = datetime.datetime.now()
-            url = "https://maps.googleapis.com/maps/api/place/details/json?reference=%s&sensor=true&extensions=review_summary&key=%s" %(ref, AUTH_KEY)
+            url = "https://maps.googleapis.com/maps/api/place/details/json?reference=%s&sensor=false&&key=%s" %(ref, AUTH_KEY)
             #print "Google API call: %s" % url
-
+            #print "now"
+          #  print url
             response = urlopen(url)
             json_raw = response.read()
             json_data = json.loads(json_raw)
+                        
+           # print json_data
+           # print "hello"
 
             if json_data['status'] == 'OK':
                 result = json_data ['result']
@@ -132,9 +140,9 @@ def findPlaces (latitude, longitude, responses):
                 try:
                     #reviews = result["reviews"]
                     #for review in reviews:
-                        #if len(review["text"]) > 100:
-                             #review["text"] = (review["text"][:100], review["text"][100:])
-					 ans.append (result ['reviews'])
+                       # if len(review["text"]) > 100:
+                       #     review["text"] = (review["text"][:100], review["text"][100:])
+                            ans.append (result ['reviews'])
                 except:
                     ans.append ("No reviews available")
 
@@ -162,7 +170,6 @@ def findPlaces (latitude, longitude, responses):
             #except:
                 #ans.append ("No yelp information")
                 #ans.append ("No yelp information")
-            results.append (ans)
 
             #end = datetime.datetime.now()
             #yelpTime += (end - start).microseconds
@@ -170,16 +177,18 @@ def findPlaces (latitude, longitude, responses):
             lng = str (lng)
             CLIENT_ID = "PROKVIKPGQ3VZ1S2LMVI0QIKPEUXYRT14XLHTOHF2XS4RQYK"
             CLIENT_SECRET = "B1GJXBPPLOGTT53OK4RNC3UZ3XK0A11GUPA3EECEUVSFDJRJ"
-            DATEVERIFIED = "20140127"
+            DATEVERIFIED = "20140301"
+
             url = "https://api.foursquare.com/v2/venues/search?query=%s&ll=%s,%s&intent=match&client_id=%s&client_secret=%s&v=%s" % (placeName, lat, lng, CLIENT_ID, CLIENT_SECRET,DATEVERIFIED)
 
             response = requests.get(url)
             json_data = response.json()["response"]["venues"]
-
+            print json_data
             myCheckIns = myHere = 0
 
             if len(json_data) > 0:
                 myVenue =  json_data [0]
+                print "UNIQUE"
                 for venue in json_data:
                     if venue["name"] == placeName:
                         myVenue = venue
@@ -189,13 +198,15 @@ def findPlaces (latitude, longitude, responses):
 
             ans.append (myCheckIns)
             ans.append (myHere)
-
+            results.append (ans)
         results = sorted(results, key=lambda ans: ans[2], reverse = True)
         for ans in results:
             if ans[2] == 0:
                 ans[2] = "N/A"
 
+        #print "yelptime: %d" % yelpTime
+        #print "phototime: %d" % photoTime
         return results
 
 if __name__ == '__main__':
-    print findPlaces (40.720842536130434, -73.99730066093753, [])[10]
+    print findPlaces (40.720842536130434, -73.99730066093753, [])

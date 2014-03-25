@@ -6,12 +6,8 @@ import pymongo, smtplib
 from bson.objectid import ObjectId
 from email.mime.text import MIMEText
 
-#client = pymongo.MongoClient('mongodb://softdev:softdev@oceanic.mongohq.com:10015/app23219080')
-#client = client.admin.authenticate('softdev','softdev')
-connection = pymongo.MongoClient ("dbh74.mongolab.com", 27747)
-db = connection ["heroku_app23236736"]
-db.authenticate("softdev", "softdev")
-#db = client.SSSD
+client = pymongo.MongoClient()
+db = client.SSSD
 
 bike_stations = db.newyork_bikes
 tourList = db.tourList
@@ -93,9 +89,9 @@ def get_mongo_tours():
 def get_mongo_tour(obj_id_string):
 	return tourList.find_one({"_id" : ObjectId(obj_id_string)})
 
-def add_mongo_tour(tour_dict, loc_images, user_id=None):
+def add_mongo_tour(tour_dict, loc_images, loc_names, user_id=None):
 	return str(tourList.insert({"tour_dict" : tour_dict,
-		"loc_images" : loc_images, "user_id" : user_id, "rating" : 0}))
+		"loc_images" : loc_images, "loc_names": loc_names, "user_id" : user_id, "rating" : 0}))
 
 def rate_tour(obj_id_string, rate_value):
 	curr_tour_rating = get_mongo_tour(obj_id_string)["rating"]

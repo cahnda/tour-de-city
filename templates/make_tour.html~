@@ -42,6 +42,11 @@
 						<img src="{{ loc[3] }}">
 					</div>
 
+					<div class="foursquare-info">
+						Total Checkins: <span>{{ loc[11] }}</span>
+						// People here now: <span>{{ loc[12] }}</span>
+					</div>
+
 					<div class="reviews">
 						<h1> Reviews </h1>
 
@@ -50,7 +55,7 @@
 
 								<p class="review-text">
 									<span>{{ review["rating"] }}</span> / 5
-									{{ review["text"] | truncate (50) }}
+									{{ review["text"] | truncate (110) }}
 
 								</p>
 								<p class="author">
@@ -63,11 +68,10 @@
 					
 
 					<div class="footer">
-					  
 						<button id="select">
-							select
+							Select
 						</button><button id="cancel">
-							cancel
+							Cancel
 						</button>
 					</div>
 				</div>
