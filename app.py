@@ -115,7 +115,7 @@ def makeTour():
                     if "google_user_dict" in session.keys():
                         user_id = session["google_user_dict"]["id"]
                     return redirect("/tour=%s" % utils.add_mongo_tour(result,
-                        session["place_pics"], user_id))
+                        session["place_pics"], session['place_names'], user_id))
 
     else:
         return redirect('/')

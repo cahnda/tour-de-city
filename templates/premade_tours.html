@@ -14,12 +14,19 @@
 		<div class="tour">
 			<div id="link">
 				<button>
-					<a href="/tour={{ tour['_id'] }}">link</a>
+					<a href="/tour={{ tour['_id'] }}">Please Press Here to Generate Premade Tour</a>
 				</button>
 			</div><br>
 				= for img_src in tour["loc_images"]
 					<div>
-						<img src="{{ img_src }}">
+					//	<img src="{{ img_src }}">]
+						<br> <br>
+					</div>
+				= endfor
+
+				= for name in tour["loc_names"]
+					<div>
+						<p> "{{ name }}" </p>
 					</div>
 				= endfor
 		</div>
