@@ -72,47 +72,50 @@ def makeTour():
             button = request.form['button']
             if button == "Submit":
                 unicodeobj = request.values.getlist("place")
-                print "THIS IS MY LENGTH"
-                print len (unicodeobj)
-                counter = 0
-                waypoints = []
-                place_names = []
-                for iterating_var in unicodeobj:
-                    iterating_var = iterating_var.encode ('ascii', 'ignore')
-                    waypoints.append(iterating_var)
-                    counter = counter + 1
-                session['place_names'] = [l[0] for l in locs if l[1] in unicodeobj]
-                session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]
-                waypoints = google_directions.get_waypoint_order(
+                if len (unicodeobj) == 0:
+                    return redirect('/makeTour')
+                else:
+                    print "THIS IS MY LENGTH"
+                    print len (unicodeobj)
+                    counter = 0
+                    waypoints = []
+                    place_names = []
+                    for iterating_var in unicodeobj:
+                        iterating_var = iterating_var.encode ('ascii', 'ignore')
+                        waypoints.append(iterating_var)
+                        counter = counter + 1
+                    session['place_names'] = [l[0] for l in locs if l[1] in unicodeobj]
+                    session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]
+                    waypoints = google_directions.get_waypoint_order(
                     latitude+","+longitude,waypoints,latitude+','+longitude)
-                session['waypoints'] = waypoints
-                session['page'] = 'showDirections'
+                    session['waypoints'] = waypoints
+                    session['page'] = 'showDirections'
 
-                waylist = session['waypoints']
-                endpoint = waylist.pop()
-                if transportation == "BIKING":
-                    waylist = utils.make_location_array(\
+                    waylist = session['waypoints']
+                    endpoint = waylist.pop()
+                    if transportation == "BIKING":
+                        waylist = utils.make_location_array(\
                         session['latitude'], session['longitude'],session['latitude'], \
                         session['longitude'], waylist)
-                else:
-                    waylist = session['waypoints']
-                waypoints = []
-                baseLoc = session['latitude'] + "," + session['longitude']
-                for waypoint in waylist:
-                    waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
-                result = dict()
-                result['start'] = baseLoc
-                result['end'] = endpoint
-                result['waypoints'] = json.dumps(waypoints)
-                result['transportation'] = session['transportation']
-                session["tour_dictionary"] = result
-                print result
+                    else:
+                        waylist = session['waypoints']
+                    waypoints = []
+                    baseLoc = session['latitude'] + "," + session['longitude']
+                    for waypoint in waylist:
+                        waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
+                    result = dict()
+                    result['start'] = baseLoc
+                    result['end'] = endpoint
+                    result['waypoints'] = json.dumps(waypoints)
+                    result['transportation'] = session['transportation']
+                    session["tour_dictionary"] = result
+                    print result
 
-                user_id = None
-                if "google_user_dict" in session.keys():
-                    user_id = session["google_user_dict"]["id"]
-                return redirect("/tour=%s" % utils.add_mongo_tour(result,
-                    session["place_pics"], user_id))
+                    user_id = None
+                    if "google_user_dict" in session.keys():
+                        user_id = session["google_user_dict"]["id"]
+                    return redirect("/tour=%s" % utils.add_mongo_tour(result,
+                        session["place_pics"], user_id))
 
     else:
         return redirect('/')
