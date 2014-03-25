@@ -1,16 +1,27 @@
 = extends 'layout.html'
+
 = block title
 	Home
 = endblock
+
 = block head
 	{{ helpers.asset_tag('maps.locationpicker.js') }}
 	{{ helpers.asset_tag("index.css")}}
 	{{ helpers.asset_tag("index.js")}}
 = endblock
+
 = block body
+
+	<div id="helper_message">
+		<a href="/about#about_2">
+			Need help? Click me!
+		</a>
+	</div>
+
 	<a id="start-button" class="button">
 		Start
 	</a>
+
 	<form action="/" id="venue-form" method="POST">
 	<div id="row1" class="row">
 		<div id="button-font1">
@@ -88,4 +99,5 @@
 	</div>
 	</form>
 </div>
+
 = endblock

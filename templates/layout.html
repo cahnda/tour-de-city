@@ -7,42 +7,66 @@
 			= block title
 			= endblock
 		</title>
-		{{ helpers.asset_tag('app.css') }}
+
 		{{ helpers.asset_tag('jquery.js') }}
 		{{ helpers.asset_tag('spin.min.js') }}
+
+		{{ helpers.asset_tag('app.css') }}
+		{{ helpers.asset_tag('app.js') }}
 
 		= block head
 		= endblock
 	</head>
 	<body>
 
-			= if session["google_user_dict"]
+		<a href="https://github.com/cahnda/proj3-6-VSSD">
+			<img style="position: absolute; top: 0; left: 0; border: 0;"
+			src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc600
+			81495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726
+			962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67"
+			alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/
+			github/ribbons/forkme_left_red_aa0000.png"></a>
 
-					<div id="gUserPanel">
-						<img src={{ session["google_user_dict"]["image"]["url"] }}>
-						<div id="profile">
-							<a href="/profile">profile</a>
-						</div>
-						<div id="logout">
-							<a href="/logout"><img src="static/images/logout.png"></a>
-						</div>
-					</div>
+		= if session["google_user_dict"]
+
+			<div id="gUserPanel">
+				<img id="profile_image"
+					src={{ session["google_user_dict"]["image"]["url"] }}>
+
+				<div id="menu_button">
+					<span>menu</span>
 				</div>
 
-			= else
+				<div id="profile_panel">
+					<p>
+						// {{ session["google_user_dict"]["displayName"] }}
+					</p>
 
-				<div id="gSignInContainer">
-					<div id="gSignInWrapper">
-						<div id="customBtn" class="customGPlusSignIn">
-							<span class="icon">
-								<img src="static/images/socMedIcos/googlePlusTransparent.png">
-							</span>
-							<span class="buttonText">Sign in with Google</span>
-						</div>
+					<ul>
+						<li>
+							<a href="/profile">@profile</a>
+						</li><br>
+						<li>
+							<a href="/logout">@logout</a>
+						</li><br>
+					</ul>
+				</div>
+			</div>
+
+		= else
+
+			<div id="gSignInContainer">
+				<div id="gSignInWrapper">
+					<div id="customBtn" class="customGPlusSignIn">
+						<span class="icon">
+							<img src="static/images/socMedIcos/googlePlusTransparent.png">
+						</span>
+						<span class="buttonText">Sign in with Google</span>
 					</div>
 				</div>
+			</div>
 
-			= endif
+		= endif
 
 		<div id="socialMediaIcons">
 			<script src="/static/js/socialmedia.js"></script>
@@ -76,15 +100,15 @@
 		<footer>
 			<div>
 				<a href="/">
-					<img src="/static/images/footerIcos/home.png">
+					<img src="/static/images/footerIcos/home.png" title="home page">
 				</a>
 
 				<a href="/contact">
-					<img src="/static/images/footerIcos/contact.png">
+					<img src="/static/images/footerIcos/contact.png" title="contact us">
 				</a>
 
 				<a href="/about">
-					<img src="/static/images/footerIcos/about.png">
+					<img src="/static/images/footerIcos/about.png" title="about us">
 				</a><br>
 			</div>
 		</footer>
