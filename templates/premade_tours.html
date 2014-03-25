@@ -6,6 +6,8 @@
 
 = block head
 	{{ helpers.asset_tag("premade_tours.css") }}
+	{{ helpers.asset_tag("premade_tours.js") }}
+
 
 = endblock
 
@@ -20,7 +22,7 @@
 			</div><br>
 				= for img_src in tour["loc_images"]
 					<div>
-						<img src="{{ img_src }}" height="500"  width="500">
+						<img src="{{ img_src }}">
 						<br> <br>
 					</div>
 				= endfor
