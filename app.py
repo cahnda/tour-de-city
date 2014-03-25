@@ -176,12 +176,14 @@ def premadetours():
 
 @app.route("/contact", methods = ["GET", "POST"])
 def contact():
-	if request.method == "POST":
+	if request.method == "GET":
+		return render_template("contact.html")
+	else:
 		utils.send_email(
 			request.form["email_address"],
 			request.form["subject"],
 			request.form["body"])
-	return render_template("contact.html")
+		return redirect(url_for("index"))
 
 @app.route("/about")
 def about():
