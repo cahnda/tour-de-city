@@ -58,6 +58,7 @@ div#about_content {
 
 div#about_menu {
   background-color: #3cb4f8;
+  font-size: 1.2em;
   margin-left: 40px;
   position: fixed; }
   div#about_menu ul {

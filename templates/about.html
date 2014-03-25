@@ -6,38 +6,22 @@
 
 = block head
 	{{ helpers.asset_tag("about.css") }}
-	<script>
-		$(function() {
-			$('a[href*=#]:not([href=#])').click(function() {
-				$(this).stop();
-				if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-					var target = $(this.hash);
-					target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-					if (target.length) {
-						$('html,body').stop().animate({
-							scrollTop: target.offset().top
-						}, 500);
-						return false;
-					}
-				}
-			});
-		});
-	</script>
+	{{ helpers.asset_tag("smooth-scroll.js") }}
 = endblock
 
 = block body
 	<div id="about_menu">
 		<ul>
 			<li>
-				<a href="#about_1">What's tour-de-city?</a>
+				<a data-scroll href="#about_1">What's tour-de-city?</a>
 			</li>
 
 			<li>
-				<a href="#about_2">How do I use it?</a>
+				<a data-scroll href="#about_2">How do I use it?</a>
 			</li>
 
 			<li>
-				<a href="#about_3">About us</a>
+				<a data-scroll href="#about_3">About us</a>
 			</li>
 		</ul>
 	</div>
@@ -52,9 +36,6 @@
 			shizznit. Pellentesque eget izzle. Sed you son of a bizzle. Fusce bling
 			bling dolor get down get down fizzle own yo' crackalackin. Maurizzle
 			pellentesque mammasay mammasa mamma oo sa izzle turpizzle. Boom
-			shackalack izzle tortizzle. Pellentesque eleifend fo shizzle phat. In hac
-			habitasse platea izzle. Doggy dapibizzle. Curabitur tellizzle fo shizzle
-			my nizzle, pretium sheezy, mattizzle ac, things , nunc. Crunk
 			suscipizzle. Integer semper boom shackalack you son of a bizzle shizznit.
 		</p>
 
@@ -62,39 +43,34 @@
 		<p>
 			Dope mofo turpis ut leo shiz fizzle. Vivamizzle my shizz we gonna chung
 			mofo fo shizzle mah nizzle fo rizzle, mah home g-dizzle. Quisque
-			malesuada ornare magna. Morbi doggy, nisl tellivizzle bibendum egestas,
-			magna sizzle doggy ligula, auctor sheezy gangsta quizzle augue.
-			Maecenizzle boofron elizzle its fo rizzle amizzle crackalackin adipiscing
-			sagittis. Vivamizzle cool pede that's the shizzle sizzle. Fo shizzle
-			rhoncizzle yippiyo leo.  Check it out black dolizzle sizzle crackalackin,
-			consectetizzle shit elit.  Phasellizzle nisi get down get down, posuere
-			gizzle amizzle, facilisis sizzle, gizzle mattizzle, libero. Curabitur yo
-			faucibizzle brizzle. Ut non break it down. Nunc sed shizzle my nizzle
-			crocodizzle a dizzle accumsizzle its fo rizzle. Quisque ma nizzle metus
-			laorizzle that's the shizzle. Aenean own yo', go to hizzle quizzle
-			varizzle lacinia, shit dizzle felis, shiznit ullamcorpizzle ghetto nisl
-			yippiyo nisi. Phat leo sure, aliquizzle away amizzle, ornare vitae,
-			pulvinizzle pulvinizzle, check out this.
+			pellentesque mammasay mammasa mamma oo sa izzle turpizzle. Boom
+			shackalack izzle tortizzle. Pellentesque eleifend fo shizzle phat. In hac
+			habitasse platea izzle. Doggy dapibizzle. Curabitur tellizzle fo shizzle
+			my nizzle, pretium sheezy, mattizzle ac, things , nunc. Crunk
+			suscipizzle. Integer semper boom shackalack you son of a bizzle shizznit.
 		</p>
 
 		<h2 id="about_3">// About us</h2><br>
 		<p>
-			In sagittizzle crazy non nisi. Sheezy rhoncizzle, fo shizzle my nizzle
-			non sizzle facilisis, break yo neck, yall nulla aliquizzle sizzle, nizzle
-			auctor fo shizzle felizzle stuff est. Suspendisse volutpizzle sizzle its
-			fo rizzle. Sed egestizzle lectus izzle libero. Prizzle sizzle blandit
-			sapien.  Fo pimpin', dizzle shit crackalackin accumsan tincidunt, leo
-			sizzle ultrices sem, doggy vestibulizzle i saw beyonces tizzles and my
-			pizzle went crizzle nisi tellivizzle mah nizzle phat. Maecenizzle crunk
-			tortizzle vizzle enim. Fo lobortizzle. lectizzle lacus, dawg nec, aliquet
-			sit amizzle, pulvinar egestas, owned. Vivamizzle convallis. Vestibulum
-			ante sheezy primizzle izzle ma nizzle orci its fo rizzle et ultrices
-			posuere cubilia Curae; Shiz funky fresh elit eu dizzle bibendum
-			condimentum. Fusce est tortizzle, vulputate vizzle, rizzle vel, commodo
-			doggy, nisi. Etizzle ghetto, tortor daahng dawg vehicula break yo neck,
-			yall, lorizzle justo ultrices shit, izzle dope mi fo shizzle my nizzle
-			vitae erizzle.
+			bling dolor get down get down fizzle own yo' crackalackin. Maurizzle
+			pellentesque mammasay mammasa mamma oo sa izzle turpizzle. Boom
+			shackalack izzle tortizzle. Pellentesque eleifend fo shizzle phat. In hac
+			habitasse platea izzle. Doggy dapibizzle. Curabitur tellizzle fo shizzle
+			my nizzle, pretium sheezy, mattizzle ac, things , nunc. Crunk
+			suscipizzle. Integer semper boom shackalack you son of a bizzle shizznit.
+			Lorem ipsizzle boofron brizzle amizzle, consectetuer adipiscing elit.
+			Nullam mofo velizzle, bow wow wow volutpat, suscipit quis, rizzle vel,
+			shizznit. Pellentesque eget izzle. Sed you son of a bizzle. Fusce bling
+			bling dolor get down get down fizzle own yo' crackalackin. Maurizzle
+			pellentesque mammasay mammasa mamma oo sa izzle turpizzle. Boom
+			shackalack izzle tortizzle. Pellentesque eleifend fo shizzle phat. In hac
+			habitasse platea izzle. Doggy dapibizzle. Curabitur tellizzle fo shizzle
+			my nizzle, pretium sheezy, mattizzle ac, things , nunc. Crunk
+			suscipizzle. Integer semper boom shackalack you son of a bizzle shizznit.
 		</p>
 
 	</div>
+	<script>
+		smoothScroll.init();
+	</script>
 = endblock

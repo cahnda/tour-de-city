@@ -47,9 +47,11 @@
     width: 80px; }
 
 .tour {
-  text-align: left;
-  float: left;
-  width: 50%; }
+  background-color: #333333;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px; }
   .tour img {
     height: 100px;
     margin-right: -4px;

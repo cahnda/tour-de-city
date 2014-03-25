@@ -7,9 +7,12 @@
 			= block title
 			= endblock
 		</title>
-		{{ helpers.asset_tag('app.css') }}
+
 		{{ helpers.asset_tag('jquery.js') }}
 		{{ helpers.asset_tag('spin.min.js') }}
+
+		{{ helpers.asset_tag('app.css') }}
+		{{ helpers.asset_tag('app.js') }}
 
 		= block head
 		= endblock
@@ -18,14 +21,27 @@
 
 			= if session["google_user_dict"]
 
-					<div id="gUserPanel">
-						<img src={{ session["google_user_dict"]["image"]["url"] }}>
-						<div id="profile">
-							<a href="/profile">profile</a>
-						</div>
-						<div id="logout">
-							<a href="/logout"><img src="static/images/logout.png"></a>
-						</div>
+				<div id="gUserPanel">
+					<img id="profile_image"
+						src={{ session["google_user_dict"]["image"]["url"] }}>
+
+					<div id="menu_button">
+						<span>menu</span>
+					</div>
+
+					<div id="profile_panel">
+						<p>
+							// {{ session["google_user_dict"]["displayName"] }}
+						</p>
+
+						<ul>
+							<li>
+								<a href="/profile">@profile</a>
+							</li><br>
+							<li>
+								<a href="/logout">@logout</a>
+							</li><br>
+						</ul>
 					</div>
 				</div>
 
@@ -76,15 +92,15 @@
 		<footer>
 			<div>
 				<a href="/">
-					<img src="/static/images/footerIcos/home.png">
+					<img src="/static/images/footerIcos/home.png" title="home page">
 				</a>
 
 				<a href="/contact">
-					<img src="/static/images/footerIcos/contact.png">
+					<img src="/static/images/footerIcos/contact.png" title="contact us">
 				</a>
 
 				<a href="/about">
-					<img src="/static/images/footerIcos/about.png">
+					<img src="/static/images/footerIcos/about.png" title="about us">
 				</a><br>
 			</div>
 		</footer>

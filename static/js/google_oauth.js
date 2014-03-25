@@ -50,14 +50,27 @@ function signinCallback(authResult) {
 
 				var userImage = document.createElement("img");
 				userImage.src = resp["image"]["url"];
-				googleUserPanel.appendChild(userImage);
 
-				googleUserPanel.innerHTML += "\
-					<div id='profile'>\
-						<a href='/profile'>profile</a>\
+				googleUserPanel.innerHTML += ("\
+					<img id='profile_image' src='" + resp["image"]["url"] +
+					"'><div id='menu_button'>\
+						<span>menu</span>\
 					</div>\
-					<div id='logout'>\
-						<a href='/logout'><img src='static/images/logout.png'></a>"
+					\
+					<div id='profile_panel'>\
+						<p>\
+							\/\/" + resp["displayName"] + "\
+						</p>\
+						\
+						<ul>\
+							<li>\
+								<a href='/profile'>@profile</a>\
+							</li><br>\
+							<li>\
+								<a href='/logout'>@logout</a>\
+							</li><br>\
+						</ul>\
+					</div>")
 
 				googleUserPanel.style.top = "-50px";
 				$("body").prepend(googleUserPanel);
@@ -67,6 +80,15 @@ function signinCallback(authResult) {
 				$("#gSignInContainer").animate({"top" : "-50px"}, 270, function(){
 					$("#gUserPanel").animate({"top" : "0px"}, 270);
 				});
+
+				$("#gUserPanel #profile_image").click(function(){
+					$("#gUserPanel").toggleClass("profile_clicked");
+					$("#profile_panel").removeClass("visible");
+				});
+
+				$("#menu_button").click(function(){
+					$("#profile_panel").toggleClass("visible");
+				})
 
 			});
 		});
