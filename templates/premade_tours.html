@@ -6,29 +6,35 @@
 
 = block head
 	{{ helpers.asset_tag("premade_tours.css") }}
+
 = endblock
 
 = block body
-	<h1>//highest rated tours</h1>
+	<h1>Highest Rated Tours</h1>
 	= for tour in highest_ranked_tours
 		<div class="tour">
 			<div id="link">
 				<button>
-					<a href="/tour={{ tour['_id'] }}">Please Press Here to Generate Premade Tour</a>
+					<a href="/tour={{ tour['_id'] }}">Please Press Here to Generate This Premade Tour</a>
 				</button>
 			</div><br>
 				= for img_src in tour["loc_images"]
 					<div>
-					//	<img src="{{ img_src }}">]
+						<img src="{{ img_src }}" height="500"  width="500">
 						<br> <br>
 					</div>
 				= endfor
-
+				<br><br>
+				<b> Stops: 	</b> 
+				<br>
+				<ul>
+				  <div>
 				= for name in tour["loc_names"]
-					<div>
-						<p> "{{ name }}" </p>
-					</div>
+				<li> "{{ name }}" </li>
 				= endfor
+				</ul>
+				</div>
+
 		</div>
 	= endfor
 = endblock
