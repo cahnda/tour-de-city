@@ -1,0 +1,57 @@
+@import mixins
+@import variables
+
+div#about_content
+	background-color: $gray
+	margin: -1px auto -1px auto
+	padding: 20px 10px 20px 10px
+	width: 50%
+
+	h1
+		font-size: 2.8em
+
+	h2
+		font-weight: bold
+		letter-spacing: 1px
+		margin-left: 10px
+		margin-top: 20px
+		text-align: left
+
+	h2#about_1
+		color: $lightBlue
+	
+	h2#about_2
+		color: $green
+	
+	h2#about_3
+		color: $googleRed
+
+	p
+		font-size: 1.06em
+		letter-spacing: 0.05px
+	
+
+div#about_menu
+	background-color: $lightBlue
+	// float: left
+	margin-left: 40px
+	position: fixed
+
+	ul
+		cursor: pointer
+		list-style-type: none
+
+		li
+			@extend .t3
+
+			padding: 7px
+		
+			&:hover
+				background-color: $darkBlue
+
+			a
+				color: white
+
+				&:visited
+					color: white
+					font-size: 1.1em

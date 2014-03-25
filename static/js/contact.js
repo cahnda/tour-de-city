@@ -14,12 +14,12 @@ $(document).ready(function(){
 		var emailConButton = $("#email-contact")
 
 		if(emailConButton.hasClass("clicked")){
-			$("#phone-info").hide();
-			$("#email-info").fadeIn(fadeTime);
-		}
-		else {
 			$("#email-info").hide();
 			$("#phone-info").fadeIn(fadeTime);
+		}
+		else {
+			$("#phone-info").hide();
+			$("#email-info").fadeIn(fadeTime);
 		}
 
 		$("button").toggleClass("clicked")
