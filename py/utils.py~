@@ -89,9 +89,9 @@ def get_mongo_tours():
 def get_mongo_tour(obj_id_string):
 	return tourList.find_one({"_id" : ObjectId(obj_id_string)})
 
-def add_mongo_tour(tour_dict, loc_images, user_id=None):
+def add_mongo_tour(tour_dict, loc_images, loc_names, user_id=None):
 	return str(tourList.insert({"tour_dict" : tour_dict,
-		"loc_images" : loc_images, "user_id" : user_id, "rating" : 0}))
+		"loc_images" : loc_images, "loc_names": loc_names, "user_id" : user_id, "rating" : 0}))
 
 def rate_tour(obj_id_string, rate_value):
 	curr_tour_rating = get_mongo_tour(obj_id_string)["rating"]
