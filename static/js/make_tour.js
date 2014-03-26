@@ -12,6 +12,7 @@ $(document).ready(function(){
 			$(".location-container").animate({"opacity" : "0.3"}, 300);
 			$(this).addClass("active");
 			dialogAppear(dialogSelector);
+
 		});
 
 		$(dialogSelector + " .footer #cancel").click(function(){
@@ -24,8 +25,8 @@ $(document).ready(function(){
 		$(dialogSelector + " .footer #select").click(function(){
 			if (totalChecked < 3) {
 				dialogDisappear(dialogSelector)
+		    	        totalChecked = totalChecked + 1;
 				$(locationSelector).addClass("active");
-				totalChecked = totalChecked + 1;
 			}
 			else
 				alert ("You have already selected 3 locations.");
