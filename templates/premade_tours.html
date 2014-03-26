@@ -39,8 +39,60 @@
 			</div>
 
 		</div>
+		
+		`= for loc in tour["loc"]
+		<div id="{{ loc[4] }}" class="dialog">
+		  <div class="top-left">
+		    <h1>{{ loc[0] }}</h1>
+		    <h3>{{ loc[1] }}</h3>
 
+		    <span class="rating">
+		      <span>{{ loc[2] }}</span> / 5
+		    </span>
 
-	= endfor
+		    <div class="contact-info">
+		      <p>{{ loc[8] }}</p>
+		      <p><a href="{{ loc[9] }}">{{ loc[9] }}</a></p>
+		    </div>
+		  </div>
 
-= endblock
+		  <div class="top-right">
+		    <img src="{{ loc[3] }}">
+		  </div>
+
+		  <div class="foursquare-info">
+		    Total Checkins: <span>{{ loc[11] }}</span>
+		    // People here now: <span>{{ loc[12] }}</span>
+		  </div>
+
+		  <div class="reviews">
+		    <h1> Reviews </h1>
+
+		    = for review in loc[10][:3]
+		    <div class="review">
+
+		      <p class="review-text">
+			<span>{{ review["rating"] }}</span> / 5
+			{{ review["text"] | truncate (110) }}
+
+		      </p>
+		      <p class="author">
+			{{ review["author_name"] }}
+		      </p>
+		    </div><br>
+		    = endfor
+
+		  </div>
+
+		  <div class="footer">
+		    <button id="select">
+		      Select
+		    </button><button id="cancel">
+		      Cancel
+		    </button>
+		  </div>
+		</div>
+
+		= endfor
+
+		= endblock
