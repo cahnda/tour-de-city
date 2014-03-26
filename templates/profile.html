@@ -16,18 +16,22 @@
 			//recent tours
 		</div>
 	</div>
+
 	= for tour in user_tours
 		<div class="tour">
 			<div id="link">
 				<button>
-					<a href="/tour={{ tour['_id'] }}">View Tour</a>
+					<a href="/tour={{ tour['_id'] }}">See Tour</a>
 				</button>
 			</div><br>
-				= for img_src in tour["loc_images"]
+
+				= for img_src in tour["loc_images"][:8]
 					<div>
 						<img src="{{ img_src }}">
 					</div>
 				= endfor
+
 		</div>
 	= endfor
+
 = endblock

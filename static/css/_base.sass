@@ -42,7 +42,12 @@ body
 			cursor: pointer
 
 	#gUserPanel
+		background-color: $gray
+		border-left: 1px solid #242424
+		border-bottom: 1px solid #242424
+		height: 50px
 		right: -150px
+		width: 200px
 
 		*
 			@extend .t3
@@ -52,34 +57,59 @@ body
 			color: white
 			float: left
 
-		#profile
-			background-color: $lightBlue
-			overflow: hidden
-			width: 100px
+		img
+			cursor: pointer
 
-			a
+		#menu_button
+			background-color: $googleRed
+			cursor: pointer
+			overflow: hidden
+			width: 150px
+
+			span
+				border: none
+				height: 100%
 				margin-top: 5px
+				margin-left: 50px
+
+			&:hover
+				background-color: $red
+
+		#profile_panel
+			@include vendor(border-radius, 4px)
+
+			background-color: $gray
+			height: 170px
+			overflow: hidden
+			position: absolute
+			right: 0px
+			top: -200px
+			width: 200px
+			z-index: -4
+
+			p
+				color: $green
+				font-size: 1.1em
+				font-style: italic
+				margin-left: 15px
+				margin-top: 5px
+
+			ul
+				cursor: pointer
 				margin-left: 15px
 
-			&:hover
-				background-color: $darkBlue
+				li
+					display: block
 
-		#logout
-			background-color: $googleRed
-			width: 50px
+					a:hover
+						color: $lightBlue
+						font-weight: bold
 
-			a
+		#profile_panel.visible
+			top: 50px
 
-				img
-					margin: 7px
-					width: 36px
-					height: 36px
-
-			&:hover
-				background-color: $darkRed
-
-		&:hover
-			right: 0px
+	#gUserPanel.profile_clicked
+		right: 0px
 
 h1
 	font-weight: normal

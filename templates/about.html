@@ -4,28 +4,72 @@
 	About
 = endblock
 
+= block head
+	{{ helpers.asset_tag("about.css") }}
+	{{ helpers.asset_tag("smooth-scroll.js") }}
+= endblock
+
 = block body
-	<h1> About Us </h1>
-<br>
-<br>
+	<div id="about_menu">
+		<ul>
+			<li>
+				<a data-scroll href="#about_1">What's tour-de-city?</a>
+			</li>
 
-<h3> The App </h3>
-<p align= "left", font color="black"> With over 50 million visitors annually, New York City is the #1 tourism destination in the US and one of the top 5 in the world. Tourists can travel independently, a difficult process, or pay expensive rates for tour guides/groups. These options are detrimental to the environment because they either involve private vehicles or gas-guzzling buses.</p>
-<br>
-<p align = "left">
-<b> Bike & Seek </b> provides tourists with easily accessible bikes from local bike sharing locations, prepackaged and coordinated tours of New York’s most popular attractions and hidden gems. Our mission is to reduce the environmental footprint of the tourism industry, increase tourism revenue for local tourist attractions, and create a fun, memorable, free experience for tourists.
-<br>
-<br>
-<p align = "left">
-Our service allows you to create custom tours,  select from highly rated tours created by others, or chose from our own premade tours. Your tours can be bike tours (our specialty!), walking tours, or tours which use public transportation.
-</p>
-<br>
-<br>
+			<li>
+				<a data-scroll href="#about_2">How do I use it?</a>
+			</li>
 
-</p>
-<h3> Free Independent Travers </h3>
-<p align = "left"> The tourism industry is witnessing a rise in the popularity of the “free independent traveler” (FIT). As tourists move away from traditional travel packages and tour groups. We're here to provide FITs  with helpful assistance and unlimited freedom. </p> 
-<img src="http://www.blogcdn.com/www.gadling.com/media/2010/05/travel-agent-vs-pc.png" alt="Image Unavailable">
-<img src="http://www.blogcdn.com/www.gadling.com/media/2010/05/fig4-large.png" alt="Image Unavailable">
+			<li>
+				<a data-scroll href="#about_3">About us</a>
+			</li>
+		</ul>
+	</div>
+	<div id="about_content">
+		<h1><i>@about</i></h1>
+		<br><hr><br>
 
+		<h2 id="about_1">// What's tour-de-city?</h2><br>
+		<p>
+			Lorem ipsizzle boofron brizzle amizzle, consectetuer adipiscing elit.
+			Nullam mofo velizzle, bow wow wow volutpat, suscipit quis, rizzle vel,
+			shizznit. Pellentesque eget izzle. Sed you son of a bizzle. Fusce bling
+			bling dolor get down get down fizzle own yo' crackalackin. Maurizzle
+			pellentesque mammasay mammasa mamma oo sa izzle turpizzle. Boom
+			suscipizzle. Integer semper boom shackalack you son of a bizzle shizznit.
+		</p>
+
+		<h2 id="about_2">// How do I use it?</h2><br>
+		<p>
+			Dope mofo turpis ut leo shiz fizzle. Vivamizzle my shizz we gonna chung
+			mofo fo shizzle mah nizzle fo rizzle, mah home g-dizzle. Quisque
+			pellentesque mammasay mammasa mamma oo sa izzle turpizzle. Boom
+			shackalack izzle tortizzle. Pellentesque eleifend fo shizzle phat. In hac
+			habitasse platea izzle. Doggy dapibizzle. Curabitur tellizzle fo shizzle
+			my nizzle, pretium sheezy, mattizzle ac, things , nunc. Crunk
+			suscipizzle. Integer semper boom shackalack you son of a bizzle shizznit.
+		</p>
+
+		<h2 id="about_3">// About us</h2><br>
+		<p>
+			bling dolor get down get down fizzle own yo' crackalackin. Maurizzle
+			pellentesque mammasay mammasa mamma oo sa izzle turpizzle. Boom
+			shackalack izzle tortizzle. Pellentesque eleifend fo shizzle phat. In hac
+			habitasse platea izzle. Doggy dapibizzle. Curabitur tellizzle fo shizzle
+			my nizzle, pretium sheezy, mattizzle ac, things , nunc. Crunk
+			suscipizzle. Integer semper boom shackalack you son of a bizzle shizznit.
+			Lorem ipsizzle boofron brizzle amizzle, consectetuer adipiscing elit.
+			Nullam mofo velizzle, bow wow wow volutpat, suscipit quis, rizzle vel,
+			shizznit. Pellentesque eget izzle. Sed you son of a bizzle. Fusce bling
+			bling dolor get down get down fizzle own yo' crackalackin. Maurizzle
+			pellentesque mammasay mammasa mamma oo sa izzle turpizzle. Boom
+			shackalack izzle tortizzle. Pellentesque eleifend fo shizzle phat. In hac
+			habitasse platea izzle. Doggy dapibizzle. Curabitur tellizzle fo shizzle
+			my nizzle, pretium sheezy, mattizzle ac, things , nunc. Crunk
+			suscipizzle. Integer semper boom shackalack you son of a bizzle shizznit.
+		</p>
+	</div>
+	<script>
+		smoothScroll.init();
+	</script>
 = endblock

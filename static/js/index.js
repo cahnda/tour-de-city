@@ -63,4 +63,8 @@ $(document).ready(function(){
 		$(this).parent().toggleClass('active', this.checked);
 	});
 
+	setTimeout(function(){
+		$("#helper_message").addClass("visible");
+	}, 800);
+	$("#helper_message").delay(5e3).fadeOut(600);
 })
