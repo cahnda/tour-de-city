@@ -86,7 +86,7 @@ def makeTour():
                         counter = counter + 1
                     session['place_names'] = [l[0] for l in locs if l[1] in unicodeobj]
                     session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]
-                    session['loc'] = l for l in locs if l[1] in waypoints]
+                    session['loc'] = [l for l in locs if l[1] in waypoints]
                     waypoints = google_directions.get_waypoint_order(
                     latitude+","+longitude,waypoints,latitude+','+longitude)
                     session['waypoints'] = waypoints
