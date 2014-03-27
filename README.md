@@ -1,4 +1,4 @@
-#proj3-6-VSSD: CUSTOM BIKE TOURS IN NYC
+#tour-de-city: CUSTOM BIKE TOURS IN NYC
 
 ## Group Members
 Visit our trello [board](https://trello.com/b/aiLwI3nm/vssd) (*note: you must have been invited by a current member to view its contents*)!
@@ -26,7 +26,7 @@ In addition to user-generated tours, we will allow users to select from pre-made
 
 ##Hosted Version
 
-Running at [softdev-server.stuycs.org:6007](http://softdev-server.stuycs.org:6007).
+Running at [tour-de-city.com](http://tour-de-city.com/).
 
 ##Installing
 
@@ -42,7 +42,7 @@ python app.py
 
 
 When running locally for the first time, visit
-[/updatedata](http://localhost:6007/updatedata) to pull necessary information into your mongo server.
+[/updatedata](http://localhost:5000/updatedata) to pull necessary information into your mongo server.
 
 ## Dependencies
 

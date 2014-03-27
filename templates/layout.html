@@ -3,6 +3,12 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<meta name="description" content="An application for Citi Bike based tour
+		generation in New York City." />
+		<meta name="keywords" content="new york city tour citi bike" />
+		<link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
 		<title>
 			= block title
 			= endblock
@@ -114,6 +120,7 @@
 		</footer>
 
 		{{ helpers.asset_tag("google_oauth.js")}}
+		{{ helpers.asset_tag("google_analytics.js") }}
 
 	</body>
 </html>
