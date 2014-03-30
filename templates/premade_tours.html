@@ -5,10 +5,7 @@
 = endblock
 
 = block head
-	{{ helpers.asset_tag("profile.css") }}
-	{{ helpers.asset_tag("premade_tours.js") }}
-
-
+	{{ helpers.asset_tag("premade_tours.css") }}
 = endblock
 
 = block body
@@ -19,30 +16,31 @@
 		<div class="tour">
 			<div id="link">
 				<button>
-					<a href="/tour={{ tour['_id'] }}">See Tour</a>
+					<a href="/tour={{ tour['_id'] }}">Click here to view this tour!</a>
 				</button>
 			</div><br>
 
-				= for img_src in tour["loc_images"]
-					<div>
-						<img src="{{ img_src }}">
-						<br> <br>
-					</div>
-				= endfor
-
-				<br><br>
-				<b> Stops: 	</b>
-				<br>
-
-				<ul>
-					= for name in tour["loc_names"]
-						<li> "{{ name }}" </li>
-					= endfor
-				</ul>
-
+			= for img_src in tour["loc_images"]
+				<div>
+				  <img src="{{ img_src }}">
+				  <br>
 				</div>
+			= endfor
+
+			<div id="metadata">
+				<b> Stops: 	</b>
+
+				= for name in tour["loc_names"]
+					<p>
+						{{ name }}
+					</p>
+				= endfor
+			</div>
 
 		</div>
-	= endfor
+		
+	
 
-= endblock
+		= endfor
+
+		= endblock

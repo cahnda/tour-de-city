@@ -9,7 +9,7 @@ import datetime
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyChW4Dkv_Ua8CXq6zy1sRRha2tRW7FYzlM'
+    AUTH_KEY = 'AIzaSyAu_MPXCDjBxDSfoqP0HG7W3e33keYx0Ww'
     # LIST OF API KEYS:
     print AUTH_KEY
 

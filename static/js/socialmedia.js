@@ -1,4 +1,4 @@
-var page_url = "http://softdev-server.stuycs.org:6007";
+var page_url = "http://tour-de-city.com";
 
 function facebookClick(){
 	var url = "http://www.facebook.com/sharer.php?" +
