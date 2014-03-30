@@ -64,7 +64,7 @@ def makeTour():
         locs = google_places.findPlaces(latitude, longitude, res_types)
         try:
             locLen = len (locs)
-        except: 
+        except:
             pass
         if request.method =="GET":
             return render_template("make_tour.html",locs=locs, locLen=locLen)
@@ -86,6 +86,7 @@ def makeTour():
                         counter = counter + 1
                     session['place_names'] = [l[0] for l in locs if l[1] in unicodeobj]
                     session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]
+                    session['loc'] = [l for l in locs if l[1] in waypoints]
                     waypoints = google_directions.get_waypoint_order(
                     latitude+","+longitude,waypoints,latitude+','+longitude)
                     session['waypoints'] = waypoints
@@ -115,7 +116,7 @@ def makeTour():
                     if "google_user_dict" in session.keys():
                         user_id = session["google_user_dict"]["id"]
                     return redirect("/tour=%s" % utils.add_mongo_tour(result,
-                        session["place_pics"], session['place_names'], user_id))
+                        session["place_pics"], session['place_names'], session['loc'], user_id))
 
     else:
         return redirect('/')
