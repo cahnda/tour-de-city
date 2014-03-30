@@ -62,7 +62,10 @@ def makeTour():
         transportation = session['transportation']
         print latitude, longitude
         locs = google_places.findPlaces(latitude, longitude, res_types)
-        locLen = len (locs)
+        try:
+            locLen = len (locs)
+        except: 
+            pass
         if request.method =="GET":
             return render_template("make_tour.html",locs=locs, locLen=locLen)
         else:
