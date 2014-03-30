@@ -6,9 +6,12 @@ import pymongo, smtplib
 from bson.objectid import ObjectId
 from email.mime.text import MIMEText
 
-client = pymongo.MongoClient()
-db = client.SSSD
+#client = pymongo.MongoClient()
+#db = client.SSSD
 
+connection = pymongo.MongoClient ("dbh74.mongolab.com", 27747)
+db = connection ["heroku_app23236736"]
+db.authenticate("softdev", "softdev")
 bike_stations = db.newyork_bikes
 tourList = db.tourList
 
