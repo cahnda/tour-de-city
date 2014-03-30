@@ -9,7 +9,7 @@ $(window).load(function() {
                   $(this).addClass("click").text("Hide Tour");
                   $("#final_map").fadeIn();       
             }
-      });		
+      });
 
       //Other
       $("#final_map").hide();

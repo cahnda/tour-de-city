@@ -1,6 +1,14 @@
 /*
- *	Handles Google oauth login, and stores user information in Flask client.
+ *  Handles Google oauth login, and stores user information in Flask client.
 */
+
+(function(){
+	var po = document.createElement('script');
+	po.type = 'text/javascript'; po.async = true;
+	po.src = 'https://apis.google.com/js/client:plusone.js?onload=render';
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(po, s);
+})();
 
 $("#gSignInContainer").click(function() {
 	var opts = {
@@ -13,17 +21,12 @@ $("#gSignInContainer").click(function() {
 	$(this).find("#gSignInWrapper").hide();
 	$(this).append(spinner.el);
 
-	var po = document.createElement('script');
-	po.type = 'text/javascript'; po.async = true;
-	po.src = 'https://apis.google.com/js/client:plusone.js?onload=render';
-	var s = document.getElementsByTagName('script')[0];
-	s.parentNode.insertBefore(po, s);
 });
 
 function render() {
 	gapi.signin.render('customBtn', {
 		'callback': 'signinCallback',
-		'clientid': '611512958800-p6uidtj1frllpcvv8jo6gnc9f2lmn431.apps.googleusercontent.com',
+		"clientid" : "611512958800-d09hbf07sibk69it40fhd12ogup6sfk7.apps.googleusercontent.com",
 		'cookiepolicy': 'single_host_origin',
 		'scope': 'profile'
 	});
