@@ -1,0 +1,75 @@
+.t1 {
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -ms-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out; }
+
+.t2 {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out; }
+
+.t3, div#about_menu ul li {
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.t6 {
+  -webkit-transition: all 0.6s ease-out;
+  -moz-transition: all 0.6s ease-out;
+  -ms-transition: all 0.6s ease-out;
+  -o-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out; }
+
+.t12 {
+  -webkit-transition: all 1.2s ease-out;
+  -moz-transition: all 1.2s ease-out;
+  -ms-transition: all 1.2s ease-out;
+  -o-transition: all 1.2s ease-out;
+  transition: all 1.2s ease-out; }
+
+div#about_content {
+  background-color: #333333;
+  margin: -1px auto -1px auto;
+  padding: 20px 10px 20px 10px;
+  width: 50%; }
+  div#about_content h1 {
+    font-size: 2.8em; }
+  div#about_content h2 {
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-left: 10px;
+    margin-top: 20px;
+    text-align: left; }
+  div#about_content h2#about_1 {
+    color: #3cb4f8; }
+  div#about_content h2#about_2 {
+    color: #33d633; }
+  div#about_content h2#about_3 {
+    color: #dd4b39; }
+  div#about_content p {
+    font-size: 1.06em;
+    letter-spacing: 0.05px; }
+
+div#about_menu {
+  background-color: #3cb4f8;
+  font-size: 1.2em;
+  margin-left: 40px;
+  position: fixed; }
+  div#about_menu ul {
+    cursor: pointer;
+    list-style-type: none; }
+    div#about_menu ul li {
+      padding: 7px; }
+      div#about_menu ul li:hover {
+        background-color: #3177eb; }
+      div#about_menu ul li a {
+        color: white; }
+        div#about_menu ul li a:visited {
+          color: white;
+          font-size: 1.1em; }
