@@ -126,7 +126,7 @@ def showDirections(tour_obj_id):
     if request.method == "GET":
         if "tour_dictionary" in session.keys():
             tour = session["tour_dictionary"]
-            locs = session['place_names']
+            locs = utils.get_mongo_tour(tour_obj_id)["loc_names"]
         else:
             tour = utils.get_mongo_tour(tour_obj_id)["tour_dict"]
             locs = utils.get_mongo_tour(tour_obj_id)["loc_names"]
