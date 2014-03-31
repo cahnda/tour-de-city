@@ -20,7 +20,10 @@ $(document).ready(function(){
 	$(dialogSelector + " .footer #cancel").click(function(){
 	    dialogDisappear(dialogSelector)
 	    $(locationSelector).removeClass("active");
-	    $(locationSelector + " input[type='checkbox']").prop("checked", false);
+	    console.log ($(locationSelector + " input[type='checkbox']").prop("checked"));
+	    $(locationSelector + " input[type='checkbox']").prop("checked",
+								 false);
+	    console.log ($(locationSelector + " input[type='checkbox']").prop("checked"));
 	    if (hasBeenSelected == 1) {
 		totalChecked = totalChecked - 1; 
 		hasBeenSelected = 0;
