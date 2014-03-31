@@ -20,8 +20,10 @@ $(document).ready(function(){
 	$(dialogSelector + " .footer #cancel").click(function(){
 	    dialogDisappear(dialogSelector)
 	    $(locationSelector).removeClass("active");
+	    console.log ($(locationSelector + " input[type='checkbox']").prop("checked"));
 	    $(locationSelector + " input[type='checkbox']").prop("checked",
-								 "false");
+								 false);
+	    console.log ($(locationSelector + " input[type='checkbox']").prop("checked"));
 	    if (hasBeenSelected == 1) {
 		totalChecked = totalChecked - 1; 
 		hasBeenSelected = 0;
@@ -31,11 +33,16 @@ $(document).ready(function(){
 	$(dialogSelector + " .footer #select").click(function(){
 	    if (totalChecked < 3) {
 		dialogDisappear(dialogSelector)
+		console.log ($(locationSelector + " input[type='checkbox']").prop("checked"));
+		$(locationSelector + " input[type='checkbox']").prop("checked",
+								     true);
+		console.log ($(locationSelector + " input[type='checkbox']").prop("checked"));
 		$(locationSelector).addClass("active");
 		if (hasBeenSelected == 0) {
 		    totalChecked = totalChecked + 1;
 		    hasBeenSelected = 1;
 		}
+		
 
 	    }
 	    else
