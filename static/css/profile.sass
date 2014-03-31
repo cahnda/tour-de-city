@@ -18,19 +18,30 @@
 		width: 80px
 
 .tour
-	background-color: $gray
+	@extend .t3
+
+	background-color: #2B2B2B
 	margin-bottom: 10px
 	margin-left: auto
 	margin-right: auto
+	padding-bottom: 10px
 	width: 800px
 
 	img
+		@extend .t3
+		@include opaque(0.6)
+
 		height: 100px
+		margin-top: 1px
 		margin-right: -4px
 		width: 100px
 
 	div
 		display: inline-block
+
+	#metadata
+		display: block
+		margin-top: 20px
 
 	#link
 		width: 99%
@@ -51,3 +62,9 @@
 
 			a
 				color: white
+
+	&:hover
+		background-color: $gray
+
+		img
+			@include opaque(1.0)

@@ -21,16 +21,26 @@
 		<div class="tour">
 			<div id="link">
 				<button>
-					<a href="/tour={{ tour['_id'] }}">See Tour</a>
+					<a href="/tour={{ tour['_id'] }}">Click here to view this tour!</a>
 				</button>
 			</div><br>
 
-				= for img_src in tour["loc_images"][:8]
-					<div>
-						<img src="{{ img_src }}">
-					</div>
-				= endfor
+			= for img_src in tour["loc_images"]
+				<div>
+				  <img src="{{ img_src }}">
+				  <br>
+				</div>
+			= endfor
 
+			<div id="metadata">
+				<b> Stops: 	</b>
+
+				= for name in tour["loc_names"]
+					<p>
+						{{ name }}
+					</p>
+				= endfor
+			</div>
 		</div>
 	= endfor
 
