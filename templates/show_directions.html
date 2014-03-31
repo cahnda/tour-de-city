@@ -33,6 +33,12 @@
 = endblock
 = block body
 	<div>
+	<div id="stops-button">View Stops</div>
+	<div id="stops">
+		= for loc in locs
+		{{loc}}<br>
+		=endfor
+	</div>
 	<div id="map-button">View Tour</div>
 	<div id="final_map" style="height: 600px">
 		<iframe class="direction" height="100%" width="100%" frameborder="0" scrolling="no" src="/map/directions"></iframe>

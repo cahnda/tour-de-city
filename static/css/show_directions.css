@@ -12,7 +12,7 @@
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out; }
 
-.t3, div button, div #finish, div #map-button {
+.t3, div button, div #finish, div #map-button, div #stops-button {
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -33,7 +33,7 @@
   -o-transition: all 1.2s ease-out;
   transition: all 1.2s ease-out; }
 
-div button, div #finish, div #map-button {
+div button, div #finish, div #map-button, div #stops-button {
   border-style: none;
   color: white;
   cursor: pointer;
@@ -46,6 +46,12 @@ div #map-button {
   div #map-button:hover {
     background-color: #3177eb; }
   div #map-button button {
+    width: 100%; }
+div #stops-button {
+  background-color: #3cb4f8; }
+  div #stops-button:hover {
+    background-color: #3177eb; }
+  div #stops-button button {
     width: 100%; }
 div #rate-up {
   background-color: #33d633; }

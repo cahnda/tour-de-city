@@ -11,8 +11,20 @@ $(window).load(function() {
             }
       });
 
+      $("#stops-button").click(function(){
+            if($(this).hasClass("click")){
+                  $(this).removeClass("click").text("View Stops");
+                  $("#stops").fadeOut(100);
+            }
+            else {
+                  $(this).addClass("click").text("Hide Stops");
+                  $("#stops").fadeIn(100);       
+            }
+      });
+
       //Other
       $("#final_map").hide();
+      $("#stops").hide();
 
       //Google Maps
       var fwindow = $('iframe')[0].contentWindow;
