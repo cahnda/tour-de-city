@@ -73,7 +73,7 @@ def makeTour():
             if button == "Submit":
                 unicodeobj = request.values.getlist("place")
                 if len (unicodeobj) == 0:
-                    return redirect('/makeTour')
+                    alert ("You have not selected any locations")
                 else:
                     print "THIS IS MY LENGTH"
                     print len (unicodeobj)
