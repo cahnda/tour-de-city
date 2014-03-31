@@ -34,11 +34,9 @@ $(document).ready(function(){
 	    if (totalChecked < 3) {
 		dialogDisappear(dialogSelector)
 		console.log ($(locationSelector + " input[type='checkbox']").prop("checked"));
-
 		$(locationSelector + " input[type='checkbox']").prop("checked",
 								     true);
 		console.log ($(locationSelector + " input[type='checkbox']").prop("checked"));
-		
 		$(locationSelector).addClass("active");
 		if (hasBeenSelected == 0) {
 		    totalChecked = totalChecked + 1;
