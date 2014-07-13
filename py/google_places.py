@@ -9,9 +9,8 @@ import datetime
 
 def findPlaces (latitude, longitude, responses):
     #make request
-    AUTH_KEY = 'AIzaSyChW4Dkv_Ua8CXq6zy1sRRha2tRW7FYzlM'
+    AUTH_KEY = 'AIzaSyAOz86LAqTs5HwgH6Ib2e3AIkNLaoVelSo'
     # LIST OF API KEYS:
-    print AUTH_KEY
 
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
@@ -44,7 +43,6 @@ def findPlaces (latitude, longitude, responses):
     response = urlopen(url)
     json_raw = response.read()
     json_data = json.loads(json_raw)
-    print json_data
 
     results = []
     placeNum = 0
@@ -53,7 +51,6 @@ def findPlaces (latitude, longitude, responses):
     yelpTime = 0
 
     if json_data['status'] == 'OK':
-        print "a"
         for place in json_data['results']:
             placeNum = placeNum + 1
             ans = []
@@ -68,18 +65,33 @@ def findPlaces (latitude, longitude, responses):
                 ans.append (str(place['rating']))
             except:
                 ans.append (0)
-            try:
-                photo_info =  place ['photos'][0]
-                photo_height = photo_info['height']
-                photo_ref = photo_info['photo_reference']
-                photo_width = photo_info['width']
 
-                photo_url = ("https://maps.googleapis.com/maps/api/place/photo?"
-                    "maxwidth=%s&photoreference=%s&sensor=true&key=%s") \
-                    % (photo_width, photo_ref, AUTH_KEY)
-                ans.append (photo_url)
-            except:
+            #start = datetime.datetime.now()
+            url = "https://maps.googleapis.com/maps/api/place/details/json?reference=%s&sensor=false&&key=%s" %(ref, AUTH_KEY)
+
+            response = urlopen(url)
+            json_raw = response.read()
+            json_data = json.loads(json_raw)
+            if json_data['status'] == 'OK':
+                place = json_data ['result']
+                try:
+                    photo_info =  place['photos'][0]
+                    photo_height = photo_info['height']
+                    photo_ref = photo_info['photo_reference']
+                    photo_width = photo_info['width']
+
+                    photo_url = ("https://maps.googleapis.com/maps/api/place/photo?"
+                        "maxwidth=%s&photoreference=%s&sensor=true&key=%s") \
+                        % (photo_width, photo_ref, AUTH_KEY)
+                    ans.append (photo_url)
+                except:
+                    print "PROBLEM"
+                    print json.dumps(place)
+                    ans.append ("/static/images/no_photo_available.jpg")
+            else:
+                print "PROBLEM"
                 ans.append ("/static/images/no_photo_available.jpg")
+
 
             divStr = "myDiv" + str (placeNum)
             ans.append (divStr)
@@ -113,17 +125,8 @@ def findPlaces (latitude, longitude, responses):
             #url = service_url + '?' + urlencode(params)
            # topic = json.loads(urlopen(url).read())
 
-            #start = datetime.datetime.now()
-            url = "https://maps.googleapis.com/maps/api/place/details/json?reference=%s&sensor=false&&key=%s" %(ref, AUTH_KEY)
-            #print "Google API call: %s" % url
-            #print "now"
-          #  print url
-            response = urlopen(url)
-            json_raw = response.read()
-            json_data = json.loads(json_raw)
-                        
-           # print json_data
-           # print "hello"
+
+
 
             if json_data['status'] == 'OK':
                 result = json_data ['result']
@@ -145,6 +148,10 @@ def findPlaces (latitude, longitude, responses):
                             ans.append (result ['reviews'])
                 except:
                     ans.append ("No reviews available")
+            else:
+                ans.append ("No phone number listed")   
+                ans.append ('No website listed')
+                ans.append ("No reviews available")          
 
             #end = datetime.datetime.now()
             #photoTime += (end - start).microseconds
@@ -183,12 +190,11 @@ def findPlaces (latitude, longitude, responses):
 
             response = requests.get(url)
             json_data = response.json()["response"]["venues"]
-            print json_data
+
             myCheckIns = myHere = 0
 
             if len(json_data) > 0:
                 myVenue =  json_data [0]
-                print "UNIQUE"
                 for venue in json_data:
                     if venue["name"] == placeName:
                         myVenue = venue
@@ -204,8 +210,6 @@ def findPlaces (latitude, longitude, responses):
             if ans[2] == 0:
                 ans[2] = "N/A"
 
-        #print "yelptime: %d" % yelpTime
-        #print "phototime: %d" % photoTime
         return results
 
 if __name__ == '__main__':
