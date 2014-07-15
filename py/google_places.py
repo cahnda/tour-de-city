@@ -9,7 +9,9 @@ import datetime
 
 def findPlaces (latitude, longitude, responses):
     
-    auth_key = 'AIzaSyChW4Dkv_Ua8CXq6zy1sRRha2tRW7FYzlM'
+    # auth_key = 'AIzaSyBJ2GpKgNV-tufVV__SC5x6vV3L74ZCTCg'
+    auth_key = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE' # Production
+    
     # LIST OF API KEYS:
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
@@ -29,7 +31,6 @@ def findPlaces (latitude, longitude, responses):
     json_raw = response.read()
     json_data = json.loads(json_raw)
 
-    
     # Initialize results
     ans_array = []
     placeCounter = 0
@@ -59,19 +60,6 @@ def findPlaces (latitude, longitude, responses):
 
         placeName = place['name'].encode ('ascii', 'ignore')
         ans["name"] = placeName
-
-        try:
-            ans['rating'] = float(place['rating'])
-        except:
-            ans['rating'] = 0.0
-        try:
-            openNow = place["opening_hours"]["open_now"];
-            if openNow:
-                ans["open_now"] = "This venue is currently open"
-            else:
-                ans["open_now"] = "This venue is currently closed"
-        except:
-                ans["open_now"] = "No data available on opening hours"
 
         # Construct request for Google Details API
         ref = place["reference"]
@@ -127,13 +115,31 @@ def findPlaces (latitude, longitude, responses):
                 ans["address"] = address
             except:
                 ans["address"] = "No Address Listed"
+
+            # Get Rating
+            try:
+                ans['rating'] = float(place_details['rating'])
+            except:
+                ans['rating'] = 0.0
+
+            # Get Open
+            try:
+                openNow = place["opening_hours"]["open_now"];
+                if openNow:
+                    ans["open_now"] = "This venue is currently open"
+                else:
+                    ans["open_now"] = "This venue is currently closed"
+            except:
+                    ans["open_now"] = "No data available on opening hours"
         else:
             # Log error
             ans["photo_url"]    = "/static/images/no_photo_available.jpg"
             ans["phone_number"] = "No phone number listed"
             ans["website"]      = 'No website listed'
             ans["reviews"]      = "No reviews available"
-
+            ans["address"]      = "No Address Listed"
+            ans['rating']       = 0.0
+            ans["open_now"]     = "No data available on opening hours"
 
         lat = place ["geometry"]["location"]["lat"]
         lng = place ["geometry"]["location"]["lng"]
