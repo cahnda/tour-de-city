@@ -23,34 +23,34 @@
 
 			= for loc in locs
 
-				<div id="{{ loc[4] }}" class="dialog">
+				<div class="dialog myDiv{{ loc["counter"] }}">
 					<div class="top-left">
-						<h1>{{ loc[0] }}</h1>
-						<h3>{{ loc[1] }}</h3>
+						<h1>{{ loc["name"] }}</h1>
+						<h3>{{ loc["address"] }}</h3>
 
 						<span class="rating">
-							<span>{{ loc[2] }}</span> / 5
+							<span>{{ loc["rating"] }}</span> / 5
 						</span>
 
 						<div class="contact-info">
-							<p>{{ loc[8] }}</p>
-							<p><a href="{{ loc[9] }}">{{ loc[9] }}</a></p>
+							<p>{{ loc["phone_number"] }}</p>
+							<p><a href="{{ loc["website"] }}">{{ loc["website"] }}</a></p>
 						</div>
 					</div>
 
 					<div class="top-right">
-						<img src="{{ loc[3] }}">
+						<img src="{{ loc["photo_url"] }}">
 					</div>
 
 					<div class="foursquare-info">
-						Total Checkins: <span>{{ loc[11] }}</span>
-						// People here now: <span>{{ loc[12] }}</span>
+						Total Checkins: <span>{{ loc["checkins"] }}</span>
+						// People here now: <span>{{ loc["here"] }}</span>
 					</div>
 
 					<div class="reviews">
 						<h1> Reviews </h1>
 
-						= for review in loc[10][:3]
+						= for review in loc["reviews"][:3]
 							<div class="review">
 
 								<p class="review-text">
@@ -79,20 +79,19 @@
 
 		<form class="locations-form" method="POST">
 			= for loc in locs
-
-			<div id="{{ loc[4] }}" class="location-container">
+			<div id="myDiv{{ loc["counter"] }}" class="location-container">
 					<div class="force-height"></div>
 					<div class="location-content">
 						<div class="circular"
-							style="background: url({{ loc[3]}}) no-repeat; background-size: 200px 200px;">
-							<!--<img src="{{ loc[3] }}">-->
+							style="background: url({{ loc["photo_url"]}}) no-repeat; background-size: 200px 200px;">
+							<!--<img src="{{ loc["photo_url"] }}">-->
 						</div>
-						<label class="location", id = {{loc[7]}}>
-							<h2>{{ loc[0] }}</h2>
-							<p>{{ loc[1] }}</p>
-							<p>Rating: {{ loc[2] }}</p>
-							<input type="checkbox" name="place" value="{{ loc[1] }}"
-								id = "{{loc[6]}}" class = "chkbox">
+						<label class="location", id = "myLoc{{loc["counter"]}}">
+							<h2>{{ loc["name"] }}</h2>
+							<p>{{ loc["address"] }}</p>
+							<p>Rating: {{ loc["rating"] }}</p>
+							<input type="checkbox" name="place" value="{{ loc["address"] }}"
+								id = "myChk{{loc["counter"]}}" class = "chkbox">
 						</label>
 					</div>
 				</div>

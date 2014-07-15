@@ -16,38 +16,39 @@ $(document).ready(function(){
     // click events for .location-container and .dialog buttons
   $(".location-container").each(function(){
 
-  	var locationSelector = ".location-container#" + this.id + " label";
-  	var dialogSelector = ".dialog#" + this.id;
-  	var hasBeenSelected = 0;
+    var locationSelector = ".location-container#" + this.id + " label";
+    var dialogSelector = ".dialog." + this.id;
+    console.log(dialogSelector)
+    var hasBeenSelected = 0;
 
-  	$(this).click(function(){
-  	    $(".location-container").animate({"opacity" : "0.3"}, 300);
-  	    $(this).addClass("active");
-  	    dialogAppear(dialogSelector);  
-  	});
+    $(this).click(function(){
+        $(".location-container").animate({"opacity" : "0.3"}, 300);
+        $(this).addClass("active");
+        dialogAppear(dialogSelector);  
+    });
 
-  	$(dialogSelector + " .footer #cancel").click(function(){
-  	    dialogDisappear(dialogSelector)
-  	    $(locationSelector).removeClass("active");
-  	    $(locationSelector + " input[type='checkbox']").prop("checked",
-  								 false);
-  	    if (hasBeenSelected == 1) {
-  		totalChecked = totalChecked - 1; 
-  		hasBeenSelected = 0;
-  	    }
-  	})
+    $(dialogSelector + " .footer #cancel").click(function(){
+        dialogDisappear(dialogSelector)
+        $(locationSelector).removeClass("active");
+        $(locationSelector + " input[type='checkbox']").prop("checked",
+                   false);
+        if (hasBeenSelected == 1) {
+          totalChecked = totalChecked - 1; 
+          hasBeenSelected = 0;
+        }
+    })
 
-  	$(dialogSelector + " .footer #select").click(function(){
-  		dialogDisappear(dialogSelector)
+    $(dialogSelector + " .footer #select").click(function(){
+      dialogDisappear(dialogSelector)
 
-  		$(locationSelector + " input[type='checkbox']").prop("checked",
-  								     true);
+      $(locationSelector + " input[type='checkbox']").prop("checked",
+                       true);
 
-  		$(locationSelector).addClass("active");
-  		if (hasBeenSelected == 0) {
-  		    totalChecked = totalChecked + 1;
-  		    hasBeenSelected = 1;
-  		}
+      $(locationSelector).addClass("active");
+      if (hasBeenSelected == 0) {
+          totalChecked = totalChecked + 1;
+          hasBeenSelected = 1;
+      }
     })
   })
 })
