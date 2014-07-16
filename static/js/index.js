@@ -13,51 +13,58 @@ $(document).ready(function(){
 		});
 	}
 
-	$("#start-button").click(function(){
-		if($(this).hasClass("clicked")){
-			$(this).removeClass("clicked").text("Start");
-			$(".row, #venue-info").fadeOut();
-			$("input[type=radio], input[type=checkbox]").prop("checked", false);
-		}
-		else {
-			$(this).addClass("clicked").text("Cancel");
-			$("#row1").fadeIn();
-			$('html, body').animate({
-        		scrollTop: $("#row1").offset().top
-    		}, 500);
-		}
-	});
+  $("#row1").fadeIn();
+  $('html, body').animate({
+        scrollTop: $("#row1").offset().top
+  }, 500);
+
+	// $("#start-button").click(function(){
+	// 	if($(this).hasClass("clicked")){
+	// 		$(this).removeClass("clicked").text("Start");
+	// 		$(".row, #venue-info").fadeOut();
+	// 		$("input[type=radio], input[type=checkbox]").prop("checked", false);
+	// 	}
+	// 	else {
+	// 		$(this).addClass("clicked").text("Cancel");
+		// 	$("#row1").fadeIn();
+		// 	$('html, body').animate({
+  //       		scrollTop: $("#row1").offset().top
+  //   		}, 500);
+		// }
+	// });
 
 	$("#row1 input[type=radio]").click(function(){
-		$(this).parent().parent().next(".row").fadeIn();
-		$('html, body').animate({
-        	scrollTop: $("#row2").offset().top
-    	}, 500);
-	})
+      if ($("#row1 input:radio:checked").val() == "premade") {
+    document.getElementById("venue-form").submit()
+    return
+      }
+    $("#venue-info").fadeIn();
+    $('html, body').animate({
+            scrollTop: $("#venue-container").offset().top
+        }, 500);
+    var $mapContainer = $('.map-container'),
+      $venueContainer = $('#venue-container');
 
-	$("#row2 input[type=radio]").click(function(){
-	    if ($("#row1 input:radio:checked").val() == "premade") {
-		document.getElementById("venue-form").submit()
-		return
-	    }
-		$("#venue-info").fadeIn();
-		$('html, body').animate({
-        		scrollTop: $("#venue-container").offset().top
-    		}, 500);
-		var $mapContainer = $('.map-container'),
-			$venueContainer = $('#venue-container');
+    function resizeMap() {
+      var mapHeight = $mapContainer.outerHeight()
+        venueHeight = $venueContainer.outerHeight();
+      if (mapHeight != venueHeight) {
+        $mapContainer.css('height', venueHeight + 8);
+      }
+    }
 
-		function resizeMap() {
-			var mapHeight = $mapContainer.outerHeight()
-				venueHeight = $venueContainer.outerHeight();
-			if (mapHeight != venueHeight) {
-				$mapContainer.css('height', venueHeight);
-			}
-		}
+    $(window).resize(resizeMap);
+    resizeMap();
+  })
 
-		$(window).resize(resizeMap);
-		resizeMap();
-	})
+ //    function(){
+	// 	$(this).parent().parent().next(".row").fadeIn();
+	// 	$('html, body').animate({
+ //        	scrollTop: $("#row3").offset().top
+ //    	}, 500);
+	// })
+
+	// $("#row2 input[type=radio]").click()
 
 	$('#venue-info input[type=checkbox]').change(function() {
 		$(this).parent().toggleClass('active', this.checked);

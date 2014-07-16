@@ -39,7 +39,7 @@
   padding: 0; }
 
 html {
-  background: url(../images/background.jpg) no-repeat center center fixed;
+  background: url(../images/background2.jpg) no-repeat center center fixed, rgba(62, 73, 152, 0.3);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -ms-background-size: cover;

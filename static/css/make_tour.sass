@@ -1,7 +1,7 @@
 @import variables, mixins
 
 .dialog
-	background-color: rgba(48, 45, 45, 0.68)
+	background-color: rgba(48, 45, 45, 0.90)
 	border: 1px solid black
 	left: 50%
 	margin-left: -250px
@@ -132,10 +132,32 @@
 	font-size: 16px
 	cursor: pointer
 
-	&:hover .location
+	.circular
+		@include vendor(border-radius, 6px)
+
+		border: 1px solid #333
+
+		-webkit-transition: all 0.25s
+		transition: all 0.25s
+		
+		height: 199px
+		margin-left: auto
+		margin-right: auto
+		width: 198px
+
+	&:hover > .circular
 		opacity: 1
 		filter: none
-		background-color: rgba(77, 144, 254, 0.4)
+		box-shadow: 0 0 14px 4px rgb(77, 144, 254)
+		-webkit-box-shadow: 0 0 14px 4px rgb(77, 144, 254)
+
+		transform: translate(0, -2px)
+		-webkit-transform: translate(0, -2px)
+		-moz-transform: translate(0, -2px)
+	&:hover > .location
+		margin-top: -2px
+		opacity: 1
+		filter: none
 
 	img
 		position: absolute
@@ -146,13 +168,7 @@
 	input[type=checkbox]
 		display: none
 
-	.circular
-		@include vendor(border-radius, 100px)
 
-		height: 200px
-		margin-left: auto
-		margin-right: auto
-		width: 200px
 
 		img
 			opacity: 0
@@ -165,13 +181,32 @@
 
 
 .location
+	@include vendor(border-radius, 6px)
+
 	transition: opacity 0.2s
 	box-sizing: border-box
 	display: block
-	height: 100%
-	padding: 15px
+
 	opacity: 0
 	cursor: pointer
+
+	top: 0
+	left: 0
+	right: 0
+
+	margin-left: auto
+	margin-right: auto
+	
+	padding: 10px 0
+
+	width: 198px
+	height: 200px
+
+	text-shadow: 0 1px 0 black
+
+	background-color: rgba(77, 144, 254, 0.4)
+
+	z-index: 1000
 
 	&.active
 		opacity: 1

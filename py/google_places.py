@@ -1,17 +1,143 @@
 import requests
 import json
 from urllib2 import urlopen
+from multiprocessing import Process, Lock, Manager
 
 import datetime
 
 # PRE: Take a list of "types of places"(i.e. musuem, nightclub) and current location (LONGITUDE and LATITUDE).
 # POST  Generate an ordered list of places to visit based on their locations.
 
+def processPlace(l, place, placeCounter, ans_array, auth_key):
+    # Initialize individual result
+    ans = {}
+    ans["counter"] = str(placeCounter)
+
+    placeName = place['name'].encode ('ascii', 'ignore')
+    ans["name"] = placeName
+
+    # Construct request for Google Details API
+    ref = place["reference"]
+    url = "https://maps.googleapis.com/maps/api/place/details/json?reference=%s&sensor=false&&key=%s" % (ref, auth_key)
+
+    # Send the GET request to the details service (using url from above)
+    response = urlopen(url, timeout=60)
+    json_raw = response.read()
+    json_data = json.loads(json_raw)
+
+    # Photos info is critical
+    if json_data['status'] == 'OK':
+        place_details = json_data ['result']
+
+        # Get Photo URL
+        try:
+            photo_info =  place_details['photos'][0]
+            photo_height = photo_info['height']
+            photo_ref = photo_info['photo_reference']
+            photo_width = photo_info['width']
+
+            photo_url = ("https://maps.googleapis.com/maps/api/place/photo?"
+                "maxwidth=%s&photoreference=%s&sensor=true&key=%s") \
+                % (photo_width, photo_ref, auth_key)
+
+            ans["photo_url"] = photo_url
+        except:
+            # Log error
+            ans["photo_url"] = "/static/images/no_photo_available.png"
+
+        # Get Phone Number
+        try:
+            phoneNum = place_details['formatted_phone_number']
+            ans["phone_number"] = phoneNum
+        except:
+            ans["phone_number"] = "No phone number listed"
+
+        # Get Website
+        try:
+            ans["website"] = place_details["website"]
+        except:
+            ans["website"] = 'No website listed'
+
+        # Get Reviews
+        try:
+            ans["reviews"] = place_details["reviews"]
+        except:
+            ans["reviews"] = "No reviews available"
+
+        # Get Address
+        try:
+            address = place_details['vicinity'].encode ('ascii', 'ignore')
+            ans["address"] = address
+        except:
+            ans["address"] = "No Address Listed"
+
+        # Get Rating
+        try:
+            ans['rating'] = float(place_details['rating'])
+        except:
+            ans['rating'] = 0.0
+
+        # Get Open
+        try:
+            openNow = place["opening_hours"]["open_now"];
+            if openNow:
+                ans["open_now"] = "This venue is currently open"
+            else:
+                ans["open_now"] = "This venue is currently closed"
+        except:
+                ans["open_now"] = "No data available on opening hours"
+    else:
+        # Log error
+        ans["photo_url"]    = "/static/images/no_photo_available.png"
+        ans["phone_number"] = "No phone number listed"
+        ans["website"]      = 'No website listed'
+        ans["reviews"]      = "No reviews available"
+        ans["address"]      = "No Address Listed"
+        ans['rating']       = 0.0
+        ans["open_now"]     = "No data available on opening hours"
+
+    lat = place ["geometry"]["location"]["lat"]
+    lng = place ["geometry"]["location"]["lng"]
+
+    lat = str (lat)
+    lng = str (lng)
+
+    FOURSQUARE_CLIENT_ID = "PROKVIKPGQ3VZ1S2LMVI0QIKPEUXYRT14XLHTOHF2XS4RQYK"
+    FOURSQUARE_CLIENT_SECRET = "B1GJXBPPLOGTT53OK4RNC3UZ3XK0A11GUPA3EECEUVSFDJRJ"
+    DATEVERIFIED = "20140301"
+
+    url = "https://api.foursquare.com/v2/venues/search?query=%s&ll=%s,%s&intent=match&client_id=%s&client_secret=%s&v=%s" % (placeName, lat, lng, FOURSQUARE_CLIENT_ID, FOURSQUARE_CLIENT_SECRET, DATEVERIFIED)
+
+    response = requests.get(url)
+    try:
+        json_data = response.json()["response"]["venues"]
+    except:
+        json_data = []
+
+    myCheckIns = 0
+    myHere     = 0
+
+    if len(json_data) > 0:
+        myVenue =  json_data [0]
+        for venue in json_data:
+            if venue["name"] == placeName:
+                myVenue = venue
+        myHere = myVenue ["hereNow"]["count"]
+        myStats =  myVenue ['stats']
+        myCheckIns =  myStats ["checkinsCount"]
+
+    ans["checkins"] = myCheckIns
+    ans["here"] = myHere
+
+    l.acquire()
+    ans_array.append (ans)
+    l.release()
+
 def findPlaces (latitude, longitude, responses):
     
-    # auth_key = 'AIzaSyBJ2GpKgNV-tufVV__SC5x6vV3L74ZCTCg'
-    auth_key = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE' # Production
-    
+    auth_key = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
+    # auth_key = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE' # Production
+
     # LIST OF API KEYS:
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
     # dcahn@guerrillajoe.com : 'AIzaSyDnin5Fiq0aAjYFSEf7D1ae5V4O2yP-d_c'
@@ -27,12 +153,13 @@ def findPlaces (latitude, longitude, responses):
     url = constructGooglePlacesURL(latitude, longitude, responses, auth_key)
 
     # Send the GET request to the places service (using url from above)
-    response = urlopen(url)
+    response = urlopen(url, timeout=60)
     json_raw = response.read()
     json_data = json.loads(json_raw)
 
     # Initialize results
-    ans_array = []
+    manager = Manager()
+    ans_array = manager.list()
     placeCounter = 0
 
     photoTime = 0
@@ -48,135 +175,26 @@ def findPlaces (latitude, longitude, responses):
         # Log error
         return []
 
+    lock = Lock()
+
+    processes = []
     for place in results:
         if "reference" not in place:
             continue
-
         placeCounter += 1
+        # processPlace(lock, place, placeCounter, ans_array, auth_key)
+        p = Process(target=processPlace, args=(lock, place, placeCounter, ans_array, auth_key))
+        p.start()
+        processes.append(p)
 
-        # Initialize individual result
-        ans = {}
-        ans["counter"] = str(placeCounter)
+    for process in processes:
+        p.join(None)
 
-        placeName = place['name'].encode ('ascii', 'ignore')
-        ans["name"] = placeName
+    # Make sure all threads finish
+    for process in processes:
+        while process.exitcode == None:
+            pass
 
-        # Construct request for Google Details API
-        ref = place["reference"]
-        url = "https://maps.googleapis.com/maps/api/place/details/json?reference=%s&sensor=false&&key=%s" % (ref, auth_key)
-
-        # Send the GET request to the details service (using url from above)
-        response = urlopen(url)
-        json_raw = response.read()
-        json_data = json.loads(json_raw)
-
-        # Photos info is critical
-        if json_data['status'] == 'OK':
-            place_details = json_data ['result']
-
-            # Get Photo URL
-            try:
-                photo_info =  place_details['photos'][0]
-                photo_height = photo_info['height']
-                photo_ref = photo_info['photo_reference']
-                photo_width = photo_info['width']
-
-                photo_url = ("https://maps.googleapis.com/maps/api/place/photo?"
-                    "maxwidth=%s&photoreference=%s&sensor=true&key=%s") \
-                    % (photo_width, photo_ref, auth_key)
-
-                ans["photo_url"] = photo_url
-            except:
-                # Log error
-                ans["photo_url"] = "/static/images/no_photo_available.jpg"
-
-            # Get Phone Number
-            try:
-                phoneNum = place_details['formatted_phone_number']
-                ans["phone_number"] = phoneNum
-            except:
-                ans["phone_number"] = "No phone number listed"
-
-            # Get Website
-            try:
-                ans["website"] = place_details["website"]
-            except:
-                ans["website"] = 'No website listed'
-
-            # Get Reviews
-            try:
-                ans["reviews"] = place_details["reviews"]
-            except:
-                ans["reviews"] = "No reviews available"
-
-            # Get Address
-            try:
-                address = place_details['vicinity'].encode ('ascii', 'ignore')
-                ans["address"] = address
-            except:
-                ans["address"] = "No Address Listed"
-
-            # Get Rating
-            try:
-                ans['rating'] = float(place_details['rating'])
-            except:
-                ans['rating'] = 0.0
-
-            # Get Open
-            try:
-                openNow = place["opening_hours"]["open_now"];
-                if openNow:
-                    ans["open_now"] = "This venue is currently open"
-                else:
-                    ans["open_now"] = "This venue is currently closed"
-            except:
-                    ans["open_now"] = "No data available on opening hours"
-        else:
-            # Log error
-            ans["photo_url"]    = "/static/images/no_photo_available.jpg"
-            ans["phone_number"] = "No phone number listed"
-            ans["website"]      = 'No website listed'
-            ans["reviews"]      = "No reviews available"
-            ans["address"]      = "No Address Listed"
-            ans['rating']       = 0.0
-            ans["open_now"]     = "No data available on opening hours"
-
-        lat = place ["geometry"]["location"]["lat"]
-        lng = place ["geometry"]["location"]["lng"]
-
-        lat = str (lat)
-        lng = str (lng)
-
-        FOURSQUARE_CLIENT_ID = "PROKVIKPGQ3VZ1S2LMVI0QIKPEUXYRT14XLHTOHF2XS4RQYK"
-        FOURSQUARE_CLIENT_SECRET = "B1GJXBPPLOGTT53OK4RNC3UZ3XK0A11GUPA3EECEUVSFDJRJ"
-        DATEVERIFIED = "20140301"
-
-        url = "https://api.foursquare.com/v2/venues/search?query=%s&ll=%s,%s&intent=match&client_id=%s&client_secret=%s&v=%s" % (placeName, lat, lng, FOURSQUARE_CLIENT_ID, FOURSQUARE_CLIENT_SECRET, DATEVERIFIED)
-
-        response = requests.get(url)
-        try:
-            json_data = response.json()["response"]["venues"]
-        except:
-            json_data = []
-
-        myCheckIns = 0
-        myHere     = 0
-
-        if len(json_data) > 0:
-            myVenue =  json_data [0]
-            for venue in json_data:
-                if venue["name"] == placeName:
-                    myVenue = venue
-            myHere = myVenue ["hereNow"]["count"]
-            myStats =  myVenue ['stats']
-            myCheckIns =  myStats ["checkinsCount"]
-
-        ans["checkins"] = myCheckIns
-        ans["here"] = myHere
-
-        ans_array.append (ans)
-
-    print json.dumps(results)
     ans_array = sorted(ans_array, key=lambda ans: ans["rating"], reverse = True)
     for ans in ans_array:
         if ans["rating"] == 0:

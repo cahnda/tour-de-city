@@ -39,7 +39,7 @@ def index():
         if button == "Submit":
             session['latitude'] = request.form.get('latitude', None)
             session['longitude'] = request.form.get('longitude', None)
-            session['transportation'] = request.form.get('tour-transportation', None)
+            session['transportation'] = 'WALKING' # request.form.get('tour-transportation', None)
             unicodeobj = request.values.getlist("tour")
             var = []
             for iterating_var in unicodeobj:
@@ -62,6 +62,7 @@ def makeTour():
         transportation = session['transportation']
         print latitude, longitude
         locs = google_places.findPlaces(latitude, longitude, res_types)
+
         try:
             locLen = len (locs)
         except:
@@ -75,8 +76,6 @@ def makeTour():
                 if len (unicodeobj) == 0:
                     return redirect ("/makeTour")
                 else:
-                    print "THIS IS MY LENGTH"
-                    print len (unicodeobj)
                     counter = 0
                     waypoints = []
                     place_names = []
@@ -84,9 +83,13 @@ def makeTour():
                         iterating_var = iterating_var.encode ('ascii', 'ignore')
                         waypoints.append(iterating_var)
                         counter = counter + 1
-                    session['place_names'] = [l[0] for l in locs if l[1] in unicodeobj]
-                    session['place_pics'] = [l[3] for l in locs if l[1] in waypoints]
-                    session['loc'] = [l for l in locs if l[1] in waypoints]
+
+                    print json.dumps(waypoints)
+                    
+                    session['place_names'] = [l["name"] for l in locs if l["address"] in waypoints]
+                    session['place_pics'] = [l["photo_url"] for l in locs if l["address"] in waypoints]
+                    session['loc'] = [l for l in locs if l["address"] in waypoints]
+                    
                     waypoints = google_directions.get_waypoint_order(
                     latitude+","+longitude,waypoints,latitude+','+longitude)
                     session['waypoints'] = waypoints
