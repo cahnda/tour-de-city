@@ -72,9 +72,10 @@ def nearest_station_address_lon(lat, lon):
 
 def make_location_array(startlat, startlon, endlat, endlon, waypoints):
     startbike = nearest_station_address_lon(startlat, startlon)
-    endBike = nearest_station_address_lon(endlat, endlon)
+    endbike = nearest_station_address_lon(endlat, endlon)
+
     if len(waypoints) == 0:
-      return [startbike, endBike]
+      return [startbike, endbike]
 
     finalwaypoints = []
     finalwaypoints.append(startbike)

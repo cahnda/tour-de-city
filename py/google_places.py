@@ -135,8 +135,8 @@ def processPlace(l, place, placeCounter, ans_array, auth_key):
 
 def findPlaces (latitude, longitude, responses):
     
-    auth_key = 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
-    # auth_key = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE' # Production
+    # auth_key = 'AIzaSyBtT5oFCm_LRdN1IvkROlLeoFRGdyNcfpU'
+    auth_key = 'AIzaSyD2EsKFEM-O1SS9PUg6b91_08i4gBvOuRE' # Production
 
     # LIST OF API KEYS:
     # cahnda@gmail.com : 'AIzaSyC-Rd4Mhjt7PPqMHGDjZdBJp3W835STm5w'
@@ -182,7 +182,8 @@ def findPlaces (latitude, longitude, responses):
         if "reference" not in place:
             continue
         placeCounter += 1
-        # processPlace(lock, place, placeCounter, ans_array, auth_key)
+        
+        # Thread results
         p = Process(target=processPlace, args=(lock, place, placeCounter, ans_array, auth_key))
         p.start()
         processes.append(p)

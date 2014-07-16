@@ -21,10 +21,19 @@
 			</div><br>
 
 			= for img_src in tour["loc_images"]
-				<div>
+<!-- 				<div>
 				  <img src="{{ img_src }}">
 				  <br>
-				</div>
+				</div> -->
+
+      <div id="myDiv" class="location-container">
+          <div class="force-height"></div>
+          <div class="location-content">
+            <div class="circular"
+              style="background: url({{ img_src }}) no-repeat; background-size: 200px 200px;">
+            </div>
+          </div>
+        </div>
 			= endfor
 
 			<div id="metadata">

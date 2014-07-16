@@ -97,20 +97,25 @@ def makeTour():
 
                     waylist = session['waypoints']
                     endpoint = waylist.pop()
-                    if transportation == "BIKING":
-                        waylist = utils.make_location_array(\
-                        session['latitude'], session['longitude'],session['latitude'], \
-                        session['longitude'], waylist)
-                    else:
-                        waylist = session['waypoints']
+                    
+                    biking_waylist = utils.make_location_array(\
+                    session['latitude'], session['longitude'],session['latitude'], \
+                    session['longitude'], waylist)
+
+                    waylist = session['waypoints']
+
                     waypoints = []
+                    biking_waypoints = []
                     baseLoc = session['latitude'] + "," + session['longitude']
                     for waypoint in waylist:
                         waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
+                    for waypoint in biking_waylist:
+                        biking_waypoints.append({"location":waypoint.encode('ascii', 'ignore')})
                     result = dict()
                     result['start'] = baseLoc
                     result['end'] = endpoint
                     result['waypoints'] = json.dumps(waypoints)
+                    result['biking_waypoints'] = json.dumps(biking_waypoints)
                     result['transportation'] = session['transportation']
                     session["tour_dictionary"] = result
                     print result
