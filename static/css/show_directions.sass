@@ -50,3 +50,44 @@ div
 			display: inline-block
 			width: 100%
 			text-decoration: none
+
+
+#button-font1, #button-font2
+	font-size: 59px
+
+	input[type=radio]
+		display: none
+
+		&:checked + label
+			@extend .t3
+			@include opaque(1.0)
+
+	label
+		background: $lightBlue
+		border: none
+		cursor: pointer
+		display: block
+		float: left
+		width: 50%
+
+		@include opaque(0.7)
+
+		&:hover
+			@extend .t3
+			@include opaque(1.0)
+
+		img
+			display: block
+			height: 80px
+			display: block
+			margin-left: auto
+			margin-right: auto
+
+#button-font1
+	label
+		background: $lightBlue
+
+#button-font2
+	label
+		background: $red
+		width: 50%

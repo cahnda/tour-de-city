@@ -22,21 +22,32 @@ $(window).load(function() {
             }
       });
 
-      //Other
-      $("#final_map").hide();
-      $("#stops").hide();
-
       //Google Maps
       var fwindow = $('iframe')[0].contentWindow;
       var fdocument = fwindow.document
       google = fwindow.google;
       map = fwindow.map.map;
 
+      var rendererOptions = {
+        draggable: true
+      };
       directionsService = new google.maps.DirectionsService();
-      directionsDisplay = new google.maps.DirectionsRenderer();
+      directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
       directionsDisplay.setMap(map);
       directionsDisplay.setPanel(fdocument.getElementById('directions-panel'));
-      calcRoute();
+      calcRoute("WALKING", false);
+
+      $(".walk").click(function(){
+        calcRoute("WALKING", false);
+      });
+
+      $(".bike").click(function(){
+        calcRoute("BICYCLING", true);
+      });
+
+      //Other
+      $("#final_map").hide();
+      $("#stops").hide();
 });
 
 $(document).ready(function(){
